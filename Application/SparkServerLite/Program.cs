@@ -1,3 +1,7 @@
+using SparkServer.Core.Repositories;
+using SparkServer.Data.Models;
+using SparkServer.Infrastructure.Repositories;
+
 namespace SparkServerLite
 {
     public class Program
@@ -10,7 +14,9 @@ namespace SparkServerLite
             builder.Services.AddControllersWithViews();
 
             // Register DI
-            // builder.Services.AddTransient();
+            builder.Services.AddTransient<IBlogRepository<Blog>, BlogRepository>();
+            builder.Services.AddTransient<IAuthorRepository<Author>, AuthorRepository>();
+            builder.Services.AddTransient<IBlogTagRepository<BlogTag>, BlogTagRepository>();
 
             var app = builder.Build();
 
