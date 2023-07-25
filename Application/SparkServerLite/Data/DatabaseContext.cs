@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Sqlite;
-using SparkServer.Data.Models;
+using SparkServerLite.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

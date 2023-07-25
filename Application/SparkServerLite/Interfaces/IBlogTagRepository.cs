@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SparkServer.Core.Repositories
+namespace SparkServerLite.Interfaces
 {
     public interface IBlogTagRepository<T> : IRepositoryBase<T>
     {
