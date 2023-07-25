@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparkServerLite", "SparkServerLite\SparkServerLite.csproj", "{9F801E64-142E-4E16-BE51-DB8A9A809EC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SparkServerLite", "SparkServerLite\SparkServerLite.csproj", "{9F801E64-142E-4E16-BE51-DB8A9A809EC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C9977F90-F09F-4688-B7A1-36088A418827}"
+	ProjectSection(SolutionItems) = preProject
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparkServer.Core", "SparkServer.Core\SparkServer.Core.csproj", "{A1103E17-AC96-4137-86A0-C8E0BC9CF5DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,10 @@ Global
 		{9F801E64-142E-4E16-BE51-DB8A9A809EC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F801E64-142E-4E16-BE51-DB8A9A809EC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F801E64-142E-4E16-BE51-DB8A9A809EC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1103E17-AC96-4137-86A0-C8E0BC9CF5DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1103E17-AC96-4137-86A0-C8E0BC9CF5DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1103E17-AC96-4137-86A0-C8E0BC9CF5DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1103E17-AC96-4137-86A0-C8E0BC9CF5DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

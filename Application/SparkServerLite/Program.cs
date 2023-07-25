@@ -9,6 +9,9 @@ namespace SparkServerLite
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            // Register DI
+            // builder.Services.AddTransient();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
