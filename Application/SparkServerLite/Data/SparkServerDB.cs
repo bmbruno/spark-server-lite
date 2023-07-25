@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SparkServer.Data
 {
-    public class DatabaseContext : DbContext
+    public class SparkServerDB : DbContext
     {
         public DbSet<Author> Authors { private get; set; }
 
