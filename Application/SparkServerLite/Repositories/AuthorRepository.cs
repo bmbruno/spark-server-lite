@@ -1,5 +1,5 @@
-﻿using SparkServerLite.Data;
-using SparkServerLite.Interfaces;
+﻿using SparkServerLite.Interfaces;
+using SparkServerLite.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

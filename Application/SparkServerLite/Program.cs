@@ -1,6 +1,6 @@
-using SparkServerLite.Data;
 using SparkServer.Infrastructure.Repositories;
 using SparkServerLite.Interfaces;
+using SparkServerLite.Models;
 
 namespace SparkServerLite
 {

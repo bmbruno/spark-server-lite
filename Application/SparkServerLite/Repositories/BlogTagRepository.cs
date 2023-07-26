@@ -1,5 +1,5 @@
-﻿using SparkServerLite.Data;
-using SparkServerLite.Interfaces;
+﻿using SparkServerLite.Interfaces;
+using SparkServerLite.Models;
 using System.Linq.Expressions;
 
 namespace SparkServer.Infrastructure.Repositories

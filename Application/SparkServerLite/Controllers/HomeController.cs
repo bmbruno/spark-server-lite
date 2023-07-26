@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SparkServerLite.Data;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
 using System.Diagnostics;
