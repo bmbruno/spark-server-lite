@@ -1,0 +1,2 @@
+# Generates DB Context models and relationships - run in Package Manager Console in VS
+Scaffold-DbContext "Data Source=SparkServer.db" Microsoft.EntityFrameworkCore.Sqlite -OutputDir Data
