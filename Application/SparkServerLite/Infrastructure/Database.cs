@@ -44,7 +44,21 @@
             }
 
             return null;
-            
+        }
+
+        public static Guid GetGuid(object dbValue)
+        {
+            Guid output;
+
+            if (dbValue != null && dbValue.GetType().Name == _TypeString)
+            {
+                if (Guid.TryParse(dbValue.ToString(), out output))
+                {
+                    return output;
+                }
+            }
+
+            return Guid.Empty;
         }
     }
 }
