@@ -35,7 +35,7 @@ namespace SparkServer.Infrastructure.Repositories
                 {
                     // Only expecting one result, so no need for while loop
                     reader.Read();
-                    author.ID = Database.GetInteger(reader["ID"]);
+                    author.ID = Database.GetID(reader["ID"]);
                     author.SSOID = Database.GetGuid(reader["SSOID"]);
                     author.FirstName = Database.GetString(reader["FirstName"]);
                     author.LastName = Database.GetString(reader["LastName"]);
