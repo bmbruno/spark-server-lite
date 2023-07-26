@@ -1,2 +1,4 @@
 # Generates DB Context models and relationships - run in Package Manager Console in VS
+# Requires Microsoft.EntityFrameworkCore.Tools NuGet package to be installed
+
 Scaffold-DbContext "Data Source=SparkServer.db" Microsoft.EntityFrameworkCore.Sqlite -OutputDir Data
