@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.Sqlite;
 
 namespace SparkServer.Infrastructure.Repositories
 {
@@ -22,7 +23,33 @@ namespace SparkServer.Infrastructure.Repositories
 
             //return item;
 
-            return new Author();
+            string? firstName = string.Empty;
+
+            using (var conn = new SqliteConnection("Data Source=SparkServer.db"))
+            {
+                conn.Open();
+
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT *
+                    FROM Authors
+                    WHERE ID = $id";
+
+                command.Parameters.AddWithValue("$id", ID);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        firstName = reader["FirstName"].ToString();
+                    }
+                }
+
+                conn.Close();
+            }
+
+
+            return new Author() { FirstName = firstName ?? "NO NAME" };
         }
 
         public Author Get(Guid ssoID)
