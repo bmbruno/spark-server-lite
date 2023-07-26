@@ -1,0 +1,1 @@
+sqlite3.exe ..\Application\SparkServerLite\SparkServer.db < 00_CreateAll.sql
