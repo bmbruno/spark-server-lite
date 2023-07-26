@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
+using SparkServerLite.Infrastructure;
 
 namespace SparkServer.Infrastructure.Repositories
 {
@@ -14,42 +15,36 @@ namespace SparkServer.Infrastructure.Repositories
     {
         public Author Get(int ID)
         {
-            //Author item;
+            Author author = new Author();
 
-            //using (var db = new SparkServerEntities())
-            //{
-            //    item = db.Author.FirstOrDefault(u => u.ID == ID);
-            //}
-
-            //return item;
-
-            string? firstName = string.Empty;
-
-            using (var conn = new SqliteConnection("Data Source=SparkServer.db"))
+            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
             {
-                conn.Open();
-
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
                     SELECT *
                     FROM Authors
-                    WHERE ID = $id";
+                    WHERE
+                        ID = $id
+                        AND Active = 1
+                    LIMIT 1";
 
                 command.Parameters.AddWithValue("$id", ID);
+                conn.Open();
 
                 using (var reader = command.ExecuteReader())
                 {
-                    while (reader.Read())
-                    {
-                        firstName = reader["FirstName"].ToString();
-                    }
+                    // Only expecting one result, so no need for while loop
+                    reader.Read();
+                    author.ID = Database.GetInteger(reader["ID"]);
+                    author.LastName = Database.GetString(reader["LastName"]);
+                    author.Active = Database.GetBoolean(reader["Active"]);
+                    author.CreateDate = Database.GetDateTime(reader["CreateDate"]);
                 }
 
                 conn.Close();
             }
 
-
-            return new Author() { FirstName = firstName ?? "NO NAME" };
+            return author;
         }
 
         public Author Get(Guid ssoID)

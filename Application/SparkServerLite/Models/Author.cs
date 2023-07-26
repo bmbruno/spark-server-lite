@@ -21,10 +21,11 @@ namespace SparkServerLite.Models
 
         public bool Active { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         public Author()
         {
+            ID = 0;
             FirstName = string.Empty;
             LastName = string.Empty;
             Email = string.Empty;
