@@ -18,6 +18,7 @@ namespace SparkServerLite.Controllers
             _authorRepo = authorRepo;
 
             var test = _authorRepo.Get(1);
+            var test1 = _authorRepo.GetAll();
         }
 
         public IActionResult Index()

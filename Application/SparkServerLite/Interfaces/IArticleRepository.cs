@@ -9,11 +9,11 @@ namespace SparkServerLite.Interfaces
     public interface IArticleRepository<T> : IRepositoryBase<T>
     {
         /// <summary>
-        /// Should return an article object based on the uniqueURL key value.
+        /// Should return an article object based on the slug key value.
         /// </summary>
-        /// <param name="uniqueURL">Unique URL of the article to load.</param>
+        /// <param name="slug">Unique URL of the article to load.</param>
         /// <returns>Article-type object.</returns>
-        T Get(string uniqueURL);
+        T Get(string slug);
 
         /// <summary>
         /// Should return an enumerable of article objects ordered by publish date descending, limited by the numberToLoad.

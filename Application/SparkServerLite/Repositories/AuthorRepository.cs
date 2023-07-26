@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using SparkServerLite.Infrastructure;
+using System.Security.Cryptography;
 
 namespace SparkServer.Infrastructure.Repositories
 {
@@ -83,16 +84,39 @@ namespace SparkServer.Infrastructure.Repositories
 
         public IEnumerable<Author> GetAll()
         {
-            //List<Author> results;
+            List<Author> authors = new List<Author>();
 
-            //using (var db = new SparkServerEntities())
-            //{
-            //    results = db.Author.ToList();
-            //}
+            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT *
+                    FROM Authors
+                    WHERE
+                        Active = 1";
 
-            //return results;
+                conn.Open();
 
-            return new List<Author>();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        authors.Add(new Author() {
+                            ID = Database.GetID(reader["ID"]),
+                            SSOID = Database.GetGuid(reader["SSOID"]),
+                            FirstName = Database.GetString(reader["FirstName"]),
+                            LastName = Database.GetString(reader["LastName"]),
+                            Email = Database.GetString(reader["Email"]),
+                            Active = Database.GetBoolean(reader["Active"]),
+                            CreateDate = Database.GetDateTime(reader["CreateDate"])
+                        });
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return authors;
         }
 
         public int Create(Author newItem)
