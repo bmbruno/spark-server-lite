@@ -171,7 +171,7 @@ namespace SparkServer.Infrastructure.Repositories
                         Blogs
                         INNER JOIN Authors ON Authors.ID = Blogs.AuthorID
                     WHERE
-	                    Active = 1
+	                    Blogs.Active = 1
 	                    AND PublishDate <= datetime('now')
                     ORDER BY
                         PublishDate DESC
