@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
+using SparkServerLite.ViewModels;
 using System.Diagnostics;
 
 namespace SparkServerLite.Controllers
@@ -18,6 +19,13 @@ namespace SparkServerLite.Controllers
 
         public IActionResult Index()
         {
+            HomeViewModel viewModel = new HomeViewModel();
+
+            var blogs = _blogRepo.GetRecent(5);
+
+            viewModel.MapToViewModel(blogs);
+            viewModel.MenuSelection = Infrastructure.Enums.MainMenu.Home;
+
             return View();
         }
 
