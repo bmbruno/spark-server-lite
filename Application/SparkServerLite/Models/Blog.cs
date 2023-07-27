@@ -24,6 +24,8 @@ namespace SparkServerLite.Models
 
         public DateTime PublishDate { get; set; }
 
+        public int AuthorID { get; set; }
+
         public string AuthorFullName { get; set; }
 
         public Blog()

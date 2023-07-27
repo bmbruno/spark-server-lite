@@ -163,12 +163,18 @@ namespace SparkServer.Infrastructure.Repositories
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
-                    SELECT *
-                    FROM Blogs
+                    SELECT
+	                    Blogs.*,
+	                    Authors.ID AS 'AuthorID',
+	                    Authors.FirstName || ' ' || Authors.LastName AS 'AuthorFullName'
+                    FROM
+                        Blogs
+                        INNER JOIN Authors ON Authors.ID = Blogs.AuthorID
                     WHERE
 	                    Active = 1
 	                    AND PublishDate <= datetime('now')
-                    ORDER BY PublishDate DESC
+                    ORDER BY
+                        PublishDate DESC
                     LIMIT $limit";
 
                 command.Parameters.AddWithValue("$limit", numberToLoad);
@@ -188,7 +194,8 @@ namespace SparkServer.Infrastructure.Repositories
                             ImageThumbnailPath = Database.GetString(reader["ImageThumbnailPath"]),
                             Slug = Database.GetString(reader["Slug"]),
                             PublishDate = Database.GetDateTime(reader["PublishDate"]).Value,
-                            AuthorFullName = string.Empty // TODO
+                            AuthorID = Database.GetID(reader["AuthorID"]),
+                            AuthorFullName = Database.GetString(reader["AuthorFullName"])
                         });
                     }
                 }
