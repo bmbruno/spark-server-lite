@@ -9,16 +9,11 @@ namespace SparkServerLite.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private IBlogRepository<Blog> _blogRepo;
-        private IAuthorRepository<Author> _authorRepo;
 
-        public HomeController(ILogger<HomeController> logger, IBlogRepository<Blog> blogRepo, IAuthorRepository<Author> authorRepo)
+        public HomeController(ILogger<HomeController> logger, IBlogRepository<Blog> blogRepo)
         {
             _logger = logger;
             _blogRepo = blogRepo;
-            _authorRepo = authorRepo;
-
-            var test = _authorRepo.Get(1);
-            var test1 = _authorRepo.GetAll();
         }
 
         public IActionResult Index()
