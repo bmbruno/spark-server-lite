@@ -1,4 +1,6 @@
-﻿using SparkServerLite.Interfaces;
+﻿using Microsoft.Data.Sqlite;
+using SparkServerLite.Infrastructure;
+using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
 using System;
 using System.Collections.Generic;
@@ -155,22 +157,46 @@ namespace SparkServer.Infrastructure.Repositories
 
         public IEnumerable<Blog> GetRecent(int numberToLoad)
         {
-            //List<Blog> blogList = new List<Blog>();
+            List<Blog> blogList = new List<Blog>();
 
-            //using (var db = new SparkServerEntities())
-            //{
-            //    blogList = db.Blog.Where(u => u.Active)
-            //                      .Where(u => u.PublishDate <= DateTime.Now)
-            //                      .Include(a => a.Author)
-            //                      .Include(a => a.BlogsTags)
-            //                      .OrderByDescending(u => u.PublishDate)
-            //                      .Take(numberToLoad)
-            //    .ToList();
-            //}
+            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT *
+                    FROM Blogs
+                    WHERE
+	                    Active = 1
+	                    AND PublishDate <= datetime('now')
+                    ORDER BY PublishDate DESC
+                    LIMIT $limit";
 
-            //return blogList;
+                command.Parameters.AddWithValue("$limit", numberToLoad);
+                conn.Open();
 
-            return new List<Blog>();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        blogList.Add(new Blog() { 
+                        
+                            ID = Database.GetID(reader["ID"]),
+                            Title = Database.GetString(reader["Title"]),
+                            Subtitle = Database.GetString(reader["Subtitle"]),
+                            Content = Database.GetString(reader["Content"]),
+                            ImagePath = Database.GetString(reader["ImagePath"]),
+                            ImageThumbnailPath = Database.GetString(reader["ImageThumbnailPath"]),
+                            Slug = Database.GetString(reader["Slug"]),
+                            PublishDate = Database.GetDateTime(reader["PublishDate"]).Value,
+                            AuthorFullName = string.Empty // TODO
+                        });
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return blogList;
         }
 
         public IEnumerable<Blog> GetByTagID(int tagID)
