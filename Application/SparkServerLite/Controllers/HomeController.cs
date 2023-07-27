@@ -26,7 +26,7 @@ namespace SparkServerLite.Controllers
             viewModel.MapToViewModel(blogs);
             viewModel.MenuSelection = Infrastructure.Enums.MainMenu.Home;
 
-            return View();
+            return View(viewModel);
         }
 
         public IActionResult Privacy()
