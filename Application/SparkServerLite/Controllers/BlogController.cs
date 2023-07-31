@@ -17,6 +17,7 @@ namespace SparkServerLite.Controllers
             this.ItemsPerPage = 10;
         }
 
+        [HttpGet("blog/")]
         [HttpGet("blog/{year}")]
         [HttpGet("blog/{year}/{month}")]
         public ActionResult Index(int? year, int? month, int? page)
@@ -43,9 +44,7 @@ namespace SparkServerLite.Controllers
             else
             {
                 // Default: blog overview (top posts)
-
-                // TODO
-                // blogList = _blogRepo.Get(u => u.Active && u.PublishDate <= DateTime.Now).OrderByDescending(u => u.PublishDate).ToList();
+                blogList = _blogRepo.GetAll(1, 3).ToList();
                 viewModel.Header = "Latest Blog Posts";
             }
 

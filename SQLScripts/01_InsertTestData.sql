@@ -18,6 +18,7 @@ FROM Authors;
 -- BLOGS
 --
 
+/*
 INSERT INTO Blogs (Title, Subtitle, Content, Slug, PublishDate, AuthorID)
 VALUES ('Test Title', 'Subtitle!!!', '<p>Hello, world!</p>', 'test-blog-alpha', '2023-07-25', 1);
 
@@ -25,7 +26,32 @@ INSERT INTO Blogs (Title, Subtitle, Content, Slug, PublishDate, AuthorID)
 VALUES ('What a Great Blog Post', 'This is my subtitle.', '<p>Lorem ipsum.</p>', 'test-blog-bravo', '2023-06-30', 1);
 
 INSERT INTO Blogs (Title, Subtitle, Content, Slug, PublishDate, AuthorID)
-VALUES ('How Much Front-End Do I Need to Know?', 'It''s time to embrace JavaScript.', '<p>Sitecore XM Cloud is Sitecore''s first fully SaaS ("software as a service") product built from the ground-up and will likely be the company''s flagship CMS product in the coming year.</p>', 'test-blog-charlie', '2023-03-13', 1);
+VALUES ('How Much Front-End Do I Need to Know? (1)', 'It''s time to embrace JavaScript.', '<p>Sitecore XM Cloud is Sitecore''s first fully SaaS ("software as a service") product built from the ground-up and will likely be the company''s flagship CMS product in the coming year.</p>', 'test-blog-charlie', '2023-03-13', 1);
+*/
+
+INSERT INTO Blogs (Title, Subtitle, Content, Slug, PublishDate, AuthorID)
+VALUES ('Blog Title 1', 'Subtitle!!!', '<p>Hello, world!</p>', 'test-blog-one', '2023-07-31', 1);
+
+INSERT INTO Blogs (Title, Subtitle, Content, Slug, PublishDate, AuthorID)
+VALUES ('Blog Title 2', 'Subtitle!!!', '<p>Hello, world!</p>', 'test-blog-two', '2023-07-15', 1);
+
+INSERT INTO Blogs (Title, Subtitle, Content, Slug, PublishDate, AuthorID)
+VALUES ('Blog Title 3', 'Subtitle!!!', '<p>Hello, world!</p>', 'test-blog-three', '2023-06-15', 1);
+
+INSERT INTO Blogs (Title, Subtitle, Content, Slug, PublishDate, AuthorID)
+VALUES ('Blog Title 4', 'Subtitle!!!', '<p>Hello, world!</p>', 'test-blog-four', '2023-05-15', 1);
+
+INSERT INTO Blogs (Title, Subtitle, Content, Slug, PublishDate, AuthorID)
+VALUES ('Blog Title 5', 'Subtitle!!!', '<p>Hello, world!</p>', 'test-blog-five', '2023-04-15', 1);
+
+INSERT INTO Blogs (Title, Subtitle, Content, Slug, PublishDate, AuthorID)
+VALUES ('Blog Title 6', 'Subtitle!!!', '<p>Hello, world!</p>', 'test-blog-six', '2023-03-15', 1);
+
+INSERT INTO Blogs (Title, Subtitle, Content, Slug, PublishDate, AuthorID)
+VALUES ('Blog Title 7', 'Subtitle!!!', '<p>Hello, world!</p>', 'test-blog-seven', '2023-02-15', 1);
+
+INSERT INTO Blogs (Title, Subtitle, Content, Slug, PublishDate, AuthorID)
+VALUES ('Blog Title 8', 'Subtitle!!!', '<p>Hello, world!</p>', 'test-blog-eight', '2023-01-15', 1);
 
 SELECT *
 FROM Blogs;

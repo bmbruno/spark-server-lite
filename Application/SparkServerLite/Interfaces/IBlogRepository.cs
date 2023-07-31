@@ -18,6 +18,14 @@ namespace SparkServerLite.Interfaces
         T Get(int year, int month, string uniqueURL);
 
         /// <summary>
+        /// Should get a list of blog posts with paging parameters.
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="numberToTake"></param>
+        /// <returns></returns>
+        IEnumerable<T> GetAll(int? page, int? numberToTake);
+
+        /// <summary>
         /// Should retrieve blog-type objects from a datastore for any combination of year + month. Year is a minimum requirement.
         /// </summary>
         /// <param name="year">Year.</param>

@@ -45,6 +45,64 @@ namespace SparkServer.Infrastructure.Repositories
             return new List<Blog>();
         }
 
+        public IEnumerable<Blog> GetAll(int? page, int? numberToTake)
+        {
+            List<Blog> blogList = new List<Blog>();
+
+            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT
+	                    Blogs.*,
+	                    Authors.ID AS 'AuthorID',
+	                    Authors.FirstName || ' ' || Authors.LastName AS 'AuthorFullName'
+                    FROM
+	                    Blogs
+	                    INNER JOIN Authors ON Authors.ID = Blogs.AuthorID
+                    WHERE
+	                    Blogs.Active = 1
+	                    AND PublishDate <= datetime('now')
+                    ORDER BY
+	                    PublishDate DESC ";
+
+
+                if (page.HasValue && numberToTake.HasValue)
+                {
+                    command.CommandText += "LIMIT $numToTake OFFSET $pageSkip";
+                    command.Parameters.AddWithValue("$numToTake", numberToTake);
+                    command.Parameters.AddWithValue("$pageSkip", (page - 1) * numberToTake);
+                }
+
+                conn.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        blogList.Add(new Blog()
+                        {
+
+                            ID = Database.GetID(reader["ID"]),
+                            Title = Database.GetString(reader["Title"]),
+                            Subtitle = Database.GetString(reader["Subtitle"]),
+                            Content = Database.GetString(reader["Content"]),
+                            ImagePath = Database.GetString(reader["ImagePath"]),
+                            ImageThumbnailPath = Database.GetString(reader["ImageThumbnailPath"]),
+                            Slug = Database.GetString(reader["Slug"]),
+                            PublishDate = Database.GetDateTime(reader["PublishDate"]).Value,
+                            AuthorID = Database.GetID(reader["AuthorID"]),
+                            AuthorFullName = Database.GetString(reader["AuthorFullName"])
+                        });
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return blogList;
+        }
+
         public IEnumerable<Blog> GetAll()
         {
             //List<Blog> results;
@@ -131,27 +189,6 @@ namespace SparkServer.Infrastructure.Repositories
 
         public IEnumerable<Blog> GetByDate(int year, int? month)
         {
-            //List<Blog> blogList = new List<Blog>();
-
-            //using (var db = new SparkServerEntities())
-            //{
-            //    if (month.HasValue)
-            //    {
-            //        blogList = db.Blog.Where(
-            //            u => u.PublishDate <= DateTime.Now &&
-            //            u.Active &&
-            //            u.PublishDate.Value.Year == year &&
-            //            u.PublishDate.Value.Month == month).Include(u => u.Author).Include(u => u.BlogsTags).ToList();
-            //    }
-            //    else
-            //    {
-            //        blogList = db.Blog.Where(
-            //            u => u.PublishDate <= DateTime.Now && u.Active && u.PublishDate.Value.Year == year).Include(u => u.Author).Include(u => u.BlogsTags).ToList();
-            //    }
-            //}
-
-            //return blogList;
-
             List<Blog> blogList = new List<Blog>();
 
             using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
