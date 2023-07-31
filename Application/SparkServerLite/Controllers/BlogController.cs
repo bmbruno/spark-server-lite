@@ -17,6 +17,8 @@ namespace SparkServerLite.Controllers
             this.ItemsPerPage = 10;
         }
 
+        [HttpGet("blog/{year}")]
+        [HttpGet("blog/{year}/{month}")]
         public ActionResult Index(int? year, int? month, int? page)
         {
             this.SetupPaging(page);
