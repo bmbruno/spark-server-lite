@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SparkServerLite.Interfaces;
+using SparkServerLite.Mapping;
 using SparkServerLite.Models;
 using SparkServerLite.ViewModels;
 
@@ -52,7 +53,7 @@ namespace SparkServerLite.Controllers
             tagList = _blogTagRepo.GetAll().OrderBy(u => u.Name).ToList();
 
             // TODO
-            // viewModel.MapToViewModel(blogList, tagList);
+            viewModel.MapToViewModel(blogList, tagList);
 
             viewModel.Paging.PageCount = (blogList.Count + (this.ItemsPerPage - 1)) / this.ItemsPerPage;
             viewModel.Paging.CurrentPage = this.Page;

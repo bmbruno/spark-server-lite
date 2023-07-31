@@ -1,7 +1,7 @@
 ﻿using SparkServerLite.Models;
 using SparkServerLite.ViewModels;
 
-namespace SparkServerLite
+namespace SparkServerLite.Mapping
 {
     public static class MappingExtensions
     {
@@ -34,7 +34,7 @@ namespace SparkServerLite
             vm.Content = blog.Content;
             vm.ImagePath = blog.ImagePath;
             vm.ImageThumbnailPath = blog.ImageThumbnailPath ?? "/Content/Images/default_blog_icon.png"; // TODO: change to proper default
-            vm.AuthorFullName = String.IsNullOrEmpty(blog.AuthorFullName) ? blog.AuthorFullName : string.Empty;
+            vm.AuthorFullName = string.IsNullOrEmpty(blog.AuthorFullName) ? blog.AuthorFullName : string.Empty;
 
             vm.PublishDate = blog.PublishDate;
 
@@ -49,6 +49,39 @@ namespace SparkServerLite
                     });
                 }
             }
+        }
+
+        /// <summary>
+        /// Database objects -> BlogListViewModel
+        /// </summary>
+        /// <param name="vm">BlogListViewModel</param>
+        /// <param name="blogs">IEnumerable of Blog objects.</param>
+        public static void MapToViewModel(this BlogListViewModel vm, IEnumerable<Blog> blogs, IEnumerable<BlogTag> tags)
+        {
+            foreach (var blog in blogs)
+            {
+                BlogViewModel blogVM = new BlogViewModel();
+                blogVM.MapToViewModel(blog, tags);
+                vm.BlogList.Add(blogVM);
+            }
+
+            foreach (var tag in tags)
+            {
+                BlogTagViewModel tagVM = new BlogTagViewModel();
+                tagVM.MapToViewModel(tag);
+                vm.BlogTagList.Add(tagVM);
+            }
+        }
+
+        /// <summary>
+        /// Database object -> BlogTagViewModel.
+        /// </summary>
+        /// <param name="vm">BlogTagViewModel</param>
+        /// <param name="blogTag">Blog tag-type object.</param>
+        public static void MapToViewModel(this BlogTagViewModel vm, BlogTag blogTag)
+        {
+            vm.BlogTagID = blogTag.ID;
+            vm.BlogTagName = blogTag.Name;
         }
 
     }
