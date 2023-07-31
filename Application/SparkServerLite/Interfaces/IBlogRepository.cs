@@ -13,9 +13,9 @@ namespace SparkServerLite.Interfaces
         /// </summary>
         /// <param name="year">Year.</param>
         /// <param name="month">Month.</param>
-        /// <param name="uniqueURL">UniqueURL.</param>
+        /// <param name="slug">Unique URL slug.</param>
         /// <returns>Object of type T.</returns>
-        T Get(int year, int month, string uniqueURL);
+        T Get(int year, int month, string slug);
 
         /// <summary>
         /// Should get a list of blog posts with paging parameters.

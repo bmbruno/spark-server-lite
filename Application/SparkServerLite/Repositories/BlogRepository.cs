@@ -168,23 +168,53 @@ namespace SparkServer.Infrastructure.Repositories
             return;
         }
 
-        public Blog Get(int year, int month, string uniqueURL)
+        public Blog Get(int year, int month, string slug)
         {
-            //// TODO: This probably needs to be finished (year, month are not being used!)
+            Blog blog = new Blog();
 
-            //Blog item = null;
+            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT
+	                    Blogs.*,
+	                    Authors.ID AS 'AuthorID',
+	                    Authors.FirstName || ' ' || Authors.LastName AS 'AuthorFullName'
+                    FROM
+                        Blogs
+                        INNER JOIN Authors ON Authors.ID = Blogs.AuthorID
+                    WHERE
+	                    Blogs.Active = 1
+	                    AND PublishDate <= datetime('now')
+	                    AND Slug = $slud
+                    ORDER BY
+                        PublishDate DESC ";
 
-            //using (var db = new SparkServerEntities())
-            //{
-            //    item = db.Blog.FirstOrDefault(u => u.UniqueURL == uniqueURL);
+                command.Parameters.AddWithValue("$slug", slug);
 
-            //    db.Entry(item).Reference(la => la.Author).Load();
-            //    db.Entry(item).Collection(la => la.BlogsTags).Load();
-            //}
+                conn.Open();
 
-            //return item;
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        blog.ID = Database.GetID(reader["ID"]);
+                        blog.Title = Database.GetString(reader["Title"]);
+                        blog.Subtitle = Database.GetString(reader["Subtitle"]);
+                        blog.Content = Database.GetString(reader["Content"]);
+                        blog.ImagePath = Database.GetString(reader["ImagePath"]);
+                        blog.ImageThumbnailPath = Database.GetString(reader["ImageThumbnailPath"]);
+                        blog.Slug = Database.GetString(reader["Slug"]);
+                        blog.PublishDate = Database.GetDateTime(reader["PublishDate"]).Value;
+                        blog.AuthorID = Database.GetID(reader["AuthorID"]);
+                        blog.AuthorFullName = Database.GetString(reader["AuthorFullName"]);
+                    }
+                }
 
-            return new Blog();
+                conn.Close();
+            }
+
+            return blog;
         }
 
         public IEnumerable<Blog> GetByDate(int year, int? month, int? page, int? numberToTake)

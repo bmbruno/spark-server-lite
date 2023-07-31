@@ -60,5 +60,42 @@ namespace SparkServerLite.Controllers
 
             return View(viewName: $"IndexOverview", model: viewModel);
         }
+
+        [HttpGet("blog/{year}/{month}/{slug}")]
+        public ActionResult Post(int year, int month, string slug = "", bool preview = false)
+        {
+            BlogViewModel viewModel = new BlogViewModel();
+
+            if (String.IsNullOrEmpty(slug))
+                return RedirectToAction(actionName: "Index", controllerName: "Blog");
+
+            Blog blog = _blogRepo.Get(year, month, slug);
+
+            // TODO
+            // List<BlogTag> blogTags = _blogTagRepo.GetFromList(blog.BlogsTags.Select(u => u.TagID));
+            // viewModel.MapToViewModel(blog, blogTags);
+
+            viewModel.IsPreview = preview;
+
+            // Should this blog post be displayed at all? (Preview flag overrides denied access in some cases)
+            bool shouldDisplay = false;
+
+            // Has published date passed?
+            if (viewModel.PublishDate <= DateTime.Now)
+            {
+                shouldDisplay = true;
+            }
+
+            // Is preview mode being used with an authenticated user?
+            if (preview && User != null && User.Identity.IsAuthenticated)
+            {
+                shouldDisplay = true;
+            }
+
+            if (shouldDisplay)
+                return View(viewModel);
+            else
+                return RedirectToAction(actionName: "Index", controllerName: "Home");
+        }
     }
 }
