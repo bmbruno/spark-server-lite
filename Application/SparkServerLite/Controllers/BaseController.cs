@@ -8,7 +8,8 @@ namespace SparkServerLite.Controllers
 
         internal int ItemsPerPage { get; set; }
 
-        internal int SkipCount { get { return (this.Page - 1) * this.ItemsPerPage; } }
+        // MARK FOR REMOVAL
+        // internal int SkipCount { get { return (this.Page - 1) * this.ItemsPerPage; } }
 
         internal void SetupPaging(int? page)
         {

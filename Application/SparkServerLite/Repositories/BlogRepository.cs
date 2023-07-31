@@ -66,7 +66,7 @@ namespace SparkServer.Infrastructure.Repositories
                     ORDER BY
 	                    PublishDate DESC ";
 
-
+                // Paging
                 if (page.HasValue && numberToTake.HasValue)
                 {
                     command.CommandText += "LIMIT $numToTake OFFSET $pageSkip";
@@ -187,7 +187,7 @@ namespace SparkServer.Infrastructure.Repositories
             return new Blog();
         }
 
-        public IEnumerable<Blog> GetByDate(int year, int? month)
+        public IEnumerable<Blog> GetByDate(int year, int? month, int? page, int? numberToTake)
         {
             List<Blog> blogList = new List<Blog>();
 
@@ -208,9 +208,9 @@ namespace SparkServer.Infrastructure.Repositories
 	                    AND PublishDate >= $startDate
 	                    AND PublishDate <= $endDate
                     ORDER BY
-                        PublishDate DESC";
+                        PublishDate DESC ";
 
-                // TODO: build start/end dates based on month/year input params
+                // Build start/end dates based on month/year input params
                 string startDate, endDate = string.Empty;
 
                 if (month.HasValue)
@@ -226,6 +226,15 @@ namespace SparkServer.Infrastructure.Repositories
 
                 command.Parameters.AddWithValue("$startDate", startDate);
                 command.Parameters.AddWithValue("$endDate", endDate);
+
+                // Paging
+                if (page.HasValue && numberToTake.HasValue)
+                {
+                    command.CommandText += "LIMIT $numToTake OFFSET $pageSkip";
+                    command.Parameters.AddWithValue("$numToTake", numberToTake);
+                    command.Parameters.AddWithValue("$pageSkip", (page - 1) * numberToTake);
+                }
+
                 conn.Open();
 
                 using (var reader = command.ExecuteReader())
@@ -306,7 +315,7 @@ namespace SparkServer.Infrastructure.Repositories
             return blogList;
         }
 
-        public IEnumerable<Blog> GetByTagID(int tagID)
+        public IEnumerable<Blog> GetByTagID(int tagID, int? page, int? numberToTake)
         {
             //List<Blog> blogList = new List<Blog>();
 

@@ -9,7 +9,7 @@ namespace SparkServerLite.Interfaces
     public interface IBlogRepository<T> : IRepositoryBase<T>
     {
         /// <summary>
-        /// Should retrieve a blog-type object from a datastore using the unique URL scheme.
+        /// Should retrieve a blog object from a datastore using the unique URL scheme.
         /// </summary>
         /// <param name="year">Year.</param>
         /// <param name="month">Month.</param>
@@ -20,18 +20,20 @@ namespace SparkServerLite.Interfaces
         /// <summary>
         /// Should get a list of blog posts with paging parameters.
         /// </summary>
-        /// <param name="page"></param>
-        /// <param name="numberToTake"></param>
-        /// <returns></returns>
+        /// <param name="page">Page value for paging.</param>
+        /// <param name="numberToTake">Number of items for paging.</param>
+        /// <returns>Enumerable of object type T.</returns>
         IEnumerable<T> GetAll(int? page, int? numberToTake);
 
         /// <summary>
-        /// Should retrieve blog-type objects from a datastore for any combination of year + month. Year is a minimum requirement.
+        /// Should retrieve blog objects from a datastore for any combination of year + month. Year is a minimum requirement.
         /// </summary>
         /// <param name="year">Year.</param>
         /// <param name="month">Month.</param>
+        /// <param name="page">Page value for paging.</param>
+        /// <param name="numberToTake">Number of items for paging.</param>
         /// <returns>Object of type T.</returns>
-        IEnumerable<T> GetByDate(int year, int? month);
+        IEnumerable<T> GetByDate(int year, int? month, int? page, int? numberToTake);
 
         /// <summary>
         /// Should return an enumerable of blog objects ordered by publish date descending, limited by the numberToLoad.
@@ -44,7 +46,9 @@ namespace SparkServerLite.Interfaces
         /// Should retrieve blog-type objects from a datastore based on tag ID.
         /// </summary>
         /// <param name="tagID">ID of tag object.</param>
+        /// <param name="page">Page value for paging.</param>
+        /// <param name="numberToTake">Number of items for paging.</param>
         /// <returns>IEnumerable of blog-type objecs.</returns>
-        IEnumerable<T> GetByTagID(int tagID);
+        IEnumerable<T> GetByTagID(int tagID, int? page, int? numberToTake);
     }
 }
