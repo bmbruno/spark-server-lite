@@ -1,0 +1,55 @@
+﻿@model SparkServerLite.ViewModels.BlogListViewModel
+
+@{
+    ViewData["Title"] = Model.Header;
+}
+
+<div class="gutter">&nbsp;</div>
+
+<div class="section" style="max-width: 1100px; margin: 0 auto;">
+
+    <h1>@ViewData["Title"]</h1>
+
+    <ul class="blog-list">
+
+        @for (var i = 0; i < Model.BlogList.Count; i++)
+        {
+                <li class="cf">
+
+                    <div class="blog-card">
+
+                        <div class="blog-list-header" style="background-image: url('@Model.BlogList[i].ImageURL');"><a href="@Model.BlogList[i].URL" style="display: block; height: 100%;" title="@Model.BlogList[i].Title">&nbsp;</a></div>
+
+                        <div class="blog-list-intro">
+                            <h3><a href="@Model.BlogList[i].URL">@Model.BlogList[i].Title</a></h3>
+                            <div class="subtitle">@Model.BlogList[i].Subtitle</div>
+                            <div class="date">@Model.BlogList[i].PublishDate.ToString("MMMM dd, yyyy")</div>
+                        </div>
+
+                    </div>
+
+                </li>
+        }
+    </ul>
+
+    @Html.Partial("_Paging", Model.Paging)
+
+</div>
+
+<div class="section" style="padding-top: 4em;">
+
+    <h1>Explore Tags</h1>
+
+    @if (Model.BlogTagList.Count > 0)
+    {
+            <ul class="explore-tags">
+
+            @foreach (var tag in Model.BlogTagList)
+            {
+                        <li><a href="/blog/tag/@tag.BlogTagName">@tag.BlogTagName</a></li>
+            }
+
+            </ul>
+    }
+
+</div>
