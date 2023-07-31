@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SparkServerLite.Infrastructure.Enums;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
 using SparkServerLite.ViewModels;
@@ -6,7 +7,7 @@ using System.Diagnostics;
 
 namespace SparkServerLite.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
         private IBlogRepository<Blog> _blogRepo;
@@ -29,15 +30,12 @@ namespace SparkServerLite.Controllers
             return View(viewModel);
         }
 
-        public IActionResult Privacy()
+        public ActionResult About()
         {
-            return View();
-        }
+            HomeViewModel viewModel = new HomeViewModel();
+            viewModel.MenuSelection = MainMenu.About;
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(viewModel);
         }
     }
 }
