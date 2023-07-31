@@ -59,3 +59,34 @@ FROM Blogs;
 --
 -- BLOGTAGS
 --
+
+INSERT INTO BlogTags (Name, Active, CreateDate)
+VALUES ('Tag Alpha', 1, date('now'))
+
+INSERT INTO BlogTags (Name, Active, CreateDate)
+VALUES ('Tag Bravo', 1, date('now'))
+
+INSERT INTO BlogTags (Name, Active, CreateDate)
+VALUES ('Tag Charlie', 1, date('now'))
+
+INSERT INTO BlogTags (Name, Active, CreateDate)
+VALUES ('Tag Delta', 1, date('now'))
+
+INSERT INTO BlogTags (Name, Active, CreateDate)
+VALUES ('Tag Echo', 1, date('now'))
+
+SELECT *
+FROM BlogTags;
+
+--
+-- BlogsToTags
+--
+
+INSERT INTO BlogsToTags (BlogID, BlogTagID) VALUES (1, 1);
+INSERT INTO BlogsToTags (BlogID, BlogTagID) VALUES (1, 2);
+INSERT INTO BlogsToTags (BlogID, BlogTagID) VALUES (1, 3);
+INSERT INTO BlogsToTags (BlogID, BlogTagID) VALUES (2, 4);
+INSERT INTO BlogsToTags (BlogID, BlogTagID) VALUES (2, 5);
+
+SELECT *
+FROM BlogsToTags;
