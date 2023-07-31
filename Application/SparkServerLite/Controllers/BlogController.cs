@@ -28,18 +28,14 @@ namespace SparkServerLite.Controllers
             if (year.HasValue && month.HasValue)
             {
                 // Blogs list by year + month
-                
-                // TODO
-                // blogList = _blogRepo.GetByDate(year.Value, month.Value).OrderByDescending(u => u.PublishDate).ToList();
+                blogList = _blogRepo.GetByDate(year.Value, month.Value).OrderByDescending(u => u.PublishDate).ToList();
                 string monthName = new DateTime(year.Value, month.Value, 1).ToString("MMMM");
                 viewModel.Header = $"Blog Posts for {monthName} {year.ToString()}";
             }
             else if (year.HasValue)
             {
                 // Blog list by year only
-
-                // TODO
-                // blogList = _blogRepo.GetByDate(year.Value, null).OrderByDescending(u => u.PublishDate).ToList();
+                blogList = _blogRepo.GetByDate(year.Value, null).OrderByDescending(u => u.PublishDate).ToList();
                 viewModel.Header = $"Blog Posts for {year.ToString()}";
             }
             else
