@@ -188,7 +188,7 @@ namespace SparkServer.Infrastructure.Repositories
                 }
 
                 command.Parameters.AddWithValue("$startDate", startDate);
-                command.Parameters.AddWithValue("$startDate", endDate);
+                command.Parameters.AddWithValue("$endDate", endDate);
                 conn.Open();
 
                 using (var reader = command.ExecuteReader())
