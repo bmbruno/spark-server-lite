@@ -17,13 +17,6 @@ namespace SparkServerLite.Interfaces
         T Get(int ID);
 
         /// <summary>
-        /// Get items of T type from the database with a Where clause predicate.
-        /// </summary>
-        /// <param name="whereClause">LINQ Where clause predicate.</param>
-        /// <returns>IQueryable of type T.</returns>
-        IEnumerable<T> Get(Expression<Func<T, bool>> whereClause);
-
-        /// <summary>
         /// Returns all items from database.
         /// </summary>
         /// <returns>IQueryable of type T.</returns>

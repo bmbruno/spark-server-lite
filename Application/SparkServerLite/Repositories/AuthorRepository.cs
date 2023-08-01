@@ -34,15 +34,22 @@ namespace SparkServer.Infrastructure.Repositories
 
                 using (var reader = command.ExecuteReader())
                 {
-                    // Only expecting one result, so no need for while loop
                     reader.Read();
-                    author.ID = Database.GetID(reader["ID"]);
-                    author.SSOID = Database.GetGuid(reader["SSOID"]);
-                    author.FirstName = Database.GetString(reader["FirstName"]);
-                    author.LastName = Database.GetString(reader["LastName"]);
-                    author.Email = Database.GetString(reader["Email"]);
-                    author.Active = Database.GetBoolean(reader["Active"]);
-                    author.CreateDate = Database.GetDateTime(reader["CreateDate"]);
+
+                    if (reader.HasRows)
+                    {
+                        author.ID = Database.GetID(reader["ID"]);
+                        author.SSOID = Database.GetGuid(reader["SSOID"]);
+                        author.FirstName = Database.GetString(reader["FirstName"]);
+                        author.LastName = Database.GetString(reader["LastName"]);
+                        author.Email = Database.GetString(reader["Email"]);
+                        author.Active = Database.GetBoolean(reader["Active"]);
+                        author.CreateDate = Database.GetDateTime(reader["CreateDate"]);
+                    }
+                    else
+                    {
+                        throw new Exception($"No Author found for ID {ID}");
+                    }
                 }
 
                 conn.Close();
@@ -53,33 +60,46 @@ namespace SparkServer.Infrastructure.Repositories
 
         public Author Get(Guid ssoID)
         {
-            //Author item;
+            Author author = new Author();
 
-            //using (var db = new SparkServerEntities())
-            //{
-            //    item = db.Author.FirstOrDefault(u => u.SSOID == ssoID);
-            //}
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT *
+                    FROM Authors
+                    WHERE
+                        SSOID = $ssoid
+                        AND Active = 1
+                    LIMIT 1";
 
-            //return item;
+                command.Parameters.AddWithValue("$ssoid", ssoID.ToString());
+                conn.Open();
 
-            return new Author();
-        }
+                using (var reader = command.ExecuteReader())
+                {
+                    reader.Read();
 
-        public IEnumerable<Author> Get(Expression<Func<Author, bool>> whereClause)
-        {
-            // CALLING: ArticleRepo.Get(x => x.Title == "abcdef");
-            // USING: db.Articles.Where(whereClause);
+                    if (reader.HasRows)
+                    {
+                        author.ID = Database.GetID(reader["ID"]);
+                        author.SSOID = Database.GetGuid(reader["SSOID"]);
+                        author.FirstName = Database.GetString(reader["FirstName"]);
+                        author.LastName = Database.GetString(reader["LastName"]);
+                        author.Email = Database.GetString(reader["Email"]);
+                        author.Active = Database.GetBoolean(reader["Active"]);
+                        author.CreateDate = Database.GetDateTime(reader["CreateDate"]);
+                    }
+                    else
+                    {
+                        throw new Exception($"No Author found for SSOID '{ssoID.ToString()}'");
+                    }
+                }
 
-            //List<Author> results;
+                conn.Close();
+            }
 
-            //using (var db = new SparkServerEntities())
-            //{
-            //    results = db.Author.Where(whereClause).ToList();
-            //}
-
-            //return results;
-
-            return new List<Author>();
+            return author;
         }
 
         public IEnumerable<Author> GetAll()
