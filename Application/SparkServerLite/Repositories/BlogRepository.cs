@@ -186,7 +186,7 @@ namespace SparkServer.Infrastructure.Repositories
                     WHERE
 	                    Blogs.Active = 1
 	                    AND PublishDate <= datetime('now')
-	                    AND Slug = $slud
+	                    AND Slug = $slug
                     ORDER BY
                         PublishDate DESC ";
 
@@ -196,19 +196,18 @@ namespace SparkServer.Infrastructure.Repositories
 
                 using (var reader = command.ExecuteReader())
                 {
-                    while (reader.Read())
-                    {
-                        blog.ID = Database.GetID(reader["ID"]);
-                        blog.Title = Database.GetString(reader["Title"]);
-                        blog.Subtitle = Database.GetString(reader["Subtitle"]);
-                        blog.Content = Database.GetString(reader["Content"]);
-                        blog.ImagePath = Database.GetString(reader["ImagePath"]);
-                        blog.ImageThumbnailPath = Database.GetString(reader["ImageThumbnailPath"]);
-                        blog.Slug = Database.GetString(reader["Slug"]);
-                        blog.PublishDate = Database.GetDateTime(reader["PublishDate"]).Value;
-                        blog.AuthorID = Database.GetID(reader["AuthorID"]);
-                        blog.AuthorFullName = Database.GetString(reader["AuthorFullName"]);
-                    }
+                    reader.Read();
+                    
+                    blog.ID = Database.GetID(reader["ID"]);
+                    blog.Title = Database.GetString(reader["Title"]);
+                    blog.Subtitle = Database.GetString(reader["Subtitle"]);
+                    blog.Content = Database.GetString(reader["Content"]);
+                    blog.ImagePath = Database.GetString(reader["ImagePath"]);
+                    blog.ImageThumbnailPath = Database.GetString(reader["ImageThumbnailPath"]);
+                    blog.Slug = Database.GetString(reader["Slug"]);
+                    blog.PublishDate = Database.GetDateTime(reader["PublishDate"]).Value;
+                    blog.AuthorID = Database.GetID(reader["AuthorID"]);
+                    blog.AuthorFullName = Database.GetString(reader["AuthorFullName"]);
                 }
 
                 conn.Close();
