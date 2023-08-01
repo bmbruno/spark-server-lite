@@ -58,6 +58,7 @@ namespace SparkServer.Infrastructure.Repositories
                     }
                     else
                     {
+                        conn.Close();
                         throw new Exception($"Blog not found with ID {ID.ToString()}");
                     }
                 }
@@ -97,7 +98,6 @@ namespace SparkServer.Infrastructure.Repositories
                     {
                         blogList.Add(new Blog()
                         {
-
                             ID = Database.GetID(reader["ID"]),
                             Title = Database.GetString(reader["Title"]),
                             Subtitle = Database.GetString(reader["Subtitle"]),
@@ -214,6 +214,7 @@ namespace SparkServer.Infrastructure.Repositories
                     }
                     else
                     {
+                        conn.Close();
                         throw new Exception($"No blog found for slug '{slug}'");
                     }
                 }
@@ -345,22 +346,54 @@ namespace SparkServer.Infrastructure.Repositories
 
         public IEnumerable<Blog> GetByTagID(int tagID)
         {
-            //List<Blog> blogList = new List<Blog>();
+            List<Blog> blogList = new List<Blog>();
 
-            //using (var db = new SparkServerEntities())
-            //{
-            //    blogList = db.BlogsTags.Where(u => u.TagID == tagID)
-            //                           .Select(p => p.Blog)
-            //                           .Where(p => p.PublishDate <= DateTime.Now)
-            //                           .Where(p => p.Active)
-            //                           .Include(a => a.Author)
-            //                           .Include(a => a.BlogsTags)
-            //                           .ToList();
-            //}
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT
+	                    Blogs.*,
+	                    Authors.ID AS 'AuthorID',
+	                    Authors.FirstName || ' ' || Authors.LastName AS 'AuthorFullName'
+                    FROM
+	                    Blogs
+	                    INNER JOIN Authors ON Authors.ID = Blogs.AuthorID
+	                    LEFT JOIN BlogsToTags ON BlogsToTags.BlogID = Blogs.ID
+                    WHERE
+	                    Blogs.Active = 1
+	                    AND PublishDate <= datetime('now')
+	                    AND BlogsToTags.BlogTagID = $tagID
+                    ORDER BY
+	                    PublishDate DESC";
 
-            //return blogList;
+                command.Parameters.AddWithValue("$tagID", tagID);
+                conn.Open();
 
-            return new List<Blog>();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        blogList.Add(new Blog()
+                        {
+                            ID = Database.GetID(reader["ID"]),
+                            Title = Database.GetString(reader["Title"]),
+                            Subtitle = Database.GetString(reader["Subtitle"]),
+                            Content = Database.GetString(reader["Content"]),
+                            ImagePath = Database.GetString(reader["ImagePath"]),
+                            ImageThumbnailPath = Database.GetString(reader["ImageThumbnailPath"]),
+                            Slug = Database.GetString(reader["Slug"]),
+                            PublishDate = Database.GetDateTime(reader["PublishDate"]).Value,
+                            AuthorID = Database.GetID(reader["AuthorID"]),
+                            AuthorFullName = Database.GetString(reader["AuthorFullName"])
+                        });
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return blogList;
         }
 
         public IEnumerable<Blog> GetByTagName(string tagName)

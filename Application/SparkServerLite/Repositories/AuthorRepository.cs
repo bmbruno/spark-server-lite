@@ -48,6 +48,7 @@ namespace SparkServer.Infrastructure.Repositories
                     }
                     else
                     {
+                        conn.Close();
                         throw new Exception($"No Author found for ID {ID}");
                     }
                 }
@@ -92,6 +93,7 @@ namespace SparkServer.Infrastructure.Repositories
                     }
                     else
                     {
+                        conn.Close();
                         throw new Exception($"No Author found for SSOID '{ssoID.ToString()}'");
                     }
                 }
