@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Mapping;
 using SparkServerLite.Models;
@@ -52,6 +53,7 @@ namespace SparkServerLite.Controllers
 
             tagList = _blogTagRepo.GetAll().OrderBy(u => u.Name).ToList();
 
+            // Paging
             int totalCount = blogList.Count;
             blogList = blogList.Skip(this.SkipCount).Take(this.ItemsPerPage).ToList();
             viewModel.MapToViewModel(blogList, tagList);
@@ -94,6 +96,32 @@ namespace SparkServerLite.Controllers
                 return View(viewModel);
             else
                 return RedirectToAction(actionName: "Index", controllerName: "Home");
+        }
+
+        [HttpGet("blog/tag/{tagName}")]
+        public ActionResult ListByTag(string tagName, int? page)
+        {
+            this.SetupPaging(page);
+            
+            BlogListViewModel viewModel = new BlogListViewModel();
+            List<Blog> blogList = new List<Blog>();
+            List<BlogTag> tagList = new List<BlogTag>();
+
+            string unencodedTagName = FormatHelper.GetTagNameFromURL(tagName);
+            blogList = _blogRepo.GetByTagName(unencodedTagName).ToList();
+            // TODO: implement this
+            // tagList = _blogTagRepo.GetAll().OrderBy(u => u.Name).ToList();
+
+            viewModel.MapToViewModel(blogList, tagList);
+
+            // Paging
+            int totalItems = blogList.Count;
+            viewModel.BlogList = viewModel.BlogList.OrderByDescending(u => u.PublishDate).Skip(this.SkipCount).Take(this.ItemsPerPage).ToList();
+
+            viewModel.Paging.PageCount = (totalItems + this.ItemsPerPage - 1) / this.ItemsPerPage;
+            viewModel.Paging.CurrentPage = this.Page;
+
+            return View(viewName: "Index", model: viewModel);
         }
     }
 }

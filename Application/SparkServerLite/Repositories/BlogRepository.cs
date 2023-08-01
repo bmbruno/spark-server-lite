@@ -229,13 +229,13 @@ namespace SparkServer.Infrastructure.Repositories
 
                 if (month.HasValue)
                 {
-                    startDate = new DateTime(year, month.Value, 1).ToString(Formats.SQLiteDate);
-                    endDate = new DateTime(year, month.Value, DateTime.DaysInMonth(year, month.Value)).ToString(Formats.SQLiteDate);
+                    startDate = new DateTime(year, month.Value, 1).ToString(FormatHelper.SQLiteDate);
+                    endDate = new DateTime(year, month.Value, DateTime.DaysInMonth(year, month.Value)).ToString(FormatHelper.SQLiteDate);
                 }
                 else
                 {
-                    startDate = new DateTime(year, 1, 1).ToString(Formats.SQLiteDate);
-                    endDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12)).ToString(Formats.SQLiteDate);
+                    startDate = new DateTime(year, 1, 1).ToString(FormatHelper.SQLiteDate);
+                    endDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12)).ToString(FormatHelper.SQLiteDate);
                 }
 
                 command.Parameters.AddWithValue("$startDate", startDate);
@@ -320,7 +320,7 @@ namespace SparkServer.Infrastructure.Repositories
             return blogList;
         }
 
-        public IEnumerable<Blog> GetByTagID(int tagID, int? page, int? numberToTake)
+        public IEnumerable<Blog> GetByTagID(int tagID)
         {
             //List<Blog> blogList = new List<Blog>();
 
@@ -338,6 +338,59 @@ namespace SparkServer.Infrastructure.Repositories
             //return blogList;
 
             return new List<Blog>();
+        }
+
+        public IEnumerable<Blog> GetByTagName(string tagName)
+        {
+            List<Blog> blogList = new List<Blog>();
+
+            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT
+	                    Blogs.*,
+	                    Authors.ID AS 'AuthorID',
+	                    Authors.FirstName || ' ' || Authors.LastName AS 'AuthorFullName'
+                    FROM
+	                    Blogs
+	                    INNER JOIN Authors ON Authors.ID = Blogs.AuthorID
+	                    LEFT JOIN BlogsToTags ON BlogsToTags.BlogID = Blogs.ID
+	                    LEFT JOIN BlogTags ON BlogTags.ID = BlogsToTags.BlogTagID
+                    WHERE
+	                    Blogs.Active = 1
+	                    AND PublishDate <= datetime('now')
+	                    AND BlogTags.Name = $tagName
+                    ORDER BY
+	                    PublishDate DESC";
+
+                command.Parameters.AddWithValue("$tagName", tagName);
+                conn.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        blogList.Add(new Blog()
+                        {
+                            ID = Database.GetID(reader["ID"]),
+                            Title = Database.GetString(reader["Title"]),
+                            Subtitle = Database.GetString(reader["Subtitle"]),
+                            Content = Database.GetString(reader["Content"]),
+                            ImagePath = Database.GetString(reader["ImagePath"]),
+                            ImageThumbnailPath = Database.GetString(reader["ImageThumbnailPath"]),
+                            Slug = Database.GetString(reader["Slug"]),
+                            PublishDate = Database.GetDateTime(reader["PublishDate"]).Value,
+                            AuthorID = Database.GetID(reader["AuthorID"]),
+                            AuthorFullName = Database.GetString(reader["AuthorFullName"])
+                        });
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return blogList;
         }
     }
 }

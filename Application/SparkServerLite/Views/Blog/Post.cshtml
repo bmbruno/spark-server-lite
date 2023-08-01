@@ -1,4 +1,5 @@
-﻿@model SparkServerLite.ViewModels.BlogViewModel
+﻿@using SparkServerLite.Infrastructure;
+@model SparkServerLite.ViewModels.BlogViewModel
 
 @{
     ViewData["Title"] = Model.Title;
@@ -32,7 +33,7 @@
         {
             foreach (var tag in Model.BlogTags)
             {
-                        <li><a href="/blog/tag/@tag.BlogTagName">@tag.BlogTagName</a></li>
+                        <li><a href="/blog/tag/@FormatHelper.FormatTagForURL(tag.BlogTagName)">@tag.BlogTagName</a></li>
             }
         }
         else
@@ -64,7 +65,7 @@
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="@Model.Title" />
         <meta name="twitter:description" content="@Model.Subtitle" />
-        <meta name="twitter:image" content="https://www.sitecorespark.com@(Model.ImageURL)" />
+        <meta name="twitter:image" content="https://www.sitecorespark.com@(Model.ImageURL)" /> <!-- TODO: move site URL into configuration -->
         <meta name="twitter:site" content="Sitecore Spark" />
 
 }

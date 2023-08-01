@@ -22,8 +22,6 @@ namespace SparkServerLite.Interfaces
         /// </summary>
         /// <param name="year">Year.</param>
         /// <param name="month">Month.</param>
-        /// <param name="page">Page value for paging.</param>
-        /// <param name="numberToTake">Number of items for paging.</param>
         /// <returns>Object of type T.</returns>
         IEnumerable<T> GetByDate(int year, int? month);
 
@@ -38,9 +36,14 @@ namespace SparkServerLite.Interfaces
         /// Should retrieve blog-type objects from a datastore based on tag ID.
         /// </summary>
         /// <param name="tagID">ID of tag object.</param>
-        /// <param name="page">Page value for paging.</param>
-        /// <param name="numberToTake">Number of items for paging.</param>
         /// <returns>IEnumerable of blog-type objecs.</returns>
-        IEnumerable<T> GetByTagID(int tagID, int? page, int? numberToTake);
+        IEnumerable<T> GetByTagID(int tagID);
+
+        /// <summary>
+        /// Should retrieve blog-type objects from a datastore based on tag name.
+        /// </summary>
+        /// <param name="tagName">Name of tag object.</param>
+        /// <returns>IEnumerable of blog-type objecs.</returns>
+        IEnumerable<T> GetByTagName(string tagName);
     }
 }
