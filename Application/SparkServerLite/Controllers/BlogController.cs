@@ -72,7 +72,7 @@ namespace SparkServerLite.Controllers
             Blog blog = _blogRepo.Get(year, month, slug);
 
             // TODO
-            IEnumerable<BlogTag> blogTags = _blogTagRepo.GetFromList(new List<int>() { 1, 3 }); /* blog.BlogsTags.Select(u => u.TagID) */
+            IEnumerable<BlogTag> blogTags = _blogTagRepo.GetForBlog(blog.ID);
             // viewModel.MapToViewModel(blog, blogTags);
 
             viewModel.IsPreview = preview;

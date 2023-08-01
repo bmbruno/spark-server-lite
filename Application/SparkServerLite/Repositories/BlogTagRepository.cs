@@ -99,23 +99,25 @@ namespace SparkServer.Infrastructure.Repositories
             return;
         }
 
-        public IEnumerable<BlogTag> GetFromList(IEnumerable<int> list)
+        public IEnumerable<BlogTag> GetForBlog(int blogID)
         {
             List<BlogTag> tagList = new List<BlogTag>();
 
             using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
             {
-                string idList = string.Join(",", list);
-
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
                     SELECT
-	                    *
+	                    BlogTags.ID,
+                        BlogTags.Name
                     FROM
 	                    BlogTags
+	                    INNER JOIN BlogsToTags ON BlogsToTags.BlogTagID = BlogTags.ID
                     WHERE
-                        Active = 1
-	                    AND ID IN (" + idList  +")";
+	                    BlogTags.Active = 1
+	                    AND BlogsToTags.BlogID = $blogID";
+
+                command.Parameters.AddWithValue("$blogID", blogID);
 
                 conn.Open();
 
