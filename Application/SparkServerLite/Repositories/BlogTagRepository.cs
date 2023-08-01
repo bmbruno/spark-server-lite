@@ -1,4 +1,7 @@
-﻿using SparkServerLite.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.Sqlite;
+using SparkServerLite.Infrastructure;
+using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
 using System.Linq.Expressions;
 
@@ -98,22 +101,40 @@ namespace SparkServer.Infrastructure.Repositories
 
         public IEnumerable<BlogTag> GetFromList(IEnumerable<int> list)
         {
-            //List<BlogTag> results = new List<BlogTag>();
+            List<BlogTag> tagList = new List<BlogTag>();
 
-            //using (var db = new SparkServerEntities())
-            //{
-            //    foreach (var ID in list)
-            //    {
-            //        var item = db.BlogTag.FirstOrDefault(u => u.ID == ID);
+            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
+            {
+                string idList = string.Join(",", list);
 
-            //        if (item != null)
-            //            results.Add(item);
-            //    }
-            //}
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT
+	                    *
+                    FROM
+	                    BlogTags
+                    WHERE
+                        Active = 1
+	                    AND ID IN (" + idList  +")";
 
-            //return results;
+                conn.Open();
 
-            return new List<BlogTag>();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        tagList.Add(new BlogTag()
+                        {
+                            ID = Database.GetID(reader["ID"]),
+                            Name = Database.GetString(reader["Name"])
+                        });
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return tagList;
         }
 
         public void UpdateTagsForBlog(int blogID, IEnumerable<int> updatedList)

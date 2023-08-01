@@ -197,17 +197,24 @@ namespace SparkServer.Infrastructure.Repositories
                 using (var reader = command.ExecuteReader())
                 {
                     reader.Read();
-                    
-                    blog.ID = Database.GetID(reader["ID"]);
-                    blog.Title = Database.GetString(reader["Title"]);
-                    blog.Subtitle = Database.GetString(reader["Subtitle"]);
-                    blog.Content = Database.GetString(reader["Content"]);
-                    blog.ImagePath = Database.GetString(reader["ImagePath"]);
-                    blog.ImageThumbnailPath = Database.GetString(reader["ImageThumbnailPath"]);
-                    blog.Slug = Database.GetString(reader["Slug"]);
-                    blog.PublishDate = Database.GetDateTime(reader["PublishDate"]).Value;
-                    blog.AuthorID = Database.GetID(reader["AuthorID"]);
-                    blog.AuthorFullName = Database.GetString(reader["AuthorFullName"]);
+
+                    if (reader.HasRows)
+                    {
+                        blog.ID = Database.GetID(reader["ID"]);
+                        blog.Title = Database.GetString(reader["Title"]);
+                        blog.Subtitle = Database.GetString(reader["Subtitle"]);
+                        blog.Content = Database.GetString(reader["Content"]);
+                        blog.ImagePath = Database.GetString(reader["ImagePath"]);
+                        blog.ImageThumbnailPath = Database.GetString(reader["ImageThumbnailPath"]);
+                        blog.Slug = Database.GetString(reader["Slug"]);
+                        blog.PublishDate = Database.GetDateTime(reader["PublishDate"]).Value;
+                        blog.AuthorID = Database.GetID(reader["AuthorID"]);
+                        blog.AuthorFullName = Database.GetString(reader["AuthorFullName"]);
+                    }
+                    else
+                    {
+                        throw new Exception($"No blog found for slug '{slug}'");
+                    }
                 }
 
                 conn.Close();
