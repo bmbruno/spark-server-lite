@@ -4,6 +4,7 @@ using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
 using System.Linq.Expressions;
+using System.Xml.Linq;
 
 namespace SparkServer.Infrastructure.Repositories
 {
@@ -11,22 +12,83 @@ namespace SparkServer.Infrastructure.Repositories
     {
         public BlogTag Get(int ID)
         {
-            //BlogTag item;
+            BlogTag tag = new BlogTag();
 
-            //using (var db = new SparkServerEntities())
-            //{
-            //    item = db.BlogTag.FirstOrDefault(u => u.ID == ID);
-            //}
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT
+	                    BlogTags.ID,
+	                    BlogTags.Name
+                    FROM
+	                    BlogTags
+                    WHERE
+	                    Active = 1
+                        AND ID = $id";
 
-            //return item;
+                command.Parameters.AddWithValue("$id", ID);
+                conn.Open();
 
-            return new BlogTag();
+                using (var reader = command.ExecuteReader())
+                {
+                    reader.Read();
+
+                    if (reader.HasRows)
+                    {
+                        tag.ID = Database.GetID(reader["ID"]);
+                        tag.Name = Database.GetString(reader["Name"]);
+                    }
+                    else
+                    {
+                        conn.Close();
+                        throw new Exception($"No blog tag found for ID {ID.ToString()}");
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return tag;
+
         }
 
         public IEnumerable<BlogTag> GetAll()
         {
-            // TODO: get all active tags
-            return new List<BlogTag>();
+            List<BlogTag> tagList = new List<BlogTag>();
+
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT
+	                    BlogTags.ID,
+	                    BlogTags.Name
+                    FROM
+	                    BlogTags
+                    WHERE
+	                    BlogTags.Active = 1
+                    ORDER BY
+                        BlogTags.Name ASC";
+
+                conn.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        tagList.Add(new BlogTag()
+                        {
+                            ID = Database.GetID(reader["ID"]),
+                            Name = Database.GetString(reader["Name"])
+                        });
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return tagList;
         }
 
         public int Create(BlogTag newItem)
@@ -74,7 +136,7 @@ namespace SparkServer.Infrastructure.Repositories
             return;
         }
 
-        public IEnumerable<BlogTag> GetActiveTags()
+        public IEnumerable<BlogTag> GetTagsInUse()
         {
             List<BlogTag> tagList = new List<BlogTag>();
 

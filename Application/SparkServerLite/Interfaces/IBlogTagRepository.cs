@@ -12,7 +12,7 @@ namespace SparkServerLite.Interfaces
         /// Should return a list of blog tag objects that are currently tied to blogs.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<T> GetActiveTags();
+        IEnumerable<T> GetTagsInUse();
 
         /// <summary>
         /// Should return a list of blog tag objects for the given blog ID.

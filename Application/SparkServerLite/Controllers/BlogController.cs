@@ -51,7 +51,7 @@ namespace SparkServerLite.Controllers
                 viewModel.Header = "Latest Blog Posts";
             }
 
-            tagList = _blogTagRepo.GetActiveTags().ToList();
+            tagList = _blogTagRepo.GetTagsInUse().ToList();
 
             // Paging
             int totalCount = blogList.Count;
@@ -109,7 +109,7 @@ namespace SparkServerLite.Controllers
 
             string unencodedTagName = FormatHelper.GetTagNameFromURL(tagName);
             blogList = _blogRepo.GetByTagName(unencodedTagName).ToList();
-            tagList = _blogTagRepo.GetActiveTags().ToList();
+            tagList = _blogTagRepo.GetTagsInUse().ToList();
 
             viewModel.MapToViewModel(blogList, tagList);
 
