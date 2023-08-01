@@ -109,8 +109,7 @@ namespace SparkServerLite.Controllers
 
             string unencodedTagName = FormatHelper.GetTagNameFromURL(tagName);
             blogList = _blogRepo.GetByTagName(unencodedTagName).ToList();
-            // TODO: implement this
-            // tagList = _blogTagRepo.GetAll().OrderBy(u => u.Name).ToList();
+            tagList = _blogTagRepo.GetActiveTags().ToList();
 
             viewModel.MapToViewModel(blogList, tagList);
 

@@ -42,15 +42,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public IEnumerable<BlogTag> GetAll()
         {
-            //List<BlogTag> results;
-
-            //using (var db = new SparkServerEntities())
-            //{
-            //    results = db.BlogTag.Where(u => u.Active).ToList();
-            //}
-
-            //return results;
-
+            // TODO: get all active tags
             return new List<BlogTag>();
         }
 
@@ -97,6 +89,45 @@ namespace SparkServer.Infrastructure.Repositories
             //}
 
             return;
+        }
+
+        public IEnumerable<BlogTag> GetActiveTags()
+        {
+            List<BlogTag> tagList = new List<BlogTag>();
+
+            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT
+	                    BlogTags.ID,
+	                    BlogTags.Name
+                    FROM
+	                    BlogTags
+	                    INNER JOIN BlogsToTags ON BlogsToTags.BlogTagID = BlogTags.ID
+                    WHERE
+	                    BlogTags.Active = 1
+                    ORDER BY
+                        BlogTags.Name ASC";
+
+                conn.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        tagList.Add(new BlogTag()
+                        {
+                            ID = Database.GetID(reader["ID"]),
+                            Name = Database.GetString(reader["Name"])
+                        });
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return tagList;
         }
 
         public IEnumerable<BlogTag> GetForBlog(int blogID)
