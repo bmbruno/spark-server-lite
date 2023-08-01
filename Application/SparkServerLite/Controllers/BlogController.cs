@@ -29,10 +29,10 @@ namespace SparkServerLite.Controllers
             List<Blog> blogList = new List<Blog>();
             List<BlogTag> tagList = new List<BlogTag>();
 
+            // TODO: (FUTURE): bring back more limited data for these lists (just what the view needs)
             if (year.HasValue && month.HasValue)
             {
                 // Blogs list by year + month
-
                 blogList = _blogRepo.GetByDate(year.Value, month.Value).ToList();
                 string monthName = new DateTime(year.Value, month.Value, 1).ToString("MMMM");
                 viewModel.Header = $"Blog Posts for {monthName} {year.ToString()}";
