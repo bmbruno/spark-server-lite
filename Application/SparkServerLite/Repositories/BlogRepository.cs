@@ -45,7 +45,7 @@ namespace SparkServer.Infrastructure.Repositories
             return new List<Blog>();
         }
 
-        public IEnumerable<Blog> GetAll(int? page, int? numberToTake)
+        public IEnumerable<Blog> GetAll()
         {
             List<Blog> blogList = new List<Blog>();
 
@@ -65,14 +65,6 @@ namespace SparkServer.Infrastructure.Repositories
 	                    AND PublishDate <= datetime('now')
                     ORDER BY
 	                    PublishDate DESC ";
-
-                // Paging
-                if (page.HasValue && numberToTake.HasValue)
-                {
-                    command.CommandText += "LIMIT $numToTake OFFSET $pageSkip";
-                    command.Parameters.AddWithValue("$numToTake", numberToTake);
-                    command.Parameters.AddWithValue("$pageSkip", (page - 1) * numberToTake);
-                }
 
                 conn.Open();
 
@@ -101,20 +93,6 @@ namespace SparkServer.Infrastructure.Repositories
             }
 
             return blogList;
-        }
-
-        public IEnumerable<Blog> GetAll()
-        {
-            //List<Blog> results;
-
-            //using (var db = new SparkServerEntities())
-            //{
-            //    results = db.Blog.Where(u => u.Active).Include(u => u.Author).Include(u => u.BlogsTags).ToList();
-            //}
-
-            //return results;
-
-            return new List<Blog>();
         }
 
         public int Create(Blog newItem)
@@ -223,7 +201,7 @@ namespace SparkServer.Infrastructure.Repositories
             return blog;
         }
 
-        public IEnumerable<Blog> GetByDate(int year, int? month, int? page, int? numberToTake)
+        public IEnumerable<Blog> GetByDate(int year, int? month)
         {
             List<Blog> blogList = new List<Blog>();
 
@@ -262,15 +240,6 @@ namespace SparkServer.Infrastructure.Repositories
 
                 command.Parameters.AddWithValue("$startDate", startDate);
                 command.Parameters.AddWithValue("$endDate", endDate);
-
-                // Paging
-                if (page.HasValue && numberToTake.HasValue)
-                {
-                    command.CommandText += "LIMIT $numToTake OFFSET $pageSkip";
-                    command.Parameters.AddWithValue("$numToTake", numberToTake);
-                    command.Parameters.AddWithValue("$pageSkip", (page - 1) * numberToTake);
-                }
-
                 conn.Open();
 
                 using (var reader = command.ExecuteReader())

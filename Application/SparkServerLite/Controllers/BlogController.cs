@@ -33,31 +33,30 @@ namespace SparkServerLite.Controllers
             {
                 // Blogs list by year + month
 
-                // TODO: determine how to get total number of blogs (for paging information)
-                blogList = _blogRepo.GetByDate(year.Value, month.Value, this.Page, this.ItemsPerPage).ToList();
+                blogList = _blogRepo.GetByDate(year.Value, month.Value).ToList();
                 string monthName = new DateTime(year.Value, month.Value, 1).ToString("MMMM");
                 viewModel.Header = $"Blog Posts for {monthName} {year.ToString()}";
             }
             else if (year.HasValue)
             {
                 // Blog list by year only
-                blogList = _blogRepo.GetByDate(year.Value, null, this.Page, this.ItemsPerPage).ToList();
+                blogList = _blogRepo.GetByDate(year.Value, null).ToList();
                 viewModel.Header = $"Blog Posts for {year.ToString()}";
             }
             else
             {
                 // Default: blog overview (top posts)
-                blogList = _blogRepo.GetAll(this.Page, this.ItemsPerPage).ToList();
+                blogList = _blogRepo.GetAll().ToList();
                 viewModel.Header = "Latest Blog Posts";
             }
 
-            // TODO: implement GetAll()
             tagList = _blogTagRepo.GetAll().OrderBy(u => u.Name).ToList();
 
-            // TODO
+            int totalCount = blogList.Count;
+            blogList = blogList.Skip(this.SkipCount).Take(this.ItemsPerPage).ToList();
             viewModel.MapToViewModel(blogList, tagList);
 
-            viewModel.Paging.PageCount = (blogList.Count + (this.ItemsPerPage - 1)) / this.ItemsPerPage;
+            viewModel.Paging.PageCount = (totalCount + (this.ItemsPerPage - 1)) / this.ItemsPerPage;
             viewModel.Paging.CurrentPage = this.Page;
 
             return View(viewModel);

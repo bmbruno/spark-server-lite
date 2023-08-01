@@ -18,14 +18,6 @@ namespace SparkServerLite.Interfaces
         T Get(int year, int month, string slug);
 
         /// <summary>
-        /// Should get a list of blog posts with paging parameters.
-        /// </summary>
-        /// <param name="page">Page value for paging.</param>
-        /// <param name="numberToTake">Number of items for paging.</param>
-        /// <returns>Enumerable of object type T.</returns>
-        IEnumerable<T> GetAll(int? page, int? numberToTake);
-
-        /// <summary>
         /// Should retrieve blog objects from a datastore for any combination of year + month. Year is a minimum requirement.
         /// </summary>
         /// <param name="year">Year.</param>
@@ -33,7 +25,7 @@ namespace SparkServerLite.Interfaces
         /// <param name="page">Page value for paging.</param>
         /// <param name="numberToTake">Number of items for paging.</param>
         /// <returns>Object of type T.</returns>
-        IEnumerable<T> GetByDate(int year, int? month, int? page, int? numberToTake);
+        IEnumerable<T> GetByDate(int year, int? month);
 
         /// <summary>
         /// Should return an enumerable of blog objects ordered by publish date descending, limited by the numberToLoad.
