@@ -95,7 +95,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             List<BlogTag> tagList = new List<BlogTag>();
 
-            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -134,7 +134,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             List<BlogTag> tagList = new List<BlogTag>();
 
-            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"

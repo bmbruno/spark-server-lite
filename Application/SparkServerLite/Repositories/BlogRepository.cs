@@ -49,7 +49,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             List<Blog> blogList = new List<Blog>();
 
-            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -150,7 +150,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             Blog blog = new Blog();
 
-            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -205,7 +205,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             List<Blog> blogList = new List<Blog>();
 
-            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -273,7 +273,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             List<Blog> blogList = new List<Blog>();
 
-            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -344,7 +344,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             List<Blog> blogList = new List<Blog>();
 
-            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"

@@ -18,7 +18,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             Author author = new Author();
 
-            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -86,7 +86,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             List<Author> authors = new List<Author>();
 
-            using (var conn = new SqliteConnection(Database.SQLiteConnectionString))
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"

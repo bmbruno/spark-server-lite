@@ -4,8 +4,6 @@ namespace SparkServerLite.Infrastructure
 {
     public class Database
     {
-        public static string SQLiteConnectionString = "Data Source=SparkServer.db";
-
         private static string _TypeInt64 = "Int64";
         private static string _TypeString = "String";
 

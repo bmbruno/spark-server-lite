@@ -16,7 +16,7 @@ namespace SparkServerLite.Controllers
         {
             _blogRepo = blogRepo;
             _blogTagRepo = blogTagRepo;
-            this.ItemsPerPage = 3;
+            this.ItemsPerPage = Configuration.BlogItemsPerPage;
         }
 
         [HttpGet("blog/")]

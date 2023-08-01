@@ -1,4 +1,5 @@
-﻿using SparkServerLite.Models;
+﻿using SparkServerLite.Infrastructure;
+using SparkServerLite.Models;
 using SparkServerLite.ViewModels;
 
 namespace SparkServerLite.Mapping
@@ -32,8 +33,8 @@ namespace SparkServerLite.Mapping
             vm.Title = blog.Title;
             vm.Subtitle = blog.Subtitle;
             vm.Content = blog.Content;
-            vm.ImagePath = blog.ImagePath;
-            vm.ImageThumbnailPath = blog.ImageThumbnailPath ?? "/Content/Images/default_blog_icon.png"; // TODO: change to a config or static class field
+            vm.ImagePath = !String.IsNullOrEmpty(blog.ImagePath) ? blog.ImagePath : Configuration.DefaultBlogBannerPath;
+            vm.ImageThumbnailPath = !String.IsNullOrEmpty(blog.ImageThumbnailPath) ? blog.ImageThumbnailPath : Configuration.DefaultBlogBannerThumbnailPath;
             vm.AuthorFullName = string.IsNullOrEmpty(blog.AuthorFullName) ? blog.AuthorFullName : string.Empty;
 
             vm.PublishDate = blog.PublishDate;
