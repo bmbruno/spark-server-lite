@@ -1,0 +1,70 @@
+﻿@model SparkServerLite.ViewModels.BlogViewModel
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="blog-header" style="background-image: url('@Model.ImageURL');">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+@if (Model.IsPreview)
+{
+        <div style="font-size: 3em; font-weight: bold; text-align: center; color: #FFF; background-color: #DC291E; padding: 0.5em;">BLOG PREVIEW</div>
+
+        <div style="background-color: #FFF; padding: 1em; margin: 2em auto;">
+            <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 0.5em;">Subtitle (Preview Only)</div>
+            @Html.Raw(Model.Subtitle)
+        </div>
+}
+
+<div class="blog-about">
+    <div class="label">Author</div>
+    <p>@Model.AuthorFullName</p>
+
+    <div class="label">Published</div>
+    <p>@Model.PublishDate.ToString(format: "MMMM dd, yyyy")</p>
+
+    <div class="label">Tags</div>
+    <ul class="tags cf">
+
+        @if (Model.BlogTags.Count > 0)
+        {
+            foreach (var tag in Model.BlogTags)
+            {
+                        <li><a href="/blog/tag/@tag.BlogTagName">@tag.BlogTagName</a></li>
+            }
+        }
+        else
+        {
+                <li>No tags defined</li>
+        }
+    </ul>
+
+</div>
+
+<article class="blog">
+
+    <h1 class="blog-title-only">@ViewBag.Title</h1>
+
+    @Html.Raw(Model.Content)
+
+    <p>Do you have questions, comments, or corrections for this post? Find me on Twitter: <a href="https://www.twitter.com/brandonmbruno" target="_blank">@@BrandonMBruno</a></p>
+
+</article>
+
+@section PageScripts {
+
+        <script src="~/Scripts/prism.js"></script>
+
+}
+
+@section PageMetadata {
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="@Model.Title" />
+        <meta name="twitter:description" content="@Model.Subtitle" />
+        <meta name="twitter:image" content="https://www.sitecorespark.com@(Model.ImageURL)" />
+        <meta name="twitter:site" content="Sitecore Spark" />
+
+}

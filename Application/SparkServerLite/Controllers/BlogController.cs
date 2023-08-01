@@ -15,7 +15,7 @@ namespace SparkServerLite.Controllers
         {
             _blogRepo = blogRepo;
             _blogTagRepo = blogTagRepo;
-            this.ItemsPerPage = 10;
+            this.ItemsPerPage = 3;
         }
 
         [HttpGet("blog/")]
@@ -70,11 +70,8 @@ namespace SparkServerLite.Controllers
                 return RedirectToAction(actionName: "Index", controllerName: "Blog");
 
             Blog blog = _blogRepo.Get(year, month, slug);
-
-            // TODO
             IEnumerable<BlogTag> blogTags = _blogTagRepo.GetForBlog(blog.ID);
-            // viewModel.MapToViewModel(blog, blogTags);
-
+            viewModel.MapToViewModel(blog, blogTags);
             viewModel.IsPreview = preview;
 
             // Should this blog post be displayed at all? (Preview flag overrides denied access in some cases)

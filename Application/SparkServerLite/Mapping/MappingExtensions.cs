@@ -33,7 +33,7 @@ namespace SparkServerLite.Mapping
             vm.Subtitle = blog.Subtitle;
             vm.Content = blog.Content;
             vm.ImagePath = blog.ImagePath;
-            vm.ImageThumbnailPath = blog.ImageThumbnailPath ?? "/Content/Images/default_blog_icon.png"; // TODO: change to proper default
+            vm.ImageThumbnailPath = blog.ImageThumbnailPath ?? "/Content/Images/default_blog_icon.png"; // TODO: change to a config or static class field
             vm.AuthorFullName = string.IsNullOrEmpty(blog.AuthorFullName) ? blog.AuthorFullName : string.Empty;
 
             vm.PublishDate = blog.PublishDate;
