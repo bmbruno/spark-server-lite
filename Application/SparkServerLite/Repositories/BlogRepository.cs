@@ -16,33 +16,56 @@ namespace SparkServer.Infrastructure.Repositories
     {
         public Blog Get(int ID)
         {
-            //Blog item;
+            Blog blog = new Blog();
 
-            //using (var db = new SparkServerEntities())
-            //{
-            //    item = db.Blog.Include(u => u.Author).Include(u => u.BlogsTags).FirstOrDefault(u => u.ID == ID);
-            //}
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT
+	                    Blogs.*,
+	                    Authors.ID AS 'AuthorID',
+	                    Authors.FirstName || ' ' || Authors.LastName AS 'AuthorFullName'
+                    FROM
+	                    Blogs
+	                    INNER JOIN Authors ON Authors.ID = Blogs.AuthorID
+                    WHERE
+	                    Blogs.Active = 1
+	                    AND Blogs.ID = $blogID
+                    ORDER BY
+	                    PublishDate DESC
+                    LIMIT 1";
 
-            //return item;
+                command.Parameters.AddWithValue("$blogID", ID);
+                conn.Open();
 
-            return new Blog();
-        }
+                using (var reader = command.ExecuteReader())
+                {
+                    reader.Read();
 
-        public IEnumerable<Blog> Get(Expression<Func<Blog, bool>> whereClause)
-        {
-            // CALLING: ArticleRepo.Get(x => x.Title == "abcdef");
-            // USING: db.Articles.Where(whereClause);
+                    if (reader.HasRows)
+                    {
+                        blog.ID = Database.GetID(reader["ID"]);
+                        blog.Title = Database.GetString(reader["Title"]);
+                        blog.Subtitle = Database.GetString(reader["Subtitle"]);
+                        blog.Content = Database.GetString(reader["Content"]);
+                        blog.ImagePath = Database.GetString(reader["ImagePath"]);
+                        blog.ImageThumbnailPath = Database.GetString(reader["ImageThumbnailPath"]);
+                        blog.Slug = Database.GetString(reader["Slug"]);
+                        blog.PublishDate = Database.GetDateTime(reader["PublishDate"]).Value;
+                        blog.AuthorID = Database.GetID(reader["AuthorID"]);
+                        blog.AuthorFullName = Database.GetString(reader["AuthorFullName"]);
+                    }
+                    else
+                    {
+                        throw new Exception($"Blog not found with ID {ID.ToString()}");
+                    }
+                }
 
-            //List<Blog> results;
+                conn.Close();
+            }
 
-            //using (var db = new SparkServerEntities())
-            //{
-            //    results = db.Blog.Where(whereClause).Include(u => u.Author).Include(u => u.BlogsTags).ToList();
-            //}
-
-            //return results;
-
-            return new List<Blog>();
+            return blog;
         }
 
         public IEnumerable<Blog> GetAll()

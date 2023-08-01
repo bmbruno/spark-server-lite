@@ -23,23 +23,6 @@ namespace SparkServer.Infrastructure.Repositories
             return new BlogTag();
         }
 
-        public IEnumerable<BlogTag> Get(Expression<Func<BlogTag, bool>> whereClause)
-        {
-            // CALLING: ArticleRepo.Get(x => x.Title == "abcdef");
-            // USING: db.Articles.Where(whereClause);
-
-            //List<BlogTag> results;
-
-            //using (var db = new SparkServerEntities())
-            //{
-            //    results = db.BlogTag.Where(whereClause).ToList();
-            //}
-
-            //return results;
-
-            return new List<BlogTag>();
-        }
-
         public IEnumerable<BlogTag> GetAll()
         {
             // TODO: get all active tags
