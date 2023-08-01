@@ -1,7 +1,17 @@
-﻿namespace SparkServerLite.Infrastructure
+﻿using System.Runtime.CompilerServices;
+
+namespace SparkServerLite.Infrastructure
 {
     public static class Configuration
     {
+        public static string SiteURL
+        {
+            get
+            {
+                return "https://www.sitecorespark.com";
+            }
+        }
+
         /// <summary>
         /// Connection string to SQLite database file.
         /// </summary>
