@@ -61,19 +61,19 @@ FROM Blogs;
 --
 
 INSERT INTO BlogTags (Name, Active, CreateDate)
-VALUES ('Tag Alpha', 1, date('now'))
+VALUES ('Tag Alpha', 1, date('now'));
 
 INSERT INTO BlogTags (Name, Active, CreateDate)
-VALUES ('Tag Bravo', 1, date('now'))
+VALUES ('Tag Bravo', 1, date('now'));
 
 INSERT INTO BlogTags (Name, Active, CreateDate)
-VALUES ('Tag Charlie', 1, date('now'))
+VALUES ('Tag Charlie', 1, date('now'));
 
 INSERT INTO BlogTags (Name, Active, CreateDate)
-VALUES ('Tag Delta', 1, date('now'))
+VALUES ('Tag Delta', 1, date('now'));
 
 INSERT INTO BlogTags (Name, Active, CreateDate)
-VALUES ('Tag Echo', 1, date('now'))
+VALUES ('Tag Echo', 1, date('now'));
 
 SELECT *
 FROM BlogTags;
