@@ -32,6 +32,8 @@ namespace SparkServerLite.Controllers
             if (year.HasValue && month.HasValue)
             {
                 // Blogs list by year + month
+
+                // TODO: determine how to get total number of blogs (for paging information)
                 blogList = _blogRepo.GetByDate(year.Value, month.Value, this.Page, this.ItemsPerPage).ToList();
                 string monthName = new DateTime(year.Value, month.Value, 1).ToString("MMMM");
                 viewModel.Header = $"Blog Posts for {monthName} {year.ToString()}";
@@ -58,7 +60,7 @@ namespace SparkServerLite.Controllers
             viewModel.Paging.PageCount = (blogList.Count + (this.ItemsPerPage - 1)) / this.ItemsPerPage;
             viewModel.Paging.CurrentPage = this.Page;
 
-            return View(viewName: $"IndexOverview", model: viewModel);
+            return View(viewModel);
         }
 
         [HttpGet("blog/{year}/{month}/{slug}")]
