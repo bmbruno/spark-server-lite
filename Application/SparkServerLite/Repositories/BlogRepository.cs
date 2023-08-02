@@ -120,15 +120,92 @@ namespace SparkServer.Infrastructure.Repositories
 
         public int Create(Blog newItem)
         {
-            //using (var db = new SparkServerEntities())
-            //{
-            //    db.Blog.Add(newItem);
-            //    db.SaveChanges();
-            //}
+            List<Blog> blogList = new List<Blog>();
+            long newID = 0;
 
-            //return newItem.ID;
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            {
+                conn.Open();
 
-            return 0;
+                SqliteCommand command = conn.CreateCommand();
+                /*
+                command.CommandText = @"INSERT INTO Blogs (Title, Subtitle, Content, ImagePath, ImageThumbnailPath, Slug, PublishDate, AuthorID)
+                    VALUES (
+	                    $title,
+	                    $subtitle,
+	                    $content,
+	                    $imagePath,
+	                    $imageThumbnailPath,
+	                    $slug,
+	                    $publishDate,
+	                    $authorID
+                    )";
+
+                command.Parameters.AddWithValue("$title", newItem.Title);
+                command.Parameters.AddWithValue("$subtitle", newItem.Subtitle);
+                command.Parameters.AddWithValue("$content", newItem.Content);
+                command.Parameters.AddWithValue("$imagePath", newItem.ImagePath);
+                command.Parameters.AddWithValue("$imageThumbnailPath", newItem.ImageThumbnailPath);
+                command.Parameters.AddWithValue("$slug", newItem.Slug);
+                command.Parameters.AddWithValue("$publishDate", newItem.PublishDate);
+                command.Parameters.AddWithValue("$authorID", newItem.AuthorID);
+                */
+
+                // Initial insert of item
+                command.CommandText = @"INSERT INTO Blogs (Title, PublishDate, Slug, AuthorID) VALUES ($title, $publishDate, $slug, $authorID);";
+                command.Parameters.AddWithValue("$title", newItem.Title);
+                command.Parameters.AddWithValue("$publishDate", newItem.PublishDate);
+                command.Parameters.AddWithValue("$slug", newItem.Slug);
+                command.Parameters.AddWithValue("$authorID", newItem.AuthorID);
+                command.ExecuteNonQuery();
+                command.Parameters.Clear();
+
+                command.CommandText = "SELECT last_insert_rowid()";
+                newID = (long)command.ExecuteScalar();
+                
+                // Updates of various fields
+                StringBuilder updateSQL = new StringBuilder();
+                bool needsUpdate = false;
+
+                if (!String.IsNullOrEmpty(newItem.Subtitle))
+                {
+                    updateSQL.Append("UPDATE Blogs SET Subtitle = $subtitle WHERE ID = $id;");
+                    command.Parameters.AddWithValue("$subtitle", newItem.Subtitle);
+                    needsUpdate = true;
+                }
+
+                if (!String.IsNullOrEmpty(newItem.Content))
+                {
+                    updateSQL.Append("UPDATE Blogs SET Content = $content WHERE ID = $id;");
+                    command.Parameters.AddWithValue("$content", newItem.Content);
+                    needsUpdate = true;
+                }
+
+                if (!String.IsNullOrEmpty(newItem.ImagePath))
+                {
+                    updateSQL.Append("UPDATE Blogs SET ImagePath = $imagePath WHERE ID = $id;");
+                    command.Parameters.AddWithValue("$imagePath", newItem.ImagePath);
+                    needsUpdate = true;
+                }
+
+                if (!String.IsNullOrEmpty(newItem.ImageThumbnailPath))
+                {
+                    updateSQL.Append("UPDATE Blogs SET ImageThumbnailPath = $imageThumbPath WHERE ID = $id;");
+                    command.Parameters.AddWithValue("$imageThumbPath", newItem.ImageThumbnailPath);
+                    needsUpdate = true;
+                }
+
+                if (needsUpdate)
+                {
+                    command.CommandText = updateSQL.ToString();
+                    command.Parameters.AddWithValue("$id", newID);
+                    command.ExecuteNonQuery();
+                }
+
+                conn.Close();
+            }
+
+            return Convert.ToInt32(newID);
         }
 
         public void Update(Blog updateItem)
@@ -448,5 +525,7 @@ namespace SparkServer.Infrastructure.Repositories
 
             return blogList;
         }
+
+        // TODO: create check for pre-existing Blog based on slug
     }
 }

@@ -24,6 +24,16 @@ namespace SparkServerLite.Controllers
 
         public IActionResult Index()
         {
+            _blogRepo.Create(new Blog { 
+                Title = "MY NEW TITLE",
+                Subtitle = "A great subtitle for a blog",
+                Content = "<p>Hello, everyone out there!</p>",
+                ImagePath = string.Empty,
+                ImageThumbnailPath = string.Empty,
+                AuthorID = 1,
+                PublishDate = DateTime.Now
+            });
+
             return View();
         }
 
