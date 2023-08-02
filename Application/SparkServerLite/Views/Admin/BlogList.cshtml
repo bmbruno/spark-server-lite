@@ -1,4 +1,4 @@
-﻿@model SparkServerLite.ViewModels.BlogEditListViewModel
+﻿@model SparkServerLite.ViewModels.Admin.BlogEditListViewModel
 @{
     Layout = "_AdminLayout";
     ViewData["Title"] = "Blog List";
@@ -23,8 +23,8 @@
             <tr>
                 <td><a href="/Admin/BlogEdit?ID=@blog.ID">@blog.Title</a></td>
                 <td><a href="/Admin/BlogEdit?ID=@blog.ID">@blog.Subtitle</a></td>
-                <td><a href="/Admin/BlogEdit?ID=@blog.ID">@blog.PublishDate.ToShortDateString()</a></td>
-                <td><a href="/Admin/BlogEdit?ID=@blog.ID">@blog.AuthorFullName</a></td>
+                <td><a href="/Admin/BlogEdit?ID=@blog.ID">@blog.PublishedDate</a></td>
+                <td><a href="/Admin/BlogEdit?ID=@blog.ID">@blog.AuthorName</a></td>
             </tr>
         }
 

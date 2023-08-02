@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
 using SparkServerLite.ViewModels;
+using SparkServerLite.ViewModels.Admin;
 
 namespace SparkServerLite.Controllers
 {
@@ -21,14 +22,26 @@ namespace SparkServerLite.Controllers
 
         public IActionResult Index()
         {
-            
-
             return View();
         }
 
         public ActionResult BlogList()
         {
             BlogEditListViewModel viewModel = new BlogEditListViewModel();
+
+            var blogs = _blogRepo.GetAll();
+
+            foreach (var blog in blogs)
+            {
+                viewModel.BlogList.Add(new BlogListItemViewModel()
+                {
+                    ID = blog.ID,
+                    Title = blog.Title,
+                    Subtitle = blog.Subtitle,
+                    PublishedDate = blog.PublishDate.ToShortDateString(),
+                    AuthorName = !String.IsNullOrEmpty(blog.AuthorFullName) ? blog.AuthorFullName : "N/A"
+                });
+            }
 
             return View(viewModel);
         }

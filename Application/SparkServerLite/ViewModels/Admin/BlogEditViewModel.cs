@@ -1,4 +1,4 @@
-﻿namespace SparkServerLite.ViewModels
+﻿namespace SparkServerLite.ViewModels.Admin
 {
     public class BlogEditViewModel : BaseViewModel
     {
