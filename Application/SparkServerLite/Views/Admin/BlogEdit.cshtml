@@ -1,3 +1,98 @@
-﻿@{
+﻿@model SparkServerLite.ViewModels.Admin.BlogEditViewModel
+
+@{
     Layout = "_AdminLayout";
+    ViewData["Title"] = "Blog Edit";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model.Mode == SparkServerLite.Infrastructure.Enums.EditMode.Edit)
+{
+    <h2>ID: @Model.ID</h2>
+
+    <a href="/Admin/BlogDelete?ID=@Model.ID" class="btn delete">Delete</a>
+
+    if (Model.ID > 0)
+    {
+        <a href="@Model.BlogURL?preview=true" target="_blank" class="btn">Preview</a>
+    }
+}
+
+@using (Html.BeginForm(actionName: "BlogUpdate", controllerName: "Admin", method: FormMethod.Post))
+{
+    if (Model.Mode == SparkServerLite.Infrastructure.Enums.EditMode.Edit)
+    {
+        @Html.HiddenFor(x => x.ID)
+    }
+
+    @Html.HiddenFor(x => x.Mode)
+
+    <div class="row">
+        @Html.LabelFor(x => x.Title)
+        @Html.TextBoxFor(x => x.Title)
+        @Html.ValidationMessageFor(x => x.Title)
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(x => x.Subtitle)
+        @Html.TextBoxFor(x => x.Subtitle)
+        @Html.ValidationMessageFor(x => x.Subtitle)
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(x => x.ContentMarkdown)
+        @Html.TextAreaFor(x => x.ContentMarkdown, htmlAttributes: new { style = "height: 400px" })
+        @Html.ValidationMessageFor(x => x.ContentMarkdown)
+        <div>
+            <input type="button" value="Convert" id="ConvertToHTML" class="btn" />
+        </div>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(x => x.Content)
+        @Html.TextAreaFor(x => x.Content, htmlAttributes: new { style = "height: 400px" })
+        @Html.ValidationMessageFor(x => x.Content)
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(x => x.PublishDate)
+        @Html.TextBoxFor(x => x.PublishDate, htmlAttributes: new { @class = "half" })
+        <input type="button" value="Today" id="DateTimeToday" class="btn" />
+        @Html.ValidationMessageFor(x => x.PublishDate)
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(x => x.AuthorID)
+        @Html.DropDownListFor(x => x.AuthorID, Model.AuthorSource, htmlAttributes: new { @class = "half" })
+        @Html.ValidationMessageFor(x => x.AuthorID)
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(x => x.Slug)
+        @Html.TextBoxFor(x => x.Slug, htmlAttributes: new { @class = "half" })
+        <input type="button" value="Create From Title" id="CreateUniqueURL" class="btn" />
+        @Html.ValidationMessageFor(x => x.Slug)
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(x => x.ImagePath)
+        @Html.TextBoxFor(x => x.ImagePath, htmlAttributes: new { @class = "half" })
+        <input type="button" value="Get Default Banner" id="GetDefaultBanner" class="btn" />
+        @Html.ValidationMessageFor(x => x.ImagePath)
+    </div>
+
+    <div class="row">
+        <p class="mono inline-code">/media/blog/2018/07/22_XXXXX.png</p>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(x => x.BlogTags)
+        @Html.ListBoxFor(x => x.BlogTags, Model.BlogTagSource, htmlAttributes: new { @class = "half", style = "height: 150px;" })
+    </div>
+
+    <div class="row">
+        <input type="submit" value="Submit" class="btn primary" />
+    </div>
+
 }

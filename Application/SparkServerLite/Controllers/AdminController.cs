@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SparkServerLite.Infrastructure;
+using SparkServerLite.Infrastructure.Enums;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
 using SparkServerLite.ViewModels;
@@ -48,9 +50,54 @@ namespace SparkServerLite.Controllers
 
         public ActionResult BlogEdit(int? ID)
         {
-            return View();
+            BlogEditViewModel viewModel = new BlogEditViewModel();
+
+            if (ID.HasValue)
+            {
+                // EDIT
+
+                viewModel.Mode = EditMode.Edit;
+
+                var blog = _blogRepo.Get(ID: ID.Value);
+
+                if (blog == null)
+                {
+                    TempData["Error"] = $"No blog found with ID {ID.Value}.";
+                    return RedirectToAction(actionName: "Index", controllerName: "Admin");
+                }
+
+                viewModel.ID = blog.ID;
+                viewModel.Title = blog.Title;
+                viewModel.Subtitle = blog.Subtitle;
+                viewModel.Content = blog.Content;
+                viewModel.PublishDate = blog.PublishDate;
+                viewModel.AuthorID = blog.AuthorID;
+                viewModel.Slug = blog.Slug;
+                viewModel.ImagePath = blog.ImagePath;
+                viewModel.ImageThumbnailPath = blog.ImageThumbnailPath;
+                viewModel.BlogURL = $"/blog/{blog.PublishDate.Year}/{blog.PublishDate.Month}/{blog.Slug}";
+
+                IEnumerable<BlogTag> blogTags = _blogTagRepo.GetForBlog(blog.ID);
+                IEnumerable<int> blogTagIDs = blogTags.Select(t => t.ID);
+
+                viewModel.AuthorSource = FilterData.Authors(_authorRepo, viewModel.AuthorID);
+                viewModel.BlogTagSource = FilterData.BlogTags(_blogTagRepo, blogTagIDs);
+            }
+            else
+            {
+                // ADD
+
+                viewModel.Mode = EditMode.Add;
+
+                viewModel.ID = 0;
+                viewModel.AuthorSource = FilterData.Authors(_authorRepo, null);
+                viewModel.BlogTagSource = FilterData.BlogTags(_blogTagRepo, viewModel.BlogTags);
+            }
+
+            return View(viewModel);
         }
 
+        [HttpPost]
         public ActionResult BlogUpdate(BlogEditViewModel viewModel)
         {
             return View();
@@ -71,6 +118,7 @@ namespace SparkServerLite.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult BlogTagUpdate(BlogTagEditViewModel viewModel)
         {
             return View();
