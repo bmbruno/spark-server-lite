@@ -28,7 +28,9 @@ namespace SparkServerLite.Controllers
 
         public ActionResult BlogList()
         {
-            return View();
+            BlogEditListViewModel viewModel = new BlogEditListViewModel();
+
+            return View(viewModel);
         }
 
         public ActionResult BlogEdit(int? ID)

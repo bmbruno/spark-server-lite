@@ -1,3 +1,32 @@
-﻿@{
+﻿@model SparkServerLite.ViewModels.BlogEditListViewModel
+@{
     Layout = "_AdminLayout";
+    ViewData["Title"] = "Blog List";
 }
+
+<h1>@ViewData["Title"]</h1>
+
+<a href="/Admin/BlogEdit" class="btn">Add New Post</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Subtitle</th>
+            <th>Published</th>
+            <th>Author</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var blog in Model.BlogList)
+        {
+            <tr>
+                <td><a href="/Admin/BlogEdit?ID=@blog.ID">@blog.Title</a></td>
+                <td><a href="/Admin/BlogEdit?ID=@blog.ID">@blog.Subtitle</a></td>
+                <td><a href="/Admin/BlogEdit?ID=@blog.ID">@blog.PublishDate.ToShortDateString()</a></td>
+                <td><a href="/Admin/BlogEdit?ID=@blog.ID">@blog.AuthorFullName</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
