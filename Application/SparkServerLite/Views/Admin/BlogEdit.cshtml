@@ -43,7 +43,6 @@
     <div class="row">
         @Html.LabelFor(x => x.ContentMarkdown)
         @Html.TextAreaFor(x => x.ContentMarkdown, htmlAttributes: new { style = "height: 400px" })
-        @Html.ValidationMessageFor(x => x.ContentMarkdown)
         <div>
             <input type="button" value="Convert" id="ConvertToHTML" class="btn" />
         </div>

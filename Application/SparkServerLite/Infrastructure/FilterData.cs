@@ -32,7 +32,7 @@ namespace SparkServerLite.Infrastructure
             return list;
         }
 
-        public static List<SelectListItem> BlogTags(IBlogTagRepository<BlogTag> repo, IEnumerable<int> selected)
+        public static List<SelectListItem> BlogTags(IBlogTagRepository<BlogTag> repo, IEnumerable<int>? selected)
         {
             List<SelectListItem> list = new List<SelectListItem>();
             IEnumerable<BlogTag> sourceList = repo.GetAll().OrderBy(u => u.Name);
@@ -45,12 +45,15 @@ namespace SparkServerLite.Infrastructure
                     Text = item.Name
                 };
 
-                // TODO: make sure the selection logic works
-                foreach (int selectedID in selected)
+                if (selected != null)
                 {
-                    if (item.ID == selectedID)
+                    // TODO: make sure the selection logic works
+                    foreach (int selectedID in selected)
                     {
-                        listItem.Selected = true;
+                        if (item.ID == selectedID)
+                        {
+                            listItem.Selected = true;
+                        }
                     }
                 }
 

@@ -111,7 +111,7 @@ namespace SparkServerLite.Controllers
         public ActionResult BlogUpdate(BlogEditViewModel viewModel)
         {
             // Check for unique URL
-            if (viewModel.Mode == EditMode.Add)
+            if (viewModel.Mode == EditMode.Add && !String.IsNullOrEmpty(viewModel.Slug))
             {
                 bool existing = _blogRepo.SlugExists(viewModel.Slug.Trim());
 
@@ -134,12 +134,12 @@ namespace SparkServerLite.Controllers
                     blog.ImagePath = viewModel.ImagePath;
                     blog.ImageThumbnailPath = viewModel.ImageThumbnailPath;
 
-                    _blogRepo.Create(blog);
+                    int newBlogID = _blogRepo.Create(blog);
                     // TODO
                     // _blogTagRepo.UpdateTagsForBlog(blog.ID, viewModel.BlogTags);
 
                     TempData["Success"] = "Blog created.";
-                    return RedirectToAction(actionName: "BlogEdit", controllerName: "Admin", routeValues: new { ID = blog.ID });
+                    return RedirectToAction(actionName: "BlogEdit", controllerName: "Admin", routeValues: new { ID = newBlogID });
                 }
                 else
                 {
