@@ -132,7 +132,7 @@ namespace SparkServer.Infrastructure.Repositories
                 // Initial insert of minimum required data
                 command.CommandText = @"INSERT INTO Blogs (Title, PublishDate, Slug, AuthorID) VALUES ($title, $publishDate, $slug, $authorID);";
                 command.Parameters.AddWithValue("$title", newItem.Title);
-                command.Parameters.AddWithValue("$publishDate", newItem.PublishDate);
+                command.Parameters.AddWithValue("$publishDate", newItem.PublishDate.ToString(FormatHelper.SQLiteDate));
                 command.Parameters.AddWithValue("$slug", newItem.Slug);
                 command.Parameters.AddWithValue("$authorID", newItem.AuthorID);
                 command.ExecuteNonQuery();
@@ -188,22 +188,38 @@ namespace SparkServer.Infrastructure.Repositories
 
         public void Update(Blog updateItem)
         {
-            //using (var db = new SparkServerEntities())
-            //{
-            //    db.Blog.Attach(updateItem);
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            {
+                conn.Open();
 
-            //    var entry = db.Entry(updateItem);
-            //    entry.Property(e => e.Title).IsModified = true;
-            //    entry.Property(e => e.Subtitle).IsModified = true;
-            //    entry.Property(e => e.Body).IsModified = true;
-            //    entry.Property(e => e.PublishDate).IsModified = true;
-            //    entry.Property(e => e.AuthorID).IsModified = true;
-            //    entry.Property(e => e.UniqueURL).IsModified = true;
-            //    entry.Property(e => e.ImagePath).IsModified = true;
-            //    entry.Property(e => e.ImageThumbnailPath).IsModified = true;
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    UPDATE Blogs
+                    SET
+	                    Title = $title,
+	                    Subtitle = $subtitle,
+	                    Content = $content,
+	                    Slug = $slug,
+	                    PublishDate = $publishDate,
+	                    ImagePath = $imagePath,
+	                    ImageThumbnailPath = $imageThumbnailPath,
+	                    AuthorID = $authorID
+                    WHERE ID = $blogID";
 
-            //    db.SaveChanges();
-            //}
+                command.Parameters.AddWithValue("$title", updateItem.Title);
+                command.Parameters.AddWithValue("$subtitle", updateItem.Subtitle);
+                command.Parameters.AddWithValue("$content", updateItem.Content);
+                command.Parameters.AddWithValue("$slug", updateItem.Slug);
+                command.Parameters.AddWithValue("$publishDate", updateItem.PublishDate.ToString(FormatHelper.SQLiteDate));
+                command.Parameters.AddWithValue("$imagePath", updateItem.ImagePath);
+                command.Parameters.AddWithValue("$imageThumbnailPath", updateItem.ImageThumbnailPath);
+                command.Parameters.AddWithValue("$authorID", updateItem.AuthorID);
+                command.Parameters.AddWithValue("$blogID", updateItem.ID);
+
+                command.ExecuteNonQuery();
+
+                conn.Close();
+            }
 
             return;
         }
