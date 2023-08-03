@@ -193,29 +193,50 @@ namespace SparkServer.Infrastructure.Repositories
                 conn.Open();
 
                 SqliteCommand command = conn.CreateCommand();
-                command.CommandText = @"
-                    UPDATE Blogs
-                    SET
-	                    Title = $title,
-	                    Subtitle = $subtitle,
-	                    Content = $content,
-	                    Slug = $slug,
-	                    PublishDate = $publishDate,
-	                    ImagePath = $imagePath,
-	                    ImageThumbnailPath = $imageThumbnailPath,
-	                    AuthorID = $authorID
-                    WHERE ID = $blogID";
+                StringBuilder updateSQL = new StringBuilder();
 
+                // Title - required
+                updateSQL.Append("UPDATE Blogs SET Title = $title WHERE ID = $id;");
                 command.Parameters.AddWithValue("$title", updateItem.Title);
-                command.Parameters.AddWithValue("$subtitle", updateItem.Subtitle);
-                command.Parameters.AddWithValue("$content", updateItem.Content);
-                command.Parameters.AddWithValue("$slug", updateItem.Slug);
-                command.Parameters.AddWithValue("$publishDate", updateItem.PublishDate.ToString(FormatHelper.SQLiteDate));
-                command.Parameters.AddWithValue("$imagePath", updateItem.ImagePath);
-                command.Parameters.AddWithValue("$imageThumbnailPath", updateItem.ImageThumbnailPath);
-                command.Parameters.AddWithValue("$authorID", updateItem.AuthorID);
-                command.Parameters.AddWithValue("$blogID", updateItem.ID);
 
+                // Publish Date - required
+                updateSQL.Append("UPDATE Blogs SET PublishDate = $imageThumbPath WHERE ID = $id;");
+                command.Parameters.AddWithValue("$imageThumbPath", updateItem.ImageThumbnailPath);
+
+                // Content - required
+                updateSQL.Append("UPDATE Blogs SET Content = $content WHERE ID = $id;");
+                command.Parameters.AddWithValue("$content", updateItem.Content);
+
+                // Author - required
+                updateSQL.Append("UPDATE Blogs SET Author = $author WHERE ID = $id;");
+                command.Parameters.AddWithValue("$author", updateItem.AuthorID);
+
+                if (!String.IsNullOrEmpty(updateItem.Subtitle))
+                {
+                    updateSQL.Append("UPDATE Blogs SET Subtitle = $subtitle WHERE ID = $id;");
+                    command.Parameters.AddWithValue("$subtitle", updateItem.Subtitle);
+                }
+
+                if (!String.IsNullOrEmpty(updateItem.Slug))
+                {
+                    updateSQL.Append("UPDATE Blogs SET Slug = $slug WHERE ID = $id;");
+                    command.Parameters.AddWithValue("$slug", updateItem.Slug);
+                }
+
+                if (!String.IsNullOrEmpty(updateItem.ImagePath))
+                {
+                    updateSQL.Append("UPDATE Blogs SET ImagePath = $imagePath WHERE ID = $id;");
+                    command.Parameters.AddWithValue("$imagePath", updateItem.ImagePath);
+                }
+
+                if (!String.IsNullOrEmpty(updateItem.ImageThumbnailPath))
+                {
+                    updateSQL.Append("UPDATE Blogs SET ImageThumbnailPath = $imageThumbPath WHERE ID = $id;");
+                    command.Parameters.AddWithValue("$imageThumbPath", updateItem.ImageThumbnailPath);
+                }
+
+                command.CommandText = updateSQL.ToString();
+                command.Parameters.AddWithValue("$id", updateItem.ID);
                 command.ExecuteNonQuery();
 
                 conn.Close();
