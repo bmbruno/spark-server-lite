@@ -27,8 +27,11 @@ namespace SparkServerLite.Controllers
             //Blog blog = _blogRepo.Get(2);
             //blog.Title = "A MODIFIED TITLE";
             //_blogRepo.Update(blog);
-            
+
             //_blogRepo.Delete(2);
+
+            // var test1 = _blogRepo.SlugExists("test-blog-one");
+            // var test2 = _blogRepo.SlugExists("test-blog-FAKE-FAKE");
 
             return View();
         }

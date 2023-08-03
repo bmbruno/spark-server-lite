@@ -524,6 +524,34 @@ namespace SparkServer.Infrastructure.Repositories
             return blogList;
         }
 
-        // TODO: create check for pre-existing Blog based on slug
+        public bool SlugExists(string slug)
+        {
+            bool slugExists = false;
+
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT ID
+                    FROM Blogs
+                    WHERE
+                        Active = 1
+                        AND Slug = $slug";
+
+                command.Parameters.AddWithValue("$slug", slug);
+
+                conn.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    reader.Read();
+                    slugExists = reader.HasRows;
+                }
+
+                conn.Close();
+            }
+
+            return slugExists;
+        }
     }
 }

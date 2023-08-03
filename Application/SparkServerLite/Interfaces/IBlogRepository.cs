@@ -45,5 +45,12 @@ namespace SparkServerLite.Interfaces
         /// <param name="tagName">Name of tag object.</param>
         /// <returns>IEnumerable of blog-type objecs.</returns>
         IEnumerable<T> GetByTagName(string tagName);
+
+        /// <summary>
+        /// Should determine if the given URL slug exists in the database.
+        /// </summary>
+        /// <param name="slug">URL slug</param>
+        /// <returns>True/false.</returns>
+        public bool SlugExists(string slug);
     }
 }
