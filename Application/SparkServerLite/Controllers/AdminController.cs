@@ -84,7 +84,6 @@ namespace SparkServerLite.Controllers
                 viewModel.Slug = blog.Slug;
                 viewModel.ImagePath = blog.ImagePath;
                 viewModel.ImageThumbnailPath = blog.ImageThumbnailPath;
-                viewModel.BlogURL = $"/blog/{blog.PublishDate.Year}/{blog.PublishDate.Month}/{blog.Slug}";
 
                 IEnumerable<BlogTag> blogTags = _blogTagRepo.GetForBlog(blog.ID);
                 IEnumerable<int> blogTagIDs = blogTags.Select(t => t.ID);
@@ -128,7 +127,7 @@ namespace SparkServerLite.Controllers
                     blog.Title = viewModel.Title;
                     blog.Subtitle = viewModel.Subtitle;
                     blog.Content = viewModel.Content;
-                    blog.PublishDate = viewModel.PublishDate.Value;
+                    blog.PublishDate = viewModel.PublishDate;
                     blog.AuthorID = viewModel.AuthorID;
                     blog.Slug = viewModel.Slug;
                     blog.ImagePath = viewModel.ImagePath;
@@ -154,7 +153,7 @@ namespace SparkServerLite.Controllers
                     blog.Title = viewModel.Title;
                     blog.Subtitle = viewModel.Subtitle;
                     blog.Content = viewModel.Content;
-                    blog.PublishDate = viewModel.PublishDate.Value;
+                    blog.PublishDate = viewModel.PublishDate;
                     blog.AuthorID = viewModel.AuthorID;
                     blog.Slug = viewModel.Slug;
                     blog.ImagePath = viewModel.ImagePath;

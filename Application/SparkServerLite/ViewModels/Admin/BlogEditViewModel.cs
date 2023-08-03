@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using SparkServerLite.Infrastructure.Enums;
+using SparkServerLite.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
@@ -23,7 +24,7 @@ namespace SparkServerLite.ViewModels.Admin
         public string Content { get; set; }
 
         [Display(Name = "Publish Date")]
-        public DateTime? PublishDate { get; set; }
+        public DateTime PublishDate { get; set; }
 
         [Display(Name = "Author")]
         public int AuthorID { get; set; }
@@ -46,7 +47,7 @@ namespace SparkServerLite.ViewModels.Admin
 
         public List<SelectListItem>? BlogTagSource { get; set; }
 
-        public string? BlogURL { get; set; }
+        public string BlogURL { get { return $"/blog/{this.PublishDate.Year}/{this.PublishDate.Month}/{this.Slug}"; } }
 
         public BlogEditViewModel()
         {
