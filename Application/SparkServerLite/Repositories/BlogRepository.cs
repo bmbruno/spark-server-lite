@@ -128,30 +128,8 @@ namespace SparkServer.Infrastructure.Repositories
                 conn.Open();
 
                 SqliteCommand command = conn.CreateCommand();
-                /*
-                command.CommandText = @"INSERT INTO Blogs (Title, Subtitle, Content, ImagePath, ImageThumbnailPath, Slug, PublishDate, AuthorID)
-                    VALUES (
-	                    $title,
-	                    $subtitle,
-	                    $content,
-	                    $imagePath,
-	                    $imageThumbnailPath,
-	                    $slug,
-	                    $publishDate,
-	                    $authorID
-                    )";
 
-                command.Parameters.AddWithValue("$title", newItem.Title);
-                command.Parameters.AddWithValue("$subtitle", newItem.Subtitle);
-                command.Parameters.AddWithValue("$content", newItem.Content);
-                command.Parameters.AddWithValue("$imagePath", newItem.ImagePath);
-                command.Parameters.AddWithValue("$imageThumbnailPath", newItem.ImageThumbnailPath);
-                command.Parameters.AddWithValue("$slug", newItem.Slug);
-                command.Parameters.AddWithValue("$publishDate", newItem.PublishDate);
-                command.Parameters.AddWithValue("$authorID", newItem.AuthorID);
-                */
-
-                // Initial insert of item
+                // Initial insert of minimum required data
                 command.CommandText = @"INSERT INTO Blogs (Title, PublishDate, Slug, AuthorID) VALUES ($title, $publishDate, $slug, $authorID);";
                 command.Parameters.AddWithValue("$title", newItem.Title);
                 command.Parameters.AddWithValue("$publishDate", newItem.PublishDate);
