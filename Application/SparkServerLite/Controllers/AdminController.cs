@@ -89,6 +89,7 @@ namespace SparkServerLite.Controllers
                 IEnumerable<BlogTag> blogTags = _blogTagRepo.GetForBlog(blog.ID);
                 IEnumerable<int> blogTagIDs = blogTags.Select(t => t.ID);
 
+                // TODO: is BlogTagSource working properly -- does the Selected value actually work here?
                 viewModel.AuthorSource = FilterData.Authors(_authorRepo, viewModel.AuthorID);
                 viewModel.BlogTagSource = FilterData.BlogTags(_blogTagRepo, blogTagIDs);
             }
@@ -100,7 +101,7 @@ namespace SparkServerLite.Controllers
 
                 viewModel.ID = 0;
                 viewModel.AuthorSource = FilterData.Authors(_authorRepo, null);
-                viewModel.BlogTagSource = FilterData.BlogTags(_blogTagRepo, viewModel.BlogTags);
+                viewModel.BlogTagSource = FilterData.BlogTags(_blogTagRepo, null);
             }
 
             return View(viewModel);
@@ -109,7 +110,75 @@ namespace SparkServerLite.Controllers
         [HttpPost]
         public ActionResult BlogUpdate(BlogEditViewModel viewModel)
         {
-            return View();
+            // Check for unique URL
+            if (viewModel.Mode == EditMode.Add)
+            {
+                bool existing = _blogRepo.SlugExists(viewModel.Slug.Trim());
+
+                if (existing)
+                    ModelState.AddModelError("UniqueURL", "URL slug must be unique!");
+            }
+
+            if (ModelState.IsValid)
+            {
+                if (viewModel.Mode == EditMode.Add)
+                {
+                    Blog blog = new Blog();
+
+                    blog.Title = viewModel.Title;
+                    blog.Subtitle = viewModel.Subtitle;
+                    blog.Content = viewModel.Content;
+                    blog.PublishDate = viewModel.PublishDate.Value;
+                    blog.AuthorID = viewModel.AuthorID;
+                    blog.Slug = viewModel.Slug;
+                    blog.ImagePath = viewModel.ImagePath;
+                    blog.ImageThumbnailPath = viewModel.ImageThumbnailPath;
+
+                    _blogRepo.Create(blog);
+                    // TODO
+                    // _blogTagRepo.UpdateTagsForBlog(blog.ID, viewModel.BlogTags);
+
+                    TempData["Success"] = "Blog created.";
+                    return RedirectToAction(actionName: "BlogEdit", controllerName: "Admin", routeValues: new { ID = blog.ID });
+                }
+                else
+                {
+                    var blog = _blogRepo.Get(viewModel.ID);
+
+                    if (blog == null)
+                    {
+                        TempData["Error"] = $"No blog found with ID {viewModel.ID}.";
+                        return RedirectToAction(actionName: "Index", controllerName: "Admin");
+                    }
+
+                    blog.Title = viewModel.Title;
+                    blog.Subtitle = viewModel.Subtitle;
+                    blog.Content = viewModel.Content;
+                    blog.PublishDate = viewModel.PublishDate.Value;
+                    blog.AuthorID = viewModel.AuthorID;
+                    blog.Slug = viewModel.Slug;
+                    blog.ImagePath = viewModel.ImagePath;
+                    blog.ImageThumbnailPath = viewModel.ImageThumbnailPath;
+
+                    _blogRepo.Update(blog);
+
+                    // TODO
+                    //_blogTagRepo.UpdateTagsForBlog(blog.ID, viewModel.BlogTags);
+
+                    TempData["Success"] = "Blog updated.";
+                    return RedirectToAction(actionName: "BlogEdit", controllerName: "Admin", routeValues: new { ID = blog.ID });
+                }
+
+            }
+            else
+            {
+                TempData["Error"] = "Please correct the errors below.";
+            }
+
+            viewModel.AuthorSource = FilterData.Authors(_authorRepo, viewModel.AuthorID);
+            viewModel.BlogTagSource = FilterData.BlogTags(_blogTagRepo, viewModel.BlogTags);
+
+            return View("BlogEdit", viewModel);
         }
 
         public ActionResult BlogDelete(int? ID)
