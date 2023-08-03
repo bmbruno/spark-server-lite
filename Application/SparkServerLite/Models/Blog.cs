@@ -12,13 +12,13 @@ namespace SparkServerLite.Models
 
         public string Title { get; set; }
 
-        public string Subtitle { get; set; }
+        public string? Subtitle { get; set; }
 
         public string Content { get; set; }
 
-        public string ImagePath { get; set; }
+        public string? ImagePath { get; set; }
 
-        public string ImageThumbnailPath { get; set; }
+        public string? ImageThumbnailPath { get; set; }
 
         public string Slug { get; set; }
 
@@ -31,10 +31,7 @@ namespace SparkServerLite.Models
         public Blog()
         {
             Title = string.Empty;
-            Subtitle = string.Empty;
             Content = string.Empty;
-            ImagePath = string.Empty;
-            ImageThumbnailPath = string.Empty;
             Slug = string.Empty;
             AuthorFullName = string.Empty;
         }
