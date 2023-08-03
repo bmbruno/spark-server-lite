@@ -27,6 +27,8 @@ namespace SparkServerLite.Controllers
             //Blog blog = _blogRepo.Get(2);
             //blog.Title = "A MODIFIED TITLE";
             //_blogRepo.Update(blog);
+            
+            //_blogRepo.Delete(2);
 
             return View();
         }

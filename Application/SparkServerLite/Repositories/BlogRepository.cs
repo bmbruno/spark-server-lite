@@ -226,16 +226,20 @@ namespace SparkServer.Infrastructure.Repositories
 
         public void Delete(int ID)
         {
-            //using (var db = new SparkServerEntities())
-            //{
-            //    Blog toDelete = db.Blog.FirstOrDefault(u => u.ID == ID);
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            {
+                conn.Open();
 
-            //    if (toDelete == null)
-            //        throw new Exception($"Could not find Blog with ID of {ID}");
-            //    toDelete.Active = false;
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    UPDATE Blogs
+                    SET Active = 0
+                    WHERE ID = $blogID";
 
-            //    db.SaveChanges();
-            //}
+                command.Parameters.AddWithValue("$blogID", ID);
+                command.ExecuteNonQuery();
+                conn.Close();
+            }
 
             return;
         }
