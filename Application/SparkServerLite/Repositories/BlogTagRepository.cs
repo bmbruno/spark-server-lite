@@ -118,15 +118,18 @@ namespace SparkServer.Infrastructure.Repositories
 
         public void Update(BlogTag updateItem)
         {
-            //using (var db = new SparkServerEntities())
-            //{
-            //    db.BlogTag.Attach(updateItem);
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            {
+                conn.Open();
 
-            //    var entry = db.Entry(updateItem);
-            //    entry.Property(e => e.Name).IsModified = true;
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = "UPDATE BlogTags SET Name = $name WHERE ID = $id;";
+                command.Parameters.AddWithValue("$name", updateItem.Name);
+                command.Parameters.AddWithValue("$id", updateItem.ID);
+                command.ExecuteNonQuery();
 
-            //    db.SaveChanges();
-            //}
+                conn.Close();
+            }
 
             return;
         }
