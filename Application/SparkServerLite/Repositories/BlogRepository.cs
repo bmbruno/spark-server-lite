@@ -120,7 +120,6 @@ namespace SparkServer.Infrastructure.Repositories
 
         public int Create(Blog newItem)
         {
-            List<Blog> blogList = new List<Blog>();
             long newID = 0;
 
             using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))

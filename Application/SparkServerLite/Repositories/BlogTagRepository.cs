@@ -4,6 +4,7 @@ using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
 using System.Linq.Expressions;
+using System.Text;
 using System.Xml.Linq;
 
 namespace SparkServer.Infrastructure.Repositories
@@ -93,15 +94,26 @@ namespace SparkServer.Infrastructure.Repositories
 
         public int Create(BlogTag newItem)
         {
-            //using (var db = new SparkServerEntities())
-            //{
-            //    db.BlogTag.Add(newItem);
-            //    db.SaveChanges();
-            //}
+            long newID = 0;
 
-            //return newItem.ID;
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            {
+                conn.Open();
 
-            return 0;
+                SqliteCommand command = conn.CreateCommand();
+
+                // Initial insert of minimum required data
+                command.CommandText = @"INSERT INTO Blogs (Name) VALUES ($name);";
+                command.Parameters.AddWithValue("$title", newItem.Name);
+                command.ExecuteNonQuery();
+                command.Parameters.Clear();
+
+                command.CommandText = "SELECT last_insert_rowid()";
+                newID = (long)command.ExecuteScalar();
+            }
+
+            return Convert.ToInt32(newID);
+
         }
 
         public void Update(BlogTag updateItem)
@@ -134,6 +146,36 @@ namespace SparkServer.Infrastructure.Repositories
             //}
 
             return;
+        }
+
+        public bool Exists(string name)
+        {
+            bool tagExists = false;
+
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT ID
+                    FROM BlogTags
+                    WHERE
+                        Active = 1
+                        AND LOWER(Name) = $slug";
+
+                command.Parameters.AddWithValue("$slug", name.ToLower());
+
+                conn.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    reader.Read();
+                    tagExists = reader.HasRows;
+                }
+
+                conn.Close();
+            }
+
+            return tagExists;
         }
 
         public IEnumerable<BlogTag> GetTagsInUse()
@@ -244,5 +286,6 @@ namespace SparkServer.Infrastructure.Repositories
 
             return;
         }
+
     }
 }

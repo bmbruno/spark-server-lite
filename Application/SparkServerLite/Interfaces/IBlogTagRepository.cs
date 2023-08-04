@@ -9,6 +9,13 @@ namespace SparkServerLite.Interfaces
     public interface IBlogTagRepository<T> : IRepositoryBase<T>
     {
         /// <summary>
+        /// Should determine if a BlogTag exists in the database based on the name (lowercase comparison).
+        /// </summary>
+        /// <param name="name">Name of the tag.</param>
+        /// <returns>True/false.</returns>
+        public bool Exists(string name);
+
+        /// <summary>
         /// Should return a list of blog tag objects that are currently tied to blogs.
         /// </summary>
         /// <returns></returns>

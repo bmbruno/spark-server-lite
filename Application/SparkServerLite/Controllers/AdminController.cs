@@ -33,6 +33,9 @@ namespace SparkServerLite.Controllers
             // var test1 = _blogRepo.SlugExists("test-blog-one");
             // var test2 = _blogRepo.SlugExists("test-blog-FAKE-FAKE");
 
+            // var existsA = _blogTagRepo.Exists("Tag Alpha");
+            // var existsB = _blogTagRepo.Exists("Tag FAKE");
+
             return View();
         }
 
