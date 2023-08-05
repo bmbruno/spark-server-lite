@@ -40,6 +40,8 @@ namespace SparkServerLite.Controllers
             // tag.Name = "NEW NAME";
             // _blogTagRepo.Update(tag);
 
+            // _blogTagRepo.Delete(2);
+
             return View();
         }
 
