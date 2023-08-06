@@ -42,6 +42,8 @@ namespace SparkServerLite.Controllers
 
             // _blogTagRepo.Delete(2);
 
+            // _blogTagRepo.UpdateTagsForBlog(1, new List<int> { 1, 2, 3 });
+
             return View();
         }
 

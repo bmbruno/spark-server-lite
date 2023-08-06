@@ -265,30 +265,29 @@ namespace SparkServer.Infrastructure.Repositories
 
         public void UpdateTagsForBlog(int blogID, IEnumerable<int> updatedList)
         {
-            //using (var db = new SparkServerEntities())
-            //{
-            //    var oldTags = db.BlogsTags.Where(u => u.BlogID == blogID);
+            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            {
+                conn.Open();
+                SqliteCommand command = conn.CreateCommand();
 
-            //    if (oldTags != null)
-            //        db.BlogsTags.RemoveRange(oldTags);
+                // Step 1: clear all BlogsToTags for the given blogID
+                command.CommandText = "DELETE FROM BlogsToTags WHERE BlogID = $blogID;";
+                command.Parameters.AddWithValue("$blogID", blogID);
+                command.ExecuteNonQuery();
 
-            //    DateTime createDate = DateTime.Now;
+                // Step 2: insert BlogToTags for the given Blog/BlogTags
+                command.CommandText = "INSERT INTO BlogsToTags (BlogID, BlogTagID) VALUES ($blogID, $blogTagID);";
+                
+                foreach (int id in updatedList)
+                {
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("$blogID", blogID);
+                    command.Parameters.AddWithValue("$blogTagID", id);
+                    command.ExecuteNonQuery();
+                }
 
-            //    foreach (var newID in updatedList)
-            //    {
-            //        BlogsTags newTag = new BlogsTags()
-            //        {
-            //            BlogID = blogID,
-            //            TagID = newID,
-            //            Active = true,
-            //            CreateDate = createDate
-            //        };
-
-            //        db.BlogsTags.Add(newTag);
-            //    }
-
-            //    db.SaveChanges();
-            //}
+                conn.Close();
+            }
 
             return;
         }
