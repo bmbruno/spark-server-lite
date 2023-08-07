@@ -297,7 +297,18 @@ namespace SparkServerLite.Controllers
 
         public ActionResult BlogTagDelete(int? ID)
         {
-            return View();
+            if (ID.HasValue)
+            {
+                _blogTagRepo.Delete(ID.Value);
+
+                TempData["Success"] = "Blog tag deleted.";
+            }
+            else
+            {
+                TempData["Error"] = "ID required to delete blog tag.";
+            }
+
+            return RedirectToAction(actionName: "BlogTagList", controllerName: "Admin");
         }
     }
 }
