@@ -196,7 +196,20 @@ namespace SparkServerLite.Controllers
 
         public ActionResult BlogTagList()
         {
-            return View();
+            BlogTagListViewModel viewModel = new BlogTagListViewModel();
+
+            IEnumerable<BlogTag> allTags = _blogTagRepo.GetAll();
+
+            foreach (var tag in allTags)
+            {
+                viewModel.BlogTagList.Add(new BlogTagListItemViewModel()
+                {
+                    ID = tag.ID,
+                    Name = tag.Name
+                });
+            }
+
+            return View(viewModel);
         }
 
         public ActionResult BlogTagEdit(int? ID)

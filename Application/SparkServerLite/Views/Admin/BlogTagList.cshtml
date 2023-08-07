@@ -1,3 +1,26 @@
-﻿@{
+﻿@model SparkServerLite.ViewModels.Admin.BlogTagListViewModel
+@{
     Layout = "_AdminLayout";
+    ViewData["Title"] = "Blog Tag List";
 }
+
+<h1>@ViewData["Title"]</h1>
+
+<a href="/Admin/BlogTagEdit" class="btn">Add New Tag</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.BlogTagList)
+        {
+            <tr>
+                <td><a href="/Admin/BlogTagEdit?ID=@item.ID">@item.Name</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
