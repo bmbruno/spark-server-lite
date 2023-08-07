@@ -99,6 +99,7 @@ namespace SparkServerLite.Controllers
                 IEnumerable<BlogTag> blogTags = _blogTagRepo.GetForBlog(blog.ID);
                 IEnumerable<int> blogTagIDs = blogTags.Select(t => t.ID);
 
+                // TODO: change BlogTagSource to be checkboxes
                 // TODO: is BlogTagSource working properly -- does the Selected value actually work here?
                 viewModel.AuthorSource = FilterData.Authors(_authorRepo, viewModel.AuthorID);
                 viewModel.BlogTagSource = FilterData.BlogTags(_blogTagRepo, blogTagIDs);
@@ -145,8 +146,7 @@ namespace SparkServerLite.Controllers
                     blog.ImageThumbnailPath = viewModel.ImageThumbnailPath;
 
                     int newBlogID = _blogRepo.Create(blog);
-                    // TODO
-                    // _blogTagRepo.UpdateTagsForBlog(blog.ID, viewModel.BlogTags);
+                    _blogTagRepo.UpdateTagsForBlog(blog.ID, viewModel.BlogTags);
 
                     TempData["Success"] = "Blog created.";
                     return RedirectToAction(actionName: "BlogEdit", controllerName: "Admin", routeValues: new { ID = newBlogID });
@@ -171,9 +171,7 @@ namespace SparkServerLite.Controllers
                     blog.ImageThumbnailPath = viewModel.ImageThumbnailPath;
 
                     _blogRepo.Update(blog);
-
-                    // TODO
-                    //_blogTagRepo.UpdateTagsForBlog(blog.ID, viewModel.BlogTags);
+                    _blogTagRepo.UpdateTagsForBlog(blog.ID, viewModel.BlogTags);
 
                     TempData["Success"] = "Blog updated.";
                     return RedirectToAction(actionName: "BlogEdit", controllerName: "Admin", routeValues: new { ID = blog.ID });

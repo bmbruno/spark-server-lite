@@ -88,6 +88,24 @@
     <div class="row">
         @Html.LabelFor(x => x.BlogTags)
         @Html.ListBoxFor(x => x.BlogTags, Model.BlogTagSource, htmlAttributes: new { @class = "half", style = "height: 150px;" })
+
+        <div class="checkbox-list">
+
+            @foreach (SelectListItem item in Model.BlogTagSource)
+            {
+                if (item.Selected)
+                {
+                    <label for="BlogTag-@item.Value"><input type="checkbox" checked name="BlogTags" value="@item.Value" id="BlogTag-@item.Value" />@item.Text</label>
+                }
+                else
+                {
+                    <label for="BlogTag-@item.Value"><input type="checkbox" name="BlogTags" value="@item.Value" id="BlogTag-@item.Value" />@item.Text</label>
+                }
+            }
+
+        </div>
+
+
     </div>
 
     <div class="row">

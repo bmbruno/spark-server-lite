@@ -200,14 +200,14 @@ namespace SparkServer.Infrastructure.Repositories
 
                 // Publish Date - required
                 updateSQL.Append("UPDATE Blogs SET PublishDate = $imageThumbPath WHERE ID = $id;");
-                command.Parameters.AddWithValue("$imageThumbPath", updateItem.ImageThumbnailPath);
+                command.Parameters.AddWithValue("$imageThumbPath", updateItem.PublishDate);
 
                 // Content - required
                 updateSQL.Append("UPDATE Blogs SET Content = $content WHERE ID = $id;");
                 command.Parameters.AddWithValue("$content", updateItem.Content);
 
                 // Author - required
-                updateSQL.Append("UPDATE Blogs SET Author = $author WHERE ID = $id;");
+                updateSQL.Append("UPDATE Blogs SET AuthorID = $author WHERE ID = $id;");
                 command.Parameters.AddWithValue("$author", updateItem.AuthorID);
 
                 if (!String.IsNullOrEmpty(updateItem.Subtitle))
