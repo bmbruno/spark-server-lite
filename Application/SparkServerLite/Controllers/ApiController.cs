@@ -20,6 +20,7 @@ namespace SparkServerLite.Controllers
             _authorRepo = authorRepo;
         }
 
+        [HttpPost]
         public JsonResult MarkdownToHTML(string markdown)
         {
             JsonPayload json = new JsonPayload();
