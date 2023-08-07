@@ -1,21 +1,19 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Infrastructure.Enums;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
-using SparkServerLite.ViewModels;
-using SparkServerLite.ViewModels.Admin;
+using System.Net;
 
 namespace SparkServerLite.Controllers
 {
-    public class Apiontroller : Controller
+    public class ApiController : Controller
     {
         private IBlogRepository<Blog> _blogRepo;
         private IBlogTagRepository<BlogTag> _blogTagRepo;
         private IAuthorRepository<Author> _authorRepo;
 
-        public Apiontroller(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAuthorRepository<Author> authorRepo)
+        public ApiController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAuthorRepository<Author> authorRepo)
         {
             _blogRepo = blogRepo;
             _blogTagRepo = blogTagRepo;
@@ -25,6 +23,19 @@ namespace SparkServerLite.Controllers
         public JsonResult MarkdownToHTML(string markdown)
         {
             JsonPayload json = new JsonPayload();
+            json.Status = JsonStatus.OK;
+
+            markdown = WebUtility.UrlDecode(markdown);
+
+            try
+            {
+                json.Data = FormatHelper.MarkdownToHTML(markdown);
+            }
+            catch (Exception exc)
+            {
+                json.Status = JsonStatus.EXCEPTION;
+                json.Message = exc.ToString();
+            }
 
             return Json(json);
         }
