@@ -103,8 +103,8 @@ namespace SparkServer.Infrastructure.Repositories
                 SqliteCommand command = conn.CreateCommand();
 
                 // Initial insert of minimum required data
-                command.CommandText = @"INSERT INTO Blogs (Name) VALUES ($name);";
-                command.Parameters.AddWithValue("$title", newItem.Name);
+                command.CommandText = @"INSERT INTO BlogTags (Name) VALUES ($name);";
+                command.Parameters.AddWithValue("$name", newItem.Name);
                 command.ExecuteNonQuery();
                 command.Parameters.Clear();
 

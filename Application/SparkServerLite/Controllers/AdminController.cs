@@ -214,13 +214,85 @@ namespace SparkServerLite.Controllers
 
         public ActionResult BlogTagEdit(int? ID)
         {
-            return View();
+            BlogTagEditViewModel viewModel = new BlogTagEditViewModel();
+
+            if (ID.HasValue)
+            {
+                // EDIT
+
+                viewModel.Mode = EditMode.Edit;
+
+                var blog = _blogTagRepo.Get(ID.Value);
+
+                if (blog == null)
+                {
+                    TempData["Error"] = $"No Blog Tag found with ID {ID.Value}.";
+                    return RedirectToAction(actionName: "Index", controllerName: "Admin");
+                }
+
+                viewModel.ID = blog.ID;
+                viewModel.Name = blog.Name;
+            }
+            else
+            {
+                // ADD
+
+                viewModel.Mode = EditMode.Add;
+            }
+
+            return View(viewModel);
         }
 
         [HttpPost]
         public ActionResult BlogTagUpdate(BlogTagEditViewModel viewModel)
         {
-            return View();
+            // Check for existing Name
+            if (viewModel.Mode == EditMode.Add)
+            {
+                bool existing = _blogTagRepo.Exists(viewModel.Name);
+
+                if (existing)
+                    ModelState.AddModelError("Name", "Name is not unique!");
+            }
+
+            if (ModelState.IsValid)
+            {
+                if (viewModel.Mode == EditMode.Add)
+                {
+                    BlogTag blogTag = new BlogTag();
+
+                    blogTag.Name = viewModel.Name;
+
+                    _blogTagRepo.Create(blogTag);
+
+                    TempData["Success"] = "Blog Tag created.";
+                    return RedirectToAction(actionName: "BlogTagList", controllerName: "Admin");
+                }
+                else
+                {
+                    var blogTag = _blogTagRepo.Get(viewModel.ID);
+
+                    if (blogTag == null)
+                    {
+                        TempData["Error"] = $"No Blog Tag found with ID {viewModel.ID}.";
+                        return RedirectToAction(actionName: "Index", controllerName: "Admin");
+                    }
+
+                    blogTag.Name = viewModel.Name;
+
+                    _blogTagRepo.Update(blogTag);
+
+                    TempData["Success"] = "Blog Tag updated.";
+                    return RedirectToAction(actionName: "BlogTagList", controllerName: "Admin");
+                }
+
+            }
+            else
+            {
+                TempData["Error"] = "Please correct the errors below.";
+            }
+
+            return View("BlogTagEdit", viewModel);
         }
 
         public ActionResult BlogTagDelete(int? ID)
