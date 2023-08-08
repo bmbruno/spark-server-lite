@@ -48,6 +48,7 @@ namespace SparkServer.Infrastructure.Repositories
                         blog.ID = Database.GetID(reader["ID"]);
                         blog.Title = Database.GetString(reader["Title"]);
                         blog.Subtitle = Database.GetString(reader["Subtitle"]);
+                        blog.Markdown = Database.GetString(reader["Markdown"]);
                         blog.Content = Database.GetString(reader["Content"]);
                         blog.ImagePath = Database.GetString(reader["ImagePath"]);
                         blog.ImageThumbnailPath = Database.GetString(reader["ImageThumbnailPath"]);
@@ -101,6 +102,7 @@ namespace SparkServer.Infrastructure.Repositories
                             ID = Database.GetID(reader["ID"]),
                             Title = Database.GetString(reader["Title"]),
                             Subtitle = Database.GetString(reader["Subtitle"]),
+                            Markdown = Database.GetString(reader["Markdown"]),
                             Content = Database.GetString(reader["Content"]),
                             ImagePath = Database.GetString(reader["ImagePath"]),
                             ImageThumbnailPath = Database.GetString(reader["ImageThumbnailPath"]),
@@ -148,6 +150,13 @@ namespace SparkServer.Infrastructure.Repositories
                 {
                     updateSQL.Append("UPDATE Blogs SET Subtitle = $subtitle WHERE ID = $id;");
                     command.Parameters.AddWithValue("$subtitle", newItem.Subtitle);
+                    needsUpdate = true;
+                }
+
+                if (!String.IsNullOrEmpty(newItem.Markdown))
+                {
+                    updateSQL.Append("UPDATE Blogs SET Markdown = $markdown WHERE ID = $id;");
+                    command.Parameters.AddWithValue("$markdown", newItem.Markdown);
                     needsUpdate = true;
                 }
 
@@ -201,6 +210,10 @@ namespace SparkServer.Infrastructure.Repositories
                 // Publish Date - required
                 updateSQL.Append("UPDATE Blogs SET PublishDate = $imageThumbPath WHERE ID = $id;");
                 command.Parameters.AddWithValue("$imageThumbPath", updateItem.PublishDate);
+
+                // Markdown - required
+                updateSQL.Append("UPDATE Blogs SET Markdown = $markdown WHERE ID = $id;");
+                command.Parameters.AddWithValue("$markdown", updateItem.Markdown);
 
                 // Content - required
                 updateSQL.Append("UPDATE Blogs SET Content = $content WHERE ID = $id;");
@@ -299,6 +312,7 @@ namespace SparkServer.Infrastructure.Repositories
                         blog.ID = Database.GetID(reader["ID"]);
                         blog.Title = Database.GetString(reader["Title"]);
                         blog.Subtitle = Database.GetString(reader["Subtitle"]);
+                        blog.Markdown = Database.GetString(reader["Markdown"]);
                         blog.Content = Database.GetString(reader["Content"]);
                         blog.ImagePath = Database.GetString(reader["ImagePath"]);
                         blog.ImageThumbnailPath = Database.GetString(reader["ImageThumbnailPath"]);

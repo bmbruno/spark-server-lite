@@ -41,11 +41,12 @@
     </div>
 
     <div class="row">
-        @Html.LabelFor(x => x.ContentMarkdown)
-        @Html.TextAreaFor(x => x.ContentMarkdown, htmlAttributes: new { style = "height: 400px" })
+        @Html.LabelFor(x => x.Markdown)
+        @Html.TextAreaFor(x => x.Markdown, htmlAttributes: new { style = "height: 400px" })
         <div>
             <input type="button" value="Convert" id="ConvertToHTML" class="btn" />
         </div>
+        @Html.ValidationMessageFor(x => x.Markdown)
     </div>
 
     <div class="row">

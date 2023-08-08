@@ -77,7 +77,6 @@ namespace SparkServerLite.Controllers
                 // EDIT
 
                 viewModel.Mode = EditMode.Edit;
-
                 var blog = _blogRepo.Get(ID: ID.Value);
 
                 if (blog == null)
@@ -89,6 +88,7 @@ namespace SparkServerLite.Controllers
                 viewModel.ID = blog.ID;
                 viewModel.Title = blog.Title;
                 viewModel.Subtitle = blog.Subtitle;
+                viewModel.Markdown = blog.Markdown;
                 viewModel.Content = blog.Content;
                 viewModel.PublishDate = blog.PublishDate;
                 viewModel.AuthorID = blog.AuthorID;
@@ -99,8 +99,6 @@ namespace SparkServerLite.Controllers
                 IEnumerable<BlogTag> blogTags = _blogTagRepo.GetForBlog(blog.ID);
                 IEnumerable<int> blogTagIDs = blogTags.Select(t => t.ID);
 
-                // TODO: change BlogTagSource to be checkboxes
-                // TODO: is BlogTagSource working properly -- does the Selected value actually work here?
                 viewModel.AuthorSource = FilterData.Authors(_authorRepo, viewModel.AuthorID);
                 viewModel.BlogTagSource = FilterData.BlogTags(_blogTagRepo, blogTagIDs);
             }
@@ -138,6 +136,7 @@ namespace SparkServerLite.Controllers
 
                     blog.Title = viewModel.Title;
                     blog.Subtitle = viewModel.Subtitle;
+                    blog.Markdown = viewModel.Markdown;
                     blog.Content = viewModel.Content;
                     blog.PublishDate = viewModel.PublishDate;
                     blog.AuthorID = viewModel.AuthorID;
@@ -163,6 +162,7 @@ namespace SparkServerLite.Controllers
 
                     blog.Title = viewModel.Title;
                     blog.Subtitle = viewModel.Subtitle;
+                    blog.Markdown = viewModel.Markdown;
                     blog.Content = viewModel.Content;
                     blog.PublishDate = viewModel.PublishDate;
                     blog.AuthorID = viewModel.AuthorID;

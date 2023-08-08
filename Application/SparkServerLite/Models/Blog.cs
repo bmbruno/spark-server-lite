@@ -14,6 +14,8 @@ namespace SparkServerLite.Models
 
         public string? Subtitle { get; set; }
 
+        public string Markdown { get; set; }
+
         public string Content { get; set; }
 
         public string? ImagePath { get; set; }

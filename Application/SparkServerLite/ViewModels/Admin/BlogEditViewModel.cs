@@ -17,8 +17,8 @@ namespace SparkServerLite.ViewModels.Admin
         [Display(Name = "Subtitle")]
         public string? Subtitle { get; set; }
 
-        [Display(Name = "Source (Markdown)")]
-        public string? ContentMarkdown { get; set; }
+        [Display(Name = "Markdown Source")]
+        public string Markdown { get; set; }
 
         [Display(Name = "Content")]
         public string Content { get; set; }
@@ -56,6 +56,7 @@ namespace SparkServerLite.ViewModels.Admin
             BlogTagSource = new List<SelectListItem>();
 
             Title = string.Empty;
+            Markdown = string.Empty;
             Content = string.Empty;
             Slug = string.Empty;
         }

@@ -27,6 +27,7 @@ CREATE TABLE Blogs (
 	[ID] INTEGER NOT NULL PRIMARY KEY,
 	[Title] TEXT NOT NULL,
 	[Subtitle] TEXT NULL,
+	[Markdown] TEXT NULL,
 	[Content] TEXT NULL,
 	[ImagePath] TEXT NULL,
     [ImageThumbnailPath] TEXT NULL,
