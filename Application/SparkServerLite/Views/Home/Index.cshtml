@@ -28,18 +28,17 @@
 
         @foreach (var blog in Model.BlogList)
         {
-                <li class="blog-card">
+            <li class="blog-card">
 
-                    <a href="@blog.URL"><img src="@blog.ImageThumbnailPath" title="@blog.Title" alt="" /></a>
+                <a href="@blog.URL"><img src="@blog.ImageThumbnailPath" title="@blog.Title" alt="" /></a>
                     
-                    <div class="blog-list-intro">
-                        <h3><a href="@blog.URL">@blog.Title</a></h3>
-                        <div class="subtitle">@blog.Subtitle</div>
-                        <div class="date">@blog.PublishDate.ToString("MMMM dd, yyyy")</div>
-                    </div>
+                <div class="blog-card-detail">
+                    <h3><a href="@blog.URL">@blog.Title</a></h3>
+                    <div class="subtitle">@blog.Subtitle</div>
+                    <div class="date">@blog.PublishDate.ToString("MMMM dd, yyyy")</div>
+                </div>
 
-
-                </li>
+            </li>
         }
 
     </ul>

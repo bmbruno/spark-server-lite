@@ -41,7 +41,7 @@ namespace SparkServerLite.Infrastructure
         {
             get
             {
-                return "/content/images/default_blog_banner.png";
+                return "/images/default-blog-image.png";
             }
         }
 
@@ -52,7 +52,7 @@ namespace SparkServerLite.Infrastructure
         {
             get
             {
-                return "/content/images/default_blog_banner_thumb.png";
+                return "/images/default-blog-image.png";
             }
         }
     }
