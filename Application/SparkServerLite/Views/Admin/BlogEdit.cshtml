@@ -44,7 +44,7 @@
         @Html.LabelFor(x => x.Markdown)
         @Html.TextAreaFor(x => x.Markdown, htmlAttributes: new { style = "height: 400px" })
         <div class="controls">
-            <button id="ConvertToHTML">Convert</button>
+            <button type="button" id="ConvertToHTML">Convert</button>
         </div>
         @Html.ValidationMessageFor(x => x.Markdown)
     </div>
@@ -59,7 +59,7 @@
         @Html.LabelFor(x => x.PublishDate)
         @Html.TextBoxFor(x => x.PublishDate, htmlAttributes: new { @class = "half" })
         <div class="controls">
-            <button id="DateTimeToday">Today</button>
+            <button type="button" id="DateTimeToday">Today</button>
         </div>
         @Html.ValidationMessageFor(x => x.PublishDate)
     </div>
@@ -74,7 +74,7 @@
         @Html.LabelFor(x => x.Slug)
         @Html.TextBoxFor(x => x.Slug, htmlAttributes: new { @class = "half" })
         <div class="controls">
-            <button id="CreateUniqueURL">Create From Title</button>
+            <button type="button" id="CreateUniqueURL">Create From Title</button>
         </div>
         @Html.ValidationMessageFor(x => x.Slug)
     </div>
@@ -83,7 +83,7 @@
         @Html.LabelFor(x => x.ImagePath)
         @Html.TextBoxFor(x => x.ImagePath, htmlAttributes: new { @class = "half" })
         <div class="controls">
-            <button id="GetDefaultHeroImage" class="btn">Get Default Hero Image</button>
+            <button type="button" id="GetDefaultHeroImage" class="btn">Get Default Hero Image</button>
         </div>
         @Html.ValidationMessageFor(x => x.ImagePath)
     </div>
