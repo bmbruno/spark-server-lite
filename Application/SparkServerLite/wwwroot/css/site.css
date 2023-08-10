@@ -31,6 +31,12 @@ nav ul li a { display: block; padding: 1em 0; }
 .blog-card .subtitle { font-size: 1.25em; }
 .blog-card .date { font-size: 0.85em; }
 
+table { width: 100%; text-align: left; }
+table th, td { padding: 1em; }
+table th { background-color: #6e8198; color: #FFF; font-weight: bold; }
+table tr:nth-child(even) { background-color: #f6f6f6; }
+table tr:nth-child(odd) { background-color: #eaeaea; }
+
 .bottom-nav { text-align: center; padding: 2em; }
 
 @media (min-width: 600px)

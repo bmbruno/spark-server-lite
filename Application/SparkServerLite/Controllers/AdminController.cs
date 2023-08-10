@@ -321,5 +321,10 @@ namespace SparkServerLite.Controllers
 
             return RedirectToAction(actionName: "BlogTagList", controllerName: "Admin");
         }
+
+        public ActionResult Media()
+        {
+            return View();
+        }
     }
 }
