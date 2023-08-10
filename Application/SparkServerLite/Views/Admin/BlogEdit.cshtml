@@ -15,7 +15,7 @@
 
     if (Model.ID > 0)
     {
-        <a href="@Model.BlogURL?preview=true" target="_blank" class="btn">Preview</a>
+        <a href="@Model.BlogURL?preview=true" target="_blank" class="btn">Preview Blog</a>
     }
 }
 
@@ -45,6 +45,7 @@
         @Html.TextAreaFor(x => x.Markdown, htmlAttributes: new { style = "height: 400px" })
         <div class="controls">
             <button type="button" id="ConvertToHTML">Convert</button>
+            <button type="button" id="SeeHTML">Preview</button>
         </div>
         @Html.ValidationMessageFor(x => x.Markdown)
     </div>

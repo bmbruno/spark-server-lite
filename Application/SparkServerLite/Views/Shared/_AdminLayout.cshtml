@@ -47,28 +47,23 @@
 
         </header>
 
-        <div class="content">
+        <div class="content admin">
 
+            @if (TempData["Success"] != null) 
+            {
+                <div class="status-message success">
+                    @TempData["Success"]
+                </div>
+            }
 
-            <div class="container">
+            @if (TempData["Error"] != null)
+            {
+                <div class="status-message error">
+                    @TempData["Error"]
+                </div>
+            }
 
-                @if (TempData["Success"] != null)
-                {
-                    <div class="status-message success">
-                        @TempData["Success"]
-                    </div>
-                }
-
-                @if (TempData["Error"] != null)
-                {
-                    <div class="status-message error">
-                        @TempData["Error"]
-                    </div>
-                }
-
-                @RenderBody()
-
-            </div>
+            @RenderBody()
 
         </div>
 

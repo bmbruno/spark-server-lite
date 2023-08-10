@@ -17,7 +17,8 @@ blockquote p:last-of-type { margin-bottom: 0; }
 nav { display: block; }
 nav ul li a { display: block; padding: 1em 0; }
 
-.content { width: 100%; margin: 1em auto; background-color: #FFF; }
+.content { width: 100%; margin: 1em auto; padding: 1em; background-color: #FFF; }
+.content.admin h1 { font-size: 2em; }
 
 .logo-wrapper { width: 300px; margin: 0 auto; }
 
