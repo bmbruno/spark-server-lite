@@ -17,8 +17,14 @@ blockquote p:last-of-type { margin-bottom: 0; }
 nav { display: block; }
 nav ul li a { display: block; padding: 1em 0; }
 
+h1 { font-size: 3em; }
+h2 { font-size: 2em; }
+h3 { font-size: 1.75em; }
+h4 { font-size: 1.65em; }
+h5 { font-size: 1.5em; }
+h6 { font-size: 1.45em; }
+
 .content { width: 100%; margin: 1em auto; padding: 1em; background-color: #FFF; }
-.content.admin h1 { font-size: 2em; }
 
 .logo-wrapper { width: 300px; margin: 0 auto; }
 
@@ -28,7 +34,7 @@ nav ul li a { display: block; padding: 1em 0; }
 
 .blog-card { padding: 1em; margin: 0 0 1em 0; background-color: #AAA;}
 .blog-card:last-of-type { margin-bottom: 0; }
-.blog-card h3 { font-size: 1.75em; }
+.blog-card h3 { font-size: 2em; }
 .blog-card .subtitle { font-size: 1.25em; }
 .blog-card .date { font-size: 0.85em; }
 
@@ -43,6 +49,7 @@ form .row { margin: 0 0 2em 0; }
 form .row label { display: block; font-weight: bold; margin-bottom: 0.25em }
 form .row > .controls { margin: 0.5em 0 0.5em 0; }
 form input[type="text"], textarea, select { width: 100%; padding: 0.75em; box-shadow: inset 1px 1px 2px #AAA; border: 1px solid #AAA; border-radius: 4px; font-size: 1em }
+form input[type="submit"] { padding: 0.75em 2em; }
 
 button { padding: 0.5em; }
 

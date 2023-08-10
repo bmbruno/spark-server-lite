@@ -112,7 +112,18 @@
     </div>
 
     <div class="row">
-        <input type="submit" value="Submit" class="btn primary" />
+        @if (Model.Mode == SparkServerLite.Infrastructure.Enums.EditMode.Add)
+        {
+            <input type="submit" value="Add Blog" class="btn primary" />
+        }
+        else
+        {
+            <input type="submit" value="Save Changes" class="btn primary" />
+        }
     </div>
+
+
+
+
 
 }
