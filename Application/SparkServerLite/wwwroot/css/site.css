@@ -37,6 +37,16 @@ table th { background-color: #6e8198; color: #FFF; font-weight: bold; }
 table tr:nth-child(even) { background-color: #f6f6f6; }
 table tr:nth-child(odd) { background-color: #eaeaea; }
 
+form { width: 95%; margin: 0 auto; text-align: left; }
+form .row { margin: 0 0 2em 0; }
+form .row label { display: block; font-weight: bold; margin-bottom: 0.25em }
+form .row > .controls { margin: 0.5em 0 0.5em 0; }
+form input[type="text"], textarea, select { width: 100%; padding: 0.75em; box-shadow: inset 1px 1px 2px #AAA; border: 1px solid #AAA; border-radius: 4px; font-size: 1em }
+
+form input[type= { padding: 0.5em; }
+
+form .checkbox-list { max-height: 200px; overflow-y: auto; background-color: #eaeaea; border-radius: 8px; padding: 1em; columns: 1; }
+
 .bottom-nav { text-align: center; padding: 2em; }
 
 @media (min-width: 600px)
@@ -50,6 +60,12 @@ table tr:nth-child(odd) { background-color: #eaeaea; }
 	.blog-card { display: grid; grid-template-columns: auto 1fr; }
 	.blog-card img { grid-column: 1; padding-right: 1em}
 	.blog-card .overview { grid-column: 2; text-align: left; }
+
+	form { width: 60% } 
+	form .row { margin: 2em; }
+	form .row label { margin-bottom: 0.5em; }
+	form input.half { width: 50%; }
+	form .checkbox-list { columns: 3 }
 }
 
 @media (min-width: 1100px)

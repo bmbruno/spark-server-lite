@@ -43,8 +43,8 @@
     <div class="row">
         @Html.LabelFor(x => x.Markdown)
         @Html.TextAreaFor(x => x.Markdown, htmlAttributes: new { style = "height: 400px" })
-        <div>
-            <input type="button" value="Convert" id="ConvertToHTML" class="btn" />
+        <div class="controls">
+            <button id="ConvertToHTML">Convert</button>
         </div>
         @Html.ValidationMessageFor(x => x.Markdown)
     </div>
@@ -58,7 +58,9 @@
     <div class="row">
         @Html.LabelFor(x => x.PublishDate)
         @Html.TextBoxFor(x => x.PublishDate, htmlAttributes: new { @class = "half" })
-        <input type="button" value="Today" id="DateTimeToday" class="btn" />
+        <div class="controls">
+            <button id="DateTimeToday">Today</button>
+        </div>
         @Html.ValidationMessageFor(x => x.PublishDate)
     </div>
 
@@ -71,19 +73,19 @@
     <div class="row">
         @Html.LabelFor(x => x.Slug)
         @Html.TextBoxFor(x => x.Slug, htmlAttributes: new { @class = "half" })
-        <input type="button" value="Create From Title" id="CreateUniqueURL" class="btn" />
+        <div class="controls">
+            <button id="CreateUniqueURL">Create From Title</button>
+        </div>
         @Html.ValidationMessageFor(x => x.Slug)
     </div>
 
     <div class="row">
         @Html.LabelFor(x => x.ImagePath)
         @Html.TextBoxFor(x => x.ImagePath, htmlAttributes: new { @class = "half" })
-        <input type="button" value="Get Default Banner" id="GetDefaultBanner" class="btn" />
+        <div class="controls">
+            <button id="GetDefaultHeroImage" class="btn">Get Default Hero Image</button>
+        </div>
         @Html.ValidationMessageFor(x => x.ImagePath)
-    </div>
-
-    <div class="row">
-        <p class="mono inline-code">/media/blog/2018/07/22_XXXXX.png</p>
     </div>
 
     <div class="row">
