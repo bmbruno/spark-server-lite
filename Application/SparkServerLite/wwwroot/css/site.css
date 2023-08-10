@@ -14,16 +14,24 @@ strong { font-weight: bold; }
 blockquote { font-style: italic; color: #555; margin: 0 1em 1.5em 1em; line-height: 1.5em; }
 blockquote p:last-of-type { margin-bottom: 0; }
 
-nav { }
+nav { display: block; }
+nav ul li a { display: block; padding: 1em 0; }
 
 .content { width: 100%; margin: 1em auto; background-color: #FFF; }
 
 .logo-wrapper { width: 300px; margin: 0 auto; }
 
-.blog-card { padding: 1em; margin: 1em 0; background-color: #AAA;}
+.section .title { padding: 2em; }
+
+.hero { padding: 4em 1em; background-size: cover; background-position: center; }
+
+.blog-card { padding: 1em; margin: 0 0 1em 0; background-color: #AAA;}
+.blog-card:last-of-type { margin-bottom: 0; }
 .blog-card h3 { font-size: 1.75em; }
 .blog-card .subtitle { font-size: 1.25em; }
 .blog-card .date { font-size: 0.85em; }
+
+.bottom-nav { text-align: center; padding: 2em; }
 
 @media (min-width: 600px)
 {		

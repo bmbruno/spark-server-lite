@@ -4,25 +4,23 @@
     string styleAttribute = string.Empty;
 }
 
-
 @if (Model.BlogList.Count > 0)
 {   
-    <div class="section" style="margin-bottom: 0;">
-        <a href="@Model.BlogList[0].URL" style="display: block;">
-            <div class="section welcome-banner" style="background-image: url('@Model.BlogList[0].ImageURL'); background-size: cover; margin-bottom: 0;">
-                <div class="header">Latest Blog Post</div>
-                <h1>@Model.BlogList[0].Title</h1>
-                <h2>@Model.BlogList[0].Subtitle</h2>
-            </div>
-        </a>
-    </div>
+
+    <a href="@Model.BlogList[0].URL">
+        <div class="hero" style="background-image: url('@Model.BlogList[0].ImageURL');1">
+            <div class="header">Latest Blog Post</div>
+            <h2>@Model.BlogList[0].Title</h2>
+            <h3>@Model.BlogList[0].Subtitle</h3>
+        </div>
+    </a>
 
     Model.BlogList.RemoveAt(0);
 }
 
 <div class="section">
 
-    <h1>Recent Blog Posts</h1>
+    <h2 class="title">Recent Blog Posts</h2>
 
     <ul class="blog-list">
 
@@ -43,7 +41,7 @@
 
     </ul>
 
-    <div style="text-align: center;">
+    <div class="bottom-nav">
         <a href="/Blog" class="btn" style="padding: 1.5em 4em; font-weight: bold;">See All Blog Posts</a>
     </div>
 

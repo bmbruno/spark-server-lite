@@ -41,25 +41,10 @@
                 </div>
 
                 <div class="byline-wrapper">
-                    <nav class="cf">
-                        <ul class="main-menu cf">
-                            @if (showHomeLink)
-                            {
-                                <li><a href="/">Home</a></li>
-                            }
-                            <li @if (!showHomeLink) { <text> style="float: right;" </text> }><a href="/Blog">All Posts</a></li>
-                        </ul>
-                        <ul class="mobile-menu cf">
-                            @if (showHomeLink)
-                            {
-                                <li><a href="/">Home</a></li>
-                                <li><a href="/Blog">All Posts</a></li>
-                            }
-                            else
-                            {
-                                <li style="margin: 0 auto; float: none;"><a href="/Blog">All Posts</a></li>
-                            }
-
+                    <nav>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/blog">All Posts</a></li>                            
                         </ul>
                     </nav>
                 </div>
@@ -88,15 +73,9 @@
 
         </div>
 
-        <footer class="page">
-            <div class="content">
-                <ul class="grid two-up cf" style="margin-bottom: 0;">
-                    <li>
-                        <p><i class="fa fa-twitter" aria-hidden="true"></i> <a href="https://www.twitter.com/brandonmbruno" target="_blank">@@BrandonMBruno</a></p>
-                        <p><i class="fa fa-slack" aria-hidden="true"></i> <a href="https://sitecorechat.slack.com/" target="_blank">@@brandon.bruno</a></p>
-                        <p><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:bmbruno+sitecorespark@gmail.com">bmbruno+sitecorespark@gmail.com</a></p>
-
-                    </li>
+        <footer>
+            <div>
+                <ul>
                     <li>
                         <p style="font-weight: bold;">SITE_DESCRIPTION</p>
                         <p>&copy; @DateTime.Today.Year.ToString() SITE_NAME. All rights reserved.</p>
@@ -106,9 +85,7 @@
 
         </footer>
 
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="/js/site.js" asp-append-version="true"></script>
         @await RenderSectionAsync("PageScripts", required: false)
 
     </body>
