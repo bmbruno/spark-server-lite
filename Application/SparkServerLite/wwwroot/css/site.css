@@ -44,6 +44,12 @@ table th { background-color: #6e8198; color: #FFF; font-weight: bold; }
 table tr:nth-child(even) { background-color: #f6f6f6; }
 table tr:nth-child(odd) { background-color: #eaeaea; }
 
+.status-message { margin: 1em auto 3em auto; padding: 1em; font-size: 1em; box-shadow: 0 0 24px #636363; border-radius: 12px; color: #FFF; font-weight: bold; }
+.status-message.success { background-color: #1f650e; }
+.status-message.error { background-color: #a50000; }
+
+.field-validation-error { display: block; margin: 1em 0 1em 0; padding: 0.5em 1em; background-color: #a50000; color: #FFF; border-radius: 8px; font-weight: bold;}
+
 form { width: 95%; margin: 0 auto; text-align: left; }
 form .row { margin: 0 0 2em 0; }
 form .row label { display: block; font-weight: bold; margin-bottom: 0.25em }
@@ -58,7 +64,7 @@ form .checkbox-list { max-height: 200px; overflow-y: auto; background-color: #ea
 .bottom-nav { text-align: center; padding: 2em; }
 
 @media (min-width: 600px)
-{		
+{
 
 }
 
@@ -68,6 +74,8 @@ form .checkbox-list { max-height: 200px; overflow-y: auto; background-color: #ea
 	.blog-card { display: grid; grid-template-columns: auto 1fr; }
 	.blog-card img { grid-column: 1; padding-right: 1em}
 	.blog-card .overview { grid-column: 2; text-align: left; }
+
+	.status-message { max-width: 600px; padding: 2em; line-height: 1.5em; }
 
 	form { width: 60% } 
 	form .row { margin: 2em; }
