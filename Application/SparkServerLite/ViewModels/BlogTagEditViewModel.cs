@@ -10,7 +10,6 @@ namespace SparkServerLite.ViewModels
 
         public int ID { get; set; }
 
-        [Required]
         [Display(Name = "Name")]
         public string Name { get; set; }
 

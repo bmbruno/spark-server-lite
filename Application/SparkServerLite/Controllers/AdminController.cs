@@ -257,8 +257,10 @@ namespace SparkServerLite.Controllers
         [HttpPost]
         public ActionResult BlogTagUpdate(BlogTagEditViewModel viewModel)
         {
+            viewModel.Name = viewModel.Name.Trim();
+
             // Check for existing Name
-            if (viewModel.Mode == EditMode.Add)
+            if (ModelState.IsValid && viewModel.Mode == EditMode.Add)
             {
                 bool existing = _blogTagRepo.Exists(viewModel.Name);
 
@@ -276,7 +278,7 @@ namespace SparkServerLite.Controllers
 
                     _blogTagRepo.Create(blogTag);
 
-                    TempData["Success"] = "Blog Tag created.";
+                    TempData["Success"] = $"Blog Tag '{blogTag.Name}' created.";
                     return RedirectToAction(actionName: "BlogTagList", controllerName: "Admin");
                 }
                 else
@@ -293,7 +295,7 @@ namespace SparkServerLite.Controllers
 
                     _blogTagRepo.Update(blogTag);
 
-                    TempData["Success"] = "Blog Tag updated.";
+                    TempData["Success"] = $"Blog Tag '{blogTag.Name}' updated.";
                     return RedirectToAction(actionName: "BlogTagList", controllerName: "Admin");
                 }
 
@@ -312,7 +314,7 @@ namespace SparkServerLite.Controllers
             {
                 _blogTagRepo.Delete(ID.Value);
 
-                TempData["Success"] = "Blog tag deleted.";
+                TempData["Success"] = $"Blog tag deleted.";
             }
             else
             {
