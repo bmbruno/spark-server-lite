@@ -14,8 +14,10 @@ strong { font-weight: bold; }
 blockquote { font-style: italic; color: #555; margin: 0 1em 1.5em 1em; line-height: 1.5em; }
 blockquote p:last-of-type { margin-bottom: 0; }
 
-nav { display: block; }
-nav ul li a { display: block; padding: 1em 0; }
+nav { display: block; margin: 1em auto; width: 100%; }
+nav ul { display: flex; justify-content: center; align-items: center; }
+nav ul li a { display: block; padding: 1em; background-color: #AAA; padding: 1em 3em; margin: 0 1em; }
+nav ul li a:hover { text-decoration: none; }
 
 h1 { font-size: 3em; }
 h2 { font-size: 2em; }
@@ -75,6 +77,8 @@ form .checkbox-list { max-height: 200px; overflow-y: auto; background-color: #ea
 
 @media (min-width: 825px)
 {
+	nav { max-width: 80%; }
+	
 	.content { max-width: 80%; }
 	.blog-card { display: grid; grid-template-columns: auto 1fr; }
 	.blog-card img { grid-column: 1; padding-right: 1em}
