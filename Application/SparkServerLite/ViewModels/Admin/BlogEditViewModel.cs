@@ -17,10 +17,10 @@ namespace SparkServerLite.ViewModels.Admin
         [Display(Name = "Subtitle")]
         public string? Subtitle { get; set; }
 
-        [Display(Name = "Markdown Source")]
+        [Display(Name = "Content (Markdown)")]
         public string Markdown { get; set; }
 
-        [Display(Name = "Content")]
+        [Display(Name = "Content (HTML)")]
         public string Content { get; set; }
 
         [Display(Name = "Publish Date")]

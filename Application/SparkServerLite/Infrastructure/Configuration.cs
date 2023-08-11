@@ -8,7 +8,7 @@ namespace SparkServerLite.Infrastructure
         {
             get
             {
-                return "https://www.sitecorespark.com";
+                return "https://blog.brandonbruno.com";
             }
         }
 
