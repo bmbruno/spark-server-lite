@@ -18,6 +18,10 @@ namespace SparkServerLite
             builder.Services.AddTransient<IAuthorRepository<Author>, AuthorRepository>();
             builder.Services.AddTransient<IBlogTagRepository<BlogTag>, BlogTagRepository>();
 
+            // Configuration loading from appSettings
+            IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            builder.Services.AddSingleton<IConfiguration>(config);
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

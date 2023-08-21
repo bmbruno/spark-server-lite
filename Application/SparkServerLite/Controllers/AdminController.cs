@@ -14,12 +14,14 @@ namespace SparkServerLite.Controllers
         private IBlogRepository<Blog> _blogRepo;
         private IBlogTagRepository<BlogTag> _blogTagRepo;
         private IAuthorRepository<Author> _authorRepo;
+        private IConfiguration _configuration;
 
-        public AdminController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAuthorRepository<Author> authorRepo)
+        public AdminController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAuthorRepository<Author> authorRepo, IConfiguration config)
         {
             _blogRepo = blogRepo;
             _blogTagRepo = blogTagRepo;
             _authorRepo = authorRepo;
+            _configuration = config;
         }
 
         public IActionResult Index()
@@ -43,6 +45,16 @@ namespace SparkServerLite.Controllers
             // _blogTagRepo.Delete(2);
 
             // _blogTagRepo.UpdateTagsForBlog(1, new List<int> { 1, 2, 3 });
+
+            // IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            // IConfigurationSection section = config.GetSection("Media:RootFolderPath");
+            // string mediaPath = config.GetValue<string>("Media:RootFolderPath");
+
+            // EXAMPLE OF CONFIG
+            string test = _configuration.GetValue<string>("Media:RootFolderPath");
+
+            // TODO: ??? Could potentially bind to an options object here
+            // _configuration.GetSection("Media").Bind(MediaSettings);
 
             return View();
         }
