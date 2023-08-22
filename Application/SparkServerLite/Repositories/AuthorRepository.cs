@@ -9,16 +9,24 @@ using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using SparkServerLite.Infrastructure;
 using System.Security.Cryptography;
+using System.Runtime;
 
 namespace SparkServer.Infrastructure.Repositories
 {
     public class AuthorRepository : IAuthorRepository<Author>
     {
+        private readonly IAppSettings _settings;
+
+        public AuthorRepository(IAppSettings settings)
+        {
+            _settings = settings;
+        }
+
         public Author Get(int ID)
         {
             Author author = new Author();
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -63,7 +71,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             Author author = new Author();
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -108,7 +116,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             List<Author> authors = new List<Author>();
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"

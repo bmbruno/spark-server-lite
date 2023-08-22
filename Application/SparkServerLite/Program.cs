@@ -1,4 +1,5 @@
 using SparkServer.Infrastructure.Repositories;
+using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
 
@@ -18,9 +19,11 @@ namespace SparkServerLite
             builder.Services.AddTransient<IAuthorRepository<Author>, AuthorRepository>();
             builder.Services.AddTransient<IBlogTagRepository<BlogTag>, BlogTagRepository>();
 
-            // Configuration loading from appSettings
+            // Load configuration/settings from appSettings
+            IAppSettings appSettings = new AppSettings();
             IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            builder.Services.AddSingleton<IConfiguration>(config);
+            config.GetSection("SparkServerLite").Bind(appSettings);
+            builder.Services.AddSingleton(appSettings);
 
             var app = builder.Build();
 

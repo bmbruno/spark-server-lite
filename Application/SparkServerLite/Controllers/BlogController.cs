@@ -11,12 +11,14 @@ namespace SparkServerLite.Controllers
     {
         private readonly IBlogRepository<Blog> _blogRepo;
         private readonly IBlogTagRepository<BlogTag> _blogTagRepo;
+        private readonly IAppSettings _settings;
 
-        public BlogController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo)
+        public BlogController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAppSettings settings)
         {
             _blogRepo = blogRepo;
             _blogTagRepo = blogTagRepo;
-            this.ItemsPerPage = Configuration.BlogItemsPerPage;
+            _settings = settings;
+            this.ItemsPerPage = _settings.BlogItemsPerPage;
         }
 
         [HttpGet("blog/")]
@@ -56,7 +58,7 @@ namespace SparkServerLite.Controllers
             // Paging
             int totalCount = blogList.Count;
             blogList = blogList.Skip(this.SkipCount).Take(this.ItemsPerPage).ToList();
-            viewModel.MapToViewModel(blogList, tagList);
+            viewModel.MapToViewModel(blogList, tagList, _settings);
 
             viewModel.Paging.PageCount = (totalCount + (this.ItemsPerPage - 1)) / this.ItemsPerPage;
             viewModel.Paging.CurrentPage = this.Page;
@@ -74,8 +76,10 @@ namespace SparkServerLite.Controllers
 
             Blog blog = _blogRepo.Get(year, month, slug);
             IEnumerable<BlogTag> blogTags = _blogTagRepo.GetForBlog(blog.ID);
-            viewModel.MapToViewModel(blog, blogTags);
+
+            viewModel.MapToViewModel(blog, blogTags, _settings);
             viewModel.IsPreview = preview;
+            viewModel.SiteURL = _settings.SiteURL;
 
             // Should this blog post be displayed at all? (Preview flag overrides denied access in some cases)
             bool shouldDisplay = false;
@@ -111,7 +115,7 @@ namespace SparkServerLite.Controllers
             blogList = _blogRepo.GetByTagName(unencodedTagName).ToList();
             tagList = _blogTagRepo.GetTagsInUse().ToList();
 
-            viewModel.MapToViewModel(blogList, tagList);
+            viewModel.MapToViewModel(blogList, tagList, _settings);
 
             // Paging
             int totalItems = blogList.Count;

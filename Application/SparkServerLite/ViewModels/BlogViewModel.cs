@@ -10,19 +10,19 @@ namespace SparkServerLite.ViewModels
 
         public bool IsPreview { get; set; }
 
-        public string Slug { get; set; }
+        public string Slug { get; set; } = string.Empty;
 
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
-        public string Subtitle { get; set; }
+        public string Subtitle { get; set; } = string.Empty;
 
-        public string Content { get; set; }
+        public string Content { get; set; } = string.Empty;
 
-        public string ImagePath { get; set; }
+        public string ImagePath { get; set; } = string.Empty;
 
-        public string ImageThumbnailPath { get; set; }
+        public string ImageThumbnailPath { get; set; } = string.Empty;
 
-        public string AuthorFullName { get; set; }
+        public string AuthorFullName { get; set; } = string.Empty;
 
         public DateTime PublishDate { get; set; }
 
@@ -51,14 +51,6 @@ namespace SparkServerLite.ViewModels
         {
             BlogTags = new List<BlogTagViewModel>();
             MenuSelection = MainMenu.Home;
-
-            Slug = string.Empty;
-            Title = string.Empty;
-            Subtitle = string.Empty;
-            Content = string.Empty;
-            ImagePath = string.Empty;
-            ImageThumbnailPath = string.Empty;
-            AuthorFullName = string.Empty;
         }
     }
 }

@@ -11,11 +11,18 @@ namespace SparkServer.Infrastructure.Repositories
 {
     public class BlogTagRepository : IBlogTagRepository<BlogTag>
     {
+        private readonly IAppSettings _settings;
+
+        public BlogTagRepository(IAppSettings settings)
+        {
+            _settings = settings;
+        }
+
         public BlogTag Get(int ID)
         {
             BlogTag tag = new BlogTag();
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -58,7 +65,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             List<BlogTag> tagList = new List<BlogTag>();
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -96,7 +103,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             long newID = 0;
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 conn.Open();
 
@@ -118,7 +125,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public void Update(BlogTag updateItem)
         {
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 conn.Open();
 
@@ -136,7 +143,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public void Delete(int ID)
         {
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 conn.Open();
 
@@ -158,7 +165,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             bool tagExists = false;
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -188,7 +195,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             List<BlogTag> tagList = new List<BlogTag>();
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -227,7 +234,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             List<BlogTag> tagList = new List<BlogTag>();
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -265,7 +272,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public void UpdateTagsForBlog(int blogID, IEnumerable<int> updatedList)
         {
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 conn.Open();
                 SqliteCommand command = conn.CreateCommand();

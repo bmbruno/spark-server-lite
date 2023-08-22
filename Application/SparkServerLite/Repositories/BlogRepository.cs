@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection.Metadata;
+using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,11 +15,18 @@ namespace SparkServer.Infrastructure.Repositories
 {
     public class BlogRepository : IBlogRepository<Blog>
     {
+        private readonly IAppSettings _settings;
+
+        public BlogRepository(IAppSettings settings)
+        {
+            _settings = settings;
+        }
+
         public Blog Get(int ID)
         {
             Blog blog = new Blog();
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -74,7 +82,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             List<Blog> blogList = new List<Blog>();
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -124,7 +132,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             long newID = 0;
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 conn.Open();
 
@@ -196,7 +204,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public void Update(Blog updateItem)
         {
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 conn.Open();
 
@@ -259,7 +267,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public void Delete(int ID)
         {
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 conn.Open();
 
@@ -281,7 +289,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             Blog blog = new Blog();
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -338,7 +346,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             List<Blog> blogList = new List<Blog>();
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -406,7 +414,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             List<Blog> blogList = new List<Blog>();
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -457,7 +465,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             List<Blog> blogList = new List<Blog>();
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -509,7 +517,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             List<Blog> blogList = new List<Blog>();
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
@@ -562,7 +570,7 @@ namespace SparkServer.Infrastructure.Repositories
         {
             bool slugExists = false;
 
-            using (var conn = new SqliteConnection(Configuration.DatabaseConnectionString))
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"

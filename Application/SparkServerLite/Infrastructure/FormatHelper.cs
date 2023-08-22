@@ -34,14 +34,14 @@ namespace SparkServerLite.Infrastructure
         /// </summary>
         /// <param name="markdownInput"></param>
         /// <returns></returns>
-        public static string MarkdownToHTML(string markdownInput)
+        public static string MarkdownToHTML(string markdownInput, string siteURL)
         {
             string htmlValue = Markdown.ToHtml(markdownInput);
 
             HtmlDocument htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(htmlValue);
 
-            htmlDoc = ExternalLinksGetBlankTarget(htmlDoc);
+            htmlDoc = ExternalLinksGetBlankTarget(htmlDoc, siteURL);
             htmlDoc = FrameImagesWithFigure(htmlDoc);
 
             return htmlDoc.DocumentNode.OuterHtml;
@@ -52,7 +52,7 @@ namespace SparkServerLite.Infrastructure
         /// </summary>
         /// <param name="htmlDoc">HtmlAgilityPack HtmlDocument object.</param>
         /// <returns>HtmlDocument object with anchor tags processed.</returns>
-        public static HtmlDocument ExternalLinksGetBlankTarget(HtmlDocument htmlDoc)
+        public static HtmlDocument ExternalLinksGetBlankTarget(HtmlDocument htmlDoc, string siteURL)
         {
             var anchors = htmlDoc.DocumentNode.SelectNodes("//a");
 
@@ -67,7 +67,7 @@ namespace SparkServerLite.Infrastructure
                 {
                     string anchorValue = anchor.Attributes["href"].Value;
 
-                    if (!anchorValue.Contains(Configuration.SiteURL) && !anchorValue.StartsWith("/"))
+                    if (!anchorValue.Contains(siteURL) && !anchorValue.StartsWith("/"))
                     {
                         if (anchor.Attributes["target"] == null)
                         {
