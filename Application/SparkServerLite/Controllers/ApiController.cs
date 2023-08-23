@@ -26,7 +26,7 @@ namespace SparkServerLite.Controllers
         public JsonResult MarkdownToHTML(string markdown)
         {
             JsonPayload json = new JsonPayload();
-            json.Status = JsonStatus.OK;
+            json.Status = JsonStatus.OK.ToString();
 
             markdown = WebUtility.UrlDecode(markdown);
 
@@ -36,7 +36,7 @@ namespace SparkServerLite.Controllers
             }
             catch (Exception exc)
             {
-                json.Status = JsonStatus.EXCEPTION;
+                json.Status = JsonStatus.EXCEPTION.ToString();
                 json.Message = exc.ToString();
             }
 
@@ -51,7 +51,9 @@ namespace SparkServerLite.Controllers
 
             // TODO: load blog and get MediaFolder value
 
-            manager.GetMediaForBlog("2023/3f5c2a0993da");
+            json.Status = JsonStatus.OK.ToString();
+            json.Message = string.Empty;
+            json.Data = manager.GetMediaForBlog("2023/3f5c2a0993da");
 
             return Json(json);
         }

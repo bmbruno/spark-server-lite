@@ -42,7 +42,7 @@ namespace SparkServerLite.Infrastructure
             return Path.Combine(year.ToString(), folderID).Replace(@"\\", "/");
         }
 
-        public IEnumerable<MediaItem> GetMediaForBlog(string folderPath)
+        public List<MediaItem> GetMediaForBlog(string folderPath)
         {
             List<MediaItem> mediaList = new List<MediaItem>();
             folderPath = Path.Combine(_settings.MediaFolderRootPath, folderPath);
@@ -59,7 +59,7 @@ namespace SparkServerLite.Infrastructure
                 mediaList.Add(new MediaItem() { 
                     Filename = Path.GetFileName(file),
                     Filetype = Path.GetExtension(file),
-                    Path = file,
+                    Path = FormatForURL(file),
                     ThumbnailPath = "thumbnail" // TODO: call GetThumbnailFilename()
                 });
             }
@@ -80,6 +80,19 @@ namespace SparkServerLite.Infrastructure
         {
             // TODO: insert "_thumb" into filename
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Formats a server-side media path to be used as a relative URL path.
+        /// </summary>
+        /// <param name="input">File path from the media root.</param>
+        /// <returns>Filepath formatted for use as a relative URL.</returns>
+        private string FormatForURL(string input)
+        {
+            if (input.StartsWith("."))
+                input = input.Substring(1, input.Length - 1);
+
+            return input.Replace(@"\", "/");
         }
     }
 }
