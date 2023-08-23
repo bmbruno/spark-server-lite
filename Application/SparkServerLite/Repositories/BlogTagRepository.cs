@@ -155,6 +155,13 @@ namespace SparkServer.Infrastructure.Repositories
 
                 command.Parameters.AddWithValue("$tagID", ID);
                 command.ExecuteNonQuery();
+
+                // Also remove BlogsToTags associated with this deleted tagID
+                command.Parameters.Clear();
+                command.CommandText = "DELETE FROM BlogsToTags WHERE BlogTagID = $tagID;";
+                command.Parameters.AddWithValue("$tagID", ID);
+                command.ExecuteNonQuery();
+
                 conn.Close();
             }
 
