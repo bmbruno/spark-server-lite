@@ -4,9 +4,6 @@ namespace SparkServerLite.Infrastructure
 {
     public class Database
     {
-        private static string _TypeInt64 = "Int64";
-        private static string _TypeString = "String";
-
         /// <summary>
         /// Gets a non-null integer-based ID from a database value. ID columns are expected to have a value, so an Exception is thrown otherwise.
         /// </summary>
@@ -30,7 +27,7 @@ namespace SparkServerLite.Infrastructure
         /// <returns>Integer value or null if no value parsed.</returns>
         public static int? GetInteger(object dbValue)
         {
-            if (dbValue != null && dbValue.GetType().Name == _TypeInt64)
+            if (dbValue != null)
                 return Convert.ToInt32(dbValue);
 
             return null;
@@ -43,7 +40,7 @@ namespace SparkServerLite.Infrastructure
         /// <returns>String value or empty string.</returns>
         public static string GetString(object dbValue)
         {
-            if (dbValue != null && dbValue.GetType().Name == _TypeString)
+            if (dbValue != null)
                 return dbValue.ToString() ?? string.Empty;
 
             return string.Empty;
@@ -57,7 +54,7 @@ namespace SparkServerLite.Infrastructure
         /// <exception cref="Exception">Thrown if a null boolean is returned from the database.</exception>
         public static bool GetBoolean(object dbValue)
         {
-            if (dbValue != null && dbValue.GetType().Name == _TypeInt64)
+            if (dbValue != null)
                 return Convert.ToBoolean(dbValue);
 
             throw new Exception("Database boolean value might be null. This should not happen.");
@@ -72,7 +69,7 @@ namespace SparkServerLite.Infrastructure
         {
             DateTime output;
 
-            if (dbValue != null && dbValue.GetType().Name == _TypeString)
+            if (dbValue != null)
             {
                 if (DateTime.TryParse(dbValue.ToString(), out output))
                 {
@@ -92,7 +89,7 @@ namespace SparkServerLite.Infrastructure
         {
             Guid output;
 
-            if (dbValue != null && dbValue.GetType().Name == _TypeString)
+            if (dbValue != null)
             {
                 if (Guid.TryParse(dbValue.ToString(), out output))
                 {
