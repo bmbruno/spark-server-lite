@@ -60,7 +60,7 @@ namespace SparkServerLite.Infrastructure
                     Filename = Path.GetFileName(file),
                     Filetype = Path.GetExtension(file),
                     Path = FormatForURL(file),
-                    ThumbnailPath = "thumbnail" // TODO: call GetThumbnailFilename()
+                    ThumbnailPath = FormatForURL(GetThumbnailFile(file))
                 });
             }
 
@@ -76,10 +76,12 @@ namespace SparkServerLite.Infrastructure
             return Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, 12);
         }
 
-        private string GetThumbnailFilename(string file)
+        private string GetThumbnailFile(string file)
         {
-            // TODO: insert "_thumb" into filename
-            return string.Empty;
+            string filename = Path.GetFileName(file);
+            string extension = Path.GetExtension(file);
+
+            return file.Replace(extension, $"_thumbnail{extension}");
         }
 
         /// <summary>
