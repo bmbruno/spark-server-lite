@@ -45,6 +45,8 @@ namespace SparkServerLite.Controllers
             // _blogTagRepo.Delete(2);
 
             // _blogTagRepo.UpdateTagsForBlog(1, new List<int> { 1, 2, 3 });
+            
+            MediaManager media = new MediaManager(_settings);
 
             return View();
         }
@@ -134,6 +136,8 @@ namespace SparkServerLite.Controllers
             {
                 if (viewModel.Mode == EditMode.Add)
                 {
+                    MediaManager media = new MediaManager(_settings);
+
                     Blog blog = new Blog();
 
                     blog.Title = viewModel.Title;
@@ -145,6 +149,7 @@ namespace SparkServerLite.Controllers
                     blog.Slug = viewModel.Slug;
                     blog.ImagePath = viewModel.ImagePath;
                     blog.ImageThumbnailPath = viewModel.ImageThumbnailPath;
+                    blog.CreateDate = DateTime.Now;
 
                     int newBlogID = _blogRepo.Create(blog);
                     _blogTagRepo.UpdateTagsForBlog(blog.ID, viewModel.BlogTags);

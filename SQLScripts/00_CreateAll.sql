@@ -34,6 +34,7 @@ CREATE TABLE Blogs (
     [Slug] TEXT NOT NULL,
 	[PublishDate] TEXT NULL,
 	[AuthorID] INTEGER NOT NULL,
+	[MediaFolder] TEXT NULL,
 	[Active] INTEGER NOT NULL DEFAULT 1,
 	[CreateDate] TEXT NOT NULL DEFAULT CURRENT_DATE,
 	

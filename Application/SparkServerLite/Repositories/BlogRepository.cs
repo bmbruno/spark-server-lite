@@ -64,6 +64,7 @@ namespace SparkServer.Infrastructure.Repositories
                         blog.PublishDate = Database.GetDateTime(reader["PublishDate"]).Value;
                         blog.AuthorID = Database.GetID(reader["AuthorID"]);
                         blog.AuthorFullName = Database.GetString(reader["AuthorFullName"]);
+                        blog.CreateDate = Database.GetDateTime(reader["CreateDate"]).Value;
                     }
                     else
                     {
@@ -117,8 +118,9 @@ namespace SparkServer.Infrastructure.Repositories
                             Slug = Database.GetString(reader["Slug"]),
                             PublishDate = Database.GetDateTime(reader["PublishDate"]).Value,
                             AuthorID = Database.GetID(reader["AuthorID"]),
-                            AuthorFullName = Database.GetString(reader["AuthorFullName"])
-                        });
+                            AuthorFullName = Database.GetString(reader["AuthorFullName"]),
+                            CreateDate = Database.GetDateTime(reader["CreateDate"]).Value
+                    });
                     }
                 }
 
@@ -139,11 +141,12 @@ namespace SparkServer.Infrastructure.Repositories
                 SqliteCommand command = conn.CreateCommand();
 
                 // Initial insert of minimum required data
-                command.CommandText = @"INSERT INTO Blogs (Title, PublishDate, Slug, AuthorID) VALUES ($title, $publishDate, $slug, $authorID);";
+                command.CommandText = @"INSERT INTO Blogs (Title, PublishDate, Slug, AuthorID, CreateDate) VALUES ($title, $publishDate, $slug, $authorID, $createDate);";
                 command.Parameters.AddWithValue("$title", newItem.Title);
-                command.Parameters.AddWithValue("$publishDate", newItem.PublishDate.ToString(FormatHelper.SQLiteDate));
+                command.Parameters.AddWithValue("$publishDate", newItem.PublishDate.ToString(FormatHelper.SQLiteDateTime));
                 command.Parameters.AddWithValue("$slug", newItem.Slug);
                 command.Parameters.AddWithValue("$authorID", newItem.AuthorID);
+                command.Parameters.AddWithValue("$createDate", newItem.CreateDate.ToString(FormatHelper.SQLiteDateTime));
                 command.ExecuteNonQuery();
                 command.Parameters.Clear();
 
@@ -399,8 +402,9 @@ namespace SparkServer.Infrastructure.Repositories
                             Slug = Database.GetString(reader["Slug"]),
                             PublishDate = Database.GetDateTime(reader["PublishDate"]).Value,
                             AuthorID = Database.GetID(reader["AuthorID"]),
-                            AuthorFullName = Database.GetString(reader["AuthorFullName"])
-                        });
+                            AuthorFullName = Database.GetString(reader["AuthorFullName"]),
+                            CreateDate = Database.GetDateTime(reader["CreateDate"]).Value
+                    });
                     }
                 }
 
@@ -450,7 +454,8 @@ namespace SparkServer.Infrastructure.Repositories
                             Slug = Database.GetString(reader["Slug"]),
                             PublishDate = Database.GetDateTime(reader["PublishDate"]).Value,
                             AuthorID = Database.GetID(reader["AuthorID"]),
-                            AuthorFullName = Database.GetString(reader["AuthorFullName"])
+                            AuthorFullName = Database.GetString(reader["AuthorFullName"]),
+                            CreateDate = Database.GetDateTime(reader["CreateDate"]).Value
                         });
                     }
                 }
@@ -502,7 +507,8 @@ namespace SparkServer.Infrastructure.Repositories
                             Slug = Database.GetString(reader["Slug"]),
                             PublishDate = Database.GetDateTime(reader["PublishDate"]).Value,
                             AuthorID = Database.GetID(reader["AuthorID"]),
-                            AuthorFullName = Database.GetString(reader["AuthorFullName"])
+                            AuthorFullName = Database.GetString(reader["AuthorFullName"]),
+                            CreateDate = Database.GetDateTime(reader["CreateDate"]).Value
                         });
                     }
                 }
@@ -555,7 +561,8 @@ namespace SparkServer.Infrastructure.Repositories
                             Slug = Database.GetString(reader["Slug"]),
                             PublishDate = Database.GetDateTime(reader["PublishDate"]).Value,
                             AuthorID = Database.GetID(reader["AuthorID"]),
-                            AuthorFullName = Database.GetString(reader["AuthorFullName"])
+                            AuthorFullName = Database.GetString(reader["AuthorFullName"]),
+                            CreateDate = Database.GetDateTime(reader["CreateDate"]).Value
                         });
                     }
                 }
