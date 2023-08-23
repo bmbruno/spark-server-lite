@@ -43,5 +43,18 @@ namespace SparkServerLite.Controllers
             return Json(json);
         }
 
+        public JsonResult BlogMedia(int blogID)
+        {
+            JsonPayload json = new JsonPayload();
+
+            MediaManager manager = new MediaManager(_settings);
+
+            // TODO: load blog and get MediaFolder value
+
+            manager.GetMediaForBlog("2023/3f5c2a0993da");
+
+            return Json(json);
+        }
+
     }
 }

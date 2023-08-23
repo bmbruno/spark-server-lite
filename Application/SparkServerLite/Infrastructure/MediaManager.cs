@@ -1,4 +1,5 @@
 ﻿using SparkServerLite.Interfaces;
+using SparkServerLite.Models;
 using System.IO;
 
 namespace SparkServerLite.Infrastructure
@@ -41,6 +42,31 @@ namespace SparkServerLite.Infrastructure
             return Path.Combine(year.ToString(), folderID).Replace(@"\\", "/");
         }
 
+        public IEnumerable<MediaItem> GetMediaForBlog(string folderPath)
+        {
+            List<MediaItem> mediaList = new List<MediaItem>();
+            folderPath = Path.Combine(_settings.MediaFolderRootPath, folderPath);
+
+            if (!Directory.Exists(folderPath))
+                throw new DirectoryNotFoundException($"Media folder not found: {folderPath}");
+
+            string[] files = Directory.GetFiles(folderPath);
+
+            if (files.Length == 0) { return mediaList; }
+
+            foreach (string file in files)
+            {
+                mediaList.Add(new MediaItem() { 
+                    Filename = Path.GetFileName(file),
+                    Filetype = Path.GetExtension(file),
+                    Path = file,
+                    ThumbnailPath = "thumbnail" // TODO: call GetThumbnailFilename()
+                });
+            }
+
+            return mediaList;
+        }
+
         /// <summary>
         /// Creates a potentially unique 12-character ID for a folder.
         /// </summary>
@@ -50,5 +76,10 @@ namespace SparkServerLite.Infrastructure
             return Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, 12);
         }
 
+        private string GetThumbnailFilename(string file)
+        {
+            // TODO: insert "_thumb" into filename
+            return string.Empty;
+        }
     }
 }
