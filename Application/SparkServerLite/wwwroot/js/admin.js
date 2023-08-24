@@ -20,7 +20,7 @@
             let blogID = document.getElementById("ID");
 
             // Call API endpoint to get media items
-            let response = await fetch(SparkServerAdmin.endpoints.blogMedia);
+            let response = await fetch(`${SparkServerAdmin.endpoints.blogMedia}?blogID=${blogID}`);
             let data = await response.json();
 
             // Build unordered list from data

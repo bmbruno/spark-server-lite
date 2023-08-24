@@ -42,6 +42,12 @@ namespace SparkServerLite.Infrastructure
             return Path.Combine(year.ToString(), folderID).Replace(@"\\", "/");
         }
 
+        /// <summary>
+        /// Gets a list of media items (and associated thumbnails) as relative URL file paths for the given Blog ID.
+        /// </summary>
+        /// <param name="folderPath">Folder on disk where the files live.</param>
+        /// <returns>List of MediaITems</returns>
+        /// <exception cref="DirectoryNotFoundException">Thrown if no directory exists on-disk for the given folderPath.</exception>
         public List<MediaItem> GetMediaForBlog(string folderPath)
         {
             List<MediaItem> mediaList = new List<MediaItem>();
@@ -76,12 +82,17 @@ namespace SparkServerLite.Infrastructure
             return Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, 12);
         }
 
-        private string GetThumbnailFile(string file)
+        /// <summary>
+        /// Creates a the standard thumbnail file name for a file. Format is filename + "_thumb" + extensions.
+        /// </summary>
+        /// <param name="filePath">Full file path.</param>
+        /// <returns>File path with the thumbnail filename.</returns>
+        private string GetThumbnailFilename(string filePath)
         {
-            string filename = Path.GetFileName(file);
-            string extension = Path.GetExtension(file);
+            string filename = Path.GetFileName(filePath);
+            string extension = Path.GetExtension(filePath);
 
-            return file.Replace(extension, $"_thumbnail{extension}");
+            return filePath.Replace(extension, $"_thumbnail{extension}");
         }
 
         /// <summary>
