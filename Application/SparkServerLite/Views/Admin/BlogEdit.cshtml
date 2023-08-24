@@ -50,6 +50,17 @@
         @Html.ValidationMessageFor(x => x.Markdown)
     </div>
 
+    if (Model.Mode == SparkServerLite.Infrastructure.Enums.EditMode.Edit)
+    {
+        <div class="row">
+            <h2>Media</h2>
+
+            <div class="media-list" id="BlogMediaList"></div>
+
+            <button></button>
+        </div>
+    }
+
     <div class="row">
         @Html.LabelFor(x => x.Content)
         @Html.TextAreaFor(x => x.Content, htmlAttributes: new { style = "height: 400px" })
