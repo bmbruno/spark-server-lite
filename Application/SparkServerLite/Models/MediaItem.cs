@@ -8,7 +8,9 @@ namespace SparkServerLite.Models
 
         public string? Filetype { get;set;}
 
-        public string? Path { get; set; }
+        public string? ServerPath { get; set; }
+
+        public string? WebPath { get; set; }
 
         public string? ThumbnailPath { get; set; }
     }

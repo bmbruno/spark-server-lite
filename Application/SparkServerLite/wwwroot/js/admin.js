@@ -30,7 +30,7 @@
 
             result.data.map((element) => {
 
-                output += `<li><img src='${element.filepath}' />${element.filename}</li>`;
+                output += `<li><img src='${element.thumbnailPath}' />${element.filename}</li>`;
 
             });
 

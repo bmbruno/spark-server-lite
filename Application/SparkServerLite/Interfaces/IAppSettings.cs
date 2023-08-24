@@ -4,7 +4,9 @@
     {
         string SiteURL { get; set; }
 
-        string MediaFolderRootPath { get; set; }
+        string MediaFolderServerPath { get; set; }
+
+        string MediaFolderWebPath { get; set; }
 
         string DatabaseConnectionString { get; set; }
 

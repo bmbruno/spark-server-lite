@@ -51,9 +51,16 @@ namespace SparkServerLite.Controllers
 
             // TODO: load blog and get MediaFolder value
 
+            List<MediaItem> list = manager.GetMediaForBlog("2023/3f5c2a0993da");
+
+            foreach (MediaItem item in list)
+            {
+                item.ServerPath = null;
+            }
+
             json.Status = JsonStatus.OK.ToString();
             json.Message = string.Empty;
-            json.Data = manager.GetMediaForBlog("2023/3f5c2a0993da");
+            json.Data = list;
 
             return Json(json);
         }

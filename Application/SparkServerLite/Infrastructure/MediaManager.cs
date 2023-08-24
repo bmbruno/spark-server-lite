@@ -1,5 +1,6 @@
 ﻿using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
+using System;
 using System.IO;
 
 namespace SparkServerLite.Infrastructure
@@ -20,7 +21,7 @@ namespace SparkServerLite.Infrastructure
         /// <param name="year">Year component of the CreateDate DateTime for the blog post.</param>
         public string CreateMediaFolderForBlog(int year)
         {
-            string basePath = Path.Combine(_settings.MediaFolderRootPath, year.ToString());
+            string basePath = Path.Combine(_settings.MediaFolderServerPath, year.ToString());
 
             // Check if year folder exists; create if not
             if (!Directory.Exists(basePath))
@@ -51,22 +52,26 @@ namespace SparkServerLite.Infrastructure
         public List<MediaItem> GetMediaForBlog(string folderPath)
         {
             List<MediaItem> mediaList = new List<MediaItem>();
-            folderPath = Path.Combine(_settings.MediaFolderRootPath, folderPath);
+            string serverPath = Path.Combine(_settings.MediaFolderServerPath, folderPath);
 
-            if (!Directory.Exists(folderPath))
+            if (!Directory.Exists(serverPath))
                 throw new DirectoryNotFoundException($"Media folder not found: {folderPath}");
 
-            string[] files = Directory.GetFiles(folderPath);
+            string[] files = Directory.GetFiles(serverPath);
 
             if (files.Length == 0) { return mediaList; }
 
             foreach (string file in files)
             {
+                string filename = Path.GetFileName(file);
+                string webPath = Path.Combine(_settings.MediaFolderWebPath, folderPath, filename);
+
                 mediaList.Add(new MediaItem() { 
-                    Filename = Path.GetFileName(file),
+                    Filename = filename,
                     Filetype = Path.GetExtension(file),
-                    Path = FormatForURL(file),
-                    ThumbnailPath = FormatForURL(GetThumbnailFilename(file))
+                    ServerPath = file,
+                    WebPath = FormatForURL(webPath),
+                    ThumbnailPath = FormatForURL(GetThumbnailFilename(webPath))
                 });
             }
 
