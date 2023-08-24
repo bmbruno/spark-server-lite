@@ -66,7 +66,7 @@ namespace SparkServerLite.Infrastructure
                     Filename = Path.GetFileName(file),
                     Filetype = Path.GetExtension(file),
                     Path = FormatForURL(file),
-                    ThumbnailPath = FormatForURL(GetThumbnailFile(file))
+                    ThumbnailPath = FormatForURL(GetThumbnailFilename(file))
                 });
             }
 

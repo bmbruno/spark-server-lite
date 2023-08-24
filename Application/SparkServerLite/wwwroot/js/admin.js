@@ -17,7 +17,7 @@
         loadBlogMediaList: async function () {
 
             // Get BlogID from page
-            let blogID = document.getElementById("ID");
+            let blogID = document.getElementById("ID").value;
 
             // Call API endpoint to get media items
             let response = await fetch(`${SparkServerAdmin.endpoints.blogMedia}?blogID=${blogID}`);
