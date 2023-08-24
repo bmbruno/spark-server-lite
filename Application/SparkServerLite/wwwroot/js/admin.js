@@ -38,8 +38,6 @@
 
                 output += "</ul>";
 
-                // TODO: hide spinner
-
                 document.getElementById("BlogMediaList").innerHTML = output;
 
             } else if (result.status == "ERROR") {
@@ -47,10 +45,15 @@
                 alert(result.message);
 
             } else if (result.status == "EXCEPTION") {
-                console.log(result.message);
+
                 alert("EXCEPTION! See browser console for details.");
+
             }
 
+            if (result.message)
+                console.log(result.message);
+
+            // TODO: hide spinner
         }
 
 

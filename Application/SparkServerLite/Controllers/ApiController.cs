@@ -61,7 +61,7 @@ namespace SparkServerLite.Controllers
 
             if (String.IsNullOrEmpty(blog.MediaFolder))
             {
-                json.Status = JsonStatus.ERROR.ToString();
+                json.Status = JsonStatus.OK.ToString();
                 json.Message = $"No media folder stored for Blog ID {blogID}.";
                 return Json(json);
             }
