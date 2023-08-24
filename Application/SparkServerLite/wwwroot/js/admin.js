@@ -25,20 +25,31 @@
             let response = await fetch(`${SparkServerAdmin.endpoints.blogMedia}?blogID=${blogID}`);
             let result = await response.json();
 
-            // Build unordered list from data
-            let output = "<ul>";
+            if (result.status == "OK") {
 
-            result.data.map((element) => {
+                // Build unordered list from data
+                let output = "<ul>";
 
-                output += `<li><img src='${element.thumbnailPath}' />${element.filename}</li>`;
+                result.data.map((element) => {
 
-            });
+                    output += `<li><img src='${element.thumbnailPath}' />${element.filename}</li>`;
 
-            output += "</ul>";
+                });
 
-            // TODO: hide spinner
+                output += "</ul>";
 
-            document.getElementById("BlogMediaList").innerHTML = output;
+                // TODO: hide spinner
+
+                document.getElementById("BlogMediaList").innerHTML = output;
+
+            } else if (result.status == "ERROR") {
+
+                alert(result.message);
+
+            } else if (result.status == "EXCEPTION") {
+                console.log(result.message);
+                alert("EXCEPTION! See browser console for details.");
+            }
 
         }
 

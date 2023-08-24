@@ -49,10 +49,27 @@ namespace SparkServerLite.Controllers
 
             MediaManager manager = new MediaManager(_settings);
 
-            // TODO: load blog and get MediaFolder value
+            // Load blog and validate data
+            Blog blog = _blogRepo.Get(blogID);
 
+            if (blog == null)
+            {
+                json.Status = JsonStatus.ERROR.ToString();
+                json.Message = $"No blog found for ID {blogID}.";
+                return Json(json);
+            }
+
+            if (String.IsNullOrEmpty(blog.MediaFolder))
+            {
+                json.Status = JsonStatus.ERROR.ToString();
+                json.Message = $"No media folder stored for Blog ID {blogID}.";
+                return Json(json);
+            }
+
+            // Load list of files from media folder
             List<MediaItem> list = manager.GetMediaForBlog("2023/3f5c2a0993da");
 
+            // Blank out server path for client-side data
             foreach (MediaItem item in list)
             {
                 item.ServerPath = null;
@@ -64,6 +81,5 @@ namespace SparkServerLite.Controllers
 
             return Json(json);
         }
-
     }
 }
