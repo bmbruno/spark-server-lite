@@ -92,6 +92,7 @@ namespace SparkServerLite.Controllers
             {
                 json.Status = JsonStatus.ERROR.ToString();
                 json.Message = "No files selected. Please select one or more pictures to upload.";
+                json.Data = null;
 
                 return Json(json);
             }
