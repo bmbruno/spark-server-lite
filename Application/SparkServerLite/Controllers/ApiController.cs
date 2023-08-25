@@ -43,6 +43,7 @@ namespace SparkServerLite.Controllers
             return Json(json);
         }
 
+        [HttpGet]
         public JsonResult BlogMedia(int blogID)
         {
             JsonPayload json = new JsonPayload();
@@ -78,6 +79,22 @@ namespace SparkServerLite.Controllers
             json.Status = JsonStatus.OK.ToString();
             json.Message = string.Empty;
             json.Data = list;
+
+            return Json(json);
+        }
+
+        [HttpPost]
+        public JsonResult UploadMedia(IFormCollection form)
+        {
+            JsonPayload json = new JsonPayload();
+
+            if (form.Files.Count == 0)
+            {
+                json.Status = JsonStatus.ERROR.ToString();
+                json.Message = "No files selected. Please select one or more pictures to upload.";
+
+                return Json(json);
+            }
 
             return Json(json);
         }

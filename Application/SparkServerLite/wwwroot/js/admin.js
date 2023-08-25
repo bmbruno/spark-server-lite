@@ -2,15 +2,16 @@
 
     window.SparkServerAdmin = window.SparkServerAdmin || {
 
-        settings: {
+        endpoints: {
 
-            siteURL: ""
+            blogMedia: "/api/blogmedia",
+            uploadMedia: "/api/uploadmedia"
 
         },
 
-        endpoints: {
+        init: function () {
 
-            blogMedia: "/api/blogmedia"
+            document.getElementById("UploadMediaFiles").addEventListener("click", SparkServerAdmin.handleMediaUpload);
 
         },
 
@@ -32,7 +33,10 @@
 
                 result.data.map((element) => {
 
-                    output += `<li><img src='${element.thumbnailPath}' />${element.filename}</li>`;
+                    output += `
+                        <li>
+                            <img src='${element.thumbnailPath}' />${element.filename}
+                        </li>`;
 
                 });
 
@@ -54,12 +58,88 @@
                 console.log(result.message);
 
             // TODO: hide spinner
+        },
+
+        handleMediaUpload: function (e) {
+
+            e.preventDefault();
+            SparkServerAdmin.disableButton("UploadMediaFiles");
+
+            var fileInput = document.getElementById("MediaFiles");
+
+            if (fileInput.files.length === 0) {
+                alert("Please add media to upload.");
+                SparkServerAdmin.enableButton("UploadMediaFiles");
+                return;
+            }
+
+            let formData = new FormData();
+
+            // Media upload
+            for (var i = 0; i < fileInput.files.length; i++) {
+                formData.append(fileInput.files[i].name, fileInput.files[i]);
+            }
+
+            // TODO: show local spinner + message
+
+            fetch(SparkServerAdmin.endpoints.uploadMedia, { method: "POST", body: formData })
+                .then(response => response.json())
+                .then(data => SparkServerAdmin.handleMediaUploadResponse(data));
+
+        },
+
+        handleMediaUploadResponse: function () {
+
+            // SparkServerAdmin.hideLoader();
+            SparkServerAdmin.enableButton("UploadMediaFiles");
+
+            if (data.Status === "ERROR") {
+                alert(`Error!\n\n${data.Message}`);
+            }
+
+            if (data.Status === "EXCEPTION") {
+                alert(`EXCEPTION!\n\n${data.Message}`);
+            }
+
+            if (data.Status === "SUCCESS") {
+
+                // TODO: show success message
+
+                // Refresh media list
+                SparkServerAdmin.loadBlogMediaList();
+
+            }
+
+        },
+
+        showLoader: (id) => {
+
+            document.getElementById(id).style.display = "block";
+
+        },
+
+        hideLoader: (id) => {
+
+            document.getElementById(id).style.display = "none";
+
+        },
+
+        disableButton: (id) => {
+
+            document.getElementById(id).disabled = true;
+
+        },
+
+        enableButton: (id) => {
+
+            document.getElementById(id).disabled = false;
+
         }
 
 
     };
 
-
-
+    // Entry point
+    SparkServerAdmin.init();
 
 })();
