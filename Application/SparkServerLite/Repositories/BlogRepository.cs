@@ -58,6 +58,7 @@ namespace SparkServer.Infrastructure.Repositories
                         blog.Subtitle = Database.GetString(reader["Subtitle"]);
                         blog.Markdown = Database.GetString(reader["Markdown"]);
                         blog.Content = Database.GetString(reader["Content"]);
+                        blog.MediaFolder = Database.GetString(reader["MediaFolder"]);
                         blog.ImagePath = Database.GetString(reader["ImagePath"]);
                         blog.ImageThumbnailPath = Database.GetString(reader["ImageThumbnailPath"]);
                         blog.Slug = Database.GetString(reader["Slug"]);
@@ -244,6 +245,12 @@ namespace SparkServer.Infrastructure.Repositories
                 {
                     updateSQL.Append("UPDATE Blogs SET Slug = $slug WHERE ID = $id;");
                     command.Parameters.AddWithValue("$slug", updateItem.Slug);
+                }
+
+                if (!String.IsNullOrEmpty(updateItem.MediaFolder))
+                {
+                    updateSQL.Append("UPDATE Blogs SET MediaFolder = $mediaFolder WHERE ID = $id;");
+                    command.Parameters.AddWithValue("$mediaFolder", updateItem.MediaFolder);
                 }
 
                 if (!String.IsNullOrEmpty(updateItem.ImagePath))
