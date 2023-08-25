@@ -89,7 +89,7 @@
 
         },
 
-        handleMediaUploadResponse: function () {
+        handleMediaUploadResponse: function (data) {
 
             // SparkServerAdmin.hideLoader();
             SparkServerAdmin.enableButton("UploadMediaFiles");

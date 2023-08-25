@@ -135,6 +135,8 @@ namespace SparkServerLite.Controllers
             {
                 try
                 {
+                    // TODO: calculate new size based on image aspect ratio and current orientation
+
                     image.Mutate(x => x.Resize(200, 200));
                 }
                 catch (Exception exc)
@@ -144,7 +146,7 @@ namespace SparkServerLite.Controllers
                     return Json(json);
                 }
 
-                // TODO: Get thumbnail file path
+                // Get thumbnail file path
                 string thumbnailPath = media.GetThumbnailFilename(filePath);
                 image.SaveAsJpeg(thumbnailPath);
             }

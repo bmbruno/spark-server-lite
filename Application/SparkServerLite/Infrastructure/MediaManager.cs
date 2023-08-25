@@ -63,6 +63,12 @@ namespace SparkServerLite.Infrastructure
 
             foreach (string file in files)
             {
+                // Filter out thumbnail images from this list
+                string pathNoExtension = file.Replace(Path.GetExtension(file), string.Empty);
+
+                if (pathNoExtension.EndsWith("_thumbnail"))
+                    continue;
+
                 string filename = Path.GetFileName(file);
                 string webPath = Path.Combine(_settings.MediaFolderWebPath, folderPath, filename);
 
