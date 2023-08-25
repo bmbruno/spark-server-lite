@@ -64,9 +64,7 @@ namespace SparkServerLite.Infrastructure
             foreach (string file in files)
             {
                 // Filter out thumbnail images from this list
-                string pathNoExtension = file.Replace(Path.GetExtension(file), string.Empty);
-
-                if (pathNoExtension.EndsWith("_thumbnail"))
+                if (file.EndsWith($"_thumbnail{Path.GetExtension(file)}"))
                     continue;
 
                 string filename = Path.GetFileName(file);
