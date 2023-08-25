@@ -9,8 +9,6 @@
 
 @if (Model.Mode == SparkServerLite.Infrastructure.Enums.EditMode.Edit)
 {
-    <h2>ID: @Model.ID</h2>
-
     <a href="/Admin/BlogDelete?ID=@Model.ID" class="btn delete">Delete</a>
 
     if (Model.ID > 0)
@@ -27,6 +25,16 @@
     }
 
     @Html.HiddenFor(x => x.Mode)
+
+    <div class="row">
+        <label>BlogID</label>
+        <p>@Model.ID</p>
+    </div>
+
+    <div class="row">
+        <label>Media Folder</label>
+        <p>@if (!String.IsNullOrEmpty(Model.MediaFolder)) { @Model.MediaFolder } else { <text>none</text> }</p>
+    </div>
 
     <div class="row">
         @Html.LabelFor(x => x.Title)
@@ -60,7 +68,7 @@
             <img src="/images/loader.gif" alt="Loader GIF" id="BlogMediaListLoader" class="loader-gif" />
 
             <div>
-                <input type="file" id="MediaFiles" multiple />
+                <input type="file" id="MediaFiles" multiple value="Choose files to upload..." />
                 <br/>
                 <button type="button" id="UploadMediaFiles" >Upload Files</button>
             </div>

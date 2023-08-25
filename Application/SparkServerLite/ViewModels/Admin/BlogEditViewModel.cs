@@ -36,6 +36,8 @@ namespace SparkServerLite.ViewModels.Admin
         [Display(Name = "Slug")]
         public string Slug { get; set; }
 
+        public string? MediaFolder { get; set; }
+
         public string? ImagePath { get; set; }
 
         public string? ImageThumbnailPath { get; set; }

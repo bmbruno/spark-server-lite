@@ -116,7 +116,10 @@ namespace SparkServerLite.Controllers
             // Save files to disk
             for (int i = 0; i < form.Files.Count; i++)
             {
-                string filePath = Path.Combine(_settings.MediaFolderServerPath, existingBlog.MediaFolder, form.Files[0].FileName);
+                // Lightly sanitize the filename (prevent folder injection)
+                string fileName = form.Files[0].FileName.Replace(@"/", string.Empty).Replace(@"\", string.Empty);
+                string filePath = Path.Combine(_settings.MediaFolderServerPath, existingBlog.MediaFolder, fileName);
+
                 using (Stream fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     form.Files[0].CopyTo(fileStream);

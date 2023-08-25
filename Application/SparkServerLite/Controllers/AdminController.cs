@@ -97,6 +97,7 @@ namespace SparkServerLite.Controllers
                 viewModel.PublishDate = blog.PublishDate;
                 viewModel.AuthorID = blog.AuthorID;
                 viewModel.Slug = blog.Slug;
+                viewModel.MediaFolder = blog.MediaFolder;
                 viewModel.ImagePath = blog.ImagePath;
                 viewModel.ImageThumbnailPath = blog.ImageThumbnailPath;
 
