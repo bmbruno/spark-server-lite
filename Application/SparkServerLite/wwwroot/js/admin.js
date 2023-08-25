@@ -64,12 +64,14 @@
 
             e.preventDefault();
             SparkServerAdmin.disableButton("UploadMediaFiles");
+            SparkServerAdmin.showLoader("MediaFilesUploadMessage");
 
             var fileInput = document.getElementById("MediaFiles");
 
             if (fileInput.files.length === 0) {
                 alert("Please add media to upload.");
                 SparkServerAdmin.enableButton("UploadMediaFiles");
+                SparkServerAdmin.hideLoader("MediaFilesUploadMessage");
                 return;
             }
 
@@ -93,6 +95,7 @@
 
             // SparkServerAdmin.hideLoader();
             SparkServerAdmin.enableButton("UploadMediaFiles");
+            SparkServerAdmin.hideLoader("MediaFilesUploadMessage");
 
             if (data.status === "ERROR") {
                 alert(`Error!\n\n${data.Message}`);
