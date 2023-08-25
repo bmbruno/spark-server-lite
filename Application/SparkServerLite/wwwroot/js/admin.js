@@ -74,6 +74,7 @@
             }
 
             let formData = new FormData();
+            formData.append("blogID", document.getElementById("ID").value);
 
             // Media upload
             for (var i = 0; i < fileInput.files.length; i++) {

@@ -64,11 +64,12 @@ namespace SparkServerLite.Controllers
             {
                 json.Status = JsonStatus.OK.ToString();
                 json.Message = $"No media folder stored for Blog ID {blogID}.";
+                json.Data = new string[0];
                 return Json(json);
             }
 
             // Load list of files from media folder
-            List<MediaItem> list = manager.GetMediaForBlog("2023/3f5c2a0993da");
+            List<MediaItem> list = manager.GetMediaForBlog(blog.MediaFolder);
 
             // Blank out server path for client-side data
             foreach (MediaItem item in list)
@@ -86,7 +87,10 @@ namespace SparkServerLite.Controllers
         [HttpPost]
         public JsonResult UploadMedia(IFormCollection form)
         {
+            MediaManager media = new MediaManager(_settings);
             JsonPayload json = new JsonPayload();
+            int filesUploaded = 0;
+            string mediaFolder = string.Empty;
 
             if (form.Files.Count == 0)
             {
@@ -96,6 +100,31 @@ namespace SparkServerLite.Controllers
 
                 return Json(json);
             }
+
+            int blogID = Convert.ToInt32(form["blogID"]);
+
+            // Check if this blog already has a media folder; if so, use that
+            Blog existingBlog = _blogRepo.Get(blogID);
+
+            if (String.IsNullOrEmpty(existingBlog.MediaFolder))
+            {
+                // If not, create a new media folder(and save the value to the Blog record)
+                existingBlog.MediaFolder = media.CreateMediaFolderForBlog(existingBlog.CreateDate.Year);
+                _blogRepo.Update(existingBlog);
+            }
+
+            // Save files to disk
+            for (int i = 0; i < form.Files.Count; i++)
+            {
+                string filePath = Path.Combine(_settings.MediaFolderServerPath, existingBlog.MediaFolder, form.Files[0].FileName);
+                using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    form.Files[0].CopyTo(fileStream);
+                }
+            }
+
+            json.Status = JsonStatus.OK.ToString();
+            json.Message = $"{filesUploaded} files uploaded.";
 
             return Json(json);
         }
