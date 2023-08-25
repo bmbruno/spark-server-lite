@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Infrastructure.Enums;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
 using System.Net;
+using static System.Net.Mime.MediaTypeNames;
+using Image = SixLabors.ImageSharp.Image;
 
 namespace SparkServerLite.Controllers
 {
@@ -91,6 +94,7 @@ namespace SparkServerLite.Controllers
             JsonPayload json = new JsonPayload();
             int filesUploaded = 0;
             string mediaFolder = string.Empty;
+            string filePath = string.Empty;
 
             if (form.Files.Count == 0)
             {
@@ -118,12 +122,31 @@ namespace SparkServerLite.Controllers
             {
                 // Lightly sanitize the filename (prevent folder injection)
                 string fileName = form.Files[0].FileName.Replace(@"/", string.Empty).Replace(@"\", string.Empty);
-                string filePath = Path.Combine(_settings.MediaFolderServerPath, existingBlog.MediaFolder, fileName);
+                filePath = Path.Combine(_settings.MediaFolderServerPath, existingBlog.MediaFolder, fileName);
 
                 using (Stream fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     form.Files[0].CopyTo(fileStream);
                 }
+            }
+
+            // TODO: Create thumbnails
+            using (Image image = Image.Load(filePath))
+            {
+                try
+                {
+                    image.Mutate(x => x.Resize(200, 200));
+                }
+                catch (Exception exc)
+                {
+                    json.Status = JsonStatus.EXCEPTION.ToString();
+                    json.Message = exc.Message.ToString();
+                    return Json(json);
+                }
+
+                // TODO: Get thumbnail file path
+                string thumbnailPath = media.GetThumbnailFilename(filePath);
+                image.SaveAsJpeg(thumbnailPath);
             }
 
             json.Status = JsonStatus.OK.ToString();

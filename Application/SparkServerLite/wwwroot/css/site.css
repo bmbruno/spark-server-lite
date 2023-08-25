@@ -65,13 +65,14 @@ form .row label { display: block; font-weight: bold; margin-bottom: 0.25em }
 form .row > .controls { margin: 0.5em 0 0.5em 0; }
 form input[type="text"], textarea, select { width: 100%; padding: 0.75em; box-shadow: inset 1px 1px 2px #AAA; border: 1px solid #AAA; border-radius: 4px; font-size: 1em }
 form input[type="submit"] { padding: 0.75em 2em; }
+form .checkbox-list { max-height: 200px; overflow-y: auto; background-color: #eaeaea; border-radius: 8px; padding: 1em; columns: 1; }
 
 a.btn, .btn, button { display: inline-block; border-radius: 8px; cursor: pointer; padding: 0.75em 2em;  text-shadow: 1px 1px 0 #000; background-color: #4c7caa; color: #FFF; box-shadow: 0 3px 0 #313131; transition: none; border: none; }
 a.btn:hover, .btn:hover, button:hover { background-color: #63a5e4; text-decoration: none;}
 a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position: relative; top: 3px; }
 .btn.primary { padding: 1em 4em; font-weight: bold; font-size: 1.05em; }
 
-form .checkbox-list { max-height: 200px; overflow-y: auto; background-color: #eaeaea; border-radius: 8px; padding: 1em; columns: 1; }
+.media-list ul li img { max-width: 50%; }
 
 .bottom-nav { text-align: center; padding: 2em; }
 
@@ -100,6 +101,8 @@ form .checkbox-list { max-height: 200px; overflow-y: auto; background-color: #ea
 	form .row label { margin-bottom: 0.5em; }
 	form input.half { width: 50%; }
 	form .checkbox-list { columns: 3 }
+
+	.media-list ul li img { max-width: 30%; }
 }
 
 @media (min-width: 1100px)

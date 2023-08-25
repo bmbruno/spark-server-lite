@@ -79,25 +79,25 @@ namespace SparkServerLite.Infrastructure
         }
 
         /// <summary>
+        /// Creates a the standard thumbnail file name for a file. Format is filename + "_thumb" + extensions.
+        /// </summary>
+        /// <param name="filePath">Full file path.</param>
+        /// <returns>File path with the thumbnail filename.</returns>
+        public string GetThumbnailFilename(string filePath)
+        {
+            string filename = Path.GetFileName(filePath);
+            string extension = Path.GetExtension(filePath);
+
+            return filePath.Replace(extension, $"_thumbnail{extension}");
+        }
+
+        /// <summary>
         /// Creates a potentially unique 12-character ID for a folder.
         /// </summary>
         /// <returns>Generated folder ID.</returns>
         private string GenerateUniqueFolderID()
         {
             return Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, 12);
-        }
-
-        /// <summary>
-        /// Creates a the standard thumbnail file name for a file. Format is filename + "_thumb" + extensions.
-        /// </summary>
-        /// <param name="filePath">Full file path.</param>
-        /// <returns>File path with the thumbnail filename.</returns>
-        private string GetThumbnailFilename(string filePath)
-        {
-            string filename = Path.GetFileName(filePath);
-            string extension = Path.GetExtension(filePath);
-
-            return filePath.Replace(extension, $"_thumbnail{extension}");
         }
 
         /// <summary>
