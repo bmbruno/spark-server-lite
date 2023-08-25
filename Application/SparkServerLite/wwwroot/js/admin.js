@@ -17,7 +17,7 @@
 
         loadBlogMediaList: async function () {
 
-            // TODO: show spinner
+            SparkServerAdmin.showLoader("BlogMediaListLoader");
 
             // Get BlogID from page
             let blogID = document.getElementById("ID").value;
@@ -57,7 +57,7 @@
             if (result.message)
                 console.log(result.message);
 
-            // TODO: hide spinner
+            SparkServerAdmin.hideLoader("BlogMediaListLoader");
         },
 
         handleMediaUpload: function (e) {
