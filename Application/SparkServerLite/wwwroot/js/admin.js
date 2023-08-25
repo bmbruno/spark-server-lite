@@ -94,15 +94,15 @@
             // SparkServerAdmin.hideLoader();
             SparkServerAdmin.enableButton("UploadMediaFiles");
 
-            if (data.Status === "ERROR") {
+            if (data.status === "ERROR") {
                 alert(`Error!\n\n${data.Message}`);
             }
 
-            if (data.Status === "EXCEPTION") {
+            if (data.status === "EXCEPTION") {
                 alert(`EXCEPTION!\n\n${data.Message}`);
             }
 
-            if (data.Status === "SUCCESS") {
+            if (data.status === "OK") {
 
                 // TODO: show success message
 

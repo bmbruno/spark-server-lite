@@ -94,7 +94,6 @@ namespace SparkServerLite.Controllers
             JsonPayload json = new JsonPayload();
             int filesUploaded = 0;
             string mediaFolder = string.Empty;
-            string filePath = string.Empty;
 
             if (form.Files.Count == 0)
             {
@@ -117,38 +116,38 @@ namespace SparkServerLite.Controllers
                 _blogRepo.Update(existingBlog);
             }
 
-            // Save files to disk
             for (int i = 0; i < form.Files.Count; i++)
             {
                 // Lightly sanitize the filename (prevent folder injection)
-                string fileName = form.Files[0].FileName.Replace(@"/", string.Empty).Replace(@"\", string.Empty);
-                filePath = Path.Combine(_settings.MediaFolderServerPath, existingBlog.MediaFolder, fileName);
+                string fileName = form.Files[i].FileName.Replace(@"/", string.Empty).Replace(@"\", string.Empty);
+                string filePath = Path.Combine(_settings.MediaFolderServerPath, existingBlog.MediaFolder, fileName);
 
+                // Save image to disk
                 using (Stream fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    form.Files[0].CopyTo(fileStream);
+                    form.Files[i].CopyTo(fileStream);
                 }
-            }
 
-            // TODO: Create thumbnails
-            using (Image image = Image.Load(filePath))
-            {
-                try
+                // Create thumbnail
+                using (Image image = Image.Load(filePath))
                 {
-                    // TODO: calculate new size based on image aspect ratio and current orientation
+                    try
+                    {
+                        // TODO: calculate new size based on image aspect ratio and current orientation
 
-                    image.Mutate(x => x.Resize(200, 200));
-                }
-                catch (Exception exc)
-                {
-                    json.Status = JsonStatus.EXCEPTION.ToString();
-                    json.Message = exc.Message.ToString();
-                    return Json(json);
-                }
+                        image.Mutate(x => x.Resize(200, 200));
+                    }
+                    catch (Exception exc)
+                    {
+                        json.Status = JsonStatus.EXCEPTION.ToString();
+                        json.Message = exc.Message.ToString();
+                        return Json(json);
+                    }
 
-                // Get thumbnail file path
-                string thumbnailPath = media.GetThumbnailFilename(filePath);
-                image.SaveAsJpeg(thumbnailPath);
+                    // Get thumbnail file path
+                    string thumbnailPath = media.GetThumbnailFilename(filePath);
+                    image.SaveAsJpeg(thumbnailPath);
+                }
             }
 
             json.Status = JsonStatus.OK.ToString();
