@@ -122,6 +122,10 @@ namespace SparkServerLite.Controllers
                 string fileName = form.Files[i].FileName.Replace(@"/", string.Empty).Replace(@"\", string.Empty);
                 string filePath = Path.Combine(_settings.MediaFolderServerPath, existingBlog.MediaFolder, fileName);
 
+                // Overwrite existing media automatically
+                if (System.IO.File.Exists(filePath))
+                    System.IO.File.Delete(filePath);                    
+
                 // Save image to disk
                 using (Stream fileStream = new FileStream(filePath, FileMode.Create))
                 {
