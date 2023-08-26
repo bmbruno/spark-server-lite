@@ -35,7 +35,13 @@
 
                     output += `
                         <li>
-                            <img src='${element.thumbnailPath}' />${element.filename}
+                            <div class="image-container">
+                                <img src='${element.thumbnailPath}' />
+                            </div>
+                            <div class="text-container">
+                                <p>${element.filename}</p>
+                                <button type="button" class="media-delete-button" data-filename="${element.filename}">Delete</button>
+                            </div>
                         </li>`;
 
                 });
@@ -43,6 +49,9 @@
                 output += "</ul>";
 
                 document.getElementById("BlogMediaList").innerHTML = output;
+
+                // TODO: wire-up delete buttons to functionality
+                SparkServerAdmin.wireDeleteButtons();
 
             } else if (result.status == "ERROR") {
 
@@ -58,6 +67,37 @@
                 console.log(result.message);
 
             SparkServerAdmin.hideLoader("BlogMediaListLoader");
+        },
+
+        wireDeleteButtons: function () {
+
+            let buttons = document.querySelectorAll(".media-delete-button");
+
+            buttons.forEach((item) => {
+
+                item.addEventListener("click", function (e) {
+
+                    e.preventDefault();
+
+                    let blogID = document.getElementById("ID").value;
+                    let filename = item.attributes["data-filename"].value;
+
+                    SparkServerAdmin.deleteMedia(blogID, filename);
+
+                });
+
+            });
+
+        },
+
+        deleteMedia: function (blogID, filename) {
+
+            alert(`[deleteMedia] blogID: ${blogID} filename: ${filename}`);
+
+            // TODO: send delete GET
+
+            // TODO: refresh media list
+
         },
 
         handleMediaUpload: function (e) {

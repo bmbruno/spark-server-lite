@@ -73,7 +73,9 @@ a.btn:hover, .btn:hover, button:hover { background-color: #63a5e4; text-decorati
 a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position: relative; top: 3px; }
 .btn.primary { padding: 1em 4em; font-weight: bold; font-size: 1.05em; }
 
-.media-list ul li img { max-width: 50%; }
+.media-list ul li { display: grid; grid-template-columns: 1fr 2fr; padding-bottom: 1em; }
+.media-list ul li .image-container { grid-column-start: 1; padding-right: 1em; }
+.media-list ul li .text-container { grid-column-start: 2; }
 
 .bottom-nav { text-align: center; padding: 2em; }
 
@@ -103,7 +105,8 @@ a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position
 	form input.half { width: 50%; }
 	form .checkbox-list { columns: 3 }
 
-	.media-list ul li img { max-width: 30%; }
+	.media-list ul li { }
+	.media-list ul li .image-container { }
 }
 
 @media (min-width: 1100px)
