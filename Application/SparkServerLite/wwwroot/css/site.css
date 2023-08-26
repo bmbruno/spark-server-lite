@@ -33,7 +33,7 @@ h6 { font-size: 1.45em; }
 
 .logo-wrapper { width: 300px; margin: 0 auto; }
 
-.loader-gif, .loader-message { display: none; }
+.loader { display: none; }
 .loader-message { margin: 1em; padding: 1em; }
 
 .section .title { padding: 2em; }
