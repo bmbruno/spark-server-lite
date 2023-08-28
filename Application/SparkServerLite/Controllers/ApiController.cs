@@ -50,7 +50,6 @@ namespace SparkServerLite.Controllers
         public JsonResult BlogMedia(int blogID)
         {
             JsonPayload json = new JsonPayload();
-
             MediaManager manager = new MediaManager(_settings);
 
             // Load blog and validate data
@@ -156,6 +155,40 @@ namespace SparkServerLite.Controllers
 
             json.Status = JsonStatus.OK.ToString();
             json.Message = $"{filesUploaded} files uploaded.";
+
+            return Json(json);
+        }
+
+        [HttpPost]
+        public JsonResult DeleteMedia(int blogID, string filename)
+        {
+            JsonPayload json = new JsonPayload();
+            MediaManager manager = new MediaManager(_settings);
+
+            Blog blog = _blogRepo.Get(blogID);
+
+            if (blog == null)
+            {
+                json.Status = JsonStatus.ERROR.ToString();
+                json.Message = $"No blog found for ID {blogID}.";
+                return Json(json);
+            }
+
+            List<MediaItem> list = manager.GetMediaForBlog(blog.MediaFolder);
+
+            MediaItem? item = list.FirstOrDefault(u => u.Filename.ToLower() == filename.ToLower());
+
+            if (item == null)
+            {
+                json.Status = JsonStatus.ERROR.ToString();
+                json.Message = $"No media item found for blog/filename {blogID}/{filename}.";
+                return Json(json);
+            }
+
+            manager.DeleteMedia(item.ServerPath);
+
+            json.Status = JsonStatus.OK.ToString();
+            json.Message = $"Media item '{filename}' deleted.";
 
             return Json(json);
         }

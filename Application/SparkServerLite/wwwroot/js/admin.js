@@ -5,7 +5,8 @@
         endpoints: {
 
             blogMedia: "/api/blogmedia",
-            uploadMedia: "/api/uploadmedia"
+            uploadMedia: "/api/uploadmedia",
+            deleteMedia: "/api/deletemedia"
 
         },
 
@@ -90,13 +91,33 @@
 
         },
 
-        deleteMedia: function (blogID, filename) {
+        deleteMedia: async function (blogID, filename) {
 
             alert(`[deleteMedia] blogID: ${blogID} filename: ${filename}`);
 
             // TODO: send delete GET
+            let formData = new FormData();
+            formData.append("blogID", blogID);
+            formData.append("filename", filename);
+            let response = await fetch(SparkServerAdmin.endpoints.deleteMedia, { method: "POST", body: formData });
+            let result = await response.json();
+
+            if (response.status == "OK") {
+
+                alert(response.message);
+
+            } else if (result.status == "ERROR") {
+
+                alert(result.message);
+
+            } else if (result.status == "EXCEPTION") {
+
+                alert("EXCEPTION! See browser console for details.");
+
+            }
 
             // TODO: refresh media list
+            SparkServerAdmin.loadBlogMediaList();
 
         },
 

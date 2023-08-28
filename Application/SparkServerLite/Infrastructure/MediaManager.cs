@@ -96,6 +96,23 @@ namespace SparkServerLite.Infrastructure
         }
 
         /// <summary>
+        /// Deteles a media item and it's associated thumbnail (if it exists).
+        /// </summary>
+        /// <param name="serverFilePath">Server-based path to the media item.</param>
+        public void DeleteMedia(string serverFilePath)
+        {
+            // Delete image
+            if (File.Exists(serverFilePath))
+                File.Delete(serverFilePath);
+
+            // Delete thumbnail
+            string thumbnail = GetThumbnailFilename(serverFilePath);
+
+            if (File.Exists(thumbnail))
+                File.Delete(thumbnail);
+        }
+
+        /// <summary>
         /// Creates a potentially unique 12-character ID for a folder.
         /// </summary>
         /// <returns>Generated folder ID.</returns>

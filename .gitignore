@@ -187,3 +187,6 @@ $RECYCLE.BIN/
 /Application/Budgeter/Views/Account/ChangePassword.cshtml
 /Application/packages/EntityFramework.6.1.3
 /Application/packages/EntityFramework.6.0.0
+
+# Spark Server Admin specific
+/Application/SparkServerLite/wwwroot/media
