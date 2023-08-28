@@ -12,7 +12,10 @@
 
         init: function () {
 
+            // TODO: move to own function
             document.getElementById("UploadMediaFiles").addEventListener("click", SparkServerAdmin.handleMediaUpload);
+
+            SparkServerAdmin.wireDeleteConfirmButtons();
 
         },
 
@@ -41,7 +44,8 @@
                             </div>
                             <div class="text-container">
                                 <p>${element.filename}</p>
-                                <button type="button" class="media-delete-button" data-filename="${element.filename}">Delete</button>
+                                <button type="button" class="media-copyurl-button" data-url="${element.webPath}">Copy URL</button>
+                                <button type="button" class="media-delete-button delete-confirm" data-filename="${element.filename}">-</button>
                             </div>
                         </li>`;
 
@@ -51,8 +55,7 @@
 
                 document.getElementById("BlogMediaList").innerHTML = output;
 
-                // TODO: wire-up delete buttons to functionality
-                SparkServerAdmin.wireDeleteButtons();
+                SparkServerAdmin.wireMediaButtons();
 
             } else if (result.status == "ERROR") {
 
@@ -70,25 +73,67 @@
             SparkServerAdmin.hideLoader("BlogMediaListLoader");
         },
 
-        wireDeleteButtons: function () {
+        wireMediaButtons: function () {
 
-            let buttons = document.querySelectorAll(".media-delete-button");
+            // Delete buttons
+            let deleteButtons = document.querySelectorAll(".media-delete-button");
 
-            buttons.forEach((item) => {
+            if (deleteButtons) {
 
-                item.addEventListener("click", function (e) {
+                deleteButtons.forEach((button) => {
 
-                    e.preventDefault();
+                    button.addEventListener("click", function (e) {
 
-                    let blogID = document.getElementById("ID").value;
-                    let filename = item.attributes["data-filename"].value;
+                        e.preventDefault();
 
-                    SparkServerAdmin.deleteMedia(blogID, filename);
+                        let blogID = document.getElementById("ID").value;
+                        let filename = item.attributes["data-filename"].value;
+
+                        SparkServerAdmin.deleteMedia(blogID, filename);
+
+                    });
 
                 });
+            }
 
-            });
+            // CopyURL buttons
+            let copyButtons = document.querySelectorAll(".media-copyurl-button");
 
+            if (copyButtons) {
+
+                copyButtons.forEach((button) => {
+
+                    button.addEventListener("click", function (e) {
+
+                        e.preventDefault();
+                        let attrUrl = button.attributes["data-url"];
+
+                        if (attrUrl) {
+                            navigator.clipboard.writeText(attrUrl.value);
+                        }
+
+                    });
+
+                });
+            }
+        },
+
+        wireDeleteConfirmButtons: function () {
+
+            let deleteButtons = document.querySelectorAll(".delete-confirm")
+
+            if (deleteButtons) {
+
+                deleteButtons.forEach((button) => {
+
+                    button.addEventListener("click", function (e) {
+
+                        if (!confirm("Are you should you want to delete this?")) {
+                            return false;
+                        }
+                    });
+                });
+            }
         },
 
         deleteMedia: async function (blogID, filename) {
