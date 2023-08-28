@@ -12,8 +12,7 @@
 
         init: function () {
 
-            // TODO: move to own function
-            document.getElementById("UploadMediaFiles").addEventListener("click", SparkServerAdmin.handleMediaUpload);
+            SparkServerAdmin.wireUploadMediaButton();
 
             SparkServerAdmin.wireDeleteConfirmButtons();
 
@@ -72,6 +71,15 @@
                 console.log(result.message);
 
             SparkServerAdmin.hideLoader("BlogMediaListLoader");
+        },
+
+        wireUploadMediaButton: function () {
+
+            let uploadButton = document.getElementById("UploadMediaFiles");
+
+            if (uploadButton) {
+                uploadButton.addEventListener("click", SparkServerAdmin.handleMediaUpload);
+            }
         },
 
         wireMediaButtons: function () {
