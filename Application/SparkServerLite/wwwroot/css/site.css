@@ -22,6 +22,7 @@ nav ul li a:hover { text-decoration: none; }
 .admin nav ul { display: block; }
 .admin nav ul a { margin: 0.5em 0; }
 
+h1, h2, h3, h4, h5, h6 { margin-bottom: 0.5em; }
 h1 { font-size: 3em; }
 h2 { font-size: 2em; }
 h3 { font-size: 1.75em; }
@@ -64,7 +65,7 @@ form { width: 95%; margin: 0 auto; text-align: left; }
 form .row { margin: 0 0 2em 0; }
 form .row label { display: block; font-weight: bold; margin-bottom: 0.25em }
 form .row > .controls { margin: 0.5em 0 0.5em 0; }
-form input[type="text"], textarea, select { width: 100%; padding: 0.75em; box-shadow: inset 1px 1px 2px #AAA; border: 1px solid #AAA; border-radius: 4px; font-size: 1em }
+form input[type="text"], textarea, select { width: 100%; padding: 0.75em; box-shadow: inset 1px 1px 2px #AAA; border: 1px solid #AAA; border-radius: 4px; font-size: 1em; background-color: #f9f9f9; }
 form input[type="submit"] { padding: 0.75em 2em; }
 form .checkbox-list { max-height: 200px; overflow-y: auto; background-color: #eaeaea; border-radius: 8px; padding: 1em; columns: 1; }
 
@@ -73,9 +74,13 @@ a.btn:hover, .btn:hover, button:hover { background-color: #63a5e4; text-decorati
 a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position: relative; top: 3px; }
 .btn.primary { padding: 1em 4em; font-weight: bold; font-size: 1.05em; }
 
+.row.blog-media h2 { font-weight: bold; }
 .media-list ul li { display: grid; grid-template-columns: 1fr 2fr; padding-bottom: 1em; }
+.media-list ul li:last-of-type { padding-bottom: 0; }
 .media-list ul li .image-container { grid-column-start: 1; padding-right: 1em; }
+.media-list ul li .image-container img { border-radius: 6px; }
 .media-list ul li .text-container { grid-column-start: 2; }
+.media-url { margin: 1em 0; padding: 0.5em; max-width: 100%; background-color: #e3e3e3; font-family: monospace; box-shadow: inset 1px 1px 2px #AAA; overflow-x: auto; border-radius: 4px; }
 
 .bottom-nav { text-align: center; padding: 2em; }
 
@@ -90,7 +95,7 @@ a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position
 	.admin nav ul { display: flex; }
 	.admin nav ul li a { margin: 0 1em; }
 
-	.content { max-width: 80%; }
+	.content { max-width: 80%; padding: 2em 1em; }
 	.blog-card { display: grid; grid-template-columns: auto 1fr; }
 	.blog-card img { grid-column: 1; padding-right: 1em}
 	.blog-card .overview { grid-column: 2; text-align: left; }

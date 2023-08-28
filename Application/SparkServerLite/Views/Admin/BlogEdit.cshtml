@@ -60,25 +60,25 @@
 
     if (Model.Mode == SparkServerLite.Infrastructure.Enums.EditMode.Edit)
     {
-        <div class="row">
+        <div class="row blog-media">
             <h2>Media</h2>
 
             <div class="media-list" id="BlogMediaList"></div>
 
             <img src="/images/loader.gif" alt="Loader GIF" id="BlogMediaListLoader" class="loader" />
-
-            <div>
-                <input type="file" id="MediaFiles" multiple value="Choose files to upload..." />
-                <br/>
-                <button type="button" id="UploadMediaFiles" >Upload Files</button>
-
-                <div id="MediaFilesUploadMessage" class="loader">
-                    <img src="/images/loader.gif" alt="Loader GIF" />
-                    <p>Uploading media, please wait...</p>
-                </div>
-
-            </div>
             
+        </div>
+
+        <div class="row">
+            <input type="file" id="MediaFiles" multiple value="Choose files to upload..." />
+            <br />
+            <button type="button" id="UploadMediaFiles">Upload Files</button>
+
+            <div id="MediaFilesUploadMessage" class="loader">
+                <img src="/images/loader.gif" alt="Loader GIF" />
+                <p>Uploading media, please wait...</p>
+            </div>
+
         </div>
     }
 

@@ -44,8 +44,9 @@
                             </div>
                             <div class="text-container">
                                 <p>${element.filename}</p>
+                                <div class='media-url'>${element.webPath}</div>
                                 <button type="button" class="media-copyurl-button" data-url="${element.webPath}">Copy URL</button>
-                                <button type="button" class="media-delete-button delete-confirm" data-filename="${element.filename}">-</button>
+                                <button type="button" class="media-delete-button delete-confirm" data-filename="${element.filename}">Delete</button>
                             </div>
                         </li>`;
 
@@ -87,7 +88,7 @@
                         e.preventDefault();
 
                         let blogID = document.getElementById("ID").value;
-                        let filename = item.attributes["data-filename"].value;
+                        let filename = button.attributes["data-filename"].value;
 
                         SparkServerAdmin.deleteMedia(blogID, filename);
 
