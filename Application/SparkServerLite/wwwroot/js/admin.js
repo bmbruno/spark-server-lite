@@ -27,10 +27,18 @@
             // Today (current datetime)
             let todayButton = document.getElementById("TodayButton");
             if (todayButton) {
-                todayButton.addEventListener("click", SparkServerAdmin.handleTodayButtonClick);
+                todayButton.addEventListener("click", SparkServerAdmin.handleTodayButton);
+            }
+
+            // Create from title
+            let createTitleButton = document.getElementById("CreateUniqueURL");
+            if (createTitleButton) {
+                createTitleButton.addEventListener("click", SparkServerAdmin.handleCreateURL);
             }
 
             // Get next default hero
+
+
 
             // Delete buttons
             SparkServerAdmin.wireDeleteConfirm();
@@ -187,12 +195,43 @@
 
         },
 
-        handleTodayButtonClick: function () {
+        handleTodayButton: function () {
 
             let publishDateField = document.getElementById("PublishDate");
             if (publishDateField) {
                 publishDateField.value = new Date().toLocaleDateString();
             }
+        },
+
+        handleCreateURL: function () {
+
+            let titleField = document.getElementById("Title");
+
+            if (titleField) {
+
+                let title = titleField.value;
+                title = title.split("-").join("");
+                title = title.split("$").join("");
+                title = title.split("%").join("");
+                title = title.split(":").join("");
+                title = title.split("(").join("");
+                title = title.split(")").join("");
+                title = title.split("'").join("");
+                title = title.split("\"").join("");
+                title = title.split(".").join("");
+                title = title.split(",").join("");
+                title = title.split("<").join("");
+                title = title.split(">").join("");
+                title = title.split("\\").join("");
+                title = title.split("/").join("");
+                title = title.split("?").join("");
+                title = title.split("!").join("");
+                title = title.split(" ").join("-");
+                title = title.toLowerCase();
+
+                document.getElementById("Slug").value = title;
+            }
+
         },
 
         handleMediaUpload: function (e) {
