@@ -33,19 +33,7 @@
             // Get next default hero
 
             // Delete buttons
-            let deleteButtons = document.querySelectorAll(".delete-confirm")
-            if (deleteButtons) {
-
-                deleteButtons.forEach((button) => {
-
-                    button.addEventListener("click", function (e) {
-
-                        if (!confirm("Are you should you want to delete this?")) {
-                            return false;
-                        }
-                    });
-                });
-            }
+            SparkServerAdmin.wireDeleteConfirm();
 
         },
 
@@ -115,7 +103,10 @@
 
                     button.addEventListener("click", function (e) {
 
-                        e.preventDefault();
+                        if (!confirm("Are you should you want to delete this?")) {
+                            e.preventDefault();
+                            return false;
+                        }
 
                         let blogID = document.getElementById("ID").value;
                         let filename = button.attributes["data-filename"].value;
@@ -149,12 +140,31 @@
             }
         },
 
+        wireDeleteConfirm: function () {
+
+            let deleteButtons = document.querySelectorAll(".delete-confirm");
+            if (deleteButtons) {
+
+                deleteButtons.forEach((button) => {
+
+                    button.addEventListener("click", function (e) {
+
+                        if (!confirm("Are you should you want to delete this?")) {
+                            e.preventDefault();
+                            return false;
+                        }
+                    });
+                });
+            }
+
+        },
+
         deleteMedia: async function (blogID, filename) {
 
-            // TODO: send delete GET
             let formData = new FormData();
             formData.append("blogID", blogID);
             formData.append("filename", filename);
+
             let response = await fetch(SparkServerAdmin.endpoints.deleteMedia, { method: "POST", body: formData });
             let result = await response.json();
 
@@ -172,7 +182,7 @@
 
             }
 
-            // TODO: refresh media list
+            // Refresh media list
             SparkServerAdmin.loadBlogMediaList();
 
         },
