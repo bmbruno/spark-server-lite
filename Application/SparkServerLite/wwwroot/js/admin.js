@@ -37,8 +37,10 @@
             }
 
             // Get next default hero
-
-
+            let getNextHeroButton = document.getElementById("GetNextHeroImage");
+            if (getNextHeroButton) {
+                getNextHeroButton.addEventListener("click", SparkServerAdmin.handleNextHero);
+            }
 
             // Delete buttons
             SparkServerAdmin.wireDeleteConfirm();
@@ -231,6 +233,12 @@
 
                 document.getElementById("Slug").value = title;
             }
+
+        },
+
+        handleNextHero: function () {
+
+            // TODO: AJAX call to get next hero
 
         },
 

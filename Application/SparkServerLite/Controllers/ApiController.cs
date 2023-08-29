@@ -192,5 +192,18 @@ namespace SparkServerLite.Controllers
 
             return Json(json);
         }
+
+        public JsonResult GetNextBlogBanner()
+        {
+            JsonPayload json = new JsonPayload();
+
+            string latestBlogBanner = _blogRepo.GetLatestBlogBanner(_settings.BlogBannerPath);
+
+            // TODO: increment to the next banner (see if file exists)
+
+            // TODO: if next files doesn't exists, return to 01 position
+
+            return Json(json);
+        }
     }
 }

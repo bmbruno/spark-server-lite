@@ -52,5 +52,12 @@ namespace SparkServerLite.Interfaces
         /// <param name="slug">URL slug</param>
         /// <returns>True/false.</returns>
         public bool SlugExists(string slug);
+
+        /// <summary>
+        /// Gets the latest blog post that uses a default hero image.
+        /// </summary>
+        /// <param name="folderFragment">String fragment that identifies what path default heros use.</param>
+        /// <returns>Filename of the latest hero image in use.</returns>
+        public string GetLatestBlogBanner(string folderFragment);
     }
 }

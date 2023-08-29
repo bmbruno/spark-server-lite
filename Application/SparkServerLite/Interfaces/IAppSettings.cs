@@ -12,6 +12,8 @@
 
         int BlogItemsPerPage { get; set; }
 
+        string BlogBannerPath { get; set; }
+
         string DefaultBlogBannerPath { get; set; }
 
         string DefaultBlogBannerThumbnailPath { get; set; }

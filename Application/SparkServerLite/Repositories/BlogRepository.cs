@@ -609,5 +609,48 @@ namespace SparkServer.Infrastructure.Repositories
 
             return slugExists;
         }
+
+        public string GetLatestBlogBanner(string folderFragment)
+        {
+            Blog blog = new Blog();
+            string latestBlogBanner = string.Empty;
+
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT ImagePath
+                    FROM Blogs
+                    WHERE
+	                    Active = 1
+	                    AND ImagePath LIKE $fragment
+                    ORDER BY PublishDate DESC
+                    LIMIT 1";
+
+                command.Parameters.AddWithValue("$fragment", $"{folderFragment}%");
+                conn.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        string imagePath = Database.GetString(reader["ImagePath"]);
+
+                        if (!String.IsNullOrEmpty(imagePath))
+                            latestBlogBanner = Path.GetFileName(imagePath);
+                    }
+                    else
+                    {
+                        conn.Close();
+                        throw new Exception($"No rows returned for latest blog hero query.");
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return latestBlogBanner;
+        }
     }
 }
