@@ -12,9 +12,40 @@
 
         init: function () {
 
-            SparkServerAdmin.wireUploadMediaButton();
+            SparkServerAdmin.wireButtons();
 
-            SparkServerAdmin.wireDeleteConfirmButtons();
+        },
+
+        wireButtons: function () {
+
+            // Upload Media button
+            let uploadButton = document.getElementById("UploadMediaFiles");
+            if (uploadButton) {
+                uploadButton.addEventListener("click", SparkServerAdmin.handleMediaUpload);
+            }
+
+            // Today (current datetime)
+            let todayButton = document.getElementById("TodayButton");
+            if (todayButton) {
+                todayButton.addEventListener("click", SparkServerAdmin.handleTodayButtonClick);
+            }
+
+            // Get next default hero
+
+            // Delete buttons
+            let deleteButtons = document.querySelectorAll(".delete-confirm")
+            if (deleteButtons) {
+
+                deleteButtons.forEach((button) => {
+
+                    button.addEventListener("click", function (e) {
+
+                        if (!confirm("Are you should you want to delete this?")) {
+                            return false;
+                        }
+                    });
+                });
+            }
 
         },
 
@@ -73,15 +104,6 @@
             SparkServerAdmin.hideLoader("BlogMediaListLoader");
         },
 
-        wireUploadMediaButton: function () {
-
-            let uploadButton = document.getElementById("UploadMediaFiles");
-
-            if (uploadButton) {
-                uploadButton.addEventListener("click", SparkServerAdmin.handleMediaUpload);
-            }
-        },
-
         wireMediaButtons: function () {
 
             // Delete buttons
@@ -127,27 +149,7 @@
             }
         },
 
-        wireDeleteConfirmButtons: function () {
-
-            let deleteButtons = document.querySelectorAll(".delete-confirm")
-
-            if (deleteButtons) {
-
-                deleteButtons.forEach((button) => {
-
-                    button.addEventListener("click", function (e) {
-
-                        if (!confirm("Are you should you want to delete this?")) {
-                            return false;
-                        }
-                    });
-                });
-            }
-        },
-
         deleteMedia: async function (blogID, filename) {
-
-            alert(`[deleteMedia] blogID: ${blogID} filename: ${filename}`);
 
             // TODO: send delete GET
             let formData = new FormData();
@@ -173,6 +175,14 @@
             // TODO: refresh media list
             SparkServerAdmin.loadBlogMediaList();
 
+        },
+
+        handleTodayButtonClick: function () {
+
+            let publishDateField = document.getElementById("PublishDate");
+            if (publishDateField) {
+                publishDateField.value = new Date().toLocaleDateString();
+            }
         },
 
         handleMediaUpload: function (e) {
