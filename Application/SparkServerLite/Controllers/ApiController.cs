@@ -137,9 +137,18 @@ namespace SparkServerLite.Controllers
                 {
                     try
                     {
-                        // TODO: calculate new size based on image aspect ratio and current orientation
+                        // Preserve aspect ratio
+                        double maxWidth = 200;
+                        double maxHeight = 200;
 
-                        image.Mutate(x => x.Resize(200, 200));
+                        var ratioX = (double)maxWidth / image.Width;
+                        var ratioY = (double)maxHeight / image.Height;
+                        var ratio = Math.Min(ratioX, ratioY);
+
+                        var newWidth = (int)(image.Width * ratio);
+                        var newHeight = (int)(image.Height * ratio);
+
+                        image.Mutate(x => x.Resize(newWidth, newHeight));
                     }
                     catch (Exception exc)
                     {

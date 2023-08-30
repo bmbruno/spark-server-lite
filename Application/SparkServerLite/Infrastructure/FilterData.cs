@@ -47,7 +47,6 @@ namespace SparkServerLite.Infrastructure
 
                 if (selected != null)
                 {
-                    // TODO: make sure the selection logic works
                     foreach (int selectedID in selected)
                     {
                         if (item.ID == selectedID)

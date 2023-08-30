@@ -32,7 +32,6 @@ namespace SparkServerLite.Controllers
             List<Blog> blogList = new List<Blog>();
             List<BlogTag> tagList = new List<BlogTag>();
 
-            // TODO: (FUTURE): bring back more limited data for these lists (just what the view needs)
             if (year.HasValue && month.HasValue)
             {
                 // Blogs list by year + month
