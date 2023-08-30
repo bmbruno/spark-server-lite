@@ -6,7 +6,8 @@
 
             blogMedia: "/api/blogmedia",
             uploadMedia: "/api/uploadmedia",
-            deleteMedia: "/api/deletemedia"
+            deleteMedia: "/api/deletemedia",
+            nextBlogBanner: "/api/getnextblogbanner"
 
         },
 
@@ -37,9 +38,9 @@
             }
 
             // Get next default hero
-            let getNextHeroButton = document.getElementById("GetNextHeroImage");
-            if (getNextHeroButton) {
-                getNextHeroButton.addEventListener("click", SparkServerAdmin.handleNextHero);
+            let getNextBannerButton = document.getElementById("GetNextBannerImage");
+            if (getNextBannerButton) {
+                getNextBannerButton.addEventListener("click", SparkServerAdmin.handleNextBanner);
             }
 
             // Delete buttons
@@ -236,9 +237,28 @@
 
         },
 
-        handleNextHero: function () {
+        handleNextBanner: async function () {
 
-            // TODO: AJAX call to get next hero
+            // TODO: show local spinner; disable button
+
+            let response = await fetch(`${SparkServerAdmin.endpoints.nextBlogBanner}`);
+            let result = await response.json();
+
+            if (result.status == "OK") {
+
+                document.getElementById("ImagePath").value = result.data;
+
+            } else if (result.status == "ERROR") {
+
+                alert(result.message);
+
+            } else if (result.status == "EXCEPTION") {
+
+                alert("EXCEPTION! See browser console for details.");
+
+            }
+
+            // TODO: hide local spinner; enable button
 
         },
 
