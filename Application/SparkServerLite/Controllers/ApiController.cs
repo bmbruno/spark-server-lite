@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Infrastructure.Enums;
@@ -199,9 +200,27 @@ namespace SparkServerLite.Controllers
 
             string latestBlogBanner = _blogRepo.GetLatestBlogBanner(_settings.BlogBannerPath);
 
-            // TODO: increment to the next banner (see if file exists)
+            if (String.IsNullOrEmpty(latestBlogBanner))
+            {
+                json.Status = JsonStatus.ERROR.ToString();
+                json.Message = "No latest blog banner found.";
+                return Json(json);
+            }
 
-            // TODO: if next files doesn't exists, return to 01 position
+            // Strip extension from the file; increment to next EXPECTED (ie sequential) banner image filename
+            int nextBannerNumber = Convert.ToInt32(latestBlogBanner.Split(".")[0]) + 1;
+
+            // Increment to the next banner (see if file exists); if next files doesn't exists, return to 01 position
+            string formatPath = _settings.BlogBannerPath + "/{0:00}.jpg";
+            string newFilename = string.Format(formatPath, nextBannerNumber);
+
+            if (!System.IO.File.Exists(newFilename))
+            {
+                newFilename = $"{_settings.BlogBannerPath}/01.jpg";
+            }
+
+            json.Status = JsonStatus.OK.ToString();
+            json.Data = newFilename;
 
             return Json(json);
         }
