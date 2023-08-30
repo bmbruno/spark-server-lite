@@ -2,6 +2,7 @@
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
 using SparkServerLite.ViewModels;
+using SparkServerLite.ViewModels.Admin;
 using System.Runtime;
 
 namespace SparkServerLite.Mapping
@@ -85,6 +86,21 @@ namespace SparkServerLite.Mapping
         {
             vm.BlogTagID = blogTag.ID;
             vm.BlogTagName = blogTag.Name;
+        }
+
+        public static void MapToViewModel(this BlogEditListViewModel vm, IEnumerable<Blog> blogs)
+        {
+            foreach (var blog in blogs)
+            {
+                vm.BlogList.Add(new BlogListItemViewModel()
+                {
+                    ID = blog.ID,
+                    Title = blog.Title,
+                    Subtitle = blog.Subtitle,
+                    PublishedDate = blog.PublishDate.ToShortDateString(),
+                    AuthorName = !String.IsNullOrEmpty(blog.AuthorFullName) ? blog.AuthorFullName : "N/A"
+                });
+            }
         }
 
     }

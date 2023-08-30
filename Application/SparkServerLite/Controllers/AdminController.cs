@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Infrastructure.Enums;
 using SparkServerLite.Interfaces;
+using SparkServerLite.Mapping;
 using SparkServerLite.Models;
 using SparkServerLite.ViewModels;
 using SparkServerLite.ViewModels.Admin;
 
 namespace SparkServerLite.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly IBlogRepository<Blog> _blogRepo;
@@ -26,28 +28,6 @@ namespace SparkServerLite.Controllers
 
         public IActionResult Index()
         {
-            //Blog blog = _blogRepo.Get(2);
-            //blog.Title = "A MODIFIED TITLE";
-            //_blogRepo.Update(blog);
-
-            //_blogRepo.Delete(2);
-
-            // var test1 = _blogRepo.SlugExists("test-blog-one");
-            // var test2 = _blogRepo.SlugExists("test-blog-FAKE-FAKE");
-
-            // var existsA = _blogTagRepo.Exists("Tag Alpha");
-            // var existsB = _blogTagRepo.Exists("Tag FAKE");
-
-            // BlogTag tag = _blogTagRepo.Get(1);
-            // tag.Name = "NEW NAME";
-            // _blogTagRepo.Update(tag);
-
-            // _blogTagRepo.Delete(2);
-
-            // _blogTagRepo.UpdateTagsForBlog(1, new List<int> { 1, 2, 3 });
-            
-            MediaManager media = new MediaManager(_settings);
-
             return View();
         }
 
@@ -55,19 +35,8 @@ namespace SparkServerLite.Controllers
         {
             BlogEditListViewModel viewModel = new BlogEditListViewModel();
 
-            var blogs = _blogRepo.GetAll();
-
-            foreach (var blog in blogs)
-            {
-                viewModel.BlogList.Add(new BlogListItemViewModel()
-                {
-                    ID = blog.ID,
-                    Title = blog.Title,
-                    Subtitle = blog.Subtitle,
-                    PublishedDate = blog.PublishDate.ToShortDateString(),
-                    AuthorName = !String.IsNullOrEmpty(blog.AuthorFullName) ? blog.AuthorFullName : "N/A"
-                });
-            }
+            IEnumerable<Blog> blogs = _blogRepo.GetAll();
+            viewModel.MapToViewModel(blogs);
 
             return View(viewModel);
         }
@@ -78,7 +47,9 @@ namespace SparkServerLite.Controllers
 
             if (ID.HasValue)
             {
+                //
                 // EDIT
+                //
 
                 viewModel.Mode = EditMode.Edit;
                 var blog = _blogRepo.Get(ID: ID.Value);
@@ -109,7 +80,9 @@ namespace SparkServerLite.Controllers
             }
             else
             {
+                //
                 // ADD
+                //
 
                 viewModel.Mode = EditMode.Add;
 
