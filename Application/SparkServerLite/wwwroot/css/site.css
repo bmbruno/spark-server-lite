@@ -75,13 +75,16 @@ a.btn:hover, .btn:hover, button:hover { background-color: #63a5e4; text-decorati
 a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position: relative; top: 3px; }
 .btn.primary { padding: 1em 4em; font-weight: bold; font-size: 1.05em; }
 
+.row.blog-media { padding: 1em; background-color: #DFDFDF; border-radius: 8px; }
+.row.blog-media .upload { margin: 1em 0 0 0; }
+.row.blog-media .upload .loader { margin: 1em 0;}
 .row.blog-media h2 { font-weight: bold; }
 .media-list ul li { display: grid; grid-template-columns: 1fr 2fr; padding-bottom: 1em; }
 .media-list ul li:last-of-type { padding-bottom: 0; }
 .media-list ul li .image-container { grid-column-start: 1; padding-right: 1em; }
 .media-list ul li .image-container img { border-radius: 6px; }
 .media-list ul li .text-container { grid-column-start: 2; }
-.media-url { margin: 1em 0; padding: 0.5em; max-width: 100%; background-color: #e3e3e3; font-family: monospace; box-shadow: inset 1px 1px 2px #AAA; overflow-x: auto; border-radius: 4px; }
+.media-url { margin: 1em 0; padding: 0.5em; max-width: 100%; background-color: #EFEFEF; font-family: monospace; box-shadow: inset 1px 1px 2px #AAA; overflow-x: auto; border-radius: 4px; }
 
 .bottom-nav { text-align: center; padding: 2em; }
 
