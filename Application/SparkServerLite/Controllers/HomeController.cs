@@ -29,6 +29,7 @@ namespace SparkServerLite.Controllers
 
             viewModel.MapToViewModel(blogs, _settings);
             viewModel.MenuSelection = MainMenu.Home;
+            viewModel.Sitename = _settings.Sitename;
 
             return View(viewModel);
         }

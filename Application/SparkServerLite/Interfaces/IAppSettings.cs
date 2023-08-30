@@ -2,6 +2,8 @@
 {
     public interface IAppSettings
     {
+        string Sitename { get; set; }
+
         string SiteURL { get; set; }
 
         string MediaFolderServerPath { get; set; }

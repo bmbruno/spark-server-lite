@@ -4,6 +4,8 @@ namespace SparkServerLite.Infrastructure
 {
     public class AppSettings : IAppSettings
     {
+        public string Sitename { get; set; } = string.Empty;
+
         public string SiteURL { get; set; } = string.Empty;
 
         public string MediaFolderServerPath { get; set; } = string.Empty;

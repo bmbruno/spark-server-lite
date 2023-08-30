@@ -9,6 +9,8 @@ namespace SparkServerLite.ViewModels
 
         public Paging Paging { get; set; }
 
+        public string Sitename { get; set; } = string.Empty;
+
         public string SiteURL { get; set; } = string.Empty;
 
         public BaseViewModel()
