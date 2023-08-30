@@ -235,6 +235,10 @@ namespace SparkServer.Infrastructure.Repositories
                 updateSQL.Append("UPDATE Blogs SET AuthorID = $author WHERE ID = $id;");
                 command.Parameters.AddWithValue("$author", updateItem.AuthorID);
 
+                // Modified Date - system level field
+                updateSQL.Append("UPDATE Blogs SET ModifiedDate = $today WHERE ID = $id;");
+                command.Parameters.AddWithValue("$today", DateTime.Now.ToString(FormatHelper.SQLiteDateTime));
+
                 if (!String.IsNullOrEmpty(updateItem.Subtitle))
                 {
                     updateSQL.Append("UPDATE Blogs SET Subtitle = $subtitle WHERE ID = $id;");
