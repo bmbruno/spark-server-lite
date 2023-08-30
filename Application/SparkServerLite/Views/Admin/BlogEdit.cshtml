@@ -115,7 +115,7 @@
         @Html.LabelFor(x => x.ImagePath)
         @Html.TextBoxFor(x => x.ImagePath, htmlAttributes: new { @class = "half" })
         <div class="controls">
-            <button type="button" id="GetNextBannerImage" class="btn">Get Next Banner Image</button>
+            <button type="button" id="GetNextBannerImage">Get Next Banner Image</button>
         </div>
         @Html.ValidationMessageFor(x => x.ImagePath)
     </div>
@@ -129,15 +129,17 @@
             {
                 if (item.Selected)
                 {
-                    <label for="BlogTag-@item.Value"><input type="checkbox" checked name="BlogTags" value="@item.Value" id="BlogTag-@item.Value" />@item.Text</label>
+                    <label for="BlogTag-@item.Value"><input type="checkbox" checked name="BlogTags" value="@item.Value" id="BlogTag-@item.Value" class="blogtag-checkbox" />@item.Text</label>
                 }
                 else
                 {
-                    <label for="BlogTag-@item.Value"><input type="checkbox" name="BlogTags" value="@item.Value" id="BlogTag-@item.Value" />@item.Text</label>
+                    <label for="BlogTag-@item.Value"><input type="checkbox" name="BlogTags" value="@item.Value" id="BlogTag-@item.Value" class="blogtag-checkbox" />@item.Text</label>
                 }
             }
 
         </div>
+
+        <button type="button" id="ClearBlogTags">Clear Tags</button>
 
 
     </div>

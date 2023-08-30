@@ -68,7 +68,7 @@ form .row > .controls { margin: 0.5em 0 0.5em 0; }
 form input[type="text"], textarea, select { width: 100%; padding: 0.75em; box-shadow: inset 1px 1px 2px #AAA; border: 1px solid #AAA; border-radius: 4px; font-size: 1em; background-color: #f9f9f9; }
 form input[type="submit"] { padding: 0.75em 2em; }
 form input[type="file"] { margin: 1em 0; }
-form .checkbox-list { max-height: 200px; overflow-y: auto; background-color: #eaeaea; border-radius: 8px; padding: 1em; columns: 1; }
+form .checkbox-list { max-height: 200px; overflow-y: auto; background-color: #eaeaea; border-radius: 8px; padding: 1em; columns: 1; margin-bottom: 0.5em; }
 
 a.btn, .btn, button { display: inline-block; border-radius: 8px; cursor: pointer; padding: 0.75em 2em;  text-shadow: 1px 1px 0 #000; background-color: #4c7caa; color: #FFF; box-shadow: 0 3px 0 #313131; transition: none; border: none; }
 a.btn:hover, .btn:hover, button:hover { background-color: #63a5e4; text-decoration: none;}

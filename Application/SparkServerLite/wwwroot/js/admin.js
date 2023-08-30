@@ -43,6 +43,12 @@
                 getNextBannerButton.addEventListener("click", SparkServerAdmin.handleNextBanner);
             }
 
+            // Clear tags
+            let clearBlogTagsButton = document.getElementById("ClearBlogTags");
+            if (clearBlogTagsButton) {
+                clearBlogTagsButton.addEventListener("click", SparkServerAdmin.handleClearBlogTags);
+            }
+
             // Delete buttons
             SparkServerAdmin.wireDeleteConfirm();
 
@@ -259,6 +265,18 @@
             }
 
             // TODO: hide local spinner; enable button
+
+        },
+
+        handleClearBlogTags: function () {
+
+            let tags = document.querySelectorAll(".blogtag-checkbox");
+
+            tags.forEach((tag) => {
+
+                tag.checked = false;
+
+            });
 
         },
 
