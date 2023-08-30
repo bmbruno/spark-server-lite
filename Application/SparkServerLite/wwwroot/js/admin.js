@@ -81,6 +81,7 @@
                                 <p>${element.filename}</p>
                                 <div class='media-url'>${element.webPath}</div>
                                 <button type="button" class="media-copyurl-button" data-url="${element.webPath}">Copy URL</button>
+                                <button type="button" class="media-copyurl-button" data-url="${element.thumbnailPath}">Copy Thumbnail</button>
                                 <button type="button" class="media-delete-button delete-confirm" data-filename="${element.filename}">Delete</button>
                             </div>
                         </li>`;
