@@ -207,15 +207,17 @@ namespace SparkServer.Infrastructure.Repositories
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = @"
                     SELECT
-	                    BlogTags.ID,
-	                    BlogTags.Name
+                        BlogTags.ID,
+	                    BlogTags.Name,
+	                    COUNT(BlogsToTags.ID) AS 'Uses'
                     FROM
 	                    BlogTags
 	                    INNER JOIN BlogsToTags ON BlogsToTags.BlogTagID = BlogTags.ID
-                    WHERE
-	                    BlogTags.Active = 1
+                    GROUP BY
+                        BlogTags.ID,
+	                    BlogTags.Name
                     ORDER BY
-                        BlogTags.Name ASC";
+	                    BlogTags.Name ASC";
 
                 conn.Open();
 
@@ -226,7 +228,50 @@ namespace SparkServer.Infrastructure.Repositories
                         tagList.Add(new BlogTag()
                         {
                             ID = Database.GetID(reader["ID"]),
-                            Name = Database.GetString(reader["Name"])
+                            Name = Database.GetString(reader["Name"]),
+                            Uses = Database.GetInteger(reader["Uses"]).Value
+                        });
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return tagList;
+        }
+
+        public IEnumerable<BlogTag> GetAllTagsWithCount()
+        {
+            List<BlogTag> tagList = new List<BlogTag>();
+
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT
+                        BlogTags.ID,
+	                    BlogTags.Name,
+	                    COUNT(BlogsToTags.ID) AS 'Uses'
+                    FROM
+	                    BlogTags
+	                    LEFT JOIN BlogsToTags ON BlogsToTags.BlogTagID = BlogTags.ID
+                    GROUP BY
+                        BlogTags.ID,
+	                    BlogTags.Name
+                    ORDER BY
+	                    BlogTags.Name ASC";
+
+                conn.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        tagList.Add(new BlogTag()
+                        {
+                            ID = Database.GetID(reader["ID"]),
+                            Name = Database.GetString(reader["Name"]),
+                            Uses = Database.GetInteger(reader["Uses"]).Value
                         });
                     }
                 }
@@ -305,6 +350,5 @@ namespace SparkServer.Infrastructure.Repositories
 
             return;
         }
-
     }
 }

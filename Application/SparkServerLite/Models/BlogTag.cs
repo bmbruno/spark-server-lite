@@ -13,9 +13,12 @@ namespace SparkServerLite.Models
 
         public string Name { get; set; }
 
+        public int Uses { get; set; }
+
         public BlogTag()
         {
             Name = string.Empty;
+            Uses = 0;
         }
     }
 }

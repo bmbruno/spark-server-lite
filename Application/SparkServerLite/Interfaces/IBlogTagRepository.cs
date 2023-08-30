@@ -34,5 +34,11 @@ namespace SparkServerLite.Interfaces
         /// <param name="blogID">ID of the blog to update related tags.</param>
         /// <param name="newTagIDList">List of actively-selected blog tag IDs.</param>
         void UpdateTagsForBlog(int blogID, IEnumerable<int> newTagIDList);
+
+        /// <summary>
+        /// Should return a list of blog tag objects and a count of their uses across all blogs.
+        /// </summary>
+        /// <returns>IEnumerable of type T.</returns>
+        IEnumerable<T> GetAllTagsWithCount();
     }
 }
