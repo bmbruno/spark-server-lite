@@ -198,7 +198,7 @@ namespace SparkServerLite.Controllers
         {
             JsonPayload json = new JsonPayload();
 
-            string latestBlogBanner = _blogRepo.GetLatestBlogBanner(_settings.BlogBannerPath);
+            string latestBlogBanner = _blogRepo.GetLatestBlogBanner(_settings.BlogBannerWebPath);
 
             if (String.IsNullOrEmpty(latestBlogBanner))
             {
@@ -211,13 +211,17 @@ namespace SparkServerLite.Controllers
             int nextBannerNumber = Convert.ToInt32(latestBlogBanner.Split(".")[0]) + 1;
 
             // Increment to the next banner (see if file exists); if next files doesn't exists, return to 01 position
-            string formatPath = _settings.BlogBannerPath + "/{0:00}.jpg";
+            string formatPath = Path.Combine(_settings.BlogBannerServerPath, "{0:00}.jpg");
             string newFilename = string.Format(formatPath, nextBannerNumber);
 
             if (!System.IO.File.Exists(newFilename))
             {
-                newFilename = $"{_settings.BlogBannerPath}/01.jpg";
+                nextBannerNumber = 1;
             }
+
+            // Format using web-friendly path to blog-banner folder
+            formatPath = $"{_settings.BlogBannerWebPath}/{{0:00}}.jpg";
+            newFilename = string.Format(formatPath, nextBannerNumber);
 
             json.Status = JsonStatus.OK.ToString();
             json.Data = newFilename;

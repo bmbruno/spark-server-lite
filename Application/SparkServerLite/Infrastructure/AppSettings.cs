@@ -14,7 +14,9 @@ namespace SparkServerLite.Infrastructure
 
         public int BlogItemsPerPage { get; set; }
 
-        public string BlogBannerPath { get; set; } = string.Empty;
+        public string BlogBannerServerPath { get; set; } = string.Empty;
+
+        public string BlogBannerWebPath { get; set; } = string.Empty;
 
         public string DefaultBlogBannerPath { get; set; } = string.Empty;
 
