@@ -6,9 +6,12 @@
 
         public string Name { get; set; }
 
+        public int Uses { get; set; }
+
         public BlogTagListItemViewModel()
         {
             Name = string.Empty;
+            Uses = 0;
         }
     }
 }

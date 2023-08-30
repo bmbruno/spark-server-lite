@@ -51,7 +51,7 @@ h6 { font-size: 1.45em; }
 
 table { width: 100%; text-align: left; }
 table th, td { padding: 1em; }
-table th { background-color: #6e8198; color: #FFF; font-weight: bold; }
+table th { background-color: #6e8198; color: #FFF; font-weight: bold; text-shadow: 1px 1px 0 #000; }
 table tr:nth-child(even) { background-color: #f6f6f6; }
 table tr:nth-child(odd) { background-color: #eaeaea; }
 

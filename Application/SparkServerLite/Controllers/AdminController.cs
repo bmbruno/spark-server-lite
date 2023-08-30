@@ -217,14 +217,15 @@ namespace SparkServerLite.Controllers
         {
             BlogTagListViewModel viewModel = new BlogTagListViewModel();
 
-            IEnumerable<BlogTag> allTags = _blogTagRepo.GetAll();
+            IEnumerable<BlogTag> allTags = _blogTagRepo.GetAllTagsWithCount();
 
             foreach (var tag in allTags)
             {
                 viewModel.BlogTagList.Add(new BlogTagListItemViewModel()
                 {
                     ID = tag.ID,
-                    Name = tag.Name
+                    Name = tag.Name,
+                    Uses = tag.Uses
                 });
             }
 
