@@ -37,6 +37,7 @@ CREATE TABLE Blogs (
 	[MediaFolder] TEXT NULL,
 	[Active] INTEGER NOT NULL DEFAULT 1,
 	[CreateDate] TEXT NOT NULL DEFAULT CURRENT_DATE,
+	[ModifiedDate] TEXT NULL,
 	
 	FOREIGN KEY (AuthorID) REFERENCES Authors(ID)
 	
