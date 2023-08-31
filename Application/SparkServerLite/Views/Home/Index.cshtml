@@ -10,7 +10,7 @@
 {   
 
     <a href="@Model.BlogList[0].URL">
-        <div class="hero" style="background-image: url('@Model.BlogList[0].ImageURL');1">
+        <div class="hero" style="background-image: url('@Model.BlogList[0].ImageURL');">
             <div class="header">Latest Blog Post</div>
             <h2>@Model.BlogList[0].Title</h2>
             <h3>@Model.BlogList[0].Subtitle</h3>
@@ -31,7 +31,7 @@
             <li class="blog-card">
 
                 <a href="@blog.URL">
-                    <img src="@blog.ImageThumbnailPath" title="@blog.Title" alt="" />
+                    <img src="@blog.ImageThumbnailPath" title="@blog.Title" alt="@blog.Title" />
                 </a>
 
                 <div class="overview">

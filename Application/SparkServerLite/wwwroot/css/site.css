@@ -9,7 +9,7 @@ em { font-style: italic; }
 .center { text-align: center; }
 
 /* BASE */
-body { min-width: 240px; text-align: center; font-family: 'XXXXXXX', arial, sans-serif; background-color: #F1F1F1; font-size: 16px; }
+body { min-width: 400px; text-align: center; font-family: 'XXXXXXX', arial, sans-serif; background-color: #F1F1F1; font-size: 16px; }
 strong { font-weight: bold; } 
 blockquote { font-style: italic; color: #555; margin: 0 1em 1.5em 1em; line-height: 1.5em; }
 blockquote p:last-of-type { margin-bottom: 0; }
@@ -39,7 +39,9 @@ h6 { font-size: 1.45em; }
 
 .section .title { padding: 1em 0; }
 
-.hero { padding: 4em 1em; background-size: cover; background-position: center; }
+.hero { padding: 4em 1em; background-size: cover; background-position: center; box-shadow: inset 0 0 192px #000; color: #FFF; }
+.hero h2 { font-size: 2em; font-weight: bold; margin: 0.5em 0 0.5em 0; }
+.hero h3 { font-size: 1.25em; }
 
 .blog-card { padding: 1em; margin: 0 0 1em 0; background-color: #AAA; text-align: left; }
 .blog-card:last-of-type { margin-bottom: 0; }
@@ -104,7 +106,8 @@ footer { padding: 2em 1em; margin: 0 auto; text-align: left; line-height: 1.5em;
 
 	.section .title { padding: 1.5em 0; }
 	
-	.hero { margin-top: 2em; }
+	.hero { margin-top: 2em; box-shadow: inset 0 0 256px #000; }
+	.hero h2 { font-size: 2.5em; }
 
 	.content { max-width: 80%; padding: 2em 1em; margin-top: 1em; }
 	.blog-card { display: grid; grid-template-columns: 2fr 3fr; }
