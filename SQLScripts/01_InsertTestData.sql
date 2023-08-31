@@ -29,11 +29,11 @@ INSERT INTO Blogs (Title, Subtitle, Markdown, Content, Slug, PublishDate, Author
 VALUES ('How Much Front-End Do I Need to Know? (1)', 'It''s time to embrace JavaScript.', '<p>Sitecore XM Cloud is Sitecore''s first fully SaaS ("software as a service") product built from the ground-up and will likely be the company''s flagship CMS product in the coming year.</p>', 'test-blog-charlie', '2023-03-13', 1);
 */
 
-INSERT INTO Blogs (Title, Subtitle, Markdown, Content, Slug, ImagePath, PublishDate, AuthorID)
-VALUES ('Blog Title 1', 'Subtitle!!!', 'Hello, World!', '<p>Hello, world!</p>', 'test-blog-one', '/images/blog-banners/01.jpg', '2023-07-31', 1);
+INSERT INTO Blogs (Title, Subtitle, Markdown, Content, Slug, ImagePath, ImageThumbnailPath, PublishDate, AuthorID)
+VALUES ('Blog Title 1', 'Subtitle!!!', 'Hello, World!', '<p>Hello, world!</p>', 'test-blog-one', '/images/blog-banners/01.jpg', '/images/blog-banners/01_thumb.jpg', '2023-07-31', 1);
 
-INSERT INTO Blogs (Title, Subtitle, Markdown, Content, Slug, ImagePath, PublishDate, AuthorID)
-VALUES ('Blog Title 2', 'Subtitle!!!', 'Hello, World!', '<p>Hello, world!</p>', 'test-blog-two', '/images/blog-banners/02.jpg', '2023-07-15', 1);
+INSERT INTO Blogs (Title, Subtitle, Markdown, Content, Slug, ImagePath, ImageThumbnailPath, PublishDate, AuthorID)
+VALUES ('Blog Title 2', 'Subtitle!!!', 'Hello, World!', '<p>Hello, world!</p>', 'test-blog-two', '/images/blog-banners/02.jpg', '/images/blog-banners/02_thumb.jpg', '2023-07-15', 1);
 
 INSERT INTO Blogs (Title, Subtitle, Markdown, Content, Slug, PublishDate, AuthorID)
 VALUES ('Blog Title 3', 'Subtitle!!!', 'Hello, World!', '<p>Hello, world!</p>', 'test-blog-three', '2023-06-15', 1);
