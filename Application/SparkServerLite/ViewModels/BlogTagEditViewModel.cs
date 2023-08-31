@@ -11,15 +11,12 @@ namespace SparkServerLite.ViewModels
         public int ID { get; set; }
 
         [Display(Name = "Name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         public bool Active { get; set; }
 
         public DateTime CreateDate { get; set; }
 
-        public BlogTagEditViewModel()
-        {
-            Name = string.Empty;
-        }
+        public BlogTagEditViewModel() { }
     }
 }

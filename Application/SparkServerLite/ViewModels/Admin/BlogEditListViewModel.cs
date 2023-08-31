@@ -1,6 +1,4 @@
-﻿using SparkServerLite.Models;
-
-namespace SparkServerLite.ViewModels.Admin
+﻿namespace SparkServerLite.ViewModels.Admin
 {
     public class BlogEditListViewModel : BaseViewModel
     {

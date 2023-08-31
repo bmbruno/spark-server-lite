@@ -4,11 +4,8 @@
     {
         public int BlogTagID { get; set; }
 
-        public string BlogTagName { get; set; }
+        public string BlogTagName { get; set; } = string.Empty;
 
-        public BlogTagViewModel()
-        {
-            BlogTagName = string.Empty;
-        }
+        public BlogTagViewModel() { }
     }
 }

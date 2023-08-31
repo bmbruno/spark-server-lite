@@ -12,16 +12,16 @@ namespace SparkServerLite.ViewModels.Admin
         public int ID { get; set; }
 
         [Display(Name = "Title")]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         [Display(Name = "Subtitle")]
         public string? Subtitle { get; set; }
 
         [Display(Name = "Content (Markdown)")]
-        public string Markdown { get; set; }
+        public string Markdown { get; set; } = string.Empty;
 
         [Display(Name = "Content (HTML)")]
-        public string Content { get; set; }
+        public string Content { get; set; } = string.Empty;
 
         [Display(Name = "Publish Date")]
         public DateTime PublishDate { get; set; }
@@ -34,7 +34,7 @@ namespace SparkServerLite.ViewModels.Admin
         public DateTime? CreateDate { get; set; }
 
         [Display(Name = "Slug")]
-        public string Slug { get; set; }
+        public string Slug { get; set; } = string.Empty;
 
         public string? MediaFolder { get; set; }
 
@@ -56,11 +56,6 @@ namespace SparkServerLite.ViewModels.Admin
             AuthorSource = new List<SelectListItem>();
             BlogTags = new List<int>();
             BlogTagSource = new List<SelectListItem>();
-
-            Title = string.Empty;
-            Markdown = string.Empty;
-            Content = string.Empty;
-            Slug = string.Empty;
         }
     }
 }

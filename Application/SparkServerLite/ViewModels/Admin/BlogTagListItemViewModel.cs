@@ -4,13 +4,12 @@
     {
         public int ID { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         public int Uses { get; set; }
 
         public BlogTagListItemViewModel()
         {
-            Name = string.Empty;
             Uses = 0;
         }
     }
