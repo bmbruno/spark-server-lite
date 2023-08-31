@@ -92,7 +92,7 @@ namespace SparkServerLite.Infrastructure
             string filename = Path.GetFileName(filePath);
             string extension = Path.GetExtension(filePath);
 
-            return filePath.Replace(extension, $"_thumbnail{extension}");
+            return filePath.Replace(extension, $"_thumb{extension}");
         }
 
         /// <summary>

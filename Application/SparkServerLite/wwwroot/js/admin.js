@@ -253,7 +253,8 @@
 
             if (result.status == "OK") {
 
-                document.getElementById("ImagePath").value = result.data;
+                document.getElementById("ImagePath").value = result.data[0];
+                document.getElementById("ImageThumbnailPath").value = result.data[1];
 
             } else if (result.status == "ERROR") {
 

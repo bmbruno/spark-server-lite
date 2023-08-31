@@ -206,6 +206,7 @@ namespace SparkServerLite.Controllers
         public JsonResult GetNextBlogBanner()
         {
             JsonPayload json = new JsonPayload();
+            MediaManager media = new MediaManager(_settings);
 
             string latestBlogBanner = _blogRepo.GetLatestBlogBanner(_settings.BlogBannerWebPath);
 
@@ -232,8 +233,10 @@ namespace SparkServerLite.Controllers
             formatPath = $"{_settings.BlogBannerWebPath}/{{0:00}}.jpg";
             newFilename = string.Format(formatPath, nextBannerNumber);
 
+            string newFilenameThumbnail = media.GetThumbnailFilename(newFilename);
+
             json.Status = JsonStatus.OK.ToString();
-            json.Data = newFilename;
+            json.Data = new string[] { newFilename, newFilenameThumbnail };
 
             return Json(json);
         }
