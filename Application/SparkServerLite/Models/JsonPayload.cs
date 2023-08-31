@@ -1,6 +1,4 @@
-﻿using SparkServerLite.Infrastructure.Enums;
-
-namespace SparkServerLite.Models
+﻿namespace SparkServerLite.Models
 {
     public class JsonPayload
     {

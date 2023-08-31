@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Routing.Constraints;
-
-namespace SparkServerLite.Models
+﻿namespace SparkServerLite.Models
 {
     public class MediaItem
     {

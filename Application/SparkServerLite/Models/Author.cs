@@ -13,11 +13,11 @@ namespace SparkServerLite.Models
 
         public Guid SSOID { get; set; }
 
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         public bool Active { get; set; }
 
@@ -26,9 +26,6 @@ namespace SparkServerLite.Models
         public Author()
         {
             ID = 0;
-            FirstName = string.Empty;
-            LastName = string.Empty;
-            Email = string.Empty;
             Active = true;
         }
 
