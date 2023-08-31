@@ -174,9 +174,15 @@ namespace SparkServerLite.Controllers
         {
             if (ID.HasValue)
             {
-                _blogRepo.Delete(ID.Value);
-
-                TempData["Success"] = "Blog deleted.";
+                try
+                {
+                    _blogRepo.Delete(ID.Value);
+                    TempData["Success"] = "Blog deleted.";
+                }
+                catch (Exception exc)
+                {
+                    TempData["Error"] = $"Could not delete blog. Exception: ${exc.Message}";
+                }
             }
             else
             {
@@ -258,10 +264,17 @@ namespace SparkServerLite.Controllers
 
                     blogTag.Name = viewModel.Name;
 
-                    _blogTagRepo.Create(blogTag);
+                    try
+                    {
+                        _blogTagRepo.Create(blogTag);
 
-                    TempData["Success"] = $"Blog Tag '{blogTag.Name}' created.";
-                    return RedirectToAction(actionName: "BlogTagList", controllerName: "Admin");
+                        TempData["Success"] = $"Blog Tag '{blogTag.Name}' created.";
+                        return RedirectToAction(actionName: "BlogTagList", controllerName: "Admin");
+                    }
+                    catch (Exception exc)
+                    {
+                        TempData["Error"] = $"Could not create Blog Tag '{viewModel.Name}'. Exception: {exc.Message}";
+                    }
                 }
                 else
                 {
