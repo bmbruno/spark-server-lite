@@ -265,8 +265,8 @@ namespace SparkServer.Infrastructure.Repositories
 
                 if (!String.IsNullOrEmpty(updateItem.ImageThumbnailPath))
                 {
-                    updateSQL.Append("UPDATE Blogs SET ImageThumbnailPath = $imageThumbPath WHERE ID = $id;");
-                    command.Parameters.AddWithValue("$imageThumbPath", updateItem.ImageThumbnailPath);
+                    updateSQL.Append("UPDATE Blogs SET ImageThumbnailPath = @imageThumbPath WHERE ID = $id;");
+                    command.Parameters.AddWithValue("@imageThumbPath", updateItem.ImageThumbnailPath);
                 }
 
                 command.CommandText = updateSQL.ToString();

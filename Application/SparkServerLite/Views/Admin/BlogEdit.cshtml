@@ -123,6 +123,12 @@
     </div>
 
     <div class="row">
+        @Html.LabelFor(x => x.ImageThumbnailPath)
+        @Html.TextBoxFor(x => x.ImageThumbnailPath, htmlAttributes: new { @class = "half" })
+        @Html.ValidationMessageFor(x => x.ImagePath)
+    </div>
+
+    <div class="row">
         @Html.LabelFor(x => x.BlogTags)
 
         <div class="checkbox-list">
