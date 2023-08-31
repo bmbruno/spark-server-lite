@@ -190,3 +190,4 @@ $RECYCLE.BIN/
 
 # Spark Server Admin specific
 /Application/SparkServerLite/wwwroot/media
+/Application/SparkServerLite/SparkServer.db
