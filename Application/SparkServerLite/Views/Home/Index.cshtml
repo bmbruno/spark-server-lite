@@ -4,6 +4,8 @@
     string styleAttribute = string.Empty;
 }
 
+<h1 style="visibility: hidden; height: 0px; margin: 0;">@Model.Sitename</h1>
+
 @if (Model.BlogList.Count > 0)
 {   
 
@@ -17,8 +19,6 @@
 
     Model.BlogList.RemoveAt(0);
 }
-
-<h1 style="visibility: hidden;">@Model.Sitename</h1>
 
 <div class="section">
 
