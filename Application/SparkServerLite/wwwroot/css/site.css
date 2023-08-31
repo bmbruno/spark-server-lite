@@ -45,7 +45,7 @@ h6 { font-size: 1.45em; }
 .blog-card:last-of-type { margin-bottom: 0; }
 .blog-card img { margin-bottom: 1em; }
 .blog-card h3 { font-size: 1.75em; margin-bottom: 0.5em; }
-.blog-card .subtitle { font-size: 1.25em; margin-bottom: 0.5em; }
+.blog-card .subtitle { font-size: 1.15em; margin-bottom: 0.5em; }
 .blog-card .date { font-size: 0.85em; }
 
 .sub-menu { padding: 1em 0; }
@@ -107,8 +107,8 @@ footer { padding: 2em 1em; margin: 0 auto; text-align: left; line-height: 1.5em;
 	.hero { margin-top: 2em; }
 
 	.content { max-width: 80%; padding: 2em 1em; margin-top: 1em; }
-	.blog-card { display: grid; grid-template-columns: auto 1fr; }
-	.blog-card img { grid-column: 1; padding-right: 1em}
+	.blog-card { display: grid; grid-template-columns: 2fr 3fr; }
+	.blog-card img { grid-column: 1; padding-right: 1em; margin-bottom: 0; }
 	.blog-card .overview { grid-column: 2; text-align: left; }
 
 	.status-message { max-width: 600px; padding: 2em; line-height: 1.5em; }
@@ -130,7 +130,9 @@ footer { padding: 2em 1em; margin: 0 auto; text-align: left; line-height: 1.5em;
 @media (min-width: 1100px)
 {
 	
-	
+	.blog-card h3 { font-size: 2em; margin-bottom: 0.5em; }
+	.blog-card .subtitle { font-size: 1.25em; margin-bottom: 0.5em; }
+	.blog-card .date { font-size: 1em; }
 
 }
 

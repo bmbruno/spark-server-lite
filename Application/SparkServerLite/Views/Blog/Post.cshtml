@@ -5,9 +5,7 @@
     ViewData["Title"] = Model.Title;
 }
 
-<div class="blog-header" style="background-image: url('@Model.ImageURL');">
-    <h1>@ViewData["Title"]</h1>
-</div>
+<img src="@Model.ImageURL" alt="@Model.Title" title="@Model.Title" />
 
 @if (Model.IsPreview)
 {
@@ -33,12 +31,12 @@
         {
             foreach (var tag in Model.BlogTags)
             {
-                        <li><a href="/blog/tag/@FormatHelper.FormatTagForURL(tag.BlogTagName)">@tag.BlogTagName</a></li>
+                <li><a href="/blog/tag/@FormatHelper.FormatTagForURL(tag.BlogTagName)">@tag.BlogTagName</a></li>
             }
         }
         else
         {
-                <li>No tags defined</li>
+            <li>No tags defined</li>
         }
     </ul>
 
@@ -46,7 +44,7 @@
 
 <article class="blog">
 
-    <h1 class="blog-title-only">@ViewBag.Title</h1>
+    <h1 class="blog-title">@ViewBag.Title</h1>
 
     @Html.Raw(Model.Content)
 
