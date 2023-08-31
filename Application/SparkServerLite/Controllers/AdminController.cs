@@ -288,9 +288,16 @@ namespace SparkServerLite.Controllers
 
                     blogTag.Name = viewModel.Name;
 
-                    _blogTagRepo.Update(blogTag);
+                    try
+                    {
+                        _blogTagRepo.Update(blogTag);
+                        TempData["Success"] = $"Blog Tag '{blogTag.Name}' updated.";
+                    }
+                    catch (Exception exc)
+                    {
+                        TempData["Error"] = $"Could not update blog tag. Exception: ${exc.Message}";
+                    }
 
-                    TempData["Success"] = $"Blog Tag '{blogTag.Name}' updated.";
                     return RedirectToAction(actionName: "BlogTagList", controllerName: "Admin");
                 }
 
@@ -307,9 +314,15 @@ namespace SparkServerLite.Controllers
         {
             if (ID.HasValue)
             {
-                _blogTagRepo.Delete(ID.Value);
-
-                TempData["Success"] = $"Blog tag deleted.";
+                try
+                {
+                    _blogTagRepo.Delete(ID.Value);
+                    TempData["Success"] = $"Blog tag deleted.";
+                }
+                catch (Exception exc)
+                {
+                    TempData["Error"] = $"Could not delete blog tag. Exception: ${exc.Message}";
+                }
             }
             else
             {
