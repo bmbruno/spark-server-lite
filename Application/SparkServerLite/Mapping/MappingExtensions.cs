@@ -38,7 +38,7 @@ namespace SparkServerLite.Mapping
             vm.Content = blog.Content;
             vm.ImagePath = !String.IsNullOrEmpty(blog.ImagePath) ? blog.ImagePath : settings.DefaultBlogBannerPath;
             vm.ImageThumbnailPath = !String.IsNullOrEmpty(blog.ImageThumbnailPath) ? blog.ImageThumbnailPath : settings.DefaultBlogBannerThumbnailPath;
-            vm.AuthorFullName = string.IsNullOrEmpty(blog.AuthorFullName) ? blog.AuthorFullName : string.Empty;
+            vm.AuthorFullName = !string.IsNullOrEmpty(blog.AuthorFullName) ? blog.AuthorFullName : string.Empty;
 
             vm.PublishDate = blog.PublishDate;
 
