@@ -30,7 +30,7 @@ h4 { font-size: 1.65em; }
 h5 { font-size: 1.5em; }
 h6 { font-size: 1.45em; }
 
-.content { width: 100%; margin: 0 auto; padding: 1em; background-color: #FFF; }
+.content { width: 100%; margin: 0 auto; padding: 1em 0 2em 0; background-color: #FFF; }
 
 .logo-wrapper { width: 300px; margin: 0 auto; }
 
@@ -50,14 +50,15 @@ h6 { font-size: 1.45em; }
 .blog-card .subtitle { font-size: 1.15em; margin-bottom: 0.5em; }
 .blog-card .date { font-size: 0.85em; }
 
-.blog-about { margin: 1em 0; padding: 1em; background-color: #fff; border: 1px solid #AAA; border-radius: 6px; text-align: left; }
+.blog-about { margin: 1em 1em 2em 1em; padding: 1em; background-color: #fff; border: 1px solid #AAA; border-radius: 6px; text-align: left; }
 .blog-about .item { margin-bottom: 1em; }
 .blog-about .item:last-of-type { margin-bottom: 0; }
 .blog-about .label { font-weight: bold; margin-bottom: 0.15em; font-size: 0.85em }
 .blog-about ul.tags { columns: 3; }
 .blog-about ul.tags li a { display: block; padding: 0.25em 0; }
 
-article.blog h1 { font-size: 2.25em; }
+article.blog h1 { font-size: 2.25em; margin: 0 0.5em 0.75em 0.5em;}
+article.blog .blog-content { text-align: left; padding: 0 1em; }
 
 .sub-menu { padding: 1em 0; }
 
