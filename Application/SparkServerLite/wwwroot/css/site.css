@@ -50,15 +50,17 @@ h6 { font-size: 1.45em; }
 .blog-card .subtitle { font-size: 1.15em; margin-bottom: 0.5em; }
 .blog-card .date { font-size: 0.85em; }
 
-.blog-about { margin: 1em 1em 2em 1em; padding: 1em; background-color: #fff; border: 1px solid #AAA; border-radius: 6px; text-align: left; }
+.blog-about { margin: 1em auto 2em auto; max-width: 400px; padding: 1em; background-color: #fff; border: 1px solid #AAA; border-radius: 6px; text-align: left; }
 .blog-about .item { margin-bottom: 1em; }
 .blog-about .item:last-of-type { margin-bottom: 0; }
 .blog-about .label { font-weight: bold; margin-bottom: 0.15em; font-size: 0.85em }
-.blog-about ul.tags { columns: 3; }
+.blog-about ul.tags { columns: 2; }
 .blog-about ul.tags li a { display: block; padding: 0.25em 0; }
 
 article.blog h1 { font-size: 2.25em; margin: 0 0.5em 0.75em 0.5em;}
 article.blog .blog-content { text-align: left; padding: 0 1em; }
+article.blog p { line-height: 1.5em; margin-bottom: 2em; text-align: justify; }
+article.blog p:last-of-type { margin-bottom: 0; }
 
 .sub-menu { padding: 1em 0; }
 
@@ -119,10 +121,18 @@ footer { padding: 2em 1em; margin: 0 auto; text-align: left; line-height: 1.5em;
 	.hero { margin-top: 2em; box-shadow: inset 0 0 256px #000; }
 	.hero h2 { font-size: 2.5em; }
 
-	.content { max-width: 80%; padding: 2em 1em; margin-top: 1em; }
+	.content { max-width: 80%; padding: 2em 1em 4em 1em; margin-top: 1em; }
 	.blog-card { display: grid; grid-template-columns: 2fr 3fr; }
 	.blog-card img { grid-column: 1; padding-right: 1em; margin-bottom: 0; }
 	.blog-card .overview { grid-column: 2; text-align: left; }
+
+	.blog-about { min-width: 350px; max-width: 500px; float: right; margin: 0 3em 4em 6em; padding: 2em; }
+
+	.blog-hero-banner { margin-bottom: 3em; }
+
+	article.blog h1 { font-size: 3em; margin-bottom: 1em; text-align: left; }
+	article.blog .blog-content { padding: 0 8em; font-size: 1.1em; line-height: 1.15em; }
+	article.blog p { line-height: 1.75em; max-width: 650px; }
 
 	.status-message { max-width: 600px; padding: 2em; line-height: 1.5em; }
 
@@ -137,7 +147,8 @@ footer { padding: 2em 1em; margin: 0 auto; text-align: left; line-height: 1.5em;
 	.media-list ul li { }
 	.media-list ul li .image-container { }
 
-	
+	footer { max-width: 80%; }
+
 }
 
 @media (min-width: 1100px)
