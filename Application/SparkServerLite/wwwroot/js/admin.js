@@ -7,7 +7,8 @@
             blogMedia: "/api/blogmedia",
             uploadMedia: "/api/uploadmedia",
             deleteMedia: "/api/deletemedia",
-            nextBlogBanner: "/api/getnextblogbanner"
+            nextBlogBanner: "/api/getnextblogbanner",
+            convertToHTML: "/api/markdowntohtml"
 
         },
 
@@ -18,6 +19,12 @@
         },
 
         wireButtons: function () {
+
+            // Convert button
+            let covnertButton = document.getElementById("ConvertToHTML");
+            if (covnertButton) {
+                covnertButton.addEventListener("click", SparkServerAdmin.handleConvertButton);
+            }
 
             // Upload Media button
             let uploadButton = document.getElementById("UploadMediaFiles");
@@ -202,6 +209,35 @@
 
             // Refresh media list
             SparkServerAdmin.loadBlogMediaList();
+
+        },
+
+        handleConvertButton: async function () {
+
+            let field = document.getElementById("Markdown");
+
+            if (field && field.value != '') {
+
+                let formData = new FormData();
+
+                formData.append("markdown", field.value);
+                let response = await fetch(`${SparkServerAdmin.endpoints.convertToHTML}`, { method: "POST", body: formData });
+                let result = await response.json();
+
+                if (result.status == "OK") {
+
+                    document.getElementById("Content").value = result.data;
+
+                } else if (result.status == "ERROR") {
+
+                    alert(result.message);
+
+                } else if (result.status == "EXCEPTION") {
+
+                    alert("EXCEPTION! See browser console for details.");
+
+                }
+            }
 
         },
 

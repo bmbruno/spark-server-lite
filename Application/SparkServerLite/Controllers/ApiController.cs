@@ -27,12 +27,12 @@ namespace SparkServerLite.Controllers
         }
 
         [HttpPost]
-        public JsonResult MarkdownToHTML(string markdown)
+        public JsonResult MarkdownToHTML(IFormCollection form)
         {
             JsonPayload json = new JsonPayload();
             json.Status = JsonStatus.OK.ToString();
 
-            markdown = WebUtility.UrlDecode(markdown);
+            string markdown = WebUtility.UrlDecode(form["markdown"]);
 
             try
             {
