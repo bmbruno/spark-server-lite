@@ -17,39 +17,41 @@
         </div>
 }
 
-<div class="blog-about">
-    <div class="item">
-        <div class="label">Author</div>
-        <p>@Model.AuthorFullName</p>
-    </div>
 
-    <div class="item">
-        <div class="label">Published</div>
-        <p>@Model.PublishDate.ToString(format: "MMMM dd, yyyy")</p>
-    </div>
-
-    <div class="item">
-        <div class="label">Tags</div>
-        <ul class="tags">
-
-            @if (Model.BlogTags.Count > 0)
-            {
-                foreach (var tag in Model.BlogTags)
-                {
-                    <li><a href="/blog/tag/@FormatHelper.FormatTagForURL(tag.BlogTagName)">@tag.BlogTagName</a></li>
-                }
-            }
-            else
-            {
-                <li>No tags defined</li>
-            }
-        </ul>
-    </div>
-</div>
 
 <article class="blog">
 
     <h1 class="blog-title">@ViewBag.Title</h1>
+
+    <div class="blog-about">
+        <div class="item">
+            <div class="label">Author</div>
+            <p>@Model.AuthorFullName</p>
+        </div>
+
+        <div class="item">
+            <div class="label">Published</div>
+            <p>@Model.PublishDate.ToString(format: "MMMM dd, yyyy")</p>
+        </div>
+
+        <div class="item">
+            <div class="label">Tags</div>
+            <ul class="tags">
+
+                @if (Model.BlogTags.Count > 0)
+                {
+                    foreach (var tag in Model.BlogTags)
+                    {
+                        <li><a href="/blog/tag/@FormatHelper.FormatTagForURL(tag.BlogTagName)">@tag.BlogTagName</a></li>
+                    }
+                }
+                else
+                {
+                    <li>No tags defined</li>
+                }
+            </ul>
+        </div>
+    </div>
 
     @Html.Raw(Model.Content)
 
