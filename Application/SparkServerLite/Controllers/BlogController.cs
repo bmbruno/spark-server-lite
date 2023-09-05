@@ -79,6 +79,7 @@ namespace SparkServerLite.Controllers
             viewModel.MapToViewModel(blog, blogTags, _settings);
             viewModel.IsPreview = preview;
             viewModel.SiteURL = _settings.SiteURL;
+            viewModel.Sitename = _settings.Sitename;
 
             // Should this blog post be displayed at all? (Preview flag overrides denied access in some cases)
             bool shouldDisplay = false;
@@ -115,6 +116,7 @@ namespace SparkServerLite.Controllers
             tagList = _blogTagRepo.GetTagsInUse().ToList();
 
             viewModel.MapToViewModel(blogList, tagList, _settings);
+            viewModel.Sitename = _settings.Sitename;
 
             // Paging
             int totalItems = blogList.Count;
