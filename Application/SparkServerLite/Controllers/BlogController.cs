@@ -121,6 +121,7 @@ namespace SparkServerLite.Controllers
             tagList = _blogTagRepo.GetTagsInUse().ToList();
 
             viewModel.MapToViewModel(blogList, tagList, _settings);
+            viewModel.TagFilter = unencodedTagName;
 
             // Paging
             int totalItems = blogList.Count;

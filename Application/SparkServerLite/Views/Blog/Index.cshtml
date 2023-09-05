@@ -8,6 +8,11 @@
 
     <h1>@ViewData["Title"]</h1>
 
+    @if (!String.IsNullOrEmpty(Model.TagFilter))
+    {
+        <h2>Posts tagged '@Model.TagFilter'</h2>
+    }
+
     <ul class="blog-list">
 
         @foreach (var blog in Model.BlogList)
