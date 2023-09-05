@@ -8,11 +8,13 @@ a:hover { color: #00F; text-decoration: underline; }
 em { font-style: italic; }
 .center { text-align: center; }
 pre { overflow-x: scroll; }
+blockquote { font-style: italic; color: #555; margin: 2em 0; line-height: 1.5em; padding: 2em; max-width: 650px; }
+blockquote p:last-of-type { margin-bottom: 0; }
 
 /* BASE */
 body { min-width: 400px; text-align: center; font-family: 'XXXXXXX', arial, sans-serif; background-color: #F1F1F1; font-size: 16px; }
 strong { font-weight: bold; } 
-blockquote { font-style: italic; color: #555; margin: 0 1em 1.5em 1em; line-height: 1.5em; }
+blockquote { font-style: italic; color: #555; background-color: #e3e3e3; margin: 2em 0; padding: 2em 2em 2em 2em; max-width: 650px; line-height: 1.5em; }
 blockquote p:last-of-type { margin-bottom: 0; }
 
 nav { display: block; margin: 1em auto; width: 100%; }
@@ -115,6 +117,7 @@ footer { padding: 2em 1em; margin: 0 auto; text-align: left; line-height: 1.5em;
 @media (min-width: 825px)
 {
 	nav { max-width: 80%; }
+
 	.admin nav ul { display: flex; }
 	.admin nav ul li a { margin: 0 1em; }
 
