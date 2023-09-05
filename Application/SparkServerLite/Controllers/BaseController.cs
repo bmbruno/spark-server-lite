@@ -23,6 +23,7 @@ namespace SparkServerLite.Controllers
         internal void Setup(BaseViewModel viewModel, IAppSettings appSettings)
         {
             viewModel.Sitename = appSettings.Sitename;
+            viewModel.SiteDescription = appSettings.SiteDescription;
             viewModel.SiteURL = appSettings.SiteURL;
         }
     }

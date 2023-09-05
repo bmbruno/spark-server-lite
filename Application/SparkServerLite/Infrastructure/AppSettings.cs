@@ -6,6 +6,8 @@ namespace SparkServerLite.Infrastructure
     {
         public string Sitename { get; set; } = string.Empty;
 
+        public string SiteDescription { get; set; } = string.Empty;
+
         public string SiteURL { get; set; } = string.Empty;
 
         public string MediaFolderServerPath { get; set; } = string.Empty;

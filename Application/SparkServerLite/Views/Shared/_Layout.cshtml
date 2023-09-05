@@ -8,7 +8,7 @@
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="SITE_DESCRIPTION">
+        <meta name="description" content="@Model.SiteDescription">
         <meta name="author" content="Brandon Bruno">
         @await RenderSectionAsync("PageMetadata", required: false)
 
@@ -37,7 +37,7 @@
                     <a href="/">
                         <picture>
                         <source srcset="/images/site-logo.png" media="(prefers-color-scheme: dark)" />
-                            <img src="/images/site-logo.png" alt="SITE_NAME Logo" class="logo" />
+                            <img src="/images/site-logo.png" alt="@Model.Sitename Logo" title="@Model.Sitename" class="logo" />
                         </picture>
                     </a>
                 </div>
@@ -79,8 +79,8 @@
             <div>
                 <ul>
                     <li>
-                        <p style="font-weight: bold;">SITE_DESCRIPTION</p>
-                        <p>&copy; @DateTime.Today.Year.ToString() SITE_NAME. All rights reserved.</p>
+                        <p style="font-weight: bold;">@Model.SiteDescription</p>
+                        <p>&copy; @DateTime.Today.Year.ToString() @Model.Sitename. All rights reserved.</p>
                     </li>
                 </ul>
             </div>
