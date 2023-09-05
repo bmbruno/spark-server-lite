@@ -138,8 +138,8 @@ namespace SparkServerLite.Controllers
                     try
                     {
                         // Preserve aspect ratio
-                        double maxWidth = 200;
-                        double maxHeight = 200;
+                        double maxWidth = 600;
+                        double maxHeight = 600;
 
                         var ratioX = (double)maxWidth / image.Width;
                         var ratioY = (double)maxHeight / image.Height;
