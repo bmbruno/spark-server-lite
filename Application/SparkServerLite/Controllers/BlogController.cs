@@ -32,6 +32,8 @@ namespace SparkServerLite.Controllers
             List<Blog> blogList = new List<Blog>();
             List<BlogTag> tagList = new List<BlogTag>();
 
+            base.Setup(viewModel, _settings);
+
             if (year.HasValue && month.HasValue)
             {
                 // Blogs list by year + month
@@ -69,6 +71,7 @@ namespace SparkServerLite.Controllers
         public ActionResult Post(int year, int month, string slug = "", bool preview = false)
         {
             BlogViewModel viewModel = new BlogViewModel();
+            base.Setup(viewModel, _settings);
 
             if (String.IsNullOrEmpty(slug))
                 return RedirectToAction(actionName: "Index", controllerName: "Blog");
@@ -78,8 +81,8 @@ namespace SparkServerLite.Controllers
 
             viewModel.MapToViewModel(blog, blogTags, _settings);
             viewModel.IsPreview = preview;
-            viewModel.SiteURL = _settings.SiteURL;
-            viewModel.Sitename = _settings.Sitename;
+            //viewModel.SiteURL = _settings.SiteURL;
+            //viewModel.Sitename = _settings.Sitename;
 
             // Should this blog post be displayed at all? (Preview flag overrides denied access in some cases)
             bool shouldDisplay = false;
@@ -111,12 +114,13 @@ namespace SparkServerLite.Controllers
             List<Blog> blogList = new List<Blog>();
             List<BlogTag> tagList = new List<BlogTag>();
 
+            base.Setup(viewModel, _settings);
+
             string unencodedTagName = FormatHelper.GetTagNameFromURL(tagName);
             blogList = _blogRepo.GetByTagName(unencodedTagName).ToList();
             tagList = _blogTagRepo.GetTagsInUse().ToList();
 
             viewModel.MapToViewModel(blogList, tagList, _settings);
-            viewModel.Sitename = _settings.Sitename;
 
             // Paging
             int totalItems = blogList.Count;

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SparkServerLite.Interfaces;
+using SparkServerLite.ViewModels;
 
 namespace SparkServerLite.Controllers
 {
@@ -16,6 +18,12 @@ namespace SparkServerLite.Controllers
                 this.Page = page.Value;
             else
                 this.Page = 1;
+        }
+
+        internal void Setup(BaseViewModel viewModel, IAppSettings appSettings)
+        {
+            viewModel.Sitename = appSettings.Sitename;
+            viewModel.SiteURL = appSettings.SiteURL;
         }
     }
 }

@@ -24,12 +24,11 @@ namespace SparkServerLite.Controllers
         public IActionResult Index()
         {
             HomeViewModel viewModel = new HomeViewModel();
+            base.Setup(viewModel, _settings);
 
             var blogs = _blogRepo.GetRecent(5);
-
             viewModel.MapToViewModel(blogs, _settings);
             viewModel.MenuSelection = MainMenu.Home;
-            viewModel.Sitename = _settings.Sitename;
 
             return View(viewModel);
         }
@@ -37,6 +36,8 @@ namespace SparkServerLite.Controllers
         public ActionResult About()
         {
             HomeViewModel viewModel = new HomeViewModel();
+            base.Setup(viewModel, _settings);
+
             viewModel.MenuSelection = MainMenu.About;
 
             return View(viewModel);
