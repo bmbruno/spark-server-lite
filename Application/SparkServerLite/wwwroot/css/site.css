@@ -9,8 +9,6 @@ em { font-style: italic; }
 .center { text-align: center; }
 pre > code { overflow-x: scroll; }
 p > code { border: 1px solid #AAA; border-radius: 4px; padding: 0.25em 0.5em; font-family: monospace; font-size: 0.9em; }
-blockquote { font-style: italic; color: #555; margin: 2em 0; line-height: 1.5em; padding: 2em; max-width: 650px; }
-blockquote p:last-of-type { margin-bottom: 0; }
 
 /* BASE */
 body { min-width: 400px; text-align: center; font-family: 'XXXXXXX', arial, sans-serif; background-color: #F1F1F1; font-size: 16px; }
@@ -19,14 +17,14 @@ blockquote { font-style: italic; color: #555; background-color: #e3e3e3; margin:
 blockquote p:last-of-type { margin-bottom: 0; }
 
 nav { display: block; margin: 1em auto; width: 100%; }
-nav ul { display: flex; justify-content: center; align-items: center; }
+nav ul { display: flex; justify-content: center; align-items: center; margin: 0; }
 nav ul li a { display: block; padding: 1em; background-color: #AAA; padding: 1em 3em; margin: 0 1em; color: #FFF; }
 nav ul li a:hover { text-decoration: none; }
 
 .admin nav ul { display: block; }
 .admin nav ul a { margin: 0.5em 0; }
 
-h1, h2, h3, h4, h5, h6 { margin: 0; }
+h1, h2, h3, h4, h5, h6 { margin-bottom: 0.5em; line-height: 1em; }
 h1 { font-size: 3em; }
 h2 { font-size: 2em; }
 h3 { font-size: 1.75em; }
@@ -58,14 +56,17 @@ h6 { font-size: 1.45em; }
 .blog-about .item { margin-bottom: 1em; }
 .blog-about .item:last-of-type { margin-bottom: 0; }
 .blog-about .label { font-weight: bold; margin-bottom: 0.15em; font-size: 0.85em }
-.blog-about ul.tags { columns: 1; }
+.blog-about ul.tags { columns: 1; margin: 0; }
+.blog-about ul.tags li { margin: 0; line-height: 1em; list-style-type: none; }
 .blog-about ul.tags li a { display: block; padding: 0.25em 0; }
 
 article.blog { text-align: left; padding: 0 1em; }
 article.blog h1 { font-size: 2.25em; margin: 0 0 1em 0; text-align: center; line-height: 1em; padding-top: 1em; }
-article.blog p { line-height: 1.5em; margin-bottom: 2em; text-align: justify; }
+article.blog p { font-size: 1.15em; line-height: 1.5em; margin-bottom: 2em; text-align: justify; }
 article.blog p:last-of-type { margin-bottom: 0; }
 article.blog .figure { margin: 0 0 2em 0; }
+article.blog ul { margin: 0 0 2em 2em; }
+article.blog ul li { list-style-type: disc; line-height: 1.5em; margin-bottom: 0.5em; }
 
 .sub-menu { padding: 1em 0; }
 
