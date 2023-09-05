@@ -20,6 +20,11 @@ namespace SparkServerLite.Controllers
                 this.Page = 1;
         }
 
+        /// <summary>
+        /// Assigns site-wide variables on the BaseViewModel class.
+        /// </summary>
+        /// <param name="viewModel">Current view model that derives from BaseViewModel.</param>
+        /// <param name="appSettings">IAppSettings instance.</param>
         internal void Setup(BaseViewModel viewModel, IAppSettings appSettings)
         {
             viewModel.Sitename = appSettings.Sitename;
