@@ -11,7 +11,7 @@ pre > code { overflow-x: scroll; }
 p > code { border: 1px solid #AAA; border-radius: 4px; padding: 0.25em 0.5em; font-family: monospace; font-size: 0.9em; }
 
 /* BASE */
-body { min-width: 400px; text-align: center; font-family: 'XXXXXXX', arial, sans-serif; background-color: #F1F1F1; font-size: 16px; }
+body { min-width: 300px; text-align: center; font-family: 'XXXXXXX', arial, sans-serif; background-color: #F1F1F1; font-size: 16px; }
 strong { font-weight: bold; } 
 blockquote { font-style: italic; color: #555; background-color: #e3e3e3; margin: 2em 0; padding: 2em 2em 2em 2em; max-width: 650px; line-height: 1.5em; }
 blockquote p:last-of-type { margin-bottom: 0; }
@@ -65,7 +65,7 @@ article.blog h1 { font-size: 2.25em; margin: 0 0 1em 0; text-align: center; line
 article.blog p { font-size: 1.15em; line-height: 1.5em; margin-bottom: 2em; text-align: justify; }
 article.blog p:last-of-type { margin-bottom: 0; }
 article.blog .figure { margin: 0 0 2em 0; }
-article.blog ul, article.blog ol { margin: 0 0 2em 2em; }
+article.blog ul, article.blog ol { margin: 0 0 2em 2em; font-size: 1.15em; }
 article.blog ul li { list-style-type: disc; line-height: 1.5em; margin-bottom: 0.5em; }
 article.blog ol li { list-style-type: decimal; line-height: 1.5em; margin-bottom: 0.5em; }
 
