@@ -7,7 +7,8 @@ a:hover { color: #00F; text-decoration: underline; }
 .cf:after { content: ""; display: table; clear: both; }
 em { font-style: italic; }
 .center { text-align: center; }
-pre { overflow-x: scroll; }
+pre > code { overflow-x: scroll; }
+p > code { border: 1px solid #AAA; border-radius: 4px; padding: 0.25em 0.5em; font-family: monospace; font-size: 0.9em; }
 blockquote { font-style: italic; color: #555; margin: 2em 0; line-height: 1.5em; padding: 2em; max-width: 650px; }
 blockquote p:last-of-type { margin-bottom: 0; }
 
