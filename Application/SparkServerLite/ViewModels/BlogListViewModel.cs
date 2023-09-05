@@ -10,8 +10,6 @@ namespace SparkServerLite.ViewModels
 
         public string Header { get; set; }
 
-        public string TagFilter { get; set; } = string.Empty;
-
         public BlogListViewModel()
         {
             BlogList = new List<BlogViewModel>();
