@@ -65,8 +65,9 @@ article.blog h1 { font-size: 2.25em; margin: 0 0 1em 0; text-align: center; line
 article.blog p { font-size: 1.15em; line-height: 1.5em; margin-bottom: 2em; text-align: justify; }
 article.blog p:last-of-type { margin-bottom: 0; }
 article.blog .figure { margin: 0 0 2em 0; }
-article.blog ul { margin: 0 0 2em 2em; }
+article.blog ul, article.blog ol { margin: 0 0 2em 2em; }
 article.blog ul li { list-style-type: disc; line-height: 1.5em; margin-bottom: 0.5em; }
+article.blog ol li { list-style-type: decimal; line-height: 1.5em; margin-bottom: 0.5em; }
 
 .sub-menu { padding: 1em 0; }
 
