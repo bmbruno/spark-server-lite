@@ -10,7 +10,7 @@ using SparkServerLite.ViewModels.Admin;
 
 namespace SparkServerLite.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         private readonly IBlogRepository<Blog> _blogRepo;
         private readonly IBlogTagRepository<BlogTag> _blogTagRepo;
@@ -27,12 +27,17 @@ namespace SparkServerLite.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            BaseViewModel viewModel = new BaseViewModel();
+            base.Setup(viewModel, _settings);
+            ViewData["Title"] = "Admin";
+
+            return View(viewModel);
         }
 
         public ActionResult BlogList()
         {
             BlogEditListViewModel viewModel = new BlogEditListViewModel();
+            base.Setup(viewModel, _settings);
 
             IEnumerable<Blog> blogs = _blogRepo.GetAll();
             viewModel.MapToViewModel(blogs);
@@ -43,6 +48,7 @@ namespace SparkServerLite.Controllers
         public ActionResult BlogEdit(int? ID)
         {
             BlogEditViewModel viewModel = new BlogEditViewModel();
+            base.Setup(viewModel, _settings);
 
             if (ID.HasValue)
             {
@@ -96,6 +102,8 @@ namespace SparkServerLite.Controllers
         [HttpPost]
         public ActionResult BlogUpdate(BlogEditViewModel viewModel)
         {
+            base.Setup(viewModel, _settings);
+
             // Check for unique URL
             if (viewModel.Mode == EditMode.Add && !String.IsNullOrEmpty(viewModel.Slug))
             {
@@ -194,6 +202,7 @@ namespace SparkServerLite.Controllers
         public ActionResult BlogTagList()
         {
             BlogTagListViewModel viewModel = new BlogTagListViewModel();
+            base.Setup(viewModel, _settings);
 
             IEnumerable<BlogTag> allTags = _blogTagRepo.GetAllTagsWithCount();
 
@@ -213,6 +222,7 @@ namespace SparkServerLite.Controllers
         public ActionResult BlogTagEdit(int? ID)
         {
             BlogTagEditViewModel viewModel = new BlogTagEditViewModel();
+            base.Setup(viewModel, _settings);
 
             if (ID.HasValue)
             {
