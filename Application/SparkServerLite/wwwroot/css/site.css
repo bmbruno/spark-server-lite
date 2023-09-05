@@ -4,7 +4,6 @@ html { overflow-y: scroll; }
 img { max-width: 100%; }
 a, a:visited { text-decoration: none; color: #00F; transition: all 0.1s ease-in-out; }
 a:hover { color: #00F; text-decoration: underline; }
-.cf:after { content: ""; display: table; clear: both; }
 em { font-style: italic; }
 .center { text-align: center; }
 pre > code { overflow-x: scroll; }
@@ -143,7 +142,8 @@ footer { padding: 2em 1em; margin: 0 auto; text-align: left; line-height: 1.5em;
 
 	article.blog { padding: 0 2em; font-size: 1.1em; line-height: 1.15em; }
 	article.blog h1 { font-size: 3em; text-align: left; padding: 0; }
-	article.blog p { line-height: 1.75em; max-width: 650px; }
+	article.blog p { font-size: 1em; line-height: 1.75em; max-width: 650px; }
+	article.blog ul, article.blog ol { font-size: 1em; }
 
 	.status-message { max-width: 600px; padding: 2em; line-height: 1.5em; }
 
