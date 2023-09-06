@@ -5,21 +5,21 @@
     ViewData["Title"] = Model.Title;
 }
 
-<img src="@Model.ImageURL" alt="@Model.Title" title="@Model.Title" class="blog-hero-banner" />
+<div class="blog-banner" style="background-image: url('@Model.ImageURL');">
+    <h1 class="blog-title">@ViewBag.Title</h1>
+</div>
 
 @if (Model.IsPreview)
 {
-        <div style="font-size: 3em; font-weight: bold; text-align: center; color: #FFF; background-color: #DC291E; padding: 0.5em;">BLOG PREVIEW</div>
+    <div style="font-size: 3em; font-weight: bold; text-align: center; color: #FFF; background-color: #DC291E; padding: 0.5em;">BLOG PREVIEW</div>
 
-        <div style="background-color: #FFF; padding: 1em; margin: 2em auto; border: 2px solid #DC291E;">
-            <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 0.5em;">Subtitle (Preview Only)</div>
-            @Html.Raw(Model.Subtitle)
-        </div>
+    <div style="background-color: #FFF; padding: 1em; margin: 2em auto; border: 2px solid #DC291E;">
+        <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 0.5em;">Subtitle (Preview Only)</div>
+        @Html.Raw(Model.Subtitle)
+    </div>
 }
 
 <article class="blog">
-
-    <h1 class="blog-title">@ViewBag.Title</h1>
 
     <div class="blog-about">
         <div class="item">
