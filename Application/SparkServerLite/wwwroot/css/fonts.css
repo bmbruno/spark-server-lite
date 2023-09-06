@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Baloo';
+    src: url('fonts/baloo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans';
+    src: url('fonts/opensans.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
