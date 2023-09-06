@@ -341,8 +341,6 @@
                 formData.append(fileInput.files[i].name, fileInput.files[i]);
             }
 
-            // TODO: show local spinner + message
-
             fetch(SparkServerAdmin.endpoints.uploadMedia, { method: "POST", body: formData })
                 .then(response => response.json())
                 .then(data => SparkServerAdmin.handleMediaUploadResponse(data));
