@@ -24,33 +24,26 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     </head>
 
-    <body class="admin">
-
-        <header>
-
-            <div class="logo-wrapper">
-                <a href="/">
-                    <picture>
-                        <source srcset="/images/site-logo.png" media="(prefers-color-scheme: dark)" />
-                        <img src="/images/site-logo.png" alt="SITE_NAME Logo" class="logo" />
-                    </picture>
-                </a>
-            </div>
-
-            <div>
-                <nav>
-                    <ul>
-                        <li><a href="/Admin">Admin Home</a></li>
-                        <li><a href="/Admin/BlogList">Blogs</a></li>
-                        <li><a href="/Admin/BlogTagList">Blog Tags</a></li>
-                        <!-- <li><a href="/Admin/Media">Media</a></li> -->
-                    </ul>
-                </nav>
-            </div>
-
-        </header>
+    <body>
 
         <div class="content admin">
+
+            <header>
+
+                <h2>@Model.Sitename Admin</h2>
+
+                <div>
+                    <nav>
+                        <ul>
+                            <li><a class="btn" href="/Admin">Home</a></li>
+                            <li><a class="btn" href="/Admin/BlogList">Blogs</a></li>
+                            <li><a class="btn" href="/Admin/BlogTagList">Blog Tags</a></li>
+                            <!-- <li><a href="/Admin/Media">Media</a></li> -->
+                        </ul>
+                    </nav>
+                </div>
+
+            </header>
 
             @if (TempData["Success"] != null) 
             {
