@@ -30,9 +30,9 @@
         {
             <li class="blog-card">
 
-                <a href="@blog.URL">
-                    <img src="@blog.ImageThumbnailPath" title="@blog.Title" alt="@blog.Title" />
-                </a>
+                <div class="image-preview" style="background-image: url('@blog.ImageThumbnailPath');">
+                    <a href="@blog.URL">&nbsp;</a>
+                </div>
 
                 <div class="overview">
                     <h3><a href="@blog.URL">@blog.Title</a></h3>
