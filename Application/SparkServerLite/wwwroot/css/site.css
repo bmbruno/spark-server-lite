@@ -32,6 +32,7 @@ h6 { font-size: 1.45em; }
 .content { width: 100%; margin: 0 auto; padding: 1em 0 1em 0; background-color: #FFF; }
 
 .logo-wrapper { width: 300px; margin: 0 auto; }
+.logo-byline { margin-top: 0.5em; font-size: 1.25em; }
 
 .loader { display: none; }
 .loader-message { margin: 1em; padding: 1em; }
@@ -45,7 +46,7 @@ h6 { font-size: 1.45em; }
 .hero-link { text-decoration: none; }
 .hero-link:hover { text-decoration: none; }
 
-.blog-card { padding: 1em; margin: 0 0 1em 0; text-align: left; }
+.blog-card { padding: 0; margin: 0 0 2em 0; text-align: left; }
 .blog-card:last-of-type { margin-bottom: 0; }
 .blog-card img { margin-bottom: 1em; }
 .blog-card h3 { font-size: 1.75em; margin-bottom: 0.5em; line-height: 1.25em; }
@@ -139,7 +140,7 @@ footer p { padding-bottom: 0.25em; }
 	.hero h2 { font-size: 3em; line-height: 1.25em }
 	.hero h3 { font-size: 1.5em; }
 
-	.content { max-width: 80%; padding: 2em 1em 3em 1em; margin-top: 1em; }
+	.content { max-width: 80%; padding: 2em 1em 3em 1em; margin-top: 1em; box-shadow: 0 1em 48px #a7a7a7; }
 	.blog-card { display: grid; grid-template-columns: 2fr 3fr; }
 	.blog-card img { grid-column: 1; padding-right: 1em; margin-bottom: 0; }
 	.blog-card .overview { grid-column: 2; text-align: left; }
