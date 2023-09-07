@@ -24,6 +24,14 @@ namespace SparkServerLite.Infrastructure
 
         public string DefaultBlogBannerPath { get; set; } = string.Empty;
 
-        public string DefaultBlogBannerThumbnailPath { get; set; } = string.Empty;   
+        public string DefaultBlogBannerThumbnailPath { get; set; } = string.Empty;
+
+        public string SSOSigningKey { get; set; } = string.Empty;
+
+        public string SSOSiteID { get; set; } = string.Empty;
+
+        public string SSOLoginURL { get; set; } = string.Empty;
+
+        public string SSOLogoutURL { get; set; } = string.Empty;
     }
 }

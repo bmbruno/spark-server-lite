@@ -24,5 +24,13 @@
 
         string DefaultBlogBannerThumbnailPath { get; set; }
 
+        string SSOSigningKey { get; set; }
+
+        string SSOSiteID { get; set; }
+
+        string SSOLoginURL { get; set; }
+
+        string SSOLogoutURL { get; set; }
+
     }
 }
