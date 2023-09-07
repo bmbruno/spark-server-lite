@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using SparkServer.Infrastructure.Repositories;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
@@ -18,6 +19,20 @@ namespace SparkServerLite
             builder.Services.AddTransient<IBlogRepository<Blog>, BlogRepository>();
             builder.Services.AddTransient<IAuthorRepository<Author>, AuthorRepository>();
             builder.Services.AddTransient<IBlogTagRepository<BlogTag>, BlogTagRepository>();
+
+            builder.Services.AddAuthentication(options => {
+
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
+            }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options => {
+
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.AccessDeniedPath = "/Account/Forbidden";
+
+                options.ExpireTimeSpan = TimeSpan.FromDays(7);
+                options.SlidingExpiration = true;
+            });
 
             // Load configuration/settings from appSettings
             IAppSettings appSettings = new AppSettings();
@@ -40,6 +55,7 @@ namespace SparkServerLite
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

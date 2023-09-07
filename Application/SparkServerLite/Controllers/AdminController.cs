@@ -10,6 +10,7 @@ using SparkServerLite.ViewModels.Admin;
 
 namespace SparkServerLite.Controllers
 {
+    [Authorize]
     public class AdminController : BaseController
     {
         private readonly IBlogRepository<Blog> _blogRepo;
