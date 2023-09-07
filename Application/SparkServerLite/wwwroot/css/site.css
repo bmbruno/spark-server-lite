@@ -18,10 +18,10 @@ blockquote p:last-of-type { margin-bottom: 0; }
 
 nav { display: block; margin: 1em auto; width: 100%; }
 nav ul { display: flex; justify-content: center; align-items: center; margin: 0; }
-nav ul li a { display: block; padding: 1em 2em; margin: 0 1em; font-family: 'Baloo';  }
+nav ul li a { display: block; padding: 1em 2em; margin: 0 1em; font-family: 'RubikMedium';  }
 nav ul li a:hover { text-decoration: none; }
 
-h1, h2, h3, h4, h5, h6 { margin-bottom: 0.5em; line-height: 1em; font-family: "Baloo", sans-serif; }
+h1, h2, h3, h4, h5, h6 { margin-bottom: 0.5em; line-height: 1em; font-family: "RubikBold", sans-serif; }
 h1 { font-size: 3em; }
 h2 { font-size: 2em; }
 h3 { font-size: 1.75em; }
@@ -36,7 +36,7 @@ h6 { font-size: 1.45em; }
 .loader { display: none; }
 .loader-message { margin: 1em; padding: 1em; }
 
-.section .title { padding: 1em 0; margin: 0; }
+.section .title { padding: 1em 0; margin: 0; font-family: "RubikMedium", sans-serif; }
 
 .hero { padding: 4em 1em; background-size: cover; background-position: center; box-shadow: inset 0 0 192px #000; color: #FFF; }
 .hero h2 { font-size: 2em; font-weight: bold; margin: 0.5em 0 0.5em 0; }
@@ -115,6 +115,7 @@ a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position
 .explore-tags li a { padding: 1em; display: block; }
 
 .bottom-nav { text-align: center; padding: 2em; }
+.bottom-nav a { font-family: "RubikMedium", sans-serif; font-size: 1.15em; }
 
 footer { padding: 2em 1em; margin: 0 auto; text-align: left; line-height: 1.5em; }
 footer p { padding-bottom: 0.25em; }
@@ -129,7 +130,7 @@ footer p { padding-bottom: 0.25em; }
 	header { margin-bottom: 2em; }
 
 	nav { max-width: 80%; }
-	nav li a { font-size: 1.25em; } 
+	nav li a { font-size: 1.15em; } 
 
 	.section .title { font-size: 2.5em; padding: 1.25em 0; }
 	

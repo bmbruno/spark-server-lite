@@ -1,4 +1,18 @@
 @font-face {
+    font-family: 'RubikMedium';
+    src: url('fonts/rubik-medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'RubikBold';
+    src: url('fonts/rubik-bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
     font-family: 'Baloo';
     src: url('fonts/baloo.woff') format('woff');
     font-weight: normal;
