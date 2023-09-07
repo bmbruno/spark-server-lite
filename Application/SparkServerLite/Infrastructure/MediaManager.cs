@@ -9,6 +9,8 @@ namespace SparkServerLite.Infrastructure
     {
         private readonly IAppSettings _settings;
 
+        private const string _thumbnailAffix = "-thumb";
+
         public MediaManager(IAppSettings settings)
         {
             _settings = settings;
@@ -64,7 +66,7 @@ namespace SparkServerLite.Infrastructure
             foreach (string file in files)
             {
                 // Filter out thumbnail images from this list
-                if (file.EndsWith($"_thumb{Path.GetExtension(file)}"))
+                if (file.EndsWith($"{_thumbnailAffix}{Path.GetExtension(file)}"))
                     continue;
 
                 string filename = Path.GetFileName(file);
@@ -83,7 +85,7 @@ namespace SparkServerLite.Infrastructure
         }
 
         /// <summary>
-        /// Creates a the standard thumbnail file name for a file. Format is filename + "_thumb" + extensions.
+        /// Creates a the standard thumbnail file name for a file. Format is filename + "-thumb" + extensions.
         /// </summary>
         /// <param name="filePath">Full file path.</param>
         /// <returns>File path with the thumbnail filename.</returns>
@@ -92,7 +94,7 @@ namespace SparkServerLite.Infrastructure
             string filename = Path.GetFileName(filePath);
             string extension = Path.GetExtension(filePath);
 
-            return filePath.Replace(extension, $"_thumb{extension}");
+            return filePath.Replace(extension, $"{_thumbnailAffix}{extension}");
         }
 
         /// <summary>
