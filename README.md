@@ -23,12 +23,21 @@ Default images (as JPG) for blog banners should be named with sequential integer
 ### App Settings descriptors
 
 * **Sitename**: Displayable name of the website.
+* **SiteDescription**: Displayable description of the website. Used in metadata fields, under main logo, and footer.
 * **SiteURL**: Resolvable URL of the site, including protocal and hostname (`https://www.myblog.com`).
+ 
 * **MediaFolderServerPath**: Relative server-addressable path to the media folder.
 * **MediaFolderWebPath**: Absolute addressable path to the media from the root web directory.
+
 * **DatabaseConnectionString**: Connection string for the SQLite database.
 * **BlogItemsPerPage**: Number of blog items to display per page.
+
 * **BlogBannerServerPath**: Absolute addressable path to the default blog banners folder.
 * **BlogBannerWebPath**: Absolute addressable path to the blog banners from the root web directory.
 * **DefaultBlogBannerPath**: Absolute addressable path to the default blog banner image.
 * **DefaultBlogBannerThumbnailPath**: Absolute addressable path to the default blog banner thumbnail image.
+
+* **SSOSigningKey**: Signing key from the QuickSSO system.
+* **SSOSiteID**: SiteID value provided by the QuickSSO system.
+* **SSOLoginURL**: should be set to `http://sso.brandonbruno.com/Authenticate/`
+* **SSOLogoutURL**: should be set to `http://sso.brandonbruno.com/Logout/`
