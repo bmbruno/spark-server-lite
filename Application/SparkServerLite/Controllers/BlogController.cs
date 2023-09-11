@@ -81,8 +81,6 @@ namespace SparkServerLite.Controllers
 
             viewModel.MapToViewModel(blog, blogTags, _settings);
             viewModel.IsPreview = preview;
-            //viewModel.SiteURL = _settings.SiteURL;
-            //viewModel.Sitename = _settings.Sitename;
 
             // Should this blog post be displayed at all? (Preview flag overrides denied access in some cases)
             bool shouldDisplay = false;
