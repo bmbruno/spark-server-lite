@@ -38,7 +38,7 @@
                     <a href="/">
                         <picture>
                             <source srcset="/images/logo_icon_web.png" media="(prefers-color-scheme: dark)" />
-                        <img src="/images/logo_icon_web.png" alt="@Model.Sitename Logo" title="@Model.Sitename" class="logo" />
+                            <img src="/images/logo_icon_web.png" alt="@Model.Sitename Logo" title="@Model.Sitename" class="logo" />
                         </picture>
                     </a>
                     <p class="logo-byline">@Model.SiteDescription</p>
@@ -48,8 +48,8 @@
                     
                     <nav>
                         <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/blog">All Posts</a></li>
+                            <li><a class="btn" href="/">Home</a></li>
+                            <li><a class="btn" href="/blog">All Posts</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -80,12 +80,11 @@
 
         <footer>
             <div>
-                <ul>
-                    <li>
-                        <p>&copy; @DateTime.Today.Year.ToString() Brandon Bruno. All rights reserved.</p>
-                        <p>Refactor: a blog covering .NET, JavaScript, modern software architecture, career, and leadership experience from Brandon Bruno.</p>
-                    </li>
-                </ul>
+                <p>&copy; @DateTime.Today.Year.ToString() Brandon Bruno. All rights reserved.</p>
+                <p>Refactor: a blog covering .NET, JavaScript, modern software architecture, career, and leadership experience from Brandon Bruno.</p>
+            </div>
+            <div>
+                <p>CONTACT</p>
             </div>
         </footer>
 

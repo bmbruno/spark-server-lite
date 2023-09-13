@@ -128,7 +128,7 @@ a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position
 .bottom-nav a { font-family: "RubikMedium", sans-serif; font-size: 1.15em; }
 
 footer { padding: 2em 1em; margin: 0 auto; text-align: left; line-height: 1.5em; }
-footer p { padding-bottom: 0.25em; }
+footer p { padding-bottom: 0.25em; text-shadow: 1px 1px 0 #FFF; }
 
 @media (min-width: 600px)
 {
@@ -202,6 +202,8 @@ footer p { padding-bottom: 0.25em; }
 	.blog-card .date { font-size: 1em; }
 
 	article.blog { padding: 0 8em; }
+
+	footer { display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 24px; padding: 1em 0; margin-top: 1em; }
 }
 
 @media (min-width: 1350px)
