@@ -381,16 +381,17 @@
         openModal: function (title, body, full = false) {
 
             let modal = document.getElementById("Modal");
+            let content = document.getElementById("ModalContent");
 
-            if (modal) {
+            if (modal && content) {
 
-                modal.innerHTML = "";
+                content.innerHTML = "";
 
                 if (title)
-                    modal.innerHTML += `<h2>${title}</h2>`;
+                    content.innerHTML += `<h2>${title}</h2>`;
 
                 if (body)
-                    modal.innerHTML += body;
+                    content.innerHTML += body;
 
                 if (full)
                     modal.classList.add("full");
@@ -408,10 +409,12 @@
         closeModal: function () {
 
             let modal = document.getElementById("Modal");
+            let content = document.getElementById("ModalContent");
 
-            if (modal) {
+            if (modal && content) {
                 modal.style.display = "none";
                 modal.classList.remove("full");
+                content.innerHTML = "";
             }
 
         },
