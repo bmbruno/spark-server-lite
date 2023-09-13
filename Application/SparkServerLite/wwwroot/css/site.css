@@ -16,6 +16,8 @@ strong { font-weight: bold; }
 blockquote { font-style: italic; color: #555; background-color: #e3e3e3; margin: 2em 0; padding: 2em 2em 2em 2em; max-width: 650px; line-height: 1.5em; }
 blockquote p:last-of-type { margin-bottom: 0; }
 
+header { width: 100%; margin: 0 auto; padding: 1em 0; }
+
 nav { display: block; margin: 1em auto; width: 100%; }
 nav ul { display: flex; justify-content: center; align-items: center; margin: 0; }
 nav ul li a { display: block; padding: 1em 2em; margin: 0 1em; font-family: 'RubikMedium';  }
@@ -135,7 +137,7 @@ footer p { padding-bottom: 0.25em; }
 
 @media (min-width: 825px)
 {
-	header { margin-bottom: 2em; }
+	header { margin: 1em auto; max-width: 80%; }
 
 	nav { max-width: 80%; }
 	nav li a { font-size: 1.15em; } 
@@ -150,7 +152,7 @@ footer p { padding-bottom: 0.25em; }
 	.hero h2 { font-size: 3em; line-height: 1.25em }
 	.hero h3 { font-size: 1.5em; }
 
-	.content { max-width: 80%; padding: 2em 1em 3em 1em; margin-top: 1em; box-shadow: 0 1em 48px #a7a7a7; }
+	.content { max-width: 80%; padding: 1em 1em 3em 1em; margin-top: 1em; box-shadow: 0 1em 48px #a7a7a7; }
 
 	.blog-list { padding: 0; }
 
