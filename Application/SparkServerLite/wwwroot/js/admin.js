@@ -56,6 +56,12 @@
                 clearBlogTagsButton.addEventListener("click", SparkServerAdmin.handleClearBlogTags);
             }
 
+            // Modal close
+            let closeModalButton = document.getElementById("CloseModal");
+            if (closeModalButton) {
+                closeModalButton.addEventListener("click", SparkServerAdmin.closeModal);
+            }
+
             // Delete buttons
             SparkServerAdmin.wireDeleteConfirm();
 
@@ -368,6 +374,44 @@
                 // Refresh media list
                 SparkServerAdmin.loadBlogMediaList();
 
+            }
+
+        },
+
+        openModal: function (title, body, full = false) {
+
+            let modal = document.getElementById("Modal");
+
+            if (modal) {
+
+                modal.innerHTML = "";
+
+                if (title)
+                    modal.innerHTML += `<h2>${title}</h2>`;
+
+                if (body)
+                    modal.innerHTML += body;
+
+                if (full)
+                    modal.classList.add("full");
+
+                modal.style.display = "block";
+
+            } else {
+
+                console.log("Modal not found on this page.");
+
+            }
+
+        },
+
+        closeModal: function () {
+
+            let modal = document.getElementById("Modal");
+
+            if (modal) {
+                modal.style.display = "none";
+                modal.classList.remove("full");
             }
 
         },
