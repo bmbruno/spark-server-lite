@@ -21,9 +21,15 @@
         wireButtons: function () {
 
             // Convert button
-            let covnertButton = document.getElementById("ConvertToHTML");
-            if (covnertButton) {
-                covnertButton.addEventListener("click", SparkServerAdmin.handleConvertButton);
+            let convertButton = document.getElementById("ConvertToHTML");
+            if (convertButton) {
+                convertButton.addEventListener("click", SparkServerAdmin.handleConvertButton);
+            }
+
+            // Preview button
+            let previewButton = document.getElementById("PreviewHTML");
+            if (previewButton) {
+                previewButton.addEventListener("click", SparkServerAdmin.handlePreviewButton);
             }
 
             // Upload Media button
@@ -247,6 +253,36 @@
 
         },
 
+        handlePreviewButton: async function () {
+
+            let field = document.getElementById("Markdown");
+
+            if (field && field.value != '') {
+
+                let formData = new FormData();
+
+                formData.append("markdown", field.value);
+                let response = await fetch(`${SparkServerAdmin.endpoints.convertToHTML}`, { method: "POST", body: formData });
+                let result = await response.json();
+
+                if (result.status == "OK") {
+
+                    let content = `<article class='blog'>${result.data}</article>`;
+                    SparkServerAdmin.openModal(null, content, true);
+
+                } else if (result.status == "ERROR") {
+
+                    alert(result.message);
+
+                } else if (result.status == "EXCEPTION") {
+
+                    alert("EXCEPTION! See browser console for details.");
+
+                }
+            }
+
+        },
+
         handleTodayButton: function () {
 
             let publishDateField = document.getElementById("PublishDate");
@@ -396,6 +432,7 @@
                 if (full)
                     modal.classList.add("full");
 
+                modal.style.top = (window.scrollY + (window.innerHeight * 0.2)) + "px";
                 modal.style.display = "block";
 
             } else {
