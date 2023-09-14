@@ -15,6 +15,7 @@ body { min-width: 300px; text-align: center; font-family: 'OpenSans', arial, san
 strong { font-weight: bold; } 
 blockquote { font-style: italic; color: #555; background-color: #e3e3e3; margin: 2em 0; padding: 2em 2em 2em 2em; max-width: 650px; line-height: 1.5em; }
 blockquote p:last-of-type { margin-bottom: 0; }
+.bold { font-weight: bold; }
 
 header { width: 100%; margin: 0 auto; padding: 1em 0; }
 

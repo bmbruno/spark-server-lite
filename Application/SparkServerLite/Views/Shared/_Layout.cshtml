@@ -48,7 +48,10 @@
                     
                     <nav>
                         <ul>
-                            <li><a class="btn" href="/">Home</a></li>
+                            @if (showHomeLink)
+                            {
+                                <li><a class="btn" href="/">Home</a></li>
+                            }
                             <li><a class="btn" href="/blog">All Posts</a></li>
                         </ul>
                     </nav>
@@ -80,11 +83,12 @@
 
         <footer>
             <div>
-                <p>&copy; @DateTime.Today.Year.ToString() Brandon Bruno. All rights reserved.</p>
+                <p class="bold">&copy; @DateTime.Today.Year.ToString() Brandon Bruno. All rights reserved.</p>
                 <p>Refactor: a blog covering .NET, JavaScript, modern software architecture, career, and leadership experience from Brandon Bruno.</p>
             </div>
             <div>
-                <p>CONTACT</p>
+                <p>Comments? Questions?</p>
+                <p><a href="https://www.linkedin.com/in/brandonbruno/" target="_blank">Brandon Bruno on LinkedIn</a></p>
             </div>
         </footer>
 
