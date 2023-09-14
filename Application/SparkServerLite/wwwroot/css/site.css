@@ -129,8 +129,11 @@ a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position
 .bottom-nav { text-align: center; padding: 2em; }
 .bottom-nav a { font-family: "RubikMedium", sans-serif; font-size: 1.15em; }
 
-footer { padding: 2em 1em; margin: 0 auto; text-align: left; line-height: 1.5em; }
-footer p { padding-bottom: 0.25em; text-shadow: 1px 1px 0 #FFF; }
+footer { width: 100%; text-align: left; line-height: 1.5em; background-color: #555; padding: 1em 0; box-shadow: inset 0 16px 48px; }
+footer .container { margin: 0 auto; }
+footer p { padding-bottom: 0.25em; color: #FFF; text-shadow: 1px 1px 0 #000; }
+footer a, footer a:visited { color: #cefff5; }
+footer a:hover { color: #FFF; }
 
 @media (min-width: 600px)
 {
@@ -139,7 +142,7 @@ footer p { padding-bottom: 0.25em; text-shadow: 1px 1px 0 #FFF; }
 
 @media (min-width: 825px)
 {
-	header { margin: 1em auto; max-width: 80%; }
+	header { margin: 1em auto; max-width: 75%; }
 
 	nav {  }
 	nav ul li a { font-size: 1.15em; } 
@@ -170,7 +173,7 @@ footer p { padding-bottom: 0.25em; text-shadow: 1px 1px 0 #FFF; }
 	article.blog { padding: 0 2em; font-size: 1.1em; line-height: 1.15em; }
 	article.blog h1 { font-size: 3em; text-align: left; padding: 0; }
 	article.blog p { font-size: 1em; line-height: 1.75em; max-width: 650px; }
-	article.blog ul, article.blog ol { font-size: 1em; }
+	article.blog ul, article.blogol { font-size: 1em; }
 
 	.status-message { max-width: 600px; padding: 2em; line-height: 1.5em; }
 
@@ -187,7 +190,7 @@ footer p { padding-bottom: 0.25em; text-shadow: 1px 1px 0 #FFF; }
 
 	.explore-tags li a { padding: 1em 2em; font-size: 1.25em; }
 
-	footer { max-width: 80%; }
+	footer {  }
 }
 
 @media (min-width: 1100px)
@@ -209,7 +212,7 @@ footer p { padding-bottom: 0.25em; text-shadow: 1px 1px 0 #FFF; }
 
 	article.blog { padding: 0 8em; }
 
-	footer { display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 24px; padding: 1em 0; margin-top: 1em; }
+	footer .container { max-width: 75%; display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 24px; padding: 1em 0; margin-top: 1em; }
 }
 
 @media (min-width: 1350px)
