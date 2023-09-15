@@ -32,7 +32,9 @@ h4 { font-size: 1.65em; }
 h5 { font-size: 1.5em; }
 h6 { font-size: 1.45em; }
 
-.content { width: 100%; margin: 0 auto; padding: 1em 0 1em 0;  }
+.container { width: 100%; }
+
+.content { margin: 0 auto; padding: 1em 0 1em 0;  }
 
 .logo-wrapper img { width: 300px; margin: 0 auto; }
 .logo-byline { margin-top: 0.5em; font-size: 1.25em; }
@@ -60,7 +62,7 @@ h6 { font-size: 1.45em; }
 .blog-card .subtitle { font-size: 1.15em; margin-bottom: 0.5em; }
 .blog-card .date { font-size: 0.85em; }
 
-.blog-banner { background-size: cover; background-position: center; height: 250px; position: relative; margin-bottom: 1em; border-radius: 4px; }
+.blog-banner { background-size: cover; background-position: center; height: 250px; position: relative; border-radius: 4px; }
 .blog-banner h1 { font-size: 2em; margin: 0; line-height: 1.25em; position: absolute; bottom: 0px; backdrop-filter: blur(18px); color: #FFF; padding: 0.5em 0.5em; text-shadow: 2px 2px 2px #000; background-color: rgba(0, 0, 0, 0.25); border-bottom-left-radius: 4px; border-top-right-radius: 4px;}
 
 .blog-about { margin: 1em auto; max-width: 500px; padding: 1em; text-align: left; columns: 2; }
@@ -72,7 +74,7 @@ h6 { font-size: 1.45em; }
 .blog-about ul.tags li { margin: 0; line-height: 1em; list-style-type: none; }
 .blog-about ul.tags li a { display: block; padding: 0.25em 0; }
 
-article.blog { text-align: left; padding: 0 1em; }
+article.blog { text-align: left; padding: 1em; background-color: #FFF; }
 article.blog h1 { font-size: 2.25em; margin: 0 0 1em 0; text-align: center; line-height: 1em; padding-top: 1em; }
 article.blog p { font-size: 1.15em; line-height: 1.5em; margin-bottom: 2em; text-align: justify; }
 article.blog .figure { margin: 0 0 2em 0; }
@@ -130,7 +132,7 @@ a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position
 .bottom-nav a { font-family: "RubikMedium", sans-serif; font-size: 1.15em; }
 
 footer { width: 100%; text-align: left; line-height: 1.5em; background-color: #555; padding: 1em 0; box-shadow: inset 0 16px 48px; }
-footer .container { margin: 0 auto; }
+footer .container { margin: 0 auto; padding: 0 1em; }
 footer p { padding-bottom: 0.25em; color: #FFF; text-shadow: 1px 1px 0 #000; }
 footer a, footer a:visited { color: #cefff5; }
 footer a:hover { color: #FFF; }
@@ -142,7 +144,9 @@ footer a:hover { color: #FFF; }
 
 @media (min-width: 825px)
 {
-	header { margin: 1em auto; max-width: 75%; }
+	header { margin: 1em auto; }
+
+	.container { max-width: 95%; }
 
 	nav {  }
 	nav ul li a { font-size: 1.15em; } 
@@ -157,7 +161,7 @@ footer a:hover { color: #FFF; }
 	.hero h2 { font-size: 3em; line-height: 1.25em }
 	.hero h3 { font-size: 1.5em; }
 
-	.content { max-width: 95%; padding: 0; margin-top: 1em; }
+	.content { padding: 0; margin-top: 1em; }
 
 	.blog-list { padding: 0; }
 
@@ -167,10 +171,10 @@ footer a:hover { color: #FFF; }
 	
 	.blog-about { min-width: 375px; margin: 0 auto 4em auto; padding: 2em; border: 1px solid #AAA; border-radius: 6px; }
 
-	.blog-banner { margin-bottom: 3em; height: 475px; }
+	.blog-banner { height: 475px; }
 	.blog-banner h1 { font-size: 3em; }
 
-	article.blog { padding: 0 2em; font-size: 1.1em; line-height: 1.15em; }
+	article.blog { padding: 5em; font-size: 1.1em; line-height: 1.15em; }
 	article.blog h1 { font-size: 3em; text-align: left; padding: 0; }
 	article.blog p { font-size: 1em; line-height: 1.75em; max-width: 650px; }
 	article.blog ul, article.blogol { font-size: 1em; }
@@ -188,6 +192,7 @@ footer a:hover { color: #FFF; }
 	.media-list ul li { }
 	.media-list ul li .image-container { }
 
+	.explore-tags { margin-bottom: 2em; }
 	.explore-tags li a { padding: 1em 2em; font-size: 1.25em; }
 
 	footer {  }
@@ -204,15 +209,13 @@ footer a:hover { color: #FFF; }
 
 	.admin header { grid-template-columns: 1fr; }
 
-	.content { max-width: 75%; }
+	.container { max-width: 75%; }
 
 	.blog-card h3 { font-size: 2em; margin-bottom: 0.5em; }
 	.blog-card .subtitle { font-size: 1.25em; margin-bottom: 0.5em; }
 	.blog-card .date { font-size: 1em; }
 
-	article.blog { padding: 0 8em; }
-
-	footer .container { max-width: 75%; display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 24px; padding: 1em 0; margin-top: 1em; }
+	footer .container { display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 24px; padding: 1em 0; margin-top: 1em; }
 }
 
 @media (min-width: 1350px)
@@ -222,7 +225,7 @@ footer a:hover { color: #FFF; }
 
 @media (min-width: 1600px)
 {
-	header, .content, footer { max-width: 1200px; }
+	.container { max-width: 1200px; }
 }
 
 /* DARK MODE */
