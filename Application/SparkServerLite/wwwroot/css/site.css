@@ -77,6 +77,7 @@ h6 { font-size: 1.45em; }
 article.blog { text-align: left; padding: 1em; background-color: #FFF; }
 article.blog h1 { font-size: 2.25em; margin: 0 0 1em 0; text-align: center; line-height: 1em; padding-top: 1em; }
 article.blog p { font-size: 1.15em; line-height: 1.5em; margin-bottom: 2em; text-align: justify; }
+article.blog p:last-of-type { margin-bottom: 0; }
 article.blog .figure { margin: 0 0 2em 0; }
 article.blog ul, article.blog ol { margin: 0 0 2em 2em; font-size: 1.15em; }
 article.blog ul li { list-style-type: disc; line-height: 1.5em; margin-bottom: 0.5em; }
@@ -161,7 +162,7 @@ footer a:hover { color: #FFF; }
 	.hero h2 { font-size: 3em; line-height: 1.25em }
 	.hero h3 { font-size: 1.5em; }
 
-	.content { padding: 0; margin-top: 1em; }
+	.content { padding: 0;  }
 
 	.blog-list { padding: 0; }
 
@@ -174,7 +175,7 @@ footer a:hover { color: #FFF; }
 	.blog-banner { height: 475px; }
 	.blog-banner h1 { font-size: 3em; }
 
-	article.blog { padding: 5em; font-size: 1.1em; line-height: 1.15em; }
+	article.blog { padding: 5em; font-size: 1.1em; line-height: 1.15em; margin-bottom: 2em; }
 	article.blog h1 { font-size: 3em; text-align: left; padding: 0; }
 	article.blog p { font-size: 1em; line-height: 1.75em; max-width: 650px; }
 	article.blog ul, article.blogol { font-size: 1em; }
