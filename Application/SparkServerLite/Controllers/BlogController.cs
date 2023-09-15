@@ -81,6 +81,7 @@ namespace SparkServerLite.Controllers
 
             viewModel.MapToViewModel(blog, blogTags, _settings);
             viewModel.IsPreview = preview;
+            viewModel.MenuSelection = Infrastructure.Enums.MainMenu.Blog;
 
             // Should this blog post be displayed at all? (Preview flag overrides denied access in some cases)
             bool shouldDisplay = false;

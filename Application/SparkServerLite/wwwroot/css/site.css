@@ -2,8 +2,8 @@
 * { box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; }
 html { overflow-y: scroll; }
 img { max-width: 100%; }
-a, a:visited { text-decoration: none; color: #00F; transition: all 0.1s ease-in-out; }
-a:hover { color: #00F; text-decoration: underline; }
+a, a:visited { text-decoration: none; color: #6f41c5; transition: all 0.1s ease-in-out; }
+a:hover { color: #187ad7; text-decoration: underline; }
 em { font-style: italic; }
 .center { text-align: center; }
 pre { padding: 1.5em 2em !important; }
@@ -58,7 +58,7 @@ h6 { font-size: 1.45em; }
 .blog-card .overview { padding: 1em; }
 .blog-card h3 { font-size: 1.75em; margin-bottom: 0.5em; line-height: 1.25em; }
 .blog-card .image-preview { background-position: center; background-size: cover; }
-.blog-card .image-preview > a { display: block; height: 200px; width: 100%; }
+.blog-card .image-preview > a { display: block; height: 100%; width: 100%; }
 .blog-card .subtitle { font-size: 1.15em; margin-bottom: 0.5em; }
 .blog-card .date { font-size: 0.85em; }
 
@@ -110,7 +110,7 @@ form input[type="submit"] { padding: 0.75em 2em; }
 form input[type="file"] { margin: 1em 0; }
 form .checkbox-list { max-height: 200px; overflow-y: auto; background-color: #eaeaea; border-radius: 8px; padding: 1em; columns: 1; margin-bottom: 0.5em; }
 
-a.btn, .btn, button { display: inline-block; border-radius: 8px; cursor: pointer; padding: 0.75em 2em;  text-shadow: 1px 1px 0 #000; background-color: #4c7caa; color: #FFF; box-shadow: 0 3px 0 #313131; transition: none; border: none; }
+a.btn, .btn, button { display: inline-block; border-radius: 8px; cursor: pointer; padding: 0.75em 2em;  text-shadow: 1px 1px 0 #000; background-color: #6f41c5; color: #FFF; box-shadow: 0 3px 0 #313131; transition: none; border: none; }
 a.btn:hover, .btn:hover, button:hover { background-color: #63a5e4; text-decoration: none;}
 a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position: relative; top: 3px; }
 .btn.primary { padding: 1em 4em; font-weight: bold; font-size: 1.05em; }
@@ -137,11 +137,6 @@ footer .container { margin: 0 auto; padding: 0 1em; }
 footer p { padding-bottom: 0.25em; color: #FFF; text-shadow: 1px 1px 0 #000; }
 footer a, footer a:visited { color: #cefff5; }
 footer a:hover { color: #FFF; }
-
-@media (min-width: 600px)
-{
-	.blog-card .image-preview > a { height: 200px; }
-}
 
 @media (min-width: 825px)
 {
