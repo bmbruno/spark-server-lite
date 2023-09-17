@@ -1,0 +1,3 @@
+sqlite3 /users/brandonbruno/src/spark-server-lite/Application/SparkServerLite/SparkServer.db < /users/brandonbruno/src/spark-server-lite/SQLScripts/00_CreateAll.sql
+
+sqlite3 /users/brandonbruno/src/spark-server-lite/Application/SparkServerLite/SparkServer.db < /users/brandonbruno/src/spark-server-lite/SQLScripts/01_InsertTestData.sql

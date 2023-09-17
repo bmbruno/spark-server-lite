@@ -149,6 +149,9 @@ ClientBin/
 *.publishsettings
 node_modules/
 
+# OSX
+**/.DS_Store
+
 # RIA/Silverlight projects
 Generated_Code/
 
