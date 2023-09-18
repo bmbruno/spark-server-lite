@@ -38,7 +38,6 @@
                             <li><a class="btn" href="/Admin">Home</a></li>
                             <li><a class="btn" href="/Admin/BlogList">Blogs</a></li>
                             <li><a class="btn" href="/Admin/BlogTagList">Blog Tags</a></li>
-                            <!-- <li><a href="/Admin/Media">Media</a></li> -->
                         </ul>
                     </nav>
                 </div>
@@ -59,7 +58,9 @@
                 </div>
             }
 
-            @RenderBody()
+            <div class="container">
+                @RenderBody()
+            </div>
 
         </div>
 
@@ -69,7 +70,7 @@
         </div>
 
         <footer>
-            <div>
+            <div class="container">
                 <ul>
                     <li>
                         <p>&copy; @DateTime.Today.Year.ToString() @Model.Sitename. All rights reserved.</p>
