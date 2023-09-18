@@ -10,12 +10,12 @@
 
     @if (Model.CurrentPage > 1)
     {
-        <a href="?page=@(Model.CurrentPage - 1)" class="btn previous"><img src="~/images/icons/back.svg" alt="Back icon" title="Back icon" class="svg-icon" aria-hidden="true" /> Previous</a>
+        <a href="?page=@(Model.CurrentPage - 1)" class="btn previous"><i class="fa fa-arrow-left" aria-hidden="true"></i> Previous</a>
     }
 
     @if (Model.CurrentPage < Model.PageCount)
     {
-        <a href="?page=@(Model.CurrentPage + 1)" class="btn next">Next <img src="~/images/icons/next.svg" alt="Next icon" title="Next icon" class="svg-icon" aria-hidden="true" /></a>
+        <a href="?page=@(Model.CurrentPage + 1)" class="btn next">Next <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
     }
 
     </div>

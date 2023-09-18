@@ -39,14 +39,14 @@
 
     @if (Model.BlogTagList.Count > 0)
     {
-            <ul class="explore-tags">
+        <ul class="explore-tags">
 
-            @foreach (var tag in Model.BlogTagList)
-            {
-                        <li><a href="/blog/tag/@tag.BlogTagName">@tag.BlogTagName</a></li>
-            }
+        @foreach (var tag in Model.BlogTagList)
+        {
+            <li><a href="/blog/tag/@tag.BlogTagName">@tag.BlogTagName</a></li>
+        }
 
-            </ul>
+        </ul>
     }
 
 </div>
