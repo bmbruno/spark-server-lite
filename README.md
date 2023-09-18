@@ -6,6 +6,19 @@ A simple blog management and hosting platform built on SQLite and ASP.NET Core M
 
 Blogs posts are written with Markdown.
 
+## Setup
+
+To set up SparkServerLite:
+
+1) Ensure a .NET 6 runtime is installed.
+
+2) Run SQL build scripts (from a terminal) to create the SQLite database (includes test data for local development).
+
+   * Windows: `/SQLScripts/RunAllCreate.bat`
+   * MacOS: `/SQLScripts/RunAllCreateOSX`
+	
+3) Run `dotnet build` then `dotnet run` to start the local server.
+
 ## Technical Information
 
 ### Standard Media Sizes
