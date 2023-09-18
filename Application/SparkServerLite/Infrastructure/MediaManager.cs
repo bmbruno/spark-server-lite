@@ -57,7 +57,7 @@ namespace SparkServerLite.Infrastructure
             string serverPath = Path.Combine(_settings.MediaFolderServerPath, folderPath);
 
             if (!Directory.Exists(serverPath))
-                throw new DirectoryNotFoundException($"Media folder not found: {folderPath}");
+                throw new DirectoryNotFoundException($"[MediaManager.GetMediaForBlog] Media folder not found: {folderPath}");
 
             string[] files = Directory.GetFiles(serverPath);
 

@@ -72,17 +72,26 @@ namespace SparkServerLite.Controllers
             }
 
             // Load list of files from media folder
-            List<MediaItem> list = manager.GetMediaForBlog(blog.MediaFolder);
-
-            // Blank out server path for client-side data
-            foreach (MediaItem item in list)
+            try
             {
-                item.ServerPath = null;
-            }
+                List<MediaItem> list = manager.GetMediaForBlog(blog.MediaFolder);
 
-            json.Status = JsonStatus.OK.ToString();
-            json.Message = string.Empty;
-            json.Data = list;
+                // Blank out server path for client-side data
+                foreach (MediaItem item in list)
+                {
+                    item.ServerPath = null;
+                }
+
+                json.Status = JsonStatus.OK.ToString();
+                json.Message = string.Empty;
+                json.Data = list;
+            }
+            catch (Exception exc)
+            {
+                json.Status = JsonStatus.EXCEPTION.ToString();
+                json.Message = exc.Message;
+                json.Data = null;
+            }
 
             return Json(json);
         }
