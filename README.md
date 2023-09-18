@@ -30,7 +30,7 @@ Default images (as JPG) for blog banners should be named with sequential integer
 
 ```
 /images/banner-images/xx.jpg
-/images/banner-images/xx_thumbnail.jpg
+/images/banner-images/xx-thumb.jpg
 ```
 
 ### App Settings descriptors
