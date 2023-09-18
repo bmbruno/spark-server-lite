@@ -15,7 +15,7 @@ To set up SparkServerLite:
 2) Run SQL build scripts (from a terminal) to create the SQLite database (includes test data for local development).
 
    * Windows: `/SQLScripts/RunAllCreate.bat`
-   * MacOS: `sh /SQLScripts/RunAllCreateOSX`
+   * MacOS: `sh /SQLScripts/RunAllCreateMacOS`
 	
 3) Run `dotnet build` then `dotnet run` to start the local server.
 
