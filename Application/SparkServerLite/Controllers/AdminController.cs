@@ -106,7 +106,7 @@ namespace SparkServerLite.Controllers
             base.Setup(viewModel, _settings);
 
             // Check for unique URL
-            if (!String.IsNullOrEmpty(viewModel.Slug))
+            if (viewModel.Mode == EditMode.Add && !String.IsNullOrEmpty(viewModel.Slug))
             {
                 bool existing = _blogRepo.SlugExists(viewModel.Slug.Trim());
 
