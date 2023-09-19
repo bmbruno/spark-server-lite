@@ -4,6 +4,8 @@ namespace SparkServerLite.Infrastructure
 {
     public class AppSettings : IAppSettings
     {
+        public bool Debug { get; set; } = false;
+
         public string Sitename { get; set; } = string.Empty;
 
         public string SiteDescription { get; set; } = string.Empty;

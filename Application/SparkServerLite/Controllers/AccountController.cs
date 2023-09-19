@@ -27,6 +27,19 @@ namespace SparkServerLite.Controllers
 
         public async Task<IActionResult> Login()
         {
+            // Override SSO login when debug mode is on
+            if (_settings.Debug)
+            {
+                var claimsIdentity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+                claimsIdentity.AddClaim(new Claim(ClaimTypes.NameIdentifier, "000"));
+                claimsIdentity.AddClaim(new Claim(ClaimTypes.Email, "user@test.com"));
+                claimsIdentity.AddClaim(new Claim(ClaimTypes.Name, "Admin"));
+                claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, "User"));
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                return RedirectToAction(actionName: "Index", controllerName: "Admin");
+            }
+
             return Redirect(url: _settings.SSOLoginURL + _settings.SSOSiteID);
         }
 

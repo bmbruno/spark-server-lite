@@ -2,6 +2,8 @@
 {
     public interface IAppSettings
     {
+        bool Debug { get; set; }
+
         string Sitename { get; set; }
 
         string SiteDescription { get; set; }
