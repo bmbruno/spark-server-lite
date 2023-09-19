@@ -134,7 +134,7 @@ namespace SparkServerLite.Controllers
                     blog.CreateDate = DateTime.Now;
 
                     int newBlogID = _blogRepo.Create(blog);
-                    _blogTagRepo.UpdateTagsForBlog(blog.ID, viewModel.BlogTags);
+                    _blogTagRepo.UpdateTagsForBlog(newBlogID, viewModel.BlogTags);
 
                     TempData["Success"] = "Blog created.";
                     return RedirectToAction(actionName: "BlogEdit", controllerName: "Admin", routeValues: new { ID = newBlogID });
