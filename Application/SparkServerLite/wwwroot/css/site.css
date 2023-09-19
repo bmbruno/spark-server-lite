@@ -120,9 +120,10 @@ a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position
 .btn.primary { padding: 1em 4em; font-weight: bold; font-size: 1.05em; }
 
 .row.blog-media { padding: 1em; }
+.row.blog-media button { margin-bottom: 1em; }
 .row.blog-media h2 { font-weight: bold; }
-.blog-upload { padding: 1em; }
-.blog-upload .loader { margin: 1em 0;}
+.media-upload { border-top: 1px solid #666; padding-top: 1em; margin-top: 1em; }
+.media-upload .loader { padding: 1em 0; }
 .media-list ul li { display: grid; grid-template-columns: 1fr 2fr; padding-bottom: 1em; }
 .media-list ul li:last-of-type { padding-bottom: 0; }
 .media-list ul li .image-container { grid-column-start: 1; padding-right: 1em; }
