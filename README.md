@@ -35,6 +35,10 @@ Default images (as JPG) for blog banners should be named with sequential integer
 
 ### App Settings descriptors
 
+#### System
+
+* **Debug**: enables additional debug messages; also skips SSO login (use with caution!)
+
 #### Site Content
 
 * **Sitename**: Displayable name of the website.
