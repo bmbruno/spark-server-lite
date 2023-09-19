@@ -11,11 +11,9 @@ namespace SparkServerLite.Interfaces
         /// <summary>
         /// Should retrieve a blog object from a datastore using the unique URL scheme.
         /// </summary>
-        /// <param name="year">Year.</param>
-        /// <param name="month">Month.</param>
         /// <param name="slug">Unique URL slug.</param>
         /// <returns>Object of type T.</returns>
-        T Get(int year, int month, string slug);
+        T Get(string slug);
 
         /// <summary>
         /// Should retrieve a blog objects from a datastore that are active and published.

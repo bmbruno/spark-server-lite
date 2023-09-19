@@ -76,7 +76,7 @@ namespace SparkServerLite.Controllers
             if (String.IsNullOrEmpty(slug))
                 return RedirectToAction(actionName: "Index", controllerName: "Blog");
 
-            Blog blog = _blogRepo.Get(year, month, slug);
+            Blog blog = _blogRepo.Get(slug);
             IEnumerable<BlogTag> blogTags = _blogTagRepo.GetForBlog(blog.ID);
 
             viewModel.MapToViewModel(blog, blogTags, _settings);

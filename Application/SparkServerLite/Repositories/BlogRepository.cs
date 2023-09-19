@@ -299,7 +299,7 @@ namespace SparkServer.Infrastructure.Repositories
             return;
         }
 
-        public Blog Get(int year, int month, string slug)
+        public Blog Get(string slug)
         {
             Blog blog = new Blog();
 
@@ -316,7 +316,6 @@ namespace SparkServer.Infrastructure.Repositories
                         INNER JOIN Authors ON Authors.ID = Blogs.AuthorID
                     WHERE
 	                    Blogs.Active = 1
-	                    AND PublishDate <= datetime('now')
 	                    AND Slug = $slug
                     ORDER BY
                         PublishDate DESC ";
