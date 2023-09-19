@@ -18,6 +18,12 @@ namespace SparkServerLite.Interfaces
         T Get(int year, int month, string slug);
 
         /// <summary>
+        /// Should retrieve a blog objects from a datastore that are active and published.
+        /// </summary>
+        /// <returns>Enumerable of blog-type objects.</returns>
+        IEnumerable<T> GetAllPublished();
+
+        /// <summary>
         /// Should retrieve blog objects from a datastore for any combination of year + month. Year is a minimum requirement.
         /// </summary>
         /// <param name="year">Year.</param>

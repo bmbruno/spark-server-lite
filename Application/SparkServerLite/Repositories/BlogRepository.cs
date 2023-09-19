@@ -97,7 +97,7 @@ namespace SparkServer.Infrastructure.Repositories
 	                    INNER JOIN Authors ON Authors.ID = Blogs.AuthorID
                     WHERE
 	                    Blogs.Active = 1
-	                    AND PublishDate <= datetime('now')
+	                    -- AND PublishDate <= datetime('now')
                     ORDER BY
 	                    PublishDate DESC ";
 
@@ -354,6 +354,57 @@ namespace SparkServer.Infrastructure.Repositories
             }
 
             return blog;
+        }
+
+        public IEnumerable<Blog> GetAllPublished()
+        {
+            List<Blog> blogList = new List<Blog>();
+
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT
+	                    Blogs.*,
+	                    Authors.ID AS 'AuthorID',
+	                    Authors.FirstName || ' ' || Authors.LastName AS 'AuthorFullName'
+                    FROM
+	                    Blogs
+	                    INNER JOIN Authors ON Authors.ID = Blogs.AuthorID
+                    WHERE
+	                    Blogs.Active = 1
+	                    AND PublishDate <= datetime('now')
+                    ORDER BY
+	                    PublishDate DESC ";
+
+                conn.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        blogList.Add(new Blog()
+                        {
+                            ID = Database.GetID(reader["ID"]),
+                            Title = Database.GetString(reader["Title"]),
+                            Subtitle = Database.GetString(reader["Subtitle"]),
+                            Markdown = Database.GetString(reader["Markdown"]),
+                            Content = Database.GetString(reader["Content"]),
+                            ImagePath = Database.GetString(reader["ImagePath"]),
+                            ImageThumbnailPath = Database.GetString(reader["ImageThumbnailPath"]),
+                            Slug = Database.GetString(reader["Slug"]),
+                            PublishDate = Database.GetDateTime(reader["PublishDate"]).Value,
+                            AuthorID = Database.GetID(reader["AuthorID"]),
+                            AuthorFullName = Database.GetString(reader["AuthorFullName"]),
+                            CreateDate = Database.GetDateTime(reader["CreateDate"]).Value
+                        });
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return blogList;
         }
 
         public IEnumerable<Blog> GetByDate(int year, int? month)

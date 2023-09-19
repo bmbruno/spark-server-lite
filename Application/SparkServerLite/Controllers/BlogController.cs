@@ -50,7 +50,7 @@ namespace SparkServerLite.Controllers
             else
             {
                 // Default: blog overview (top posts)
-                blogList = _blogRepo.GetAll().ToList();
+                blogList = _blogRepo.GetAllPublished().ToList();
                 viewModel.Header = "Latest Blog Posts";
             }
 

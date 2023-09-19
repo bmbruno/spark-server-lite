@@ -45,9 +45,9 @@
             }
 
             // Create from title
-            let createTitleButton = document.getElementById("CreateUniqueURL");
+            let createTitleButton = document.getElementById("CreateSlug");
             if (createTitleButton) {
-                createTitleButton.addEventListener("click", SparkServerAdmin.handleCreateURL);
+                createTitleButton.addEventListener("click", SparkServerAdmin.handleCreateSlug);
             }
 
             // Get next default hero
@@ -288,7 +288,7 @@
             }
         },
 
-        handleCreateURL: function () {
+        handleCreateSlug: function () {
 
             let titleField = document.getElementById("Title");
 
