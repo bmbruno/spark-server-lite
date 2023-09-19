@@ -100,7 +100,7 @@ table tr:nth-child(odd) { background-color: #eaeaea; }
 
 .field-validation-error { display: block; margin: 1em 0 1em 0; padding: 0.5em 1em; background-color: #a50000; color: #FFF; border-radius: 8px; font-weight: bold;}
 
-.modal { display: none; z-index: 10000; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; background-color: #FFF; padding: 32px; border-radius: 16px; box-shadow: 0 8px 32px #000;  }
+.modal { display: none; z-index: 10000; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; background-color: #FFF; padding: 32px; border-radius: 16px; box-shadow: 0 8px 96px #000;  }
 .modal.full { width: 95%; }
 .modal button { margin-top: 32px; }
 

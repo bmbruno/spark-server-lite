@@ -104,7 +104,7 @@
                                 <button type="button" class="media-delete-button delete-confirm" data-filename="${element.filename}">Delete</button>
                             </div>
                         </li>`;
-
+                        
                 });
 
                 output += "</ul>";
@@ -115,16 +115,13 @@
 
             } else if (result.status == "ERROR") {
 
-                alert(result.message);
+                SparkServerAdmin.openModal("ERROR!", result.message);
 
             } else if (result.status == "EXCEPTION") {
 
-                alert("EXCEPTION! See browser console for details.");
+                SparkServerAdmin.openModal("EXCEPTION!", result.message);
 
             }
-
-            if (result.message)
-                console.log(result.message);
 
             SparkServerAdmin.hideLoader("BlogMediaListLoader");
         },
@@ -205,17 +202,17 @@
             let response = await fetch(SparkServerAdmin.endpoints.deleteMedia, { method: "POST", body: formData });
             let result = await response.json();
 
-            if (response.status == "OK") {
+            if (result.status == "OK") {
 
-                alert(response.message);
+                SparkServerAdmin.openModal("Media Deleted", "Successfully");
 
             } else if (result.status == "ERROR") {
 
-                alert(result.message);
+                SparkServerAdmin.openModal("ERROR!", result.message);
 
             } else if (result.status == "EXCEPTION") {
 
-                alert("EXCEPTION! See browser console for details.");
+                SparkServerAdmin.openModal("EXCEPTION!", result.message);
 
             }
 
@@ -242,11 +239,11 @@
 
                 } else if (result.status == "ERROR") {
 
-                    alert(result.message);
+                    SparkServerAdmin.openModal("ERROR!", result.message);
 
                 } else if (result.status == "EXCEPTION") {
 
-                    alert("EXCEPTION! See browser console for details.");
+                    SparkServerAdmin.openModal("EXCEPTION!", result.message);
 
                 }
             }
@@ -336,11 +333,11 @@
 
             } else if (result.status == "ERROR") {
 
-                alert(result.message);
+                SparkServerAdmin.openModal("ERROR!", result.message);
 
             } else if (result.status == "EXCEPTION") {
 
-                alert("EXCEPTION! See browser console for details.");
+                SparkServerAdmin.openModal("EXCEPTION!", result.message);
 
             }
 
@@ -369,7 +366,8 @@
             var fileInput = document.getElementById("MediaFiles");
 
             if (fileInput.files.length === 0) {
-                alert("Please add media to upload.");
+                SparkServerAdmin.openModal("Alert!", "Please add media to upload.");
+
                 SparkServerAdmin.enableButton("UploadMediaFiles");
                 SparkServerAdmin.hideLoader("MediaFilesUploadMessage");
                 return;
@@ -396,11 +394,11 @@
             SparkServerAdmin.hideLoader("MediaFilesUploadMessage");
 
             if (data.status === "ERROR") {
-                alert(`Error!\n\n${data.Message}`);
+                SparkServerAdmin.openModal("ERROR!", data.Message);
             }
 
             if (data.status === "EXCEPTION") {
-                alert(`EXCEPTION!\n\n${data.Message}`);
+                SparkServerAdmin.openModal("EXCEPTION!", data.Message);
             }
 
             if (data.status === "OK") {

@@ -166,7 +166,11 @@
 
         <script type="text/javascript">
 
-            SparkServerAdmin.loadBlogMediaList();
+            let mode = document.getElementById("Mode");
+
+            if (mode && mode.value == "Edit") {
+                SparkServerAdmin.loadBlogMediaList();
+            }
 
         </script>
 
