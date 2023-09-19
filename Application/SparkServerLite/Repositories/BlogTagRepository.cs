@@ -255,6 +255,8 @@ namespace SparkServer.Infrastructure.Repositories
                     FROM
 	                    BlogTags
 	                    LEFT JOIN BlogsToTags ON BlogsToTags.BlogTagID = BlogTags.ID
+                    WHERE
+                        BlogTags.Active = 1
                     GROUP BY
                         BlogTags.ID,
 	                    BlogTags.Name
