@@ -40,7 +40,7 @@
                 {
                     foreach (var tag in Model.BlogTags)
                     {
-                        <li><a href="/blog/tag/@FormatHelper.FormatTagForURL(tag.BlogTagName)">@tag.BlogTagName</a></li>
+                        <li><a href="/posts/tag/@FormatHelper.FormatTagForURL(tag.BlogTagName)">@tag.BlogTagName</a></li>
                     }
                 }
                 else

@@ -49,7 +49,7 @@ namespace SparkServerLite.ViewModels.Admin
 
         public List<SelectListItem>? BlogTagSource { get; set; }
 
-        public string BlogURL { get { return $"/blog/{this.PublishDate.Year}/{this.PublishDate.Month}/{this.Slug}"; } }
+        public string BlogURL { get { return $"/posts/{this.PublishDate.Year}/{this.PublishDate.Month}/{this.Slug}"; } }
 
         public BlogEditViewModel()
         {
