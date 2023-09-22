@@ -22,14 +22,16 @@
 <article class="blog">
 
     <div class="blog-about">
-        <div class="item">
-            <div class="label">Author</div>
-            <p>@Model.AuthorFullName</p>
-        </div>
+        <div class="columns">
+            <div class="item">
+                <div class="label">Author</div>
+                <p>@Model.AuthorFullName</p>
+            </div>
 
-        <div class="item">
-            <div class="label">Published</div>
-            <p>@Model.PublishDate.ToString(format: "MMMM dd, yyyy")</p>
+            <div class="item">
+                <div class="label">Published</div>
+                <p>@Model.PublishDate.ToString(format: "MMMM dd, yyyy")</p>
+            </div>
         </div>
 
         <div class="item">
