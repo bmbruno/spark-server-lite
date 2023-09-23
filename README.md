@@ -19,6 +19,8 @@ To set up SparkServerLite:
 	
 3) Run `dotnet build` then `dotnet run` to start the local server.
 
+4) Authentication - TODO
+
 ## Technical Information
 
 ### Standard Media Sizes
