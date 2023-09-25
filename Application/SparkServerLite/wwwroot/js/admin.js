@@ -430,7 +430,11 @@
                 if (full)
                     modal.classList.add("full");
 
-                modal.style.top = (window.scrollY + (window.innerHeight * 0.2)) + "px";
+                if (!full)
+                    modal.style.top = (window.scrollY + (window.innerHeight * 0.2)) + "px";
+                else
+                    modal.style.top = (window.scrollY + (window.innerHeight * 0.05)) + "px";
+
                 modal.style.display = "block";
 
             } else {
