@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\favicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.51" />
     <PackageReference Include="Markdig" Version="0.32.0" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.9" />
@@ -17,6 +21,16 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\blog-banners\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\android-chrome-192x192.png" />
+    <None Include="wwwroot\android-chrome-512x512.png" />
+    <None Include="wwwroot\apple-touch-icon.png" />
+    <None Include="wwwroot\favicon-16x16.png" />
+    <None Include="wwwroot\favicon-32x32.png" />
+    <None Include="wwwroot\favicon.ico" />
+    <None Include="wwwroot\site.webmanifest" />
   </ItemGroup>
 
 </Project>
