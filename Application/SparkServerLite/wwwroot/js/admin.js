@@ -458,6 +458,38 @@
 
         },
 
+        showToast: function (title, body, time = 6, type = "message") {
+
+            let toast = document.getElementById("Toast");
+            let content = document.getElementById("ToastContent");
+
+            if (toast && content) {
+
+                content.innerHTML = "";
+
+                if (title)
+                    content.innerHTML += `<h2>${title}</h2>`;
+
+                if (body)
+                    content.innerHTML += body;
+
+                // "error", "success"
+                toast.classList.add(type);
+                    
+                toast.style.bottom = window.scrollY + window.innerHeight - 150 + "px"
+                toast.style.display = "block";
+
+                // TODO: start countdown to removal
+                // TODO: reset class list (blank and set to 'toast')
+
+            } else {
+
+                console.log("Toast not found on this page.");
+
+            }
+
+        },
+
         showLoader: (id) => {
 
             document.getElementById(id).style.display = "block";
