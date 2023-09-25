@@ -269,11 +269,11 @@
 
                 } else if (result.status == "ERROR") {
 
-                    alert(result.message);
+                    SparkServerAdmin.openModal("ERROR!", result.message);
 
                 } else if (result.status == "EXCEPTION") {
 
-                    alert("EXCEPTION! See browser console for details.");
+                    SparkServerAdmin.openModal("EXCEPTION!", result.message);
 
                 }
             }
