@@ -103,12 +103,13 @@ table tr:nth-child(odd) { background-color: #eaeaea; }
 .field-validation-error { display: block; margin: 1em 0 1em 0; padding: 0.5em 1em; background-color: #a50000; color: #FFF; border-radius: 8px; font-weight: bold;}
 
 .modal { display: none; z-index: 10000; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; background-color: #FFF; padding: 32px; border-radius: 16px; box-shadow: 0 8px 96px #000;  }
-.modal.full { width: 100%; transform: initial; top: 1em; left: initial; margin: 0 auto; }
+.modal.full { width: 96%; transform: translate(-2%, 0); top: 1em; left: 4%; margin: 0 auto; }
 .modal button { margin-top: 32px; }
 
 .toast { display: none; z-index: 1000; position: absolute; bottom: 5%; max-width: 100%; color: #FFF; text-shadow: 1px 1px 0px #000; background-color: #555; right: 50%; transform: translate(50%, 0); padding: 2em; box-shadow: 0 16px 48px #000; border-radius: 16px; }
 .toast.error { background-color: #960000; }
 .toast.success { background-color: #177830; }
+.toast.fadeout { transition: opacity 4s; }
 
 form { width: 95%; margin: 0 auto; text-align: left; }
 form .row { margin: 0 0 2em 0; }
