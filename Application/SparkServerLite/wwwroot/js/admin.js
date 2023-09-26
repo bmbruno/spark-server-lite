@@ -394,11 +394,11 @@
             SparkServerAdmin.hideLoader("MediaFilesUploadMessage");
 
             if (data.status === "ERROR") {
-                SparkServerAdmin.openModal("ERROR!", data.Message);
+                SparkServerAdmin.openModal("ERROR!", data.message);
             }
 
             if (data.status === "EXCEPTION") {
-                SparkServerAdmin.openModal("EXCEPTION!", data.Message);
+                SparkServerAdmin.openModal("EXCEPTION!", data.message);
             }
 
             if (data.status === "OK") {

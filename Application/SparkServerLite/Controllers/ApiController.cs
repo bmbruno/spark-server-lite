@@ -18,6 +18,8 @@ namespace SparkServerLite.Controllers
         private readonly IAuthorRepository<Author> _authorRepo;
         private readonly IAppSettings _settings;
 
+        private readonly string[] validFileExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
+
         public ApiController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAuthorRepository<Author> authorRepo, IAppSettings settings)
         {
             _blogRepo = blogRepo;
@@ -113,6 +115,19 @@ namespace SparkServerLite.Controllers
                 return Json(json);
             }
 
+            // Validate file types
+            foreach (IFormFile file in form.Files)
+            {
+                if (!validFileExtensions.Contains(Path.GetExtension(file.FileName.ToLower())))
+                {
+                    json.Status = JsonStatus.ERROR.ToString();
+                    json.Message = $"File '{file.FileName}' must be an image type! Allowed types are: jpg, gif, png, webp";
+                    json.Data = null;
+
+                    return Json(json);
+                }
+            }
+
             int blogID = Convert.ToInt32(form["blogID"]);
 
             // Check if this blog already has a media folder; if so, use that
@@ -125,10 +140,10 @@ namespace SparkServerLite.Controllers
                 _blogRepo.Update(existingBlog);
             }
 
-            for (int i = 0; i < form.Files.Count; i++)
+            foreach (IFormFile file in form.Files)
             {
                 // Lightly sanitize the filename (prevent folder injection)
-                string fileName = form.Files[i].FileName.Replace(@"/", string.Empty).Replace(@"\", string.Empty);
+                string fileName = file.FileName.Replace(@"/", string.Empty).Replace(@"\", string.Empty);
                 string filePath = Path.Combine(_settings.MediaFolderServerPath, existingBlog.MediaFolder, fileName);
 
                 // Overwrite existing media automatically
@@ -138,7 +153,7 @@ namespace SparkServerLite.Controllers
                 // Save image to disk
                 using (Stream fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    form.Files[i].CopyTo(fileStream);
+                    file.CopyTo(fileStream);
                 }
 
                 // Create thumbnail
