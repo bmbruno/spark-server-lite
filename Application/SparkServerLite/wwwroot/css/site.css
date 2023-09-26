@@ -106,9 +106,10 @@ table tr:nth-child(odd) { background-color: #eaeaea; }
 .modal.full { width: 96%; transform: translate(-2%, 0); top: 1em; left: 4%; margin: 0 auto; }
 .modal button { margin-top: 32px; }
 
-.toast { display: none; z-index: 1000; position: absolute; bottom: 5%; max-width: 100%; color: #FFF; text-shadow: 1px 1px 0px #000; background-color: #555; right: 50%; transform: translate(50%, 0); padding: 2em; box-shadow: 0 16px 48px #000; border-radius: 16px; }
-.toast.error { background-color: #960000; }
-.toast.success { background-color: #177830; }
+.toast { display: none; z-index: 1000; position: fixed; bottom: 5%; right: 5%; max-width: 85%; color: #FFF; text-shadow: 1px 1px 0px #000; background-color: rgba(100, 100, 100, 0.95);  padding: 2em; box-shadow: 0 16px 48px #000; border-radius: 16px; }
+.toast h2 { text-align: left; }
+.toast.error { background-color: rgb(164, 0, 0, 0.9); }
+.toast.success { background-color: rgb(1, 103, 0, 0.90); }
 .toast.fadeout { transition: opacity 4s; }
 
 form { width: 95%; margin: 0 auto; text-align: left; }

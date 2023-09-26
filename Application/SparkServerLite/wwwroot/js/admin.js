@@ -475,12 +475,20 @@
 
                 // "error", "success"
                 toast.classList.add(type);
-                    
-                toast.style.bottom = window.scrollY + window.innerHeight - 150 + "px"
                 toast.style.display = "block";
 
-                // TODO: start countdown to removal
-                // TODO: reset class list (blank and set to 'toast')
+                // Start countdown to removal
+                window.setTimeout(() => {
+                                        
+                    toast.style.display = "none";
+
+                    // Reset class list (blank and set to 'toast')
+                    toast.className = "";
+                    toast.classList.add("toast");
+
+                }, time * 1000);
+
+                
 
             } else {
 
