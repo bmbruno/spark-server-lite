@@ -432,8 +432,8 @@
 
                 if (full)
                     modal.style.top = (window.scrollY + (window.innerHeight * 0.05)) + "px";
-                else
-                    modal.style.top = (window.scrollY + (window.innerHeight * 0.2)) + "px";
+                //else
+                //    modal.style.top = (window.scrollY + (window.innerHeight * 0.2)) + "px";
 
                 modal.style.display = "block";
 
@@ -451,6 +451,7 @@
             let content = document.getElementById("ModalContent");
 
             if (modal && content) {
+                modal.style.top = "";
                 modal.style.display = "none";
                 modal.classList.remove("full");
                 content.innerHTML = "";
