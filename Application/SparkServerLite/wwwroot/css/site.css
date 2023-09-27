@@ -3,7 +3,7 @@
 html { overflow-y: scroll; }
 img { max-width: 100%; }
 a, a:visited { text-decoration: none; color: #6f41c5; transition: all 0.1s ease-in-out; }
-a:hover { color: #187ad7; text-decoration: none; box-shadow: inset 0 -8px 0 #ffe000; }
+a:hover { color: #187ad7; text-decoration: none; }
 em { font-style: italic; }
 .center { text-align: center; }
 pre { padding: 1.5em 2em !important; }
@@ -87,6 +87,7 @@ article.blog .figure { margin: 0 0 2em 0; }
 article.blog ul, article.blog ol { margin: 0 0 2em 2em; font-size: 1.15em; }
 article.blog ul li { list-style-type: disc; line-height: 1.5em; margin-bottom: 0.5em; }
 article.blog ol li { list-style-type: decimal; line-height: 1.5em; margin-bottom: 0.5em; }
+article.blog a:hover { box-shadow: inset 0 -8px 0 #ffe000; }
 
 .sub-menu { padding: 1em 0; }
 
