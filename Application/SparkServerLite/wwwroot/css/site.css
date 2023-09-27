@@ -199,10 +199,9 @@ footer a:hover { color: #FFF; }
 
 	.sub-menu { padding: 2em 0; }
 
-	form { width: 60% } 
 	form .row { margin: 2em; }
 	form .row label { margin-bottom: 0.5em; }
-	form input.half { width: 50%; }
+	form input.half, form select.half { width: 50%; }
 	form .checkbox-list { columns: 3 }
 
 	.explore-tags { margin-bottom: 2em; }
@@ -229,6 +228,8 @@ footer a:hover { color: #FFF; }
 	.blog-card h3 { font-size: 2em; margin-bottom: 0.5em; }
 	.blog-card .subtitle { font-size: 1.25em; margin-bottom: 0.5em; }
 	.blog-card .date { font-size: 1em; }
+
+	form { width: 80% } 
 
 	.paging { margin-top: 4em; }
 
