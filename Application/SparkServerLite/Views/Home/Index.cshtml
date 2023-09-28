@@ -6,47 +6,51 @@
 
 <h1 style="visibility: hidden; height: 0px; margin: 0;">@Model.Sitename</h1>
 
-@if (Model.BlogList.Count > 0)
-{   
+<div class="content container">
 
-    <a href="@Model.BlogList[0].URL" class="hero-link">
-        <div class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('@Model.BlogList[0].ImageURL');">
-            <div class="header">Latest Blog Post</div>
-            <h2>@Model.BlogList[0].Title</h2>
-            <h3>@Model.BlogList[0].Subtitle</h3>
+    @if (Model.BlogList.Count > 0)
+    {   
+
+        <a href="@Model.BlogList[0].URL" class="hero-link">
+            <div class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('@Model.BlogList[0].ImageURL');">
+                <div class="header">Latest Blog Post</div>
+                <h2>@Model.BlogList[0].Title</h2>
+                <h3>@Model.BlogList[0].Subtitle</h3>
+            </div>
+        </a>
+
+        Model.BlogList.RemoveAt(0);
+    }
+
+    <div class="section">
+
+        <h2 class="title">Recent Blog Posts</h2>
+
+        <ul class="blog-list">
+
+            @foreach (var blog in Model.BlogList)
+            {
+                <li class="blog-card">
+
+                    <div class="image-preview" style="background-image: url('@blog.ImageThumbnailPath');">
+                        <a href="@blog.URL">&nbsp;</a>
+                    </div>
+
+                    <div class="overview">
+                        <h3><a href="@blog.URL">@blog.Title</a></h3>
+                        <div class="subtitle">@blog.Subtitle</div>
+                        <div class="date">@blog.PublishDate.ToString("MMMM dd, yyyy")</div>
+                    </div>
+
+                </li>
+            }
+
+        </ul>
+
+        <div class="bottom-nav">
+            <a href="/posts" class="btn" style="padding: 1.5em 4em; font-weight: bold;"><i class="fa fa-book" aria-hidden="true"></i> All Blog Posts</a>
         </div>
-    </a>
 
-    Model.BlogList.RemoveAt(0);
-}
-
-<div class="section">
-
-    <h2 class="title">Recent Blog Posts</h2>
-
-    <ul class="blog-list">
-
-        @foreach (var blog in Model.BlogList)
-        {
-            <li class="blog-card">
-
-                <div class="image-preview" style="background-image: url('@blog.ImageThumbnailPath');">
-                    <a href="@blog.URL">&nbsp;</a>
-                </div>
-
-                <div class="overview">
-                    <h3><a href="@blog.URL">@blog.Title</a></h3>
-                    <div class="subtitle">@blog.Subtitle</div>
-                    <div class="date">@blog.PublishDate.ToString("MMMM dd, yyyy")</div>
-                </div>
-
-            </li>
-        }
-
-    </ul>
-
-    <div class="bottom-nav">
-        <a href="/posts" class="btn" style="padding: 1.5em 4em; font-weight: bold;"><i class="fa fa-book" aria-hidden="true"></i> All Blog Posts</a>
     </div>
 
 </div>

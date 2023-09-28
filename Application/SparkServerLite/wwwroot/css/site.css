@@ -163,7 +163,7 @@ footer a:hover { color: #FFF; }
 	.logo-byline { font-size: 1.25em; }
 
 	.container { max-width: 95%; }
-
+	
 	nav {  }
 	nav ul li a { font-size: 1.15em; } 
 
@@ -178,6 +178,7 @@ footer a:hover { color: #FFF; }
 	.hero h3 { font-size: 1.5em; }
 
 	.content { padding: 0;  }
+	.content.post { box-shadow: 0 16px 48px #a4a4a4; }
 
 	.blog-list { padding: 0; }
 
@@ -189,6 +190,7 @@ footer a:hover { color: #FFF; }
 
 	.blog-banner { height: 475px; }
 	.blog-banner h1 { font-size: 3em; }
+
 
 	article.blog { padding: 2em 5em 5em 5em; font-size: 1.1em; line-height: 1.15em; margin-bottom: 2em; }
 	article.blog h1 { font-size: 3em; text-align: left; padding: 0; }

@@ -4,49 +4,53 @@
     ViewData["Title"] = Model.Header;
 }
 
-<div class="section">
+<div class="content container">
 
-    <h2 class="title">@ViewData["Title"]</h2>
+    <div class="section">
 
-    <ul class="blog-list">
+        <h2 class="title">@ViewData["Title"]</h2>
 
-        @foreach (var blog in Model.BlogList)
-        {
-            <li class="blog-card">
+        <ul class="blog-list">
 
-                <div class="image-preview" style="background-image: url('@blog.ImageThumbnailPath');">
-                    <a href="@blog.URL">&nbsp;</a>
-                </div>
+            @foreach (var blog in Model.BlogList)
+            {
+                <li class="blog-card">
 
-                <div class="overview">
-                    <h3><a href="@blog.URL">@blog.Title</a></h3>
-                    <div class="subtitle">@blog.Subtitle</div>
-                    <div class="date">@blog.PublishDate.ToString("MMMM dd, yyyy")</div>
-                </div>
+                    <div class="image-preview" style="background-image: url('@blog.ImageThumbnailPath');">
+                        <a href="@blog.URL">&nbsp;</a>
+                    </div>
 
-            </li>
-        }
+                    <div class="overview">
+                        <h3><a href="@blog.URL">@blog.Title</a></h3>
+                        <div class="subtitle">@blog.Subtitle</div>
+                        <div class="date">@blog.PublishDate.ToString("MMMM dd, yyyy")</div>
+                    </div>
 
-    </ul>
-
-    @await Html.PartialAsync("_Paging", Model.Paging)
-
-</div>
-
-<div class="section" style="padding-top: 4em;">
-
-    <h2>Explore Tags</h2>
-
-    @if (Model.BlogTagList.Count > 0)
-    {
-        <ul class="explore-tags">
-
-        @foreach (var tag in Model.BlogTagList)
-        {
-            <li><a href="/posts/tag/@tag.BlogTagName">@tag.BlogTagName</a></li>
-        }
+                </li>
+            }
 
         </ul>
-    }
+
+        @await Html.PartialAsync("_Paging", Model.Paging)
+
+    </div>
+
+    <div class="section" style="padding-top: 4em;">
+
+        <h2>Explore Tags</h2>
+
+        @if (Model.BlogTagList.Count > 0)
+        {
+            <ul class="explore-tags">
+
+            @foreach (var tag in Model.BlogTagList)
+            {
+                <li><a href="/posts/tag/@tag.BlogTagName">@tag.BlogTagName</a></li>
+            }
+
+            </ul>
+        }
+
+    </div>
 
 </div>

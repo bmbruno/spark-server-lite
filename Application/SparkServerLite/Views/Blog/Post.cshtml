@@ -5,57 +5,61 @@
     ViewData["Title"] = Model.Title;
 }
 
-<div class="blog-banner" style="background-image: url('@Model.ImageURL');">
-    <h1 class="blog-title">@ViewBag.Title</h1>
-</div>
+<div class="content container post">
 
-@if (Model.IsPreview)
-{
-    <div style="font-size: 3em; font-weight: bold; text-align: center; color: #FFF; background-color: #DC291E; padding: 0.5em;">BLOG PREVIEW</div>
-
-    <div style="background-color: #FFF; padding: 1em; margin: 2em auto; border: 2px solid #DC291E;">
-        <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 0.5em;">Subtitle (Preview Only)</div>
-        @Html.Raw(Model.Subtitle)
+    <div class="blog-banner" style="background-image: url('@Model.ImageURL');">
+        <h1 class="blog-title">@ViewBag.Title</h1>
     </div>
-}
 
-<article class="blog">
+    @if (Model.IsPreview)
+    {
+        <div style="font-size: 3em; font-weight: bold; text-align: center; color: #FFF; background-color: #DC291E; padding: 0.5em;">BLOG PREVIEW</div>
 
-    <div class="blog-about">
-        <div class="columns">
-            <div class="item">
-                <div class="label">Author</div>
-                <p>@Model.AuthorFullName</p>
-            </div>
-
-            <div class="item">
-                <div class="label">Published</div>
-                <p>@Model.PublishDate.ToString(format: "MMMM dd, yyyy")</p>
-            </div>
+        <div style="background-color: #FFF; padding: 1em; margin: 2em auto; border: 2px solid #DC291E;">
+            <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 0.5em;">Subtitle (Preview Only)</div>
+            @Html.Raw(Model.Subtitle)
         </div>
+    }
 
-        <div class="item">
-            <div class="label">Tags</div>
-            <ul class="tags">
+    <article class="blog">
 
-                @if (Model.BlogTags.Count > 0)
-                {
-                    foreach (var tag in Model.BlogTags)
+        <div class="blog-about">
+            <div class="columns">
+                <div class="item">
+                    <div class="label">Author</div>
+                    <p>@Model.AuthorFullName</p>
+                </div>
+
+                <div class="item">
+                    <div class="label">Published</div>
+                    <p>@Model.PublishDate.ToString(format: "MMMM dd, yyyy")</p>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="label">Tags</div>
+                <ul class="tags">
+
+                    @if (Model.BlogTags.Count > 0)
                     {
-                        <li><a href="/posts/tag/@FormatHelper.FormatTagForURL(tag.BlogTagName)">@tag.BlogTagName</a></li>
+                        foreach (var tag in Model.BlogTags)
+                        {
+                            <li><a href="/posts/tag/@FormatHelper.FormatTagForURL(tag.BlogTagName)">@tag.BlogTagName</a></li>
+                        }
                     }
-                }
-                else
-                {
-                    <li>No tags defined</li>
-                }
-            </ul>
+                    else
+                    {
+                        <li>No tags defined</li>
+                    }
+                </ul>
+            </div>
         </div>
-    </div>
 
-    @Html.Raw(Model.Content)
+        @Html.Raw(Model.Content)
 
-</article>
+    </article>
+
+</div>
 
 @section PageScripts {
 
