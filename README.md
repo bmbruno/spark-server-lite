@@ -76,3 +76,10 @@ These settings are only used with the QuickSSO system.
 * **SSOSiteID**: SiteID value provided by the QuickSSO system.
 * **SSOLoginURL**: should be set to `http://sso.brandonbruno.com/Authenticate/`
 * **SSOLogoutURL**: should be set to `http://sso.brandonbruno.com/Logout/`
+
+## Contact The Author
+
+For questions / comments / issues, contact me:
+
+* [Brandon Bruno on LinkedIn](https://www.linkedin.com/in/brandonbruno)
+* [bmbruno@gmail.com](mailto:bmbruno@gmail.com)
