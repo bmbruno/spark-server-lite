@@ -321,8 +321,6 @@
 
         handleNextBanner: async function () {
 
-            // TODO: show local spinner; disable button
-
             let response = await fetch(`${SparkServerAdmin.endpoints.nextBlogBanner}`);
             let result = await response.json();
 
@@ -340,8 +338,6 @@
                 SparkServerAdmin.openModal("EXCEPTION!", result.message);
 
             }
-
-            // TODO: hide local spinner; enable button
 
         },
 
@@ -404,7 +400,7 @@
 
             if (data.status === "OK") {
 
-                // TODO: show success message
+                SparkServerAdmin.showToast("Success!", "Media file(s) uploaded.", 8, "success");
 
                 // Refresh media list
                 SparkServerAdmin.loadBlogMediaList();
