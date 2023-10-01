@@ -1,4 +1,4 @@
-# Spark Server Lite
+# SparkServer Lite
 
 A simple blog management and hosting platform built on SQLite and ASP.NET Core MVC (.NET 6).
 
@@ -19,7 +19,11 @@ To set up SparkServerLite:
 	
 3) Run `dotnet build` then `dotnet run` to start the local server.
 
-4) Authentication - TODO
+## Authentication
+
+SparkServer Lite is configured to use a custom-built SSO system. The `AccountController` can be updated to use your login system of choice.
+
+For local development and testing, enabling `debug` mode (see [App Settings descriptors](https://github.com/bmbruno/spark-server-lite#app-settings-descriptors)) will automatically log UserID 1 into the system. **WARNING**: do not enable debug mode on production deployments.
 
 ## Technical Information
 
@@ -53,8 +57,6 @@ Default images (as JPG) for blog banners should be named with sequential integer
 * **MediaFolderWebPath**: Absolute addressable path to the media from the root web directory.
 * **DatabaseConnectionString**: Connection string for the SQLite database.
 * **BlogItemsPerPage**: Number of blog items to display per page.
- 
-
 * **BlogBannerServerPath**: Absolute addressable path to the default blog banners folder.
 * **BlogBannerWebPath**: Absolute addressable path to the blog banners from the root web directory.
 * **DefaultBlogBannerPath**: Absolute addressable path to the default blog banner image.
