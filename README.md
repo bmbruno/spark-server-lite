@@ -8,7 +8,7 @@ Blogs posts are written with Markdown.
 
 ## Setup
 
-To set up SparkServerLite:
+To set up SparkServer Lite:
 
 1) Ensure a .NET 6 runtime is installed.
 
@@ -32,12 +32,18 @@ For local development and testing, enabling `debug` mode (see [App Settings desc
 * Blog Image Banner: 2000px x 1000px @ 96dpi
 * Blog Banner Thumb: 600px x 300px @ 96dpi
 
-Default images (as JPG) for blog banners should be named with sequential integers (01, 02, 03... 22, 23, etc.) in the following folder:
+### Default Blog Banners
+
+Blog posts can have default images configured. The "Get Next Banner" button on the Blog Edit page will automatically pull the next unused default image, returning to the first image once reaching the last.
+
+Images to be used as default blog banners should be placed in the following folder and named with sequential integers (01, 02, 03... 22, 23, etc.):
 
 ```
 /images/banner-images/xx.jpg
 /images/banner-images/xx-thumb.jpg
 ```
+
+There should a numbered file _and_ a thumbnail version.
 
 ### App Settings descriptors
 
