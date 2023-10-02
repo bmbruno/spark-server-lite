@@ -32,7 +32,7 @@ h4 { font-size: 1.65em; }
 h5 { font-size: 1.5em; }
 h6 { font-size: 1.45em; }
 
-.container { width: 100%; }
+.container { width: 100%; margin: 0 auto; }
 .admin .container { margin: 0 auto; }
 
 .content { margin: 0 auto; padding: 1em 0 1em 0;  }
