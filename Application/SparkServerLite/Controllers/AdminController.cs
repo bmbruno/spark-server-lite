@@ -40,8 +40,16 @@ namespace SparkServerLite.Controllers
             BlogEditListViewModel viewModel = new BlogEditListViewModel();
             base.Setup(viewModel, _settings);
 
-            IEnumerable<Blog> blogs = _blogRepo.GetAll();
-            viewModel.MapToViewModel(blogs);
+            try
+            {
+                IEnumerable<Blog> blogs = _blogRepo.GetAll();
+                viewModel.MapToViewModel(blogs);
+            }
+            catch (Exception exc)
+            {
+                // TODO: log this exception
+                TempData["Error"] = $"Error loading blogs. Exception: {exc.Message}";
+            }
 
             return View(viewModel);
         }
@@ -205,16 +213,24 @@ namespace SparkServerLite.Controllers
             BlogTagListViewModel viewModel = new BlogTagListViewModel();
             base.Setup(viewModel, _settings);
 
-            IEnumerable<BlogTag> allTags = _blogTagRepo.GetAllTagsWithCount();
-
-            foreach (var tag in allTags)
+            try
             {
-                viewModel.BlogTagList.Add(new BlogTagListItemViewModel()
+                IEnumerable<BlogTag> allTags = _blogTagRepo.GetAllTagsWithCount();
+
+                foreach (var tag in allTags)
                 {
-                    ID = tag.ID,
-                    Name = tag.Name,
-                    Uses = tag.Uses
-                });
+                    viewModel.BlogTagList.Add(new BlogTagListItemViewModel()
+                    {
+                        ID = tag.ID,
+                        Name = tag.Name,
+                        Uses = tag.Uses
+                    });
+                }
+            }
+            catch (Exception exc)
+            {
+                // TODO: log this exception
+                TempData["Error"] = $"Error loading blog tags. Exception: {exc.Message}";
             }
 
             return View(viewModel);
