@@ -28,7 +28,7 @@ namespace SparkServerLite.Controllers
 
         public IActionResult Index()
         {
-            BaseViewModel viewModel = new BaseViewModel();
+            BaseViewModel viewModel = new();
             base.Setup(viewModel, _settings);
             ViewData["Title"] = "Admin";
 
@@ -37,7 +37,7 @@ namespace SparkServerLite.Controllers
 
         public ActionResult BlogList()
         {
-            BlogEditListViewModel viewModel = new BlogEditListViewModel();
+            BlogEditListViewModel viewModel = new();
             base.Setup(viewModel, _settings);
 
             try
@@ -56,7 +56,7 @@ namespace SparkServerLite.Controllers
 
         public ActionResult BlogEdit(int? ID)
         {
-            BlogEditViewModel viewModel = new BlogEditViewModel();
+            BlogEditViewModel viewModel = new();
             base.Setup(viewModel, _settings);
 
             if (ID.HasValue)
@@ -126,9 +126,9 @@ namespace SparkServerLite.Controllers
             {
                 if (viewModel.Mode == EditMode.Add)
                 {
-                    MediaManager media = new MediaManager(_settings);
+                    MediaManager media = new(_settings);
 
-                    Blog blog = new Blog();
+                    Blog blog = new();
 
                     blog.Title = viewModel.Title;
                     blog.Subtitle = viewModel.Subtitle;
@@ -171,7 +171,7 @@ namespace SparkServerLite.Controllers
                     _blogTagRepo.UpdateTagsForBlog(blog.ID, viewModel.BlogTags);
 
                     TempData["Success"] = "Blog updated.";
-                    return RedirectToAction(actionName: "BlogEdit", controllerName: "Admin", routeValues: new { ID = blog.ID });
+                    return RedirectToAction(actionName: "BlogEdit", controllerName: "Admin", routeValues: new { blog.ID });
                 }
 
             }
@@ -210,7 +210,7 @@ namespace SparkServerLite.Controllers
 
         public ActionResult BlogTagList()
         {
-            BlogTagListViewModel viewModel = new BlogTagListViewModel();
+            BlogTagListViewModel viewModel = new();
             base.Setup(viewModel, _settings);
 
             try
@@ -238,7 +238,7 @@ namespace SparkServerLite.Controllers
 
         public ActionResult BlogTagEdit(int? ID)
         {
-            BlogTagEditViewModel viewModel = new BlogTagEditViewModel();
+            BlogTagEditViewModel viewModel = new();
             base.Setup(viewModel, _settings);
 
             if (ID.HasValue)
@@ -286,8 +286,7 @@ namespace SparkServerLite.Controllers
             {
                 if (viewModel.Mode == EditMode.Add)
                 {
-                    BlogTag blogTag = new BlogTag();
-
+                    BlogTag blogTag = new();
                     blogTag.Name = viewModel.Name;
 
                     try

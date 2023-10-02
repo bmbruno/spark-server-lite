@@ -20,7 +20,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public BlogTag Get(int ID)
         {
-            BlogTag tag = new BlogTag();
+            BlogTag tag = new();
 
             using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
@@ -50,7 +50,7 @@ namespace SparkServer.Infrastructure.Repositories
                     else
                     {
                         conn.Close();
-                        throw new Exception($"No blog tag found for ID {ID.ToString()}");
+                        throw new Exception($"No blog tag found for ID {ID}");
                     }
                 }
 
@@ -63,7 +63,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public IEnumerable<BlogTag> GetAll()
         {
-            List<BlogTag> tagList = new List<BlogTag>();
+            List<BlogTag> tagList = new();
 
             using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
@@ -200,7 +200,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public IEnumerable<BlogTag> GetTagsInUse()
         {
-            List<BlogTag> tagList = new List<BlogTag>();
+            List<BlogTag> tagList = new();
 
             using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
@@ -242,7 +242,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public IEnumerable<BlogTag> GetAllTagsWithCount()
         {
-            List<BlogTag> tagList = new List<BlogTag>();
+            List<BlogTag> tagList = new();
 
             using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
@@ -286,7 +286,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public IEnumerable<BlogTag> GetForBlog(int blogID)
         {
-            List<BlogTag> tagList = new List<BlogTag>();
+            List<BlogTag> tagList = new();
 
             using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {

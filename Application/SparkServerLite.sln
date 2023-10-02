@@ -7,6 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SparkServerLite", "SparkSer
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C9977F90-F09F-4688-B7A1-36088A418827}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		..\LICENSE = ..\LICENSE
 		..\README.md = ..\README.md
 	EndProjectSection

@@ -24,7 +24,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public Blog Get(int ID)
         {
-            Blog blog = new Blog();
+            Blog blog = new();
 
             using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
@@ -70,7 +70,7 @@ namespace SparkServer.Infrastructure.Repositories
                     else
                     {
                         conn.Close();
-                        throw new Exception($"Blog not found with ID {ID.ToString()}");
+                        throw new Exception($"Blog not found with ID {ID}");
                     }
                 }
 
@@ -82,7 +82,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public IEnumerable<Blog> GetAll()
         {
-            List<Blog> blogList = new List<Blog>();
+            List<Blog> blogList = new();
 
             using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
@@ -155,7 +155,7 @@ namespace SparkServer.Infrastructure.Repositories
                 newID = (long)command.ExecuteScalar();
                 
                 // Updates of various fields
-                StringBuilder updateSQL = new StringBuilder();
+                StringBuilder updateSQL = new();
                 bool needsUpdate = false;
 
                 if (!String.IsNullOrEmpty(newItem.Subtitle))
@@ -213,7 +213,7 @@ namespace SparkServer.Infrastructure.Repositories
                 conn.Open();
 
                 SqliteCommand command = conn.CreateCommand();
-                StringBuilder updateSQL = new StringBuilder();
+                StringBuilder updateSQL = new();
 
                 // Title - required
                 updateSQL.Append("UPDATE Blogs SET Title = $title WHERE ID = $id;");
@@ -301,7 +301,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public Blog Get(string slug)
         {
-            Blog blog = new Blog();
+            Blog blog = new();
 
             using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
@@ -357,7 +357,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public IEnumerable<Blog> GetAllPublished()
         {
-            List<Blog> blogList = new List<Blog>();
+            List<Blog> blogList = new();
 
             using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
@@ -408,7 +408,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public IEnumerable<Blog> GetByDate(int year, int? month)
         {
-            List<Blog> blogList = new List<Blog>();
+            List<Blog> blogList = new();
 
             using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
@@ -477,7 +477,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public IEnumerable<Blog> GetRecent(int numberToLoad)
         {
-            List<Blog> blogList = new List<Blog>();
+            List<Blog> blogList = new();
 
             using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
@@ -529,7 +529,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public IEnumerable<Blog> GetByTagID(int tagID)
         {
-            List<Blog> blogList = new List<Blog>();
+            List<Blog> blogList = new();
 
             using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
@@ -582,7 +582,7 @@ namespace SparkServer.Infrastructure.Repositories
 
         public IEnumerable<Blog> GetByTagName(string tagName)
         {
-            List<Blog> blogList = new List<Blog>();
+            List<Blog> blogList = new();
 
             using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
             {
@@ -666,7 +666,6 @@ namespace SparkServer.Infrastructure.Repositories
 
         public string GetLatestBlogBanner(string folderFragment)
         {
-            Blog blog = new Blog();
             string latestBlogBanner = string.Empty;
 
             using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))

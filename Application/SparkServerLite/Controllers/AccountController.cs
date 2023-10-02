@@ -52,7 +52,7 @@ namespace SparkServerLite.Controllers
                 if (status == TokenStatus.Expired)
                     return Redirect(url: _settings.SSOLoginURL + _settings.SSOSiteID);
 
-                TempData["Error"] = $"Token not valid. Status: {status.ToString()}";
+                TempData["Error"] = $"Token not valid. Status: {status}";
                 return RedirectToAction(actionName: "Index", controllerName: "Home");
             }
 

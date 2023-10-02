@@ -28,9 +28,9 @@ namespace SparkServerLite.Controllers
         {
             this.SetupPaging(page);
 
-            BlogListViewModel viewModel = new BlogListViewModel();
-            List<Blog> blogList = new List<Blog>();
-            List<BlogTag> tagList = new List<BlogTag>();
+            BlogListViewModel viewModel = new();
+            List<Blog> blogList = new();
+            List<BlogTag> tagList = new();
 
             base.Setup(viewModel, _settings);
 
@@ -41,13 +41,13 @@ namespace SparkServerLite.Controllers
                     // Blogs list by year + month
                     blogList = _blogRepo.GetByDate(year.Value, month.Value).ToList();
                     string monthName = new DateTime(year.Value, month.Value, 1).ToString("MMMM");
-                    viewModel.Header = $"Blog Posts for {monthName} {year.ToString()}";
+                    viewModel.Header = $"Blog Posts for {monthName} {year}";
                 }
                 else if (year.HasValue)
                 {
                     // Blog list by year only
                     blogList = _blogRepo.GetByDate(year.Value, null).ToList();
-                    viewModel.Header = $"Blog Posts for {year.ToString()}";
+                    viewModel.Header = $"Blog Posts for {year}";
                 }
                 else
                 {
@@ -76,9 +76,9 @@ namespace SparkServerLite.Controllers
         }
 
         [HttpGet("posts/{year}/{month}/{slug}")]
-        public ActionResult Post(int year, int month, string slug = "", bool preview = false)
+        public ActionResult Post(string slug = "", bool preview = false)
         {
-            BlogViewModel viewModel = new BlogViewModel();
+            BlogViewModel viewModel = new();
             base.Setup(viewModel, _settings);
 
             if (String.IsNullOrEmpty(slug))
@@ -103,7 +103,7 @@ namespace SparkServerLite.Controllers
                 }
 
                 // Is preview mode being used with an authenticated user?
-                if (preview && User != null && User.Identity.IsAuthenticated)
+                if (preview && User.Identity != null && User.Identity.IsAuthenticated)
                 {
                     shouldDisplay = true;
                 }
@@ -126,19 +126,15 @@ namespace SparkServerLite.Controllers
         [HttpGet("posts/tag/{tagName}")]
         public ActionResult ListByTag(string tagName, int? page)
         {
+            BlogListViewModel viewModel = new();
+            base.Setup(viewModel, _settings);
             this.SetupPaging(page);
             
-            BlogListViewModel viewModel = new BlogListViewModel();
-            List<Blog> blogList = new List<Blog>();
-            List<BlogTag> tagList = new List<BlogTag>();
-
-            base.Setup(viewModel, _settings);
-
             try
             {
                 string unencodedTagName = FormatHelper.GetTagNameFromURL(tagName);
-                blogList = _blogRepo.GetByTagName(unencodedTagName).ToList();
-                tagList = _blogTagRepo.GetTagsInUse().ToList();
+                List<Blog> blogList = _blogRepo.GetByTagName(unencodedTagName).ToList();
+                List<BlogTag> tagList = _blogTagRepo.GetTagsInUse().ToList();
 
                 viewModel.MapToViewModel(blogList, tagList, _settings);
                 viewModel.Header = $"Posts tagged '{unencodedTagName}'";
