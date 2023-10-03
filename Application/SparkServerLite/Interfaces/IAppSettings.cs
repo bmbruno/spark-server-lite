@@ -63,6 +63,16 @@
         string DefaultBlogBannerThumbnailPath { get; set; }
 
         /// <summary>
+        /// Relative path (from the root of the application) to the folder where library images are stored. Example: ./wwwroot/images/library
+        /// </summary>
+        string LibraryMediaServerPath { get; set; }
+
+        /// <summary>
+        /// Absolute path to the wwwroot folder where browsers can access library images. Example: /images/library
+        /// </summary>
+        string LibraryMediaWebPath { get; set; }
+
+        /// <summary>
         /// Only used with QuickSSO system.
         /// </summary>
         string SSOSigningKey { get; set; }

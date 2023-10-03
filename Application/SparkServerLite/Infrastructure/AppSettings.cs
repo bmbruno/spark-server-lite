@@ -28,6 +28,10 @@ namespace SparkServerLite.Infrastructure
 
         public string DefaultBlogBannerThumbnailPath { get; set; } = string.Empty;
 
+        public string LibraryMediaServerPath { get; set; } = string.Empty;
+
+        public string LibraryMediaWebPath { get; set; } = string.Empty;
+
         public string SSOSigningKey { get; set; } = string.Empty;
 
         public string SSOSiteID { get; set; } = string.Empty;
