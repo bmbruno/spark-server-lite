@@ -359,7 +359,10 @@ namespace SparkServerLite.Controllers
 
         public ActionResult Media()
         {
-            return View();
+            BaseViewModel viewModel = new();
+            this.Setup(viewModel, _settings);
+
+            return View(viewModel);
         }
     }
 }
