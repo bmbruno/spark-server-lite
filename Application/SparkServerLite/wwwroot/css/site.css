@@ -27,10 +27,10 @@ nav ul li a:hover { text-decoration: none; }
 h1, h2, h3, h4, h5, h6 { margin-bottom: 0.5em; line-height: 1em; font-family: "RubikBold", sans-serif; }
 h1 { font-size: 3em; }
 h2 { font-size: 2em; }
-h3 { font-size: 1.75em; }
-h4 { font-size: 1.65em; }
-h5 { font-size: 1.5em; }
-h6 { font-size: 1.45em; }
+h3 { font-size: 1.5em; }
+h4 { font-size: 1.4em; }
+h5 { font-size: 1.2em; }
+h6 { font-size: 1.15em; }
 
 .container { width: 100%; margin: 0 auto; }
 .admin .container { margin: 0 auto; }
