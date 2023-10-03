@@ -18,11 +18,9 @@ namespace SparkServerLite.Controllers
 
         private readonly string[] validFileExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
 
-        public ApiController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAuthorRepository<Author> authorRepo, IAppSettings settings)
+        public ApiController(IBlogRepository<Blog> blogRepo, IAppSettings settings)
         {
             _blogRepo = blogRepo;
-            _blogTagRepo = blogTagRepo;
-            _authorRepo = authorRepo;
             _settings = settings;
         }
 

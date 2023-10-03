@@ -46,10 +46,10 @@ namespace SparkServerLite.Infrastructure
         }
 
         /// <summary>
-        /// Gets a list of media items (and associated thumbnails) as relative URL file paths for the given Blog ID.
+        /// Gets a list of media items (and associated thumbnails) as relative URL file paths for the given Blog media folder.
         /// </summary>
         /// <param name="folderPath">Folder on disk where the files live.</param>
-        /// <returns>List of MediaITems</returns>
+        /// <returns>List of MediaItems</returns>
         /// <exception cref="DirectoryNotFoundException">Thrown if no directory exists on-disk for the given folderPath.</exception>
         public List<MediaItem> GetMediaForBlog(string folderPath)
         {
@@ -80,6 +80,17 @@ namespace SparkServerLite.Infrastructure
                     ThumbnailPath = FormatForURL(GetThumbnailFilename(webPath))
                 });
             }
+
+            return mediaList;
+        }
+
+        /// <summary>
+        /// Gets a list of all images in the library folder. Does not return thumbnails.
+        /// </summary>
+        /// <returns>List of MediaItems.</returns>
+        public List<MediaItem> GetLibraryMedia()
+        {
+            List<MediaItem> mediaList = new();
 
             return mediaList;
         }
