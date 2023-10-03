@@ -14,8 +14,6 @@ namespace SparkServerLite.Controllers
     public class ApiController : Controller
     {
         private readonly IBlogRepository<Blog> _blogRepo;
-        private readonly IBlogTagRepository<BlogTag> _blogTagRepo;
-        private readonly IAuthorRepository<Author> _authorRepo;
         private readonly IAppSettings _settings;
 
         private readonly string[] validFileExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
@@ -261,6 +259,23 @@ namespace SparkServerLite.Controllers
 
             json.Status = JsonStatus.OK.ToString();
             json.Data = new string[] { newFilename, newFilenameThumbnail };
+
+            return Json(json);
+        }
+
+        [HttpGet]
+        public JsonResult BlogMediaFolderList()
+        {
+            // TODO: return a list of blog media folders with the following columns: Blog Title, Date Published, Media Folder ID
+            JsonPayload json = new();
+
+            return Json(json);
+        }
+
+        public JsonResult LibraryList()
+        {
+            // TODO: return a list of files (minus thumbnails) in the library folder
+            JsonPayload json = new();
 
             return Json(json);
         }
