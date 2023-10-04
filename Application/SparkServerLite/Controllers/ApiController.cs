@@ -5,6 +5,7 @@ using SparkServerLite.Infrastructure;
 using SparkServerLite.Infrastructure.Enums;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
+using System.Collections.Generic;
 using System.Net;
 using static System.Net.Mime.MediaTypeNames;
 using Image = SixLabors.ImageSharp.Image;
@@ -272,8 +273,27 @@ namespace SparkServerLite.Controllers
 
         public JsonResult LibraryList()
         {
-            // TODO: return a list of files (minus thumbnails) in the library folder
             JsonPayload json = new();
+            MediaManager media = new MediaManager(_settings);
+
+            try
+            {
+                List<MediaItem> library = media.GetLibraryMedia();
+
+                // Blank out server path for client-side data
+                foreach (MediaItem item in library)
+                    item.ServerPath = null;
+
+                json.Status = JsonStatus.OK.ToString();
+                json.Message = null;
+                json.Data = library;
+            }
+            catch (Exception exc)
+            {
+                json.Status = JsonStatus.EXCEPTION.ToString();
+                json.Message = $"Error loading library media. Exception: {exc.Message}";
+                json.Data = null;
+            }
 
             return Json(json);
         }

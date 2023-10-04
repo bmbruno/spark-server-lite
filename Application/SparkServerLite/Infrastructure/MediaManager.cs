@@ -2,6 +2,7 @@
 using SparkServerLite.Models;
 using System;
 using System.IO;
+using System.Runtime;
 
 namespace SparkServerLite.Infrastructure
 {
@@ -91,6 +92,27 @@ namespace SparkServerLite.Infrastructure
         public List<MediaItem> GetLibraryMedia()
         {
             List<MediaItem> mediaList = new();
+
+            string[] allFiles = Directory.GetFiles(_settings.LibraryMediaServerPath);
+
+            foreach (string file in allFiles)
+            {
+                // Filter out thumbnail images from this list
+                if (file.EndsWith($"{_thumbnailAffix}{Path.GetExtension(file)}"))
+                    continue;
+
+                string filename = Path.GetFileName(file);
+                string webPath = Path.Combine(_settings.LibraryMediaWebPath, filename);
+
+                mediaList.Add(new MediaItem()
+                {
+                    Filename = filename,
+                    Filetype = Path.GetExtension(file),
+                    ServerPath = file,
+                    WebPath = FormatForURL(webPath),
+                    ThumbnailPath = FormatForURL(GetThumbnailFilename(webPath))
+                });
+            }
 
             return mediaList;
         }
