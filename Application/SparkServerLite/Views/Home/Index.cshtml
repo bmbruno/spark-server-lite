@@ -12,7 +12,7 @@
     {   
 
         <a href="@Model.BlogList[0].URL" class="hero-link">
-            <div class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('@Model.BlogList[0].ImageURL');">
+            <div class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('@Model.BlogList[0].ImageURL'); background-size: cover; background-position: center;">
                 <div class="header">Latest Blog Post</div>
                 <h2>@Model.BlogList[0].Title</h2>
                 <h3>@Model.BlogList[0].Subtitle</h3>
@@ -32,7 +32,7 @@
             {
                 <li class="blog-card">
 
-                    <div class="image-preview" style="background-image: url('@blog.ImageThumbnailPath');">
+                    <div class="image-preview" style="background-image: url('@blog.ImageThumbnailPath'); background-size: cover; background-position: center;">
                         <a href="@blog.URL">&nbsp;</a>
                     </div>
 
