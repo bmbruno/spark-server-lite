@@ -8,7 +8,8 @@
             uploadMedia: "/api/uploadmedia",
             deleteMedia: "/api/deletemedia",
             nextBlogBanner: "/api/getnextblogbanner",
-            convertToHTML: "/api/markdowntohtml"
+            convertToHTML: "/api/markdowntohtml",
+            libraryMedia: "/api/librarylist"
 
         },
 
@@ -124,6 +125,51 @@
             }
 
             SparkServerAdmin.hideLoader("BlogMediaListLoader");
+        },
+
+        loadLibraryMediaList: async function () {
+
+            SparkServerAdmin.showLoader("LibraryMediaListLoader");
+
+            let response = await fetch(SparkServerAdmin.endpoints.libraryMedia);
+            let result = await response.json();
+            let output = "";
+
+            if (result.status == "OK") {
+
+                result.data.map((element) => {
+
+                    output += `
+                        <li>
+                            <div class="image-container">
+                                <img src='${element.thumbnailPath}' />
+                            </div>
+                            <div class="text-container">
+                                <p>${element.filename}</p>
+                                <div class='media-url'>${element.webPath}</div>
+                                <button type="button" class="media-copyurl-button" data-url="${element.webPath}">Copy URL</button>
+                                <button type="button" class="media-copyurl-button" data-url="${element.thumbnailPath}">Copy Thumbnail</button>
+                                <button type="button" class="media-delete-button delete-confirm" data-filename="${element.filename}">Delete</button>
+                            </div>
+                        </li>`;
+
+                });
+
+                output += "</ul>";
+
+                document.getElementById("LibraryMediaList").innerHTML = output;
+
+            } else if (result.status == "ERROR") {
+
+                SparkServerAdmin.openModal("ERROR!", result.message);
+
+            } else if (result.status == "EXCEPTION") {
+
+                SparkServerAdmin.openModal("EXCEPTION!", result.message);
+
+            }
+
+            SparkServerAdmin.hideLoader("LibraryMediaListLoader");
         },
 
         wireMediaButtons: function () {

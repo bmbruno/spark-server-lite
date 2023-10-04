@@ -2,6 +2,7 @@
     Layout = "_AdminLayout";
 }
 
+<!--
 <div class="content container">
     <h1>Media</h1>
     <table class="folder-list" id="MediaList">
@@ -14,16 +15,43 @@
         <tbody></tbody>
     </table>
 </div>
+-->
 
 <div class="content container">
+
     <h1>Library</h1>
-    <table class="folder-list" id="LibraryList">
-        <thead>
-            <tr>
-                <td>Item</td>
-                <td>Actions</td>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+
+    <img src="/images/loader.gif" alt="Loader GIF" id="LibraryListLoader" class="loader" />
+
+    <div class="row blog-media well">
+        <h2>Media</h2>
+
+        <div class="media-list" id="LibraryMediaList"></div>
+        <img src="/images/loader.gif" alt="Loader GIF" id="LibraryMediaListLoader" class="loader" />
+
+        <div class="media-upload">
+
+            <input type="file" id="MediaFiles" multiple value="Choose files to upload..." />
+            <br />
+            <button type="button" id="UploadMediaFiles">Upload Files</button>
+
+            <div id="MediaFilesUploadMessage" class="loader">
+                <img src="/images/loader.gif" alt="Loader GIF" />
+                <p>Uploading media, please wait...</p>
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
+
+@section PageScripts {
+
+    <script type="text/javascript">
+
+        SparkServerAdmin.loadLibraryMediaList();
+
+    </script>
+
+}
