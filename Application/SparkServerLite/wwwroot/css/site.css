@@ -163,7 +163,7 @@ footer a:hover { color: #FFF; }
 
 @media (min-width: 825px)
 {
-	header { margin: 1em auto; padding: 1em 0; }
+	header { margin: 1em auto; padding: 2em 0; }
 
 	.logo-byline { font-size: 1.25em; }
 
