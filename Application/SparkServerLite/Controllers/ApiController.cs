@@ -224,6 +224,29 @@ namespace SparkServerLite.Controllers
             return Json(json);
         }
 
+        [HttpPost]
+        public JsonResult DeleteLibraryMedia(string filename)
+        {
+            JsonPayload json = new JsonPayload();
+            MediaManager manager = new MediaManager(_settings);
+
+            string libraryMediaPath = Path.Combine(_settings.LibraryMediaServerPath, filename);
+
+            if (String.IsNullOrEmpty(libraryMediaPath))
+            {
+                json.Status = JsonStatus.ERROR.ToString();
+                json.Message = $"No media found at the following path: {libraryMediaPath}";
+                return Json(json);
+            }
+
+            manager.DeleteMedia(libraryMediaPath);
+
+            json.Status = JsonStatus.OK.ToString();
+            json.Message = $"Media item '{filename}' deleted.";
+
+            return Json(json);
+        }
+
         public JsonResult GetNextBlogBanner()
         {
             JsonPayload json = new JsonPayload();

@@ -19,23 +19,21 @@
 
 <div class="content container">
 
-    <h1>Library</h1>
-
     <img src="/images/loader.gif" alt="Loader GIF" id="LibraryListLoader" class="loader" />
 
-    <div class="row blog-media well">
-        <h2>Media</h2>
+    <div class="row library-media well">
+        <h2>Library Images</h2>
 
         <div class="media-list" id="LibraryMediaList"></div>
         <img src="/images/loader.gif" alt="Loader GIF" id="LibraryMediaListLoader" class="loader" />
 
         <div class="media-upload">
 
-            <input type="file" id="MediaFiles" multiple value="Choose files to upload..." />
-            <br />
+            <input type="file" id="LibraryMediaFiles" multiple value="Choose files to upload..." />
+            <label for="LibraryMediaFiles"></label>
             <button type="button" id="UploadMediaFiles">Upload Files</button>
 
-            <div id="MediaFilesUploadMessage" class="loader">
+            <div id="LibraryUploadMessage" class="loader">
                 <img src="/images/loader.gif" alt="Loader GIF" />
                 <p>Uploading media, please wait...</p>
             </div>
