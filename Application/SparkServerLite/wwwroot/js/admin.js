@@ -8,7 +8,10 @@
             uploadMedia: "/api/uploadmedia",
             deleteMedia: "/api/deletemedia",
             nextBlogBanner: "/api/getnextblogbanner",
-            convertToHTML: "/api/markdowntohtml"
+            convertToHTML: "/api/markdowntohtml",
+            libraryMedia: "/api/librarylist",
+            uploadLibraryMedia: "/api/uploadlibrarymedia",
+            deleteLibraryMedia: "/api/deletelibrarymedia"
 
         },
 
@@ -36,6 +39,12 @@
             let uploadButton = document.getElementById("UploadMediaFiles");
             if (uploadButton) {
                 uploadButton.addEventListener("click", SparkServerAdmin.handleMediaUpload);
+            }
+
+            // Upload Library Media button
+            let uploadLibraryButton = document.getElementById("UploadLibraryMediaFiles");
+            if (uploadLibraryButton) {
+                uploadLibraryButton.addEventListener("click", SparkServerAdmin.handleLibraryMediaUpload);
             }
 
             // Today (current datetime)
@@ -126,6 +135,53 @@
             SparkServerAdmin.hideLoader("BlogMediaListLoader");
         },
 
+        loadLibraryMediaList: async function () {
+
+            SparkServerAdmin.showLoader("LibraryMediaListLoader");
+
+            let response = await fetch(SparkServerAdmin.endpoints.libraryMedia);
+            let result = await response.json();
+            let output = "<ul>";
+
+            if (result.status == "OK") {
+
+                result.data.map((element) => {
+
+                    output += `
+                        <li>
+                            <div class="image-container">
+                                <img src='${element.thumbnailPath}' />
+                            </div>
+                            <div class="text-container">
+                                <h3>${element.filename}</h3>
+                                <div class='media-url'>${element.webPath}</div>
+                                <button type="button" class="media-copyurl-button" data-url="${element.webPath}">Copy URL</button>
+                                <button type="button" class="media-copyurl-button" data-url="${element.thumbnailPath}">Copy Thumbnail</button>
+                                <button type="button" class="media-delete-button delete-confirm" data-filename="${element.filename}">Delete</button>
+                            </div>
+                        </li>`;
+
+                });
+
+                output += "</ul>";
+
+                document.getElementById("LibraryMediaList").innerHTML = output;
+
+                SparkServerAdmin.wireLibraryMediaButtons();
+
+            } else if (result.status == "ERROR") {
+
+                SparkServerAdmin.openModal("ERROR!", result.message);
+
+            } else if (result.status == "EXCEPTION") {
+
+                SparkServerAdmin.openModal("EXCEPTION!", result.message);
+
+            }
+
+            SparkServerAdmin.hideLoader("LibraryMediaListLoader");
+        },
+
         wireMediaButtons: function () {
 
             // Delete buttons
@@ -166,12 +222,62 @@
 
                         if (attrUrl) {
                             navigator.clipboard.writeText(attrUrl.value);
+                            SparkServerAdmin.showToast("Copied to Clipboard", "URL fragment has been copied into the clipboard", 2, "success");
                         }
 
                     });
 
                 });
             }
+        },
+
+        wireLibraryMediaButtons: function () {
+
+            // Delete buttons
+            let deleteButtons = document.querySelectorAll(".media-delete-button");
+
+            if (deleteButtons) {
+
+                deleteButtons.forEach((button) => {
+
+                    button.addEventListener("click", function (e) {
+
+                        if (!confirm("Are you should you want to delete this?")) {
+                            e.preventDefault();
+                            return false;
+                        }
+
+                        let filename = button.attributes["data-filename"].value;
+
+                        SparkServerAdmin.deleteLibraryMedia(filename);
+
+                    });
+
+                });
+            }
+
+            // CopyURL buttons
+            let copyButtons = document.querySelectorAll(".media-copyurl-button");
+
+            if (copyButtons) {
+
+                copyButtons.forEach((button) => {
+
+                    button.addEventListener("click", function (e) {
+
+                        e.preventDefault();
+                        let attrUrl = button.attributes["data-url"];
+
+                        if (attrUrl) {
+                            navigator.clipboard.writeText(attrUrl.value);
+                            SparkServerAdmin.showToast("Copied to Clipboard", "URL fragment has been copied into the clipboard", 2, "success");
+                        }
+
+                    });
+
+                });
+            }
+
         },
 
         wireDeleteConfirm: function () {
@@ -204,7 +310,7 @@
 
             if (result.status == "OK") {
 
-                SparkServerAdmin.openModal("Media Deleted", "Successfully");
+                SparkServerAdmin.showToast("Media Deleted", "Media has been successfully deleted.", 6, "success");
 
             } else if (result.status == "ERROR") {
 
@@ -218,6 +324,33 @@
 
             // Refresh media list
             SparkServerAdmin.loadBlogMediaList();
+
+        },
+
+        deleteLibraryMedia: async function (filename) {
+
+            let formData = new FormData();
+            formData.append("filename", filename);
+
+            let response = await fetch(SparkServerAdmin.endpoints.deleteLibraryMedia, { method: "POST", body: formData });
+            let result = await response.json();
+
+            if (result.status == "OK") {
+
+                SparkServerAdmin.showToast("Image Deleted", "Library iamge has been successfully deleted.", 6, "success");
+
+            } else if (result.status == "ERROR") {
+
+                SparkServerAdmin.openModal("ERROR!", result.message);
+
+            } else if (result.status == "EXCEPTION") {
+
+                SparkServerAdmin.openModal("EXCEPTION!", result.message);
+
+            }
+
+            // Refresh media list
+            SparkServerAdmin.loadLibraryMediaList();
 
         },
 
@@ -383,6 +516,34 @@
 
         },
 
+        handleLibraryMediaUpload: function (e) {
+
+            e.preventDefault();
+            SparkServerAdmin.disableButton("UploadLibraryMediaFiles");
+            SparkServerAdmin.showLoader("LibraryUploadMessage");
+
+            var fileInput = document.getElementById("LibraryMediaFiles");
+
+            if (fileInput.files.length === 0) {
+                SparkServerAdmin.openModal("Alert!", "Please add media to upload.");
+                SparkServerAdmin.enableButton("UploadLibraryMediaFiles");
+                SparkServerAdmin.hideLoader("LibraryUploadMessage");
+                return;
+            }
+
+            let formData = new FormData();
+
+            // Media upload
+            for (var i = 0; i < fileInput.files.length; i++) {
+                formData.append(fileInput.files[i].name, fileInput.files[i]);
+            }
+
+            fetch(SparkServerAdmin.endpoints.uploadLibraryMedia, { method: "POST", body: formData })
+                .then(response => response.json())
+                .then(data => SparkServerAdmin.handleLibraryMediaUploadResponse(data));
+
+        },
+
         handleMediaUploadResponse: function (data) {
 
             // SparkServerAdmin.hideLoader();
@@ -404,6 +565,32 @@
 
                 // Refresh media list
                 SparkServerAdmin.loadBlogMediaList();
+
+            }
+
+        },
+
+        handleLibraryMediaUploadResponse: function (data) {
+
+            // SparkServerAdmin.hideLoader();
+            SparkServerAdmin.enableButton("UploadLibraryMediaFiles");
+            SparkServerAdmin.hideLoader("LibraryUploadMessage");
+
+            if (data.status === "ERROR") {
+
+                SparkServerAdmin.showToast("Error!", data.message, 8, "error");
+            }
+
+            if (data.status === "EXCEPTION") {
+                SparkServerAdmin.openModal("EXCEPTION!", data.message);
+            }
+
+            if (data.status === "OK") {
+
+                SparkServerAdmin.showToast("Success!", "Library file(s) uploaded.", 8, "success");
+
+                // Refresh media list
+                SparkServerAdmin.loadLibraryMediaList();
 
             }
 

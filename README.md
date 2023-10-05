@@ -59,14 +59,16 @@ There should a numbered file _and_ a thumbnail version.
  
 #### Backend Server configuration
 
-* **MediaFolderServerPath**: Relative server-addressable path to the media folder.
+* **MediaFolderServerPath**: Relative path to the media folder as viewed from the app directory.
 * **MediaFolderWebPath**: Absolute addressable path to the media from the root web directory.
 * **DatabaseConnectionString**: Connection string for the SQLite database.
 * **BlogItemsPerPage**: Number of blog items to display per page.
-* **BlogBannerServerPath**: Absolute addressable path to the default blog banners folder.
+* **BlogBannerServerPath**: Relative path to the default blog banners folder as viewed from the app directory.
 * **BlogBannerWebPath**: Absolute addressable path to the blog banners from the root web directory.
 * **DefaultBlogBannerPath**: Absolute addressable path to the default blog banner image.
 * **DefaultBlogBannerThumbnailPath**: Absolute addressable path to the default blog banner thumbnail image.
+* **LibraryMediaServerPath**: Relative path to the library image folder as viewed from the app directory.
+* **LibraryMediaWebPath**: Absolute addreessable path to the library image folder.
 
 #### SSO Configuration
 

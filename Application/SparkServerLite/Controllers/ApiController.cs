@@ -5,6 +5,7 @@ using SparkServerLite.Infrastructure;
 using SparkServerLite.Infrastructure.Enums;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
+using System.Collections.Generic;
 using System.Net;
 using static System.Net.Mime.MediaTypeNames;
 using Image = SixLabors.ImageSharp.Image;
@@ -14,17 +15,13 @@ namespace SparkServerLite.Controllers
     public class ApiController : Controller
     {
         private readonly IBlogRepository<Blog> _blogRepo;
-        private readonly IBlogTagRepository<BlogTag> _blogTagRepo;
-        private readonly IAuthorRepository<Author> _authorRepo;
         private readonly IAppSettings _settings;
 
         private readonly string[] validFileExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
 
-        public ApiController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAuthorRepository<Author> authorRepo, IAppSettings settings)
+        public ApiController(IBlogRepository<Blog> blogRepo, IAppSettings settings)
         {
             _blogRepo = blogRepo;
-            _blogTagRepo = blogTagRepo;
-            _authorRepo = authorRepo;
             _settings = settings;
         }
 
@@ -109,7 +106,7 @@ namespace SparkServerLite.Controllers
             if (form.Files.Count == 0)
             {
                 json.Status = JsonStatus.ERROR.ToString();
-                json.Message = "No files selected. Please select one or more pictures to upload.";
+                json.Message = "No files selected. Please select one or more files to upload.";
                 json.Data = null;
 
                 return Json(json);
@@ -194,6 +191,89 @@ namespace SparkServerLite.Controllers
         }
 
         [HttpPost]
+        public JsonResult UploadLibraryMedia(IFormCollection form)
+        {
+            MediaManager media = new MediaManager(_settings);
+            JsonPayload json = new JsonPayload();
+            int filesUploaded = 0;
+            string libraryFolder = string.Empty;
+
+            if (form.Files.Count == 0)
+            {
+                json.Status = JsonStatus.ERROR.ToString();
+                json.Message = "No files selected. Please select one or more files to upload.";
+                json.Data = null;
+
+                return Json(json);
+            }
+
+            // Validate file types
+            foreach (IFormFile file in form.Files)
+            {
+                if (!validFileExtensions.Contains(Path.GetExtension(file.FileName.ToLower())))
+                {
+                    json.Status = JsonStatus.ERROR.ToString();
+                    json.Message = $"File '{file.FileName}' must be an image type! Allowed types are: jpg, gif, png, webp";
+                    json.Data = null;
+
+                    return Json(json);
+                }
+            }
+
+            foreach (IFormFile file in form.Files)
+            {
+                // Lightly sanitize the filename (prevent folder injection)
+                string fileName = file.FileName.Replace(@"/", string.Empty).Replace(@"\", string.Empty);
+                string filePath = Path.Combine(_settings.LibraryMediaServerPath, fileName);
+
+                // Overwrite existing media automatically
+                if (System.IO.File.Exists(filePath))
+                    System.IO.File.Delete(filePath);
+
+                // Save image to disk
+                using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+
+                // Create thumbnail
+                using (Image image = Image.Load(filePath))
+                {
+                    try
+                    {
+                        // Preserve aspect ratio
+                        double maxWidth = 600;
+                        double maxHeight = 600;
+
+                        var ratioX = (double)maxWidth / image.Width;
+                        var ratioY = (double)maxHeight / image.Height;
+                        var ratio = Math.Min(ratioX, ratioY);
+
+                        var newWidth = (int)(image.Width * ratio);
+                        var newHeight = (int)(image.Height * ratio);
+
+                        image.Mutate(x => x.Resize(newWidth, newHeight));
+                    }
+                    catch (Exception exc)
+                    {
+                        json.Status = JsonStatus.EXCEPTION.ToString();
+                        json.Message = exc.Message.ToString();
+                        return Json(json);
+                    }
+
+                    // Get thumbnail file path
+                    string thumbnailPath = media.GetThumbnailFilename(filePath);
+                    image.SaveAsJpeg(thumbnailPath);
+                }
+            }
+
+            json.Status = JsonStatus.OK.ToString();
+            json.Message = $"{filesUploaded} files uploaded.";
+
+            return Json(json);
+        }
+
+        [HttpPost]
         public JsonResult DeleteMedia(int blogID, string filename)
         {
             JsonPayload json = new JsonPayload();
@@ -220,6 +300,29 @@ namespace SparkServerLite.Controllers
             }
 
             manager.DeleteMedia(item.ServerPath);
+
+            json.Status = JsonStatus.OK.ToString();
+            json.Message = $"Media item '{filename}' deleted.";
+
+            return Json(json);
+        }
+
+        [HttpPost]
+        public JsonResult DeleteLibraryMedia(string filename)
+        {
+            JsonPayload json = new JsonPayload();
+            MediaManager manager = new MediaManager(_settings);
+
+            string libraryMediaPath = Path.Combine(_settings.LibraryMediaServerPath, filename);
+
+            if (String.IsNullOrEmpty(libraryMediaPath))
+            {
+                json.Status = JsonStatus.ERROR.ToString();
+                json.Message = $"No media found at the following path: {libraryMediaPath}";
+                return Json(json);
+            }
+
+            manager.DeleteMedia(libraryMediaPath);
 
             json.Status = JsonStatus.OK.ToString();
             json.Message = $"Media item '{filename}' deleted.";
@@ -261,6 +364,42 @@ namespace SparkServerLite.Controllers
 
             json.Status = JsonStatus.OK.ToString();
             json.Data = new string[] { newFilename, newFilenameThumbnail };
+
+            return Json(json);
+        }
+
+        [HttpGet]
+        public JsonResult BlogMediaFolderList()
+        {
+            // TODO: return a list of blog media folders with the following columns: Blog Title, Date Published, Media Folder ID
+            JsonPayload json = new();
+
+            return Json(json);
+        }
+
+        public JsonResult LibraryList()
+        {
+            JsonPayload json = new();
+            MediaManager media = new MediaManager(_settings);
+
+            try
+            {
+                List<MediaItem> library = media.GetLibraryMedia();
+
+                // Blank out server path for client-side data
+                foreach (MediaItem item in library)
+                    item.ServerPath = null;
+
+                json.Status = JsonStatus.OK.ToString();
+                json.Message = null;
+                json.Data = library;
+            }
+            catch (Exception exc)
+            {
+                json.Status = JsonStatus.EXCEPTION.ToString();
+                json.Message = $"Error loading library media. Exception: {exc.Message}";
+                json.Data = null;
+            }
 
             return Json(json);
         }
