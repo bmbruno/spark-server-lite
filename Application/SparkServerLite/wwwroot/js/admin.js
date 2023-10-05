@@ -10,6 +10,7 @@
             nextBlogBanner: "/api/getnextblogbanner",
             convertToHTML: "/api/markdowntohtml",
             libraryMedia: "/api/librarylist",
+            uploadLibraryMedia: "/api/uploadlibrarymedia",
             deleteLibraryMedia: "/api/deletelibrarymedia"
 
         },
@@ -38,6 +39,12 @@
             let uploadButton = document.getElementById("UploadMediaFiles");
             if (uploadButton) {
                 uploadButton.addEventListener("click", SparkServerAdmin.handleMediaUpload);
+            }
+
+            // Upload Library Media button
+            let uploadLibraryButton = document.getElementById("UploadLibraryMediaFiles");
+            if (uploadLibraryButton) {
+                uploadLibraryButton.addEventListener("click", SparkServerAdmin.handleLibraryMediaUpload);
             }
 
             // Today (current datetime)
@@ -146,7 +153,7 @@
                                 <img src='${element.thumbnailPath}' />
                             </div>
                             <div class="text-container">
-                                <h3p>${element.filename}</h3>
+                                <h3>${element.filename}</h3>
                                 <div class='media-url'>${element.webPath}</div>
                                 <button type="button" class="media-copyurl-button" data-url="${element.webPath}">Copy URL</button>
                                 <button type="button" class="media-copyurl-button" data-url="${element.thumbnailPath}">Copy Thumbnail</button>
@@ -509,6 +516,34 @@
 
         },
 
+        handleLibraryMediaUpload: function (e) {
+
+            e.preventDefault();
+            SparkServerAdmin.disableButton("UploadLibraryMediaFiles");
+            SparkServerAdmin.showLoader("LibraryUploadMessage");
+
+            var fileInput = document.getElementById("LibraryMediaFiles");
+
+            if (fileInput.files.length === 0) {
+                SparkServerAdmin.openModal("Alert!", "Please add media to upload.");
+                SparkServerAdmin.enableButton("UploadLibraryMediaFiles");
+                SparkServerAdmin.hideLoader("LibraryUploadMessage");
+                return;
+            }
+
+            let formData = new FormData();
+
+            // Media upload
+            for (var i = 0; i < fileInput.files.length; i++) {
+                formData.append(fileInput.files[i].name, fileInput.files[i]);
+            }
+
+            fetch(SparkServerAdmin.endpoints.uploadLibraryMedia, { method: "POST", body: formData })
+                .then(response => response.json())
+                .then(data => SparkServerAdmin.handleLibraryMediaUploadResponse(data));
+
+        },
+
         handleMediaUploadResponse: function (data) {
 
             // SparkServerAdmin.hideLoader();
@@ -530,6 +565,32 @@
 
                 // Refresh media list
                 SparkServerAdmin.loadBlogMediaList();
+
+            }
+
+        },
+
+        handleLibraryMediaUploadResponse: function (data) {
+
+            // SparkServerAdmin.hideLoader();
+            SparkServerAdmin.enableButton("UploadLibraryMediaFiles");
+            SparkServerAdmin.hideLoader("LibraryUploadMessage");
+
+            if (data.status === "ERROR") {
+
+                SparkServerAdmin.showToast("Error!", data.message, 8, "error");
+            }
+
+            if (data.status === "EXCEPTION") {
+                SparkServerAdmin.openModal("EXCEPTION!", data.message);
+            }
+
+            if (data.status === "OK") {
+
+                SparkServerAdmin.showToast("Success!", "Library file(s) uploaded.", 8, "success");
+
+                // Refresh media list
+                SparkServerAdmin.loadLibraryMediaList();
 
             }
 

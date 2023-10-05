@@ -106,7 +106,7 @@ namespace SparkServerLite.Controllers
             if (form.Files.Count == 0)
             {
                 json.Status = JsonStatus.ERROR.ToString();
-                json.Message = "No files selected. Please select one or more pictures to upload.";
+                json.Message = "No files selected. Please select one or more files to upload.";
                 json.Data = null;
 
                 return Json(json);
@@ -146,6 +146,89 @@ namespace SparkServerLite.Controllers
                 // Overwrite existing media automatically
                 if (System.IO.File.Exists(filePath))
                     System.IO.File.Delete(filePath);                    
+
+                // Save image to disk
+                using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+
+                // Create thumbnail
+                using (Image image = Image.Load(filePath))
+                {
+                    try
+                    {
+                        // Preserve aspect ratio
+                        double maxWidth = 600;
+                        double maxHeight = 600;
+
+                        var ratioX = (double)maxWidth / image.Width;
+                        var ratioY = (double)maxHeight / image.Height;
+                        var ratio = Math.Min(ratioX, ratioY);
+
+                        var newWidth = (int)(image.Width * ratio);
+                        var newHeight = (int)(image.Height * ratio);
+
+                        image.Mutate(x => x.Resize(newWidth, newHeight));
+                    }
+                    catch (Exception exc)
+                    {
+                        json.Status = JsonStatus.EXCEPTION.ToString();
+                        json.Message = exc.Message.ToString();
+                        return Json(json);
+                    }
+
+                    // Get thumbnail file path
+                    string thumbnailPath = media.GetThumbnailFilename(filePath);
+                    image.SaveAsJpeg(thumbnailPath);
+                }
+            }
+
+            json.Status = JsonStatus.OK.ToString();
+            json.Message = $"{filesUploaded} files uploaded.";
+
+            return Json(json);
+        }
+
+        [HttpPost]
+        public JsonResult UploadLibraryMedia(IFormCollection form)
+        {
+            MediaManager media = new MediaManager(_settings);
+            JsonPayload json = new JsonPayload();
+            int filesUploaded = 0;
+            string libraryFolder = string.Empty;
+
+            if (form.Files.Count == 0)
+            {
+                json.Status = JsonStatus.ERROR.ToString();
+                json.Message = "No files selected. Please select one or more files to upload.";
+                json.Data = null;
+
+                return Json(json);
+            }
+
+            // Validate file types
+            foreach (IFormFile file in form.Files)
+            {
+                if (!validFileExtensions.Contains(Path.GetExtension(file.FileName.ToLower())))
+                {
+                    json.Status = JsonStatus.ERROR.ToString();
+                    json.Message = $"File '{file.FileName}' must be an image type! Allowed types are: jpg, gif, png, webp";
+                    json.Data = null;
+
+                    return Json(json);
+                }
+            }
+
+            foreach (IFormFile file in form.Files)
+            {
+                // Lightly sanitize the filename (prevent folder injection)
+                string fileName = file.FileName.Replace(@"/", string.Empty).Replace(@"\", string.Empty);
+                string filePath = Path.Combine(_settings.LibraryMediaServerPath, fileName);
+
+                // Overwrite existing media automatically
+                if (System.IO.File.Exists(filePath))
+                    System.IO.File.Delete(filePath);
 
                 // Save image to disk
                 using (Stream fileStream = new FileStream(filePath, FileMode.Create))
