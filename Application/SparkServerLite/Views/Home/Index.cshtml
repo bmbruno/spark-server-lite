@@ -9,9 +9,9 @@
 <div class="content container">
 
     @if (Model.BlogList.Count > 0)
-    {   
+    {
 
-        <a href="@Model.BlogList[0].URL" class="hero-link">
+        <a href="@Model.BlogList[0].URL" class="hero-link" aria-label="@Model.BlogList[0].Title" title="@Model.BlogList[0].Title">
             <div class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('@Model.BlogList[0].ImageURL'); background-size: cover; background-position: center;">
                 <div class="header">Latest Blog Post</div>
                 <h2>@Model.BlogList[0].Title</h2>
@@ -33,7 +33,7 @@
                 <li class="blog-card">
 
                     <div class="image-preview" style="background-image: url('@blog.ImageThumbnailPath'); background-size: cover; background-position: center;">
-                        <a href="@blog.URL">&nbsp;</a>
+                        <a href="@blog.URL" aria-label="@blog.Title" title="@blog.Title">&nbsp;</a>
                     </div>
 
                     <div class="overview">
