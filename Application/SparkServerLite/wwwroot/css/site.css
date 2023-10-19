@@ -194,7 +194,7 @@ footer a:hover { color: #FFF; }
 	.blog-about { min-width: 375px; margin: 0 auto 2em auto; padding: 2em; border: 1px solid #AAA; border-radius: 6px; background-color: initial; }
 
 	.blog-banner { height: 475px; }
-	.blog-banner h1 { font-size: 3em; }
+	.blog-banner h1 { font-size: 3em; text-align: left; }
 
 	article.blog { padding: 2em 5em 5em 5em; font-size: 1.1em; line-height: 1.15em; margin-bottom: 2em; }
 	article.blog h1 { font-size: 3em; text-align: left; padding: 0; }
