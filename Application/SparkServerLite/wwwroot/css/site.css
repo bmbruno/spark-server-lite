@@ -80,7 +80,7 @@ h6 { font-size: 1.15em; }
 
 article.blog { text-align: left; padding: 1em; background-color: #FFF; }
 article.blog h1 { font-size: 2.25em; margin: 0 0 1em 0; text-align: center; line-height: 1em; padding-top: 1em; }
-article.blog p { font-size: 1.15em; line-height: 1.5em; margin-bottom: 2em; text-align: left; }
+article.blog p { font-size: 1.15em; line-height: 1.5em; margin-bottom: 1.5em; text-align: left; }
 article.blog p:last-of-type { margin-bottom: 0; }
 article.blog p a { font-weight: bold; }
 article.blog .figure { margin: 0 0 2em 0; }
