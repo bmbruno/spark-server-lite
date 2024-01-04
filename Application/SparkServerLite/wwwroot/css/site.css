@@ -88,6 +88,7 @@ article.blog ul, article.blog ol { margin: 0 0 2em 2em; font-size: 1.15em; }
 article.blog ul li { list-style-type: disc; line-height: 1.5em; margin-bottom: 0.5em; }
 article.blog ol li { list-style-type: decimal; line-height: 1.5em; margin-bottom: 0.5em; }
 article.blog a:hover { box-shadow: inset 0 -8px 0 #ffe000; }
+article.blog .figure > a { box-shadow: none; }
 
 .sub-menu { padding: 1em 0; }
 
