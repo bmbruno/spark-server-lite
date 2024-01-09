@@ -34,7 +34,7 @@ namespace SparkServerLite.Mapping
             vm.BlogID = blog.ID;
             vm.Slug = blog.Slug;
             vm.Title = blog.Title;
-            vm.Subtitle = blog.Subtitle;
+            vm.Subtitle = blog.Subtitle ?? string.Empty;
             vm.Content = blog.Content;
             vm.ImagePath = !String.IsNullOrEmpty(blog.ImagePath) ? blog.ImagePath : settings.DefaultBlogBannerPath;
             vm.ImageThumbnailPath = !String.IsNullOrEmpty(blog.ImageThumbnailPath) ? blog.ImageThumbnailPath : settings.DefaultBlogBannerThumbnailPath;
