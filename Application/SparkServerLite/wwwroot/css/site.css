@@ -24,7 +24,7 @@ nav ul { display: flex; justify-content: center; align-items: center; margin: 0;
 nav ul li a { display: block; padding: 1em 2em; margin: 0 1em; font-family: 'RubikMedium';  }
 nav ul li a:hover { text-decoration: none; }
 
-h1, h2, h3, h4, h5, h6 { margin-bottom: 0.5em; line-height: 1em; font-family: "RubikBold", sans-serif; }
+h1, h2, h3, h4, h5, h6 { margin-bottom: 0.5em; line-height: 1em; font-family: "RubikBold", sans-serif; max-width: 650px; }
 h1 { font-size: 3em; }
 h2 { font-size: 2em; }
 h3 { font-size: 1.5em; }
