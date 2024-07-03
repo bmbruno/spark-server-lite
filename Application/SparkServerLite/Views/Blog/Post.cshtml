@@ -36,42 +36,41 @@
         </div>
     }
 
-    <article class="blog">
-
-        <div class="blog-about">
-            <div class="columns">
-                <div class="item">
-                    <div class="label">Author</div>
-                    <p>@Model.AuthorFullName</p>
-                </div>
-
-                <div class="item">
-                    <div class="label">Published</div>
-                    <p><time datetime="@Model.PublishDate.ToString(format: "yyyy-dd-MM")">@Model.PublishDate.ToString(format: "MMMM dd, yyyy")</time></p>
-                </div>
-
-                <div class="item">
-                    <div class="label">Tags</div>
-                    <ul class="tags">
-
-                        @if (Model.BlogTags.Count > 0)
-                        {
-                            foreach (var tag in Model.BlogTags)
-                            {
-                                <li><a href="/posts/tag/@FormatHelper.FormatTagForURL(tag.BlogTagName)">@tag.BlogTagName</a></li>
-                            }
-                        }
-                        else
-                        {
-                            <li>No tags defined</li>
-                        }
-                    </ul>
-                </div>
-
+    <div class="blog-about">
+        <div class="columns">
+            <div class="item">
+                <div class="label">Author</div>
+                <p>@Model.AuthorFullName</p>
             </div>
 
+            <div class="item">
+                <div class="label">Published</div>
+                <p><time datetime="@Model.PublishDate.ToString(format: "yyyy-dd-MM")">@Model.PublishDate.ToString(format: "MMMM dd, yyyy")</time></p>
+            </div>
+
+            <div class="item">
+                <div class="label">Tags</div>
+                <ul class="tags">
+
+                    @if (Model.BlogTags.Count > 0)
+                    {
+                        foreach (var tag in Model.BlogTags)
+                        {
+                            <li><a href="/posts/tag/@FormatHelper.FormatTagForURL(tag.BlogTagName)">@tag.BlogTagName</a></li>
+                        }
+                    }
+                    else
+                    {
+                        <li>No tags defined</li>
+                    }
+                </ul>
+            </div>
 
         </div>
+
+    </div>
+
+    <article class="blog">
 
         @Html.Raw(Model.Content)
 
