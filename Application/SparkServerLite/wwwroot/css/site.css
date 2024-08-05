@@ -72,7 +72,7 @@ h6 { font-size: 1.15em; }
 .blog-about .columns { display: grid; grid-template-columns: 1fr; }
 .blog-about .item { margin-bottom: 1em; }
 .blog-about .item:last-of-type { margin-bottom: 0; }
-.blog-about .label { font-weight: bold; margin-bottom: 0.15em; }
+.blog-about .label { font-weight: bold; margin-bottom: 0.25em; }
 .blog-about p, .blog-about li { line-height: 1em !important; }
 .blog-about ul.tags { columns: 1; margin: 0; }
 .blog-about ul.tags li { margin: 0; line-height: 1em; list-style-type: none; float: left; line-height: 1.25em; }
