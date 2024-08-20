@@ -31,8 +31,7 @@ namespace SparkServerLite.Controllers
         /// <param name="viewModel">Current view model that derives from BaseViewModel.</param>
         internal void Setup(BaseViewModel viewModel)
         {
-            viewModel.Sitename = _content.SiteName;
-            viewModel.SiteDescription = _content.SiteDescription;
+            viewModel.AppContent = _content;
             viewModel.SiteURL = _settings.SiteURL;
         }
 

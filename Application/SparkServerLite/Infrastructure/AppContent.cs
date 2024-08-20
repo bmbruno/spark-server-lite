@@ -8,5 +8,7 @@ namespace SparkServerLite.Infrastructure
 
         public string SiteDescription { get; set; } = string.Empty;
 
+        public string SiteLogoURL { get; set; } = string.Empty;
+
     }
 }

@@ -4,11 +4,11 @@
 <html lang="en">
 
     <head>
-        <title>@ViewData["Title"] - @Model.Sitename</title>
+        <title>@ViewData["Title"] - @Model.AppContent.SiteName</title>
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="@Model.SiteDescription">
+        <meta name="description" content="@Model.AppContent.SiteDescription">
         <meta name="author" content="Brandon Bruno">
         @await RenderSectionAsync("PageMetadata", required: false)
 
@@ -37,11 +37,10 @@
                 <div class="logo-wrapper">
                     <a href="/">
                         <picture>
-                            <source srcset="/images/logo_icon_web.png" media="(prefers-color-scheme: dark)" />
-                            <img src="/images/logo_icon_web.png" alt="@Model.Sitename Logo" title="@Model.Sitename" class="logo" />
+                            <img src="@Model.AppContent.SiteLogoURL" alt="@Model.AppContent.SiteName Logo" title="@Model.AppContent.SiteName" class="logo" />
                         </picture>
                     </a>
-                    <p class="logo-byline">@Model.SiteDescription</p>
+                    <p class="logo-byline">@Model.AppContent.SiteDescription</p>
                 </div>
 
                 <div>

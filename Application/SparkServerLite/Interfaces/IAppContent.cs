@@ -12,5 +12,10 @@
         /// </summary>
         string SiteDescription { get; set; }
 
+        /// <summary>
+        /// URL of the site's logo image.
+        /// </summary>
+        string SiteLogoURL { get; set; }
+
     }
 }

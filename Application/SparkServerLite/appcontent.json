@@ -2,7 +2,8 @@
     "SparkServerLite": {
 
         "SiteName": "Refactor 64",
-        "SiteDescription": "Technology & Career Insights by Brandon Bruno 128"
+        "SiteDescription": "Technology & Career Insights by Brandon Bruno 128",
+        "SiteLogoURL": "/images/logo_icon_web.png"
 
     }
 }
