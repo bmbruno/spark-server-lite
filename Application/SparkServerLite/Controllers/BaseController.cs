@@ -7,7 +7,9 @@ namespace SparkServerLite.Controllers
 {
     public class BaseController : Controller
     {
-        private IAppContent _appContent { get; set; }
+        private IAppContent _content { get; set; }
+
+        private IAppSettings _settings { get; set; }
 
         internal int Page { get; set; }
 
@@ -27,17 +29,17 @@ namespace SparkServerLite.Controllers
         /// Assigns site-wide variables on the BaseViewModel class.
         /// </summary>
         /// <param name="viewModel">Current view model that derives from BaseViewModel.</param>
-        /// <param name="appSettings">IAppSettings instance.</param>
-        internal void Setup(BaseViewModel viewModel, IAppSettings appSettings)
+        internal void Setup(BaseViewModel viewModel)
         {
-            viewModel.Sitename = _appContent.SiteName;
-            viewModel.SiteDescription = _appContent.SiteDescription;
-            viewModel.SiteURL = appSettings.SiteURL;
+            viewModel.Sitename = _content.SiteName;
+            viewModel.SiteDescription = _content.SiteDescription;
+            viewModel.SiteURL = _settings.SiteURL;
         }
 
-        public BaseController(IAppContent content)
+        public BaseController(IAppSettings settings, IAppContent content)
         {
-            _appContent = content;
+            _settings = settings;
+            _content = content;
         }
     }
 }

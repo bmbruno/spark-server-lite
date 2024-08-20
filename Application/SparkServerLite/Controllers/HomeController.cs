@@ -14,7 +14,7 @@ namespace SparkServerLite.Controllers
         private readonly IBlogRepository<Blog> _blogRepo;
         private readonly IAppSettings _settings;
 
-        public HomeController(ILogger<HomeController> logger, IBlogRepository<Blog> blogRepo, IAppSettings settings, IAppContent content) : base(content)
+        public HomeController(ILogger<HomeController> logger, IBlogRepository<Blog> blogRepo, IAppSettings settings, IAppContent content) : base(settings, content)
         {
             _logger = logger;
             _blogRepo = blogRepo;
@@ -24,7 +24,7 @@ namespace SparkServerLite.Controllers
         public IActionResult Index()
         {
             HomeViewModel viewModel = new HomeViewModel();
-            base.Setup(viewModel, _settings);
+            base.Setup(viewModel);
 
             var blogs = _blogRepo.GetRecent(5);
             viewModel.MapToViewModel(blogs, _settings);
@@ -36,7 +36,7 @@ namespace SparkServerLite.Controllers
         public ActionResult About()
         {
             HomeViewModel viewModel = new HomeViewModel();
-            base.Setup(viewModel, _settings);
+            base.Setup(viewModel);
 
             viewModel.MenuSelection = MainMenu.About;
 
