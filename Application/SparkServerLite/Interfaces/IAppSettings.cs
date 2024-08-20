@@ -8,16 +8,6 @@
         bool Debug { get; set; }
 
         /// <summary>
-        /// Name of website; will be displayed to users.
-        /// </summary>
-        string Sitename { get; set; }
-
-        /// <summary>
-        /// Description of the website; usuall displayed near the site logo or Sitename.
-        /// </summary>
-        string SiteDescription { get; set; }
-
-        /// <summary>
         /// Base URL of the site. Used to generate some URLs. Example: https://www.myblog.com
         /// </summary>
         string SiteURL { get; set; }

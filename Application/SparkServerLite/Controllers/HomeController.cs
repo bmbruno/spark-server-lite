@@ -14,7 +14,7 @@ namespace SparkServerLite.Controllers
         private readonly IBlogRepository<Blog> _blogRepo;
         private readonly IAppSettings _settings;
 
-        public HomeController(ILogger<HomeController> logger, IBlogRepository<Blog> blogRepo, IAppSettings settings)
+        public HomeController(ILogger<HomeController> logger, IBlogRepository<Blog> blogRepo, IAppSettings settings, IAppContent content) : base(content)
         {
             _logger = logger;
             _blogRepo = blogRepo;

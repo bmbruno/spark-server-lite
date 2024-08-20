@@ -40,6 +40,11 @@ namespace SparkServerLite
             config.GetSection("SparkServerLite").Bind(appSettings);
             builder.Services.AddSingleton(appSettings);
 
+            IAppContent appContent = new AppContent();
+            IConfigurationRoot content = new ConfigurationBuilder().AddJsonFile("appcontent.json").Build();
+            content.GetSection("SparkServerLite").Bind(appContent);
+            builder.Services.AddSingleton(appContent);
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

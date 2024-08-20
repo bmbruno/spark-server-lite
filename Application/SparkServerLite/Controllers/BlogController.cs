@@ -13,7 +13,7 @@ namespace SparkServerLite.Controllers
         private readonly IBlogTagRepository<BlogTag> _blogTagRepo;
         private readonly IAppSettings _settings;
 
-        public BlogController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAppSettings settings)
+        public BlogController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAppSettings settings, IAppContent content) : base(content)
         {
             _blogRepo = blogRepo;
             _blogTagRepo = blogTagRepo;

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
 using SparkServerLite.ViewModels;
 
@@ -6,6 +7,8 @@ namespace SparkServerLite.Controllers
 {
     public class BaseController : Controller
     {
+        private IAppContent _appContent { get; set; }
+
         internal int Page { get; set; }
 
         internal int ItemsPerPage { get; set; }
@@ -27,9 +30,14 @@ namespace SparkServerLite.Controllers
         /// <param name="appSettings">IAppSettings instance.</param>
         internal void Setup(BaseViewModel viewModel, IAppSettings appSettings)
         {
-            viewModel.Sitename = appSettings.Sitename;
-            viewModel.SiteDescription = appSettings.SiteDescription;
+            viewModel.Sitename = _appContent.SiteName;
+            viewModel.SiteDescription = _appContent.SiteDescription;
             viewModel.SiteURL = appSettings.SiteURL;
+        }
+
+        public BaseController(IAppContent content)
+        {
+            _appContent = content;
         }
     }
 }

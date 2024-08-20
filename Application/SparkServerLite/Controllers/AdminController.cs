@@ -18,7 +18,7 @@ namespace SparkServerLite.Controllers
         private readonly IAuthorRepository<Author> _authorRepo;
         private readonly IAppSettings _settings;
 
-        public AdminController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAuthorRepository<Author> authorRepo, IAppSettings settings)
+        public AdminController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAuthorRepository<Author> authorRepo, IAppSettings settings, IAppContent content) : base(content)
         {
             _blogRepo = blogRepo;
             _blogTagRepo = blogTagRepo;
