@@ -5,10 +5,10 @@ namespace SparkServerLite.Infrastructure
     public class AppSettings : IAppSettings
     {
         public bool Debug { get; set; } = false;
-        
-        public string SiteURL { get; set; } = string.Empty;
 
         public string DatabaseConnectionString { get; set; } = string.Empty;
+
+        public string SiteURL { get; set; } = string.Empty;
 
         public int BlogItemsPerPage { get; set; }
 
