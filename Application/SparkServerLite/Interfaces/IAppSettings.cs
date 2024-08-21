@@ -28,17 +28,17 @@
         string ServerWWWRoot { get; set; }
 
         /// <summary>
-        /// Relative path (from the root of the application) to the folder where blog post media should be stored. Example: ./wwwroot/media
+        /// Relative path (from the root of the application) to the folder where blog post media should be stored. Example: /media
         /// </summary>
         string MediaFolderPath { get; set; }
 
         /// <summary>
-        /// Absolute path to the wwwroot folder where browsers can access default blog banner images. Example: /images/banners
+        /// Relative path (from the root of the application) to the folder where blog banner images are stored. Example: /images/banners
         /// </summary>
         string BlogBannerPath { get; set; }
 
         /// <summary>
-        /// Absolute path to the wwwroot folder where browsers can access library images. Example: /images/library
+        /// Relative path (from the root of the application) to the folder where library images are stored. Example: /images/library
         /// </summary>
         string LibraryMediaPath { get; set; }
 
