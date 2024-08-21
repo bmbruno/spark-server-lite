@@ -24,7 +24,7 @@ namespace SparkServerLite.Infrastructure
         /// <param name="year">Year component of the CreateDate DateTime for the blog post.</param>
         public string CreateMediaFolderForBlog(int year)
         {
-            string basePath = Path.Combine(_settings.MediaFolderServerPath, year.ToString());
+            string basePath = Path.Combine(_settings.ServerWWWRoot, _settings.MediaFolderPath, year.ToString());
 
             // Check if year folder exists; create if not
             if (!Directory.Exists(basePath))
@@ -55,7 +55,7 @@ namespace SparkServerLite.Infrastructure
         public List<MediaItem> GetMediaForBlog(string folderPath)
         {
             List<MediaItem> mediaList = new List<MediaItem>();
-            string serverPath = Path.Combine(_settings.MediaFolderServerPath, folderPath);
+            string serverPath = Path.Combine(_settings.ServerWWWRoot, _settings.MediaFolderPath, folderPath);
 
             if (!Directory.Exists(serverPath))
                 throw new DirectoryNotFoundException($"[MediaManager.GetMediaForBlog] Media folder not found: {folderPath}");
@@ -71,7 +71,7 @@ namespace SparkServerLite.Infrastructure
                     continue;
 
                 string filename = Path.GetFileName(file);
-                string webPath = Path.Combine(_settings.MediaFolderWebPath, folderPath, filename);
+                string webPath = Path.Combine(_settings.MediaFolderPath, folderPath, filename);
 
                 mediaList.Add(new MediaItem() { 
                     Filename = filename,
@@ -93,7 +93,7 @@ namespace SparkServerLite.Infrastructure
         {
             List<MediaItem> mediaList = new();
 
-            string[] allFiles = Directory.GetFiles(_settings.LibraryMediaServerPath);
+            string[] allFiles = Directory.GetFiles(_settings.ServerWWWRoot, _settings.LibraryMediaPath);
 
             foreach (string file in allFiles)
             {
@@ -102,7 +102,7 @@ namespace SparkServerLite.Infrastructure
                     continue;
 
                 string filename = Path.GetFileName(file);
-                string webPath = Path.Combine(_settings.LibraryMediaWebPath, filename);
+                string webPath = Path.Combine(_settings.LibraryMediaPath, filename);
 
                 mediaList.Add(new MediaItem()
                 {

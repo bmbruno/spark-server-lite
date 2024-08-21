@@ -141,7 +141,7 @@ namespace SparkServerLite.Controllers
             {
                 // Lightly sanitize the filename (prevent folder injection)
                 string fileName = file.FileName.Replace(@"/", string.Empty).Replace(@"\", string.Empty);
-                string filePath = Path.Combine(_settings.MediaFolderServerPath, existingBlog.MediaFolder, fileName);
+                string filePath = Path.Combine(_settings.ServerWWWRoot, _settings.MediaFolderPath, existingBlog.MediaFolder, fileName);
 
                 // Overwrite existing media automatically
                 if (System.IO.File.Exists(filePath))
@@ -224,7 +224,7 @@ namespace SparkServerLite.Controllers
             {
                 // Lightly sanitize the filename (prevent folder injection)
                 string fileName = file.FileName.Replace(@"/", string.Empty).Replace(@"\", string.Empty);
-                string filePath = Path.Combine(_settings.LibraryMediaServerPath, fileName);
+                string filePath = Path.Combine(_settings.ServerWWWRoot, _settings.LibraryMediaPath, fileName);
 
                 // Overwrite existing media automatically
                 if (System.IO.File.Exists(filePath))
@@ -313,7 +313,7 @@ namespace SparkServerLite.Controllers
             JsonPayload json = new JsonPayload();
             MediaManager manager = new MediaManager(_settings);
 
-            string libraryMediaPath = Path.Combine(_settings.LibraryMediaServerPath, filename);
+            string libraryMediaPath = Path.Combine(_settings.ServerWWWRoot, _settings.LibraryMediaPath, filename);
 
             if (String.IsNullOrEmpty(libraryMediaPath))
             {
@@ -335,7 +335,7 @@ namespace SparkServerLite.Controllers
             JsonPayload json = new JsonPayload();
             MediaManager media = new MediaManager(_settings);
 
-            string latestBlogBanner = _blogRepo.GetLatestBlogBanner(_settings.BlogBannerWebPath);
+            string latestBlogBanner = _blogRepo.GetLatestBlogBanner(_settings.BlogBannerPath);
 
             if (String.IsNullOrEmpty(latestBlogBanner))
             {
@@ -348,7 +348,7 @@ namespace SparkServerLite.Controllers
             int nextBannerNumber = Convert.ToInt32(latestBlogBanner.Split(".")[0]) + 1;
 
             // Increment to the next banner (see if file exists); if next files doesn't exists, return to 01 position
-            string formatPath = Path.Combine(_settings.BlogBannerServerPath, "{0:00}.jpg");
+            string formatPath = Path.Combine(_settings.ServerWWWRoot, _settings.BlogBannerPath, "{0:00}.jpg");
             string newFilename = string.Format(formatPath, nextBannerNumber);
 
             if (!System.IO.File.Exists(newFilename))
@@ -357,7 +357,7 @@ namespace SparkServerLite.Controllers
             }
 
             // Format using web-friendly path to blog-banner folder
-            formatPath = $"{_settings.BlogBannerWebPath}/{{0:00}}.jpg";
+            formatPath = $"{_settings.BlogBannerPath}/{{0:00}}.jpg";
             newFilename = string.Format(formatPath, nextBannerNumber);
 
             string newFilenameThumbnail = media.GetThumbnailFilename(newFilename);

@@ -8,25 +8,21 @@ namespace SparkServerLite.Infrastructure
         
         public string SiteURL { get; set; } = string.Empty;
 
-        public string MediaFolderServerPath { get; set; } = string.Empty;
-
-        public string MediaFolderWebPath { get; set; } = string.Empty;
-
         public string DatabaseConnectionString { get; set; } = string.Empty;
 
         public int BlogItemsPerPage { get; set; }
 
-        public string BlogBannerServerPath { get; set; } = string.Empty;
+        public string ServerWWWRoot { get; set; } = string.Empty;
 
-        public string BlogBannerWebPath { get; set; } = string.Empty;
+        public string MediaFolderPath { get; set; } = string.Empty;
+
+        public string BlogBannerPath { get; set; } = string.Empty;
+
+        public string LibraryMediaPath { get; set; } = string.Empty;
 
         public string DefaultBlogBannerPath { get; set; } = string.Empty;
 
         public string DefaultBlogBannerThumbnailPath { get; set; } = string.Empty;
-
-        public string LibraryMediaServerPath { get; set; } = string.Empty;
-
-        public string LibraryMediaWebPath { get; set; } = string.Empty;
 
         public string SSOSigningKey { get; set; } = string.Empty;
 
