@@ -4,11 +4,11 @@
 <html lang="en">
 
     <head>
-        <title>@ViewData["Title"] - @Model.Sitename</title>
+        <title>@ViewData["Title"] - @Model.AppContent.SiteTitle</title>
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="@Model.SiteDescription">
+        <meta name="description" content="@Model.AppContent.SiteSubtitle">
         <meta name="author" content="Brandon Bruno">
         @await RenderSectionAsync("PageMetadata", required: false)
 
@@ -37,11 +37,10 @@
                 <div class="logo-wrapper">
                     <a href="/">
                         <picture>
-                            <source srcset="/images/logo_icon_web.png" media="(prefers-color-scheme: dark)" />
-                            <img src="/images/logo_icon_web.png" alt="@Model.Sitename Logo" title="@Model.Sitename" class="logo" />
+                            <img src="@Model.AppContent.SiteLogoURL" alt="@Model.AppContent.SiteTitle Logo" title="@Model.AppContent.SiteTitle" class="logo" />
                         </picture>
                     </a>
-                    <p class="logo-byline">@Model.SiteDescription</p>
+                    <p class="logo-byline">@Model.AppContent.SiteSubtitle</p>
                 </div>
 
                 <div>
@@ -86,11 +85,11 @@
         <footer>
             <div class="container">
                 <div>
-                    <p class="bold">&copy; @DateTime.Today.Year.ToString() Brandon Bruno. All rights reserved.</p>
-                    <p>Refactor: insights by Brandon Bruno on .NET, JavaScript, software architecture, career advancement, and leadership.</p>
+                    <p style="font-weight: bold;">&copy; @DateTime.Now.Year @Html.Raw(Model.AppContent.Footer.Copyright)</p>
+                    <p>@Html.Raw(Model.AppContent.Footer.Description)</p>
                 </div>
                 <div>
-                    <p>Comments? Questions? <a href="https://www.linkedin.com/in/brandonbruno/" target="_blank">Brandon Bruno on LinkedIn</a></p>
+                    <p>@Html.Raw(Model.AppContent.Footer.Blurb)</p>
                 </div>
             </div>
         </footer>

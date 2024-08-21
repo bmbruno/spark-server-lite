@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
 using SparkServerLite.ViewModels;
 
@@ -6,6 +7,10 @@ namespace SparkServerLite.Controllers
 {
     public class BaseController : Controller
     {
+        private IAppContent _content { get; set; }
+
+        private IAppSettings _settings { get; set; }
+
         internal int Page { get; set; }
 
         internal int ItemsPerPage { get; set; }
@@ -24,12 +29,16 @@ namespace SparkServerLite.Controllers
         /// Assigns site-wide variables on the BaseViewModel class.
         /// </summary>
         /// <param name="viewModel">Current view model that derives from BaseViewModel.</param>
-        /// <param name="appSettings">IAppSettings instance.</param>
-        internal void Setup(BaseViewModel viewModel, IAppSettings appSettings)
+        internal void Setup(BaseViewModel viewModel)
         {
-            viewModel.Sitename = appSettings.Sitename;
-            viewModel.SiteDescription = appSettings.SiteDescription;
-            viewModel.SiteURL = appSettings.SiteURL;
+            viewModel.AppContent = _content;
+            viewModel.SiteURL = _settings.SiteURL;
+        }
+
+        public BaseController(IAppSettings settings, IAppContent content)
+        {
+            _settings = settings;
+            _content = content;
         }
     }
 }

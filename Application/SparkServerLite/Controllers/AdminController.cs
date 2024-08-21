@@ -16,20 +16,22 @@ namespace SparkServerLite.Controllers
         private readonly IBlogRepository<Blog> _blogRepo;
         private readonly IBlogTagRepository<BlogTag> _blogTagRepo;
         private readonly IAuthorRepository<Author> _authorRepo;
+        private readonly IWebHostEnvironment _host;
         private readonly IAppSettings _settings;
-
-        public AdminController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAuthorRepository<Author> authorRepo, IAppSettings settings)
+        
+        public AdminController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAuthorRepository<Author> authorRepo, IWebHostEnvironment host, IAppSettings settings, IAppContent content) : base(settings, content)
         {
             _blogRepo = blogRepo;
             _blogTagRepo = blogTagRepo;
             _authorRepo = authorRepo;
             _settings = settings;
+            _host = host;
         }
 
         public IActionResult Index()
         {
             BaseViewModel viewModel = new();
-            base.Setup(viewModel, _settings);
+            base.Setup(viewModel);
             ViewData["Title"] = "Admin";
 
             return View(viewModel);
@@ -38,7 +40,7 @@ namespace SparkServerLite.Controllers
         public ActionResult BlogList()
         {
             BlogEditListViewModel viewModel = new();
-            base.Setup(viewModel, _settings);
+            base.Setup(viewModel);
 
             try
             {
@@ -57,7 +59,7 @@ namespace SparkServerLite.Controllers
         public ActionResult BlogEdit(int? ID)
         {
             BlogEditViewModel viewModel = new();
-            base.Setup(viewModel, _settings);
+            base.Setup(viewModel);
 
             if (ID.HasValue)
             {
@@ -111,7 +113,7 @@ namespace SparkServerLite.Controllers
         [HttpPost]
         public ActionResult BlogUpdate(BlogEditViewModel viewModel)
         {
-            base.Setup(viewModel, _settings);
+            base.Setup(viewModel);
 
             // Check for unique URL
             if (viewModel.Mode == EditMode.Add && !String.IsNullOrEmpty(viewModel.Slug))
@@ -126,7 +128,7 @@ namespace SparkServerLite.Controllers
             {
                 if (viewModel.Mode == EditMode.Add)
                 {
-                    MediaManager media = new(_settings);
+                    MediaManager media = new(_settings, _host);
 
                     Blog blog = new();
 
@@ -211,7 +213,7 @@ namespace SparkServerLite.Controllers
         public ActionResult BlogTagList()
         {
             BlogTagListViewModel viewModel = new();
-            base.Setup(viewModel, _settings);
+            base.Setup(viewModel);
 
             try
             {
@@ -239,7 +241,7 @@ namespace SparkServerLite.Controllers
         public ActionResult BlogTagEdit(int? ID)
         {
             BlogTagEditViewModel viewModel = new();
-            base.Setup(viewModel, _settings);
+            base.Setup(viewModel);
 
             if (ID.HasValue)
             {
@@ -360,7 +362,7 @@ namespace SparkServerLite.Controllers
         public ActionResult Media()
         {
             BaseViewModel viewModel = new();
-            this.Setup(viewModel, _settings);
+            this.Setup(viewModel);
 
             return View(viewModel);
         }

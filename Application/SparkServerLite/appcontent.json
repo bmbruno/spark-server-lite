@@ -1,0 +1,14 @@
+{
+    "SparkServerLite": {
+
+        "SiteTitle": "Refactor",
+        "SiteSubtitle": "Technology & Career Insights by Brandon Bruno",
+        "SiteLogoURL": "/images/logo_icon_web.png",
+
+        "Footer": {
+            "Copyright": "Brandon Bruno. All rights reserved.",
+            "Description": "Refactor: insights by Brandon Bruno on .NET, JavaScript, software architecture, career advancement, and leadership.",
+            "Blurb": "Comments? Questions? <a href='https://www.linkedin.com/in/brandonbruno/' target='_blank'>Brandon Bruno on LinkedIn</a>"
+        }
+    }
+}

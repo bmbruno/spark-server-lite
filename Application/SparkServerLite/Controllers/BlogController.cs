@@ -13,7 +13,7 @@ namespace SparkServerLite.Controllers
         private readonly IBlogTagRepository<BlogTag> _blogTagRepo;
         private readonly IAppSettings _settings;
 
-        public BlogController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAppSettings settings)
+        public BlogController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAppSettings settings, IAppContent content) : base(settings, content)
         {
             _blogRepo = blogRepo;
             _blogTagRepo = blogTagRepo;
@@ -32,7 +32,7 @@ namespace SparkServerLite.Controllers
             List<Blog> blogList = new();
             List<BlogTag> tagList = new();
 
-            base.Setup(viewModel, _settings);
+            base.Setup(viewModel);
 
             try
             {
@@ -79,7 +79,7 @@ namespace SparkServerLite.Controllers
         public ActionResult Post(string slug = "", bool preview = false)
         {
             BlogViewModel viewModel = new();
-            base.Setup(viewModel, _settings);
+            base.Setup(viewModel);
 
             if (String.IsNullOrEmpty(slug))
                 return RedirectToAction(actionName: "Index", controllerName: "Blog");
@@ -127,7 +127,7 @@ namespace SparkServerLite.Controllers
         public ActionResult ListByTag(string tagName, int? page)
         {
             BlogListViewModel viewModel = new();
-            base.Setup(viewModel, _settings);
+            base.Setup(viewModel);
             this.SetupPaging(page);
             
             try
