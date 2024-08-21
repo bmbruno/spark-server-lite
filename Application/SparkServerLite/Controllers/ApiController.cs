@@ -16,13 +16,15 @@ namespace SparkServerLite.Controllers
     {
         private readonly IBlogRepository<Blog> _blogRepo;
         private readonly IAppSettings _settings;
+        private readonly IWebHostEnvironment _host;
 
         private readonly string[] validFileExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
 
-        public ApiController(IBlogRepository<Blog> blogRepo, IAppSettings settings)
+        public ApiController(IBlogRepository<Blog> blogRepo, IAppSettings settings, IWebHostEnvironment host)
         {
             _blogRepo = blogRepo;
             _settings = settings;
+            _host = host;
         }
 
         [HttpPost]
@@ -50,7 +52,7 @@ namespace SparkServerLite.Controllers
         public JsonResult BlogMedia(int blogID)
         {
             JsonPayload json = new JsonPayload();
-            MediaManager manager = new MediaManager(_settings);
+            MediaManager manager = new MediaManager(_settings, _host);
 
             // Load blog and validate data
             Blog blog = _blogRepo.Get(blogID);
@@ -98,7 +100,7 @@ namespace SparkServerLite.Controllers
         [HttpPost]
         public JsonResult UploadMedia(IFormCollection form)
         {
-            MediaManager media = new MediaManager(_settings);
+            MediaManager media = new MediaManager(_settings, _host);
             JsonPayload json = new JsonPayload();
             int filesUploaded = 0;
             string mediaFolder = string.Empty;
@@ -141,7 +143,7 @@ namespace SparkServerLite.Controllers
             {
                 // Lightly sanitize the filename (prevent folder injection)
                 string fileName = file.FileName.Replace(@"/", string.Empty).Replace(@"\", string.Empty);
-                string filePath = Path.Combine(_settings.ServerWWWRoot, _settings.MediaFolderPath, existingBlog.MediaFolder, fileName);
+                string filePath = Path.Combine(_host.ContentRootPath, _settings.ServerWWWRoot, _settings.MediaFolderPath, existingBlog.MediaFolder, fileName);
 
                 // Overwrite existing media automatically
                 if (System.IO.File.Exists(filePath))
@@ -193,7 +195,7 @@ namespace SparkServerLite.Controllers
         [HttpPost]
         public JsonResult UploadLibraryMedia(IFormCollection form)
         {
-            MediaManager media = new MediaManager(_settings);
+            MediaManager media = new MediaManager(_settings, _host);
             JsonPayload json = new JsonPayload();
             int filesUploaded = 0;
             string libraryFolder = string.Empty;
@@ -224,7 +226,7 @@ namespace SparkServerLite.Controllers
             {
                 // Lightly sanitize the filename (prevent folder injection)
                 string fileName = file.FileName.Replace(@"/", string.Empty).Replace(@"\", string.Empty);
-                string filePath = Path.Combine(_settings.ServerWWWRoot, _settings.LibraryMediaPath, fileName);
+                string filePath = Path.Combine(_host.ContentRootPath, _settings.ServerWWWRoot, _settings.LibraryMediaPath, fileName);
 
                 // Overwrite existing media automatically
                 if (System.IO.File.Exists(filePath))
@@ -277,7 +279,7 @@ namespace SparkServerLite.Controllers
         public JsonResult DeleteMedia(int blogID, string filename)
         {
             JsonPayload json = new JsonPayload();
-            MediaManager manager = new MediaManager(_settings);
+            MediaManager manager = new(_settings, _host);
 
             Blog blog = _blogRepo.Get(blogID);
 
@@ -311,9 +313,9 @@ namespace SparkServerLite.Controllers
         public JsonResult DeleteLibraryMedia(string filename)
         {
             JsonPayload json = new JsonPayload();
-            MediaManager manager = new MediaManager(_settings);
+            MediaManager manager = new MediaManager(_settings, _host);
 
-            string libraryMediaPath = Path.Combine(_settings.ServerWWWRoot, _settings.LibraryMediaPath, filename);
+            string libraryMediaPath = Path.Combine(_host.ContentRootPath, _settings.ServerWWWRoot, _settings.LibraryMediaPath, filename);
 
             if (String.IsNullOrEmpty(libraryMediaPath))
             {
@@ -333,7 +335,7 @@ namespace SparkServerLite.Controllers
         public JsonResult GetNextBlogBanner()
         {
             JsonPayload json = new JsonPayload();
-            MediaManager media = new MediaManager(_settings);
+            MediaManager media = new MediaManager(_settings, _host);
 
             string latestBlogBanner = _blogRepo.GetLatestBlogBanner(_settings.BlogBannerPath);
 
@@ -348,7 +350,7 @@ namespace SparkServerLite.Controllers
             int nextBannerNumber = Convert.ToInt32(latestBlogBanner.Split(".")[0]) + 1;
 
             // Increment to the next banner (see if file exists); if next files doesn't exists, return to 01 position
-            string formatPath = Path.Combine(_settings.ServerWWWRoot, _settings.BlogBannerPath, "{0:00}.jpg");
+            string formatPath = Path.Combine(_host.ContentRootPath, _settings.ServerWWWRoot, _settings.BlogBannerPath, "{0:00}.jpg");
             string newFilename = string.Format(formatPath, nextBannerNumber);
 
             if (!System.IO.File.Exists(newFilename))
@@ -380,7 +382,7 @@ namespace SparkServerLite.Controllers
         public JsonResult LibraryList()
         {
             JsonPayload json = new();
-            MediaManager media = new MediaManager(_settings);
+            MediaManager media = new(_settings, _host);
 
             try
             {

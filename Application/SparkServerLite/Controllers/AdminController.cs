@@ -16,14 +16,16 @@ namespace SparkServerLite.Controllers
         private readonly IBlogRepository<Blog> _blogRepo;
         private readonly IBlogTagRepository<BlogTag> _blogTagRepo;
         private readonly IAuthorRepository<Author> _authorRepo;
+        private readonly IWebHostEnvironment _host;
         private readonly IAppSettings _settings;
-
-        public AdminController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAuthorRepository<Author> authorRepo, IAppSettings settings, IAppContent content) : base(settings, content)
+        
+        public AdminController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAuthorRepository<Author> authorRepo, IWebHostEnvironment host, IAppSettings settings, IAppContent content) : base(settings, content)
         {
             _blogRepo = blogRepo;
             _blogTagRepo = blogTagRepo;
             _authorRepo = authorRepo;
             _settings = settings;
+            _host = host;
         }
 
         public IActionResult Index()
@@ -126,7 +128,7 @@ namespace SparkServerLite.Controllers
             {
                 if (viewModel.Mode == EditMode.Add)
                 {
-                    MediaManager media = new(_settings);
+                    MediaManager media = new(_settings, _host);
 
                     Blog blog = new();
 
