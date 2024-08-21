@@ -47,37 +47,44 @@ There should a numbered file _and_ a thumbnail version.
 
 ### App Settings descriptors
 
-#### System
+#### System configuration
 
-* **Debug**: enables additional debug messages; also skips SSO login (use with caution!)
-
-#### Site Content
-
-* **Sitename**: Displayable name of the website.
-* **SiteDescription**: Displayable description of the website. Used in metadata fields, under main logo, and footer.
-* **SiteURL**: Resolvable URL of the site, including protocal and hostname (`https://www.myblog.com`).
+* **Debug**: enables additional debug messages; also skips SSO login (use with caution!).
+* **DatabaseConnectionString**: connection string to a SQLite database file.
+* **SiteURL**: resolvable URL of the site, including protocal and hostname (`https://www.myblog.com`).
+* **BlogItemsPerPage**: number of blog posts to display on each list page.
  
-#### Backend Server configuration
+#### Backend server configuration
 
-* **MediaFolderServerPath**: Relative path to the media folder as viewed from the app directory.
-* **MediaFolderWebPath**: Absolute addressable path to the media from the root web directory.
-* **DatabaseConnectionString**: Connection string for the SQLite database.
-* **BlogItemsPerPage**: Number of blog items to display per page.
-* **BlogBannerServerPath**: Relative path to the default blog banners folder as viewed from the app directory.
-* **BlogBannerWebPath**: Absolute addressable path to the blog banners from the root web directory.
-* **DefaultBlogBannerPath**: Absolute addressable path to the default blog banner image.
-* **DefaultBlogBannerThumbnailPath**: Absolute addressable path to the default blog banner thumbnail image.
-* **LibraryMediaServerPath**: Relative path to the library image folder as viewed from the app directory.
-* **LibraryMediaWebPath**: Absolute addreessable path to the library image folder.
+* **ServerWWWRoot**: path to the website content folder; usually 'wwwroot'
+* **MediaFolderServerPath**: relative path to the media folder as viewed from the app directory.
+* **BlogBannerServerPath**: relative path to the default blog banners folder as viewed from the app directory.
+* **LibraryMediaServerPath**: relative path to the library image folder as viewed from the app directory.
+* **DefaultBlogBannerPath**: absolute addressable path to the default blog banner image.
+* **DefaultBlogBannerThumbnailPath**: absolute addressable path to the default blog banner thumbnail image.
 
-#### SSO Configuration
+#### SSO configuration
 
 These settings are only used with the QuickSSO system.
 
-* **SSOSigningKey**: Signing key from the QuickSSO system.
-* **SSOSiteID**: SiteID value provided by the QuickSSO system.
+* **SSOSigningKey**: signing key from the QuickSSO system.
+* **SSOSiteID**: siteID value provided by the QuickSSO system.
 * **SSOLoginURL**: should be set to `http://sso.brandonbruno.com/Authenticate/`
 * **SSOLogoutURL**: should be set to `http://sso.brandonbruno.com/Logout/`
+
+### Content Settings descriptors
+
+#### Site-wide content
+
+* **SiteTitle**: displayable name of the website.
+* **SiteSubtitle**: displayable description of the website. Used in metadata fields, under main logo, and footer.
+* **SiteLogoURL**: URL of the site logo image.
+
+#### Footer content
+
+* **Copyright**: copyright string (copyright mark and year are already provided).
+* **Description**: description of the website.
+* **Blurb**: message, summary, overview, or other text about the website. Appears in right column of footer.
 
 ## Contact The Author
 
