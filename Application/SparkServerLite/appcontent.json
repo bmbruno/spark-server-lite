@@ -3,6 +3,7 @@
 
         "SiteTitle": "Refactor",
         "SiteSubtitle": "Technology & Career Insights by Brandon Bruno",
+        "ShowSubtitle": "true",
         "SiteLogoURL": "/images/logo_icon_web.png",
 
         "Footer": {

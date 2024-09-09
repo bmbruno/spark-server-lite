@@ -13,6 +13,11 @@
         string SiteSubtitle { get; set; }
 
         /// <summary>
+        /// Determines if the SIteSubtitle should be displayed on the homepage.
+        /// </summary>
+        bool ShowSubtitle { get; set; }
+
+        /// <summary>
         /// URL of the site's logo image.
         /// </summary>
         string SiteLogoURL { get; set; }

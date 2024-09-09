@@ -9,6 +9,8 @@ namespace SparkServerLite.Infrastructure
 
         public string SiteSubtitle { get; set; } = string.Empty;
 
+        public bool ShowSubtitle { get; set; } = true;
+
         public string SiteLogoURL { get; set; } = string.Empty;
 
         public IFooter Footer { get; set; }

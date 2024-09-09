@@ -40,7 +40,10 @@
                             <img src="@Model.AppContent.SiteLogoURL" alt="@Model.AppContent.SiteTitle Logo" title="@Model.AppContent.SiteTitle" class="logo" />
                         </picture>
                     </a>
-                    <p class="logo-byline">@Model.AppContent.SiteSubtitle</p>
+                    @if (Model.AppContent.ShowSubtitle)
+                    {
+                        <p class="logo-byline">@Model.AppContent.SiteSubtitle</p>
+                    }
                 </div>
 
                 <div>
