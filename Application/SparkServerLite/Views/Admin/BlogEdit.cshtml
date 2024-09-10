@@ -91,7 +91,7 @@
 
     <div class="row">
         @Html.LabelFor(x => x.PublishDate)
-        @Html.TextBoxFor(x => x.PublishDate, htmlAttributes: new { @class = "half" })
+        @Html.TextBoxFor(x => x.PublishDate, htmlAttributes: new { @class = "half", type = "date" })
         <div class="controls">
             <button type="button" id="TodayButton">Today</button>
         </div>
@@ -148,7 +148,6 @@
         </div>
 
         <button type="button" id="ClearBlogTags">Clear Tags</button>
-
 
     </div>
 

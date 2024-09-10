@@ -19,6 +19,11 @@
 
             SparkServerAdmin.wireButtons();
 
+            // The Date input type requires a certain 
+            let publishDate = document.getElementById("PublishDate");
+            if (publishDate && publishDate.defaultValue != "")
+                publishDate.value = SparkServerAdmin.formatDateForDatepicker(new Date(publishDate.defaultValue));
+
         },
 
         wireButtons: function () {
@@ -417,7 +422,7 @@
 
             let publishDateField = document.getElementById("PublishDate");
             if (publishDateField) {
-                publishDateField.value = new Date().toLocaleDateString();
+                publishDateField.value = SparkServerAdmin.formatDateForDatepicker(new Date());
             }
         },
 
@@ -705,8 +710,16 @@
 
             document.getElementById(id).disabled = false;
 
-        }
+        },
 
+        formatDateForDatepicker: (dateValue) => {
+
+            let month = (dateValue.getMonth() < 9) ? `0${dateValue.getMonth() + 1}` : `${dateValue.getMonth() + 1}`;
+            let day = (dateValue.getDate() < 10) ? `0${dateValue.getDate()}` : `${dateValue.getDate()}`;
+
+            return `${dateValue.getFullYear()}-${month}-${day}`;
+
+        }
 
     };
 
