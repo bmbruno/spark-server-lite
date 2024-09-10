@@ -32,7 +32,7 @@ namespace SparkServerLite.ViewModels
         {
             get
             {
-                return $"/posts/{this.PublishDate.Year}/{this.PublishDate.Month}/{this.Slug}";
+                return $"/blog/{this.PublishDate.Year}/{this.PublishDate.Month}/{this.Slug}";
             }
         }
 

@@ -21,9 +21,9 @@ namespace SparkServerLite.Controllers
             this.ItemsPerPage = _settings.BlogItemsPerPage;
         }
 
-        [HttpGet("posts/")]
-        [HttpGet("posts/{year}")]
-        [HttpGet("posts/{year}/{month}")]
+        [HttpGet("blog/")]
+        [HttpGet("blog/{year}")]
+        [HttpGet("blog/{year}/{month}")]
         public ActionResult Index(int? year, int? month, int? page)
         {
             this.SetupPaging(page);
@@ -75,7 +75,7 @@ namespace SparkServerLite.Controllers
             return View(viewModel);
         }
 
-        [HttpGet("posts/{year}/{month}/{slug}")]
+        [HttpGet("blog/{year}/{month}/{slug}")]
         public ActionResult Post(string slug = "", bool preview = false)
         {
             BlogViewModel viewModel = new();
@@ -123,7 +123,7 @@ namespace SparkServerLite.Controllers
             return View(viewModel);
         }
 
-        [HttpGet("posts/tag/{tagName}")]
+        [HttpGet("blog/tag/{tagName}")]
         public ActionResult ListByTag(string tagName, int? page)
         {
             BlogListViewModel viewModel = new();
