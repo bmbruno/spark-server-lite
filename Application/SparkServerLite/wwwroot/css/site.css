@@ -82,7 +82,7 @@ h6 { font-size: 1.15em; }
 .blog-about ul.tags li:last-child::after { content: ""; }
 
 article.blog { text-align: left; padding: 1em; background-color: #FFF; }
-article.blog h1, article.blog h2, article.blog h3, article.blog h4, article.blog h5, article.blog h6 { max-width: 650px; }
+article.blog h1, article.blog h2, article.blog h3, article.blog h4, article.blog h5, article.blog h6 { max-width: 650px; line-height: 1.25em; }
 article.blog h1 { font-size: 2.25em; margin: 0 0 1em 0; text-align: center; line-height: 1em; padding-top: 1em; }
 article.blog p { font-size: 1.15em; line-height: 1.5em; margin-bottom: 1.5em; text-align: left; }
 article.blog p:last-of-type { margin-bottom: 0; }
