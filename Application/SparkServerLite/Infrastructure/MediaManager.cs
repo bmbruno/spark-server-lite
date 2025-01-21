@@ -90,7 +90,7 @@ namespace SparkServerLite.Infrastructure
         }
 
         /// <summary>
-        /// Gets a list of all images in the library folder. Does not return thumbnails.
+        /// Gets a list of all images in the library folder.
         /// </summary>
         /// <returns>List of MediaItems.</returns>
         public List<MediaItem> GetLibraryMedia()

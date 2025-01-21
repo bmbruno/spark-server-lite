@@ -388,9 +388,16 @@ namespace SparkServerLite.Controllers
             {
                 List<MediaItem> library = media.GetLibraryMedia();
 
-                // Blank out server path for client-side data
+                
                 foreach (MediaItem item in library)
+                {
+                    // Blank out server path for client-side data
                     item.ServerPath = null;
+
+                    // Image path should be absolute for web server
+                    item.ThumbnailPath = $"/{item.ThumbnailPath}";
+                    item.WebPath = $"/{item.WebPath}";
+                }
 
                 json.Status = JsonStatus.OK.ToString();
                 json.Message = null;
