@@ -11,7 +11,7 @@ pre > code { overflow-x: scroll; }
 p > code { border: 1px solid #AAA; border-radius: 4px; padding: 0.25em 0.5em; font-family: monospace; font-size: 0.9em; }
 
 /* BASE */
-body { min-width: 300px; text-align: center; font-family: 'OpenSans', arial, sans-serif; background-color: #ebebeb; font-size: 16px; }
+body { min-width: 300px; text-align: center; font-family: 'OpenSans', arial, sans-serif; background-color: #ebebeb; }
 strong { font-weight: bold; } 
 blockquote { font-style: italic; color: #555; background-color: #e3e3e3; margin: 2em 0; padding: 2em 2em 2em 2em; max-width: 650px; line-height: 1.5em; }
 blockquote p:last-of-type { margin-bottom: 0; }
@@ -27,7 +27,7 @@ nav ul li a:hover { text-decoration: none; }
 h1, h2, h3, h4, h5, h6 { margin-bottom: 0.5em; line-height: 1em; font-family: "RubikBold", sans-serif; }
 h1 { font-size: 3em; }
 h2 { font-size: 2em; }
-h3 { font-size: 1.5em; }
+h3 { font-size: 1.5em; margin-bottom: 1em; }
 h4 { font-size: 1.4em; }
 h5 { font-size: 1.2em; }
 h6 { font-size: 1.15em; }
@@ -81,16 +81,16 @@ h6 { font-size: 1.15em; }
 .blog-about ul.tags li::after { content: ",\00a0"; } 
 .blog-about ul.tags li:last-child::after { content: ""; }
 
-article.blog { text-align: left; padding: 1em; background-color: #FFF; }
+article.blog { text-align: left; padding: 1em; background-color: #FFF; font-size: 1.15em; line-height: 1.5em; }
 article.blog h1, article.blog h2, article.blog h3, article.blog h4, article.blog h5, article.blog h6 { max-width: 650px; }
 article.blog h1 { font-size: 2.25em; margin: 0 0 1em 0; text-align: center; line-height: 1em; padding-top: 1em; }
-article.blog p { font-size: 1.15em; line-height: 1.5em; margin-bottom: 1.5em; text-align: left; }
+article.blog p { margin-bottom: 1.5em; text-align: left; }
 article.blog p:last-of-type { margin-bottom: 0; }
 article.blog p a { font-weight: bold; }
 article.blog .figure { margin: 0 0 2em 0; }
-article.blog ul, article.blog ol { margin: 0 0 2em 2em; font-size: 1.15em; }
-article.blog ul li { list-style-type: disc; line-height: 1.75em; margin-bottom: 1em; }
-article.blog ol li { list-style-type: decimal; line-height: 1.75em; margin-bottom: 1em; }
+article.blog ul, article.blog ol { margin: 0 0 2em 2em; }
+article.blog ul li { list-style-type: disc; margin-bottom: 1em; }
+article.blog ol li { list-style-type: decimal; margin-bottom: 1em; }
 article.blog li > ul, article.blog li > ol { padding-top: 1em; }
 article.blog a:hover { box-shadow: inset 0 -8px 0 #ffe000; }
 article.blog .figure > a { box-shadow: none; }
@@ -124,6 +124,7 @@ form .row { margin: 0 0 2em 0; }
 form .row label { display: block; font-weight: bold; margin-bottom: 0.25em }
 form .row > .controls { margin: 0.5em 0 0.5em 0; }
 form input[type="text"], textarea, select { width: 100%; padding: 0.75em; box-shadow: inset 1px 1px 2px #AAA; border: 1px solid #AAA; border-radius: 4px; font-size: 1em; background-color: #f9f9f9; }
+textarea { font-size: 1.25em; }
 form input[type="submit"] { padding: 0.75em 2em; }
 form input[type="file"] { margin-bottom: 1em; }
 form .checkbox-list { max-height: 200px; overflow-y: auto;  padding: 2em; columns: 1; line-height: 1.5em; margin-bottom: 0.5em;  }
@@ -209,10 +210,9 @@ footer a:hover { color: #FFF; }
 	.blog-banner { height: 475px; }
 	.blog-banner h1 { font-size: 3em; text-align: left; }
 
-	article.blog { padding: 2em 5em 5em 5em; font-size: 1em; line-height: 1.15em; margin-bottom: 2em; }
+	article.blog { padding: 2em 5em 5em 5em; font-size: 1em; margin-bottom: 2em; }
 	article.blog h1 { font-size: 3em; text-align: left; padding: 0; }
-	article.blog p { font-size: 1em; line-height: 1.75em; max-width: 650px; }
-	article.blog ul, article.blog ol { font-size: 1em; }
+	article.blog p { font-size: 1em; max-width: 650px; }
 	article.blog ul li, article.blog ol li { max-width: 600px; }
 
 	.status-message { max-width: 600px; padding: 2em; line-height: 1.5em; }
