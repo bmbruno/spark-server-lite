@@ -88,6 +88,7 @@ article.blog p { margin-bottom: 1.5em; text-align: left; }
 article.blog p:last-of-type { margin-bottom: 0; }
 article.blog p a { font-weight: bold; }
 article.blog .figure { margin: 0 0 2em 0; }
+article.blog .figure.shadow { box-shadow: 0 4px 12px #cdcdcd; }
 article.blog ul, article.blog ol { margin: 0 0 2em 2em; }
 article.blog ul li { list-style-type: disc; margin-bottom: 1em; }
 article.blog ol li { list-style-type: decimal; margin-bottom: 1em; }
