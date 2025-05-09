@@ -97,7 +97,7 @@ namespace SparkServer.Infrastructure.Repositories
 	                    INNER JOIN Authors ON Authors.ID = Blogs.AuthorID
                     WHERE
 	                    Blogs.Active = 1
-	                    -- AND PublishDate <= datetime('now')
+	                    -- AND PublishDate <= datetime('now', 'localtime')
                     ORDER BY
 	                    PublishDate DESC ";
 
@@ -372,7 +372,7 @@ namespace SparkServer.Infrastructure.Repositories
 	                    INNER JOIN Authors ON Authors.ID = Blogs.AuthorID
                     WHERE
 	                    Blogs.Active = 1
-	                    AND PublishDate <= datetime('now')
+	                    AND PublishDate <= datetime('now', 'localtime')
                     ORDER BY
 	                    PublishDate DESC ";
 
@@ -423,7 +423,7 @@ namespace SparkServer.Infrastructure.Repositories
                         INNER JOIN Authors ON Authors.ID = Blogs.AuthorID
                     WHERE
 	                    Blogs.Active = 1
-	                    AND PublishDate <= datetime('now')
+	                    AND PublishDate <= datetime('now', 'localtime')
 	                    AND PublishDate >= $startDate
 	                    AND PublishDate <= $endDate
                     ORDER BY
@@ -492,7 +492,7 @@ namespace SparkServer.Infrastructure.Repositories
                         INNER JOIN Authors ON Authors.ID = Blogs.AuthorID
                     WHERE
 	                    Blogs.Active = 1
-	                    AND PublishDate <= datetime('now')
+	                    AND PublishDate <= datetime('now', 'localtime')
                     ORDER BY
                         PublishDate DESC
                     LIMIT $limit";
@@ -545,7 +545,7 @@ namespace SparkServer.Infrastructure.Repositories
 	                    LEFT JOIN BlogsToTags ON BlogsToTags.BlogID = Blogs.ID
                     WHERE
 	                    Blogs.Active = 1
-	                    AND PublishDate <= datetime('now')
+	                    AND PublishDate <= datetime('now', 'localtime')
 	                    AND BlogsToTags.BlogTagID = $tagID
                     ORDER BY
 	                    PublishDate DESC";
@@ -599,7 +599,7 @@ namespace SparkServer.Infrastructure.Repositories
 	                    LEFT JOIN BlogTags ON BlogTags.ID = BlogsToTags.BlogTagID
                     WHERE
 	                    Blogs.Active = 1
-	                    AND PublishDate <= datetime('now')
+	                    AND PublishDate <= datetime('now', 'localtime')
 	                    AND BlogTags.Name = $tagName
                     ORDER BY
 	                    PublishDate DESC";
