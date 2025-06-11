@@ -680,7 +680,7 @@ namespace SparkServer.Infrastructure.Repositories
                     ORDER BY PublishDate DESC
                     LIMIT 1";
 
-                command.Parameters.AddWithValue("$fragment", $"{folderFragment}%");
+                command.Parameters.AddWithValue("$fragment", $"%{folderFragment}%");
                 conn.Open();
 
                 using (var reader = command.ExecuteReader())

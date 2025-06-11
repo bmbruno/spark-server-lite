@@ -361,7 +361,7 @@ namespace SparkServerLite.Controllers
                 }
 
                 // Format using web-friendly path to blog-banner folder
-                formatPath = $"{_settings.BlogBannerPath}/{{0:00}}.jpg";
+                formatPath = $"/{_settings.BlogBannerPath}/{{0:00}}.jpg";
                 newFilename = string.Format(formatPath, nextBannerNumber);
 
                 string newFilenameThumbnail = media.GetThumbnailFilename(newFilename);
