@@ -106,7 +106,7 @@ namespace SparkServerLite.Infrastructure
                     continue;
 
                 string filename = Path.GetFileName(file);
-                string webPath = Path.Combine(_settings.LibraryMediaPath, filename);
+                string webPath = Path.Combine($"/{_settings.LibraryMediaPath}", filename);
 
                 mediaList.Add(new MediaItem()
                 {
