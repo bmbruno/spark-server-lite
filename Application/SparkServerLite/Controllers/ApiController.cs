@@ -337,35 +337,44 @@ namespace SparkServerLite.Controllers
             JsonPayload json = new JsonPayload();
             MediaManager media = new MediaManager(_settings, _host);
 
-            string latestBlogBanner = _blogRepo.GetLatestBlogBanner(_settings.BlogBannerPath);
-
-            if (String.IsNullOrEmpty(latestBlogBanner))
+            try
             {
-                json.Status = JsonStatus.ERROR.ToString();
-                json.Message = "No latest blog banner found.";
-                return Json(json);
+                string latestBlogBanner = _blogRepo.GetLatestBlogBanner(_settings.BlogBannerPath);
+
+                if (String.IsNullOrEmpty(latestBlogBanner))
+                {
+                    json.Status = JsonStatus.ERROR.ToString();
+                    json.Message = "No latest blog banner found.";
+                    return Json(json);
+                }
+
+                // Strip extension from the file; increment to next EXPECTED (ie sequential) banner image filename
+                int nextBannerNumber = Convert.ToInt32(latestBlogBanner.Split(".")[0]) + 1;
+
+                // Increment to the next banner (see if file exists); if next files doesn't exists, return to 01 position
+                string formatPath = Path.Combine(_host.ContentRootPath, _settings.ServerWWWRoot, _settings.BlogBannerPath, "{0:00}.jpg");
+                string newFilename = string.Format(formatPath, nextBannerNumber);
+
+                if (!System.IO.File.Exists(newFilename))
+                {
+                    nextBannerNumber = 1;
+                }
+
+                // Format using web-friendly path to blog-banner folder
+                formatPath = $"{_settings.BlogBannerPath}/{{0:00}}.jpg";
+                newFilename = string.Format(formatPath, nextBannerNumber);
+
+                string newFilenameThumbnail = media.GetThumbnailFilename(newFilename);
+
+                json.Status = JsonStatus.OK.ToString();
+                json.Data = new string[] { newFilename, newFilenameThumbnail };
+
             }
-
-            // Strip extension from the file; increment to next EXPECTED (ie sequential) banner image filename
-            int nextBannerNumber = Convert.ToInt32(latestBlogBanner.Split(".")[0]) + 1;
-
-            // Increment to the next banner (see if file exists); if next files doesn't exists, return to 01 position
-            string formatPath = Path.Combine(_host.ContentRootPath, _settings.ServerWWWRoot, _settings.BlogBannerPath, "{0:00}.jpg");
-            string newFilename = string.Format(formatPath, nextBannerNumber);
-
-            if (!System.IO.File.Exists(newFilename))
+            catch (Exception exc)
             {
-                nextBannerNumber = 1;
+                json.Status = JsonStatus.EXCEPTION.ToString();
+                json.Message = exc.Message.ToString();
             }
-
-            // Format using web-friendly path to blog-banner folder
-            formatPath = $"{_settings.BlogBannerPath}/{{0:00}}.jpg";
-            newFilename = string.Format(formatPath, nextBannerNumber);
-
-            string newFilenameThumbnail = media.GetThumbnailFilename(newFilename);
-
-            json.Status = JsonStatus.OK.ToString();
-            json.Data = new string[] { newFilename, newFilenameThumbnail };
 
             return Json(json);
         }
