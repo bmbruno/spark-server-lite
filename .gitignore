@@ -175,6 +175,9 @@ App_Data/*.ldf
 # Microsoft Fakes
 FakesAssemblies/
 
+# Rider
+.idea
+
 # =========================
 # Windows detritus
 # =========================
