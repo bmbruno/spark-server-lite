@@ -1,4 +1,7 @@
-﻿using SparkServerLite.Interfaces;
+﻿using System.Text;
+using Microsoft.Data.Sqlite;
+using SparkServerLite.Infrastructure;
+using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
 
 namespace SparkServerLite.Repositories
@@ -24,7 +27,27 @@ namespace SparkServerLite.Repositories
 
         public int Create(Visit newItem)
         {
-            return 0;
+            long newID = 0;
+            
+            using (var conn = new SqliteConnection(_settings.AnalyticsConnectionString))
+            {
+                conn.Open();
+
+                SqliteCommand command = conn.CreateCommand();
+                
+                command.CommandText = @"INSERT INTO Visits (Date, UserAgent, Domain, Page, Referer, OS, Device, Active, CreateDate) VALUES ($date, $useragent, $domain, $page, $referer, $os, $device, $active, $createdate);";
+                command.Parameters.AddWithValue("$date", newItem.Date);
+                command.Parameters.AddWithValue("$createDate", newItem.CreateDate.ToString(FormatHelper.SQLiteDateTime));
+                command.ExecuteNonQuery();
+                command.Parameters.Clear();
+
+                command.CommandText = "SELECT last_insert_rowid()";
+                newID = (long)command.ExecuteScalar();
+
+                conn.Close();
+            }
+            
+            return Convert.ToInt32(newID);
         }
 
         public void Update(Visit updateItem)
