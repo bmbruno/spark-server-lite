@@ -34,7 +34,7 @@ namespace SparkServerLite.Infrastructure
             // TODO: extract useragent into variables
             if (!String.IsNullOrEmpty(userAgent))
             {
-                visit.UserAgent.Trim();
+                visit.UserAgent = userAgent.Trim();
             }
 
             // TODO: store in database
