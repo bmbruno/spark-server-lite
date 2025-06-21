@@ -37,6 +37,12 @@ namespace SparkServerLite.Repositories
                 
                 command.CommandText = @"INSERT INTO Visits (Date, UserAgent, Domain, Page, Referer, OS, Device, Active, CreateDate) VALUES ($date, $useragent, $domain, $page, $referer, $os, $device, $active, $createdate);";
                 command.Parameters.AddWithValue("$date", newItem.Date);
+                command.Parameters.AddWithValue("$useragent", !String.IsNullOrEmpty(newItem.UserAgent) ? newItem.UserAgent : null);
+                command.Parameters.AddWithValue("$domain", !String.IsNullOrEmpty(newItem.Domain) ? newItem.Domain : null);
+                command.Parameters.AddWithValue("$page", !String.IsNullOrEmpty(newItem.Page) ? newItem.Page : null);
+                
+                
+                command.Parameters.AddWithValue("$active", newItem.Active);
                 command.Parameters.AddWithValue("$createDate", newItem.CreateDate.ToString(FormatHelper.SQLiteDateTime));
                 command.ExecuteNonQuery();
                 command.Parameters.Clear();
