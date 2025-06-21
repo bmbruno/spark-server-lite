@@ -24,15 +24,11 @@ namespace SparkServerLite.Repositories
         {
             return new List<Visit>();
         }
-
-        public int Create(Visit newItem)
+        
+        public void Create(Visit newItem)
         {
-            long newID = 0;
-            
             using (var conn = new SqliteConnection(_settings.AnalyticsConnectionString))
             {
-                conn.Open();
-
                 SqliteCommand command = conn.CreateCommand();
                 
                 command.CommandText = @"INSERT INTO Visits (Date, UserAgent, Domain, Page, Referer, OS, Device, Active, CreateDate) VALUES ($date, $useragent, $domain, $page, $referer, $os, $device, $active, $createdate);";
@@ -40,30 +36,17 @@ namespace SparkServerLite.Repositories
                 command.Parameters.AddWithValue("$useragent", !String.IsNullOrEmpty(newItem.UserAgent) ? newItem.UserAgent : null);
                 command.Parameters.AddWithValue("$domain", !String.IsNullOrEmpty(newItem.Domain) ? newItem.Domain : null);
                 command.Parameters.AddWithValue("$page", !String.IsNullOrEmpty(newItem.Page) ? newItem.Page : null);
-                
+                command.Parameters.AddWithValue("$referer", !String.IsNullOrEmpty(newItem.Referer) ? newItem.Referer : null);
+                command.Parameters.AddWithValue("$os", !String.IsNullOrEmpty(newItem.OS) ? newItem.OS : null);
+                command.Parameters.AddWithValue("$device", !String.IsNullOrEmpty(newItem.Device) ? newItem.Device : null);
                 
                 command.Parameters.AddWithValue("$active", newItem.Active);
                 command.Parameters.AddWithValue("$createDate", newItem.CreateDate.ToString(FormatHelper.SQLiteDateTime));
+                
+                conn.Open();
                 command.ExecuteNonQuery();
-                command.Parameters.Clear();
-
-                command.CommandText = "SELECT last_insert_rowid()";
-                newID = (long)command.ExecuteScalar();
-
                 conn.Close();
             }
-            
-            return Convert.ToInt32(newID);
-        }
-
-        public void Update(Visit updateItem)
-        { 
-                    
-        }
-
-        public void Delete(int ID)
-        {
-        
         }
     }
 }
