@@ -51,7 +51,7 @@ namespace SparkServerLite.Infrastructure
             }
             catch (Exception exc)
             {
-                // TODO: handle concurrency issues/errors
+                // TODO: handle concurrency issues/errors - move this into the Create method (concurrency issues are a responsibility of the repo, not the service class)
             }
         }
     }
