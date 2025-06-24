@@ -12,12 +12,15 @@ namespace SparkServerLite.Controllers
         private readonly IBlogRepository<Blog> _blogRepo;
         private readonly IBlogTagRepository<BlogTag> _blogTagRepo;
         private readonly IAppSettings _settings;
+        private readonly Analytics _analytics;
 
-        public BlogController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAppSettings settings, IAppContent content) : base(settings, content)
+        public BlogController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAnalyticsRepository<Visit> analyticsRepo, IAppSettings settings, IAppContent content) : base(settings, content)
         {
             _blogRepo = blogRepo;
             _blogTagRepo = blogTagRepo;
             _settings = settings;
+            _analytics = new Analytics(_settings, analyticsRepo);
+
             this.ItemsPerPage = _settings.BlogItemsPerPage;
         }
 
@@ -71,6 +74,8 @@ namespace SparkServerLite.Controllers
                 // TODO: log this exception
                 TempData["Error"] = $"Error loading blog posts. Exception: {exc.Message}";
             }
+
+            _analytics.RecordVisit("/", this.UserAgent, this.Referer);
 
             return View(viewModel);
         }

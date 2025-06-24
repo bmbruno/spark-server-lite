@@ -17,6 +17,10 @@ namespace SparkServerLite.Controllers
 
         internal int SkipCount { get { return (this.Page - 1) * this.ItemsPerPage; } }
 
+        internal string UserAgent { get { return Request.Headers["User-Agent"]; } }
+
+        internal string Referer { get { return Request.Headers["Referer"]; } }
+
         internal void SetupPaging(int? page)
         {
             if (page.HasValue)
