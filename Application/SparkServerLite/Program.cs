@@ -3,6 +3,7 @@ using SparkServer.Infrastructure.Repositories;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
+using SparkServerLite.Repositories;
 
 namespace SparkServerLite
 {
@@ -19,7 +20,9 @@ namespace SparkServerLite
             builder.Services.AddTransient<IBlogRepository<Blog>, BlogRepository>();
             builder.Services.AddTransient<IAuthorRepository<Author>, AuthorRepository>();
             builder.Services.AddTransient<IBlogTagRepository<BlogTag>, BlogTagRepository>();
+            builder.Services.AddTransient<IAnalyticsRepository<Visit>, AnalyticsRepository>();
 
+            // Authentication
             builder.Services.AddAuthentication(options => {
 
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
