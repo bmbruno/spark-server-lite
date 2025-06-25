@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Mapping;
@@ -75,7 +76,7 @@ namespace SparkServerLite.Controllers
                 TempData["Error"] = $"Error loading blog posts. Exception: {exc.Message}";
             }
 
-            _analytics.RecordVisit("/", this.UserAgent, this.Referer);
+            _analytics.RecordVisit(Request.GetDisplayUrl(), this.UserAgent, this.Referer);
 
             return View(viewModel);
         }
@@ -114,9 +115,14 @@ namespace SparkServerLite.Controllers
                 }
 
                 if (shouldDisplay)
+                {
+                    _analytics.RecordVisit(Request.GetDisplayUrl(), this.UserAgent, this.Referer);
                     return View(viewModel);
+                }
                 else
+                {
                     return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
 
             }
             catch (Exception exc)
@@ -124,6 +130,8 @@ namespace SparkServerLite.Controllers
                 // TODO: log this exception
                 TempData["Error"] = $"Error loading blog post. Exception: {exc.Message}";
             }
+
+            _analytics.RecordVisit(Request.GetDisplayUrl(), this.UserAgent, this.Referer);
 
             return View(viewModel);
         }
@@ -156,6 +164,8 @@ namespace SparkServerLite.Controllers
                 // TODO: log this exception
                 TempData["Error"] = $"Error loading blogs by tag. Exception: {exc.Message}";
             }
+
+            _analytics.RecordVisit(Request.GetDisplayUrl(), this.UserAgent, this.Referer);
 
             return View(viewName: "Index", model: viewModel);
         }
