@@ -7,9 +7,9 @@ namespace SparkServerLite.Controllers
 {
     public class BaseController : Controller
     {
-        private IAppContent _content { get; set; }
+        protected IAppContent _content { get; set; }
 
-        private IAppSettings _settings { get; set; }
+        protected IAppSettings _settings { get; set; }
 
         internal int Page { get; set; }
 
