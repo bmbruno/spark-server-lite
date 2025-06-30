@@ -21,12 +21,12 @@ namespace SparkServerLite.Infrastructure
         /// </summary>
         /// <param name="page">Page URL of this visit.</param>
         /// <param name="userAgent">User Agent string, if available.</param>
-        /// <param name="referer">URL/page referer from the request.</param>
+        /// <param name="referer">URL/page referer from the request, if available.</param>
         public void RecordVisit(string page, string userAgent = "", string referer = "")
         {
+            // TODO: log 'page empty' condition - this should not really happen since page is handled by the app, not the user's request
             if (String.IsNullOrEmpty(page))
             {
-                // TODO: log 'page empty' condition - this should not really happen since page is handled by the app, not the user's request
                 return;
             }
 
@@ -34,19 +34,19 @@ namespace SparkServerLite.Infrastructure
             visit.Active = true;
             visit.CreateDate = DateTime.Now;
             visit.Date = visit.CreateDate;
-            visit.Page = page.Trim();
+            visit.Page = !String.IsNullOrEmpty(page) ? page.Trim() : null;
             visit.Referer = !String.IsNullOrEmpty(referer) ? referer.Trim() : null;
 
-            // TODO: extract useragent into variables
             if (!String.IsNullOrEmpty(userAgent))
             {
                 visit.UserAgent = userAgent.Trim();
-            }
 
-            // TODO: store in database
+                // TODO: extract useragent into variables
+            }
 
             try
             {
+                // Store in database
                 _analyticsRepo.Create(visit);
             }
             catch (Exception exc)
