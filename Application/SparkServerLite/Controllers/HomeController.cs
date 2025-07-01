@@ -33,7 +33,7 @@ namespace SparkServerLite.Controllers
             viewModel.MapToViewModel(blogs, _settings);
             viewModel.MenuSelection = MainMenu.Home;
 
-            _analytics.RecordVisit("/", this.UserAgent, this.Referer);
+            _analytics.RecordVisit(Request.Path, this.UserAgent, this.Referer);
 
             return View(viewModel);
         }

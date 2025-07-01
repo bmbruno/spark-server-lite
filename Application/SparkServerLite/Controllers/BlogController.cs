@@ -76,7 +76,7 @@ namespace SparkServerLite.Controllers
                 TempData["Error"] = $"Error loading blog posts. Exception: {exc.Message}";
             }
 
-            _analytics.RecordVisit(Request.GetDisplayUrl(), this.UserAgent, this.Referer);
+            _analytics.RecordVisit(Request.Path, this.UserAgent, this.Referer);
 
             return View(viewModel);
         }
@@ -116,7 +116,7 @@ namespace SparkServerLite.Controllers
 
                 if (shouldDisplay)
                 {
-                    _analytics.RecordVisit(Request.GetDisplayUrl(), this.UserAgent, this.Referer);
+                    _analytics.RecordVisit(Request.Path, this.UserAgent, this.Referer);
                     return View(viewModel);
                 }
                 else
@@ -131,7 +131,7 @@ namespace SparkServerLite.Controllers
                 TempData["Error"] = $"Error loading blog post. Exception: {exc.Message}";
             }
 
-            _analytics.RecordVisit(Request.GetDisplayUrl(), this.UserAgent, this.Referer);
+            _analytics.RecordVisit(Request.Path, this.UserAgent, this.Referer);
 
             return View(viewModel);
         }
@@ -165,7 +165,7 @@ namespace SparkServerLite.Controllers
                 TempData["Error"] = $"Error loading blogs by tag. Exception: {exc.Message}";
             }
 
-            _analytics.RecordVisit(Request.GetDisplayUrl(), this.UserAgent, this.Referer);
+            _analytics.RecordVisit(Request.Path, this.UserAgent, this.Referer);
 
             return View(viewName: "Index", model: viewModel);
         }
