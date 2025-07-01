@@ -48,5 +48,20 @@ namespace SparkServerLite.Repositories
                 conn.Close();
             }
         }
+
+        public void ReportPageViews()
+        {
+
+            string sql = @"
+                SELECT
+	                [Page],
+	                COUNT(*) AS [PageViews]
+                FROM Visits
+                WHERE
+	                Active = 1
+	                GROUP BY [Page]
+	                ORDER BY [PageViews] DESC, [Date] DESC";
+
+        }
     }
 }
