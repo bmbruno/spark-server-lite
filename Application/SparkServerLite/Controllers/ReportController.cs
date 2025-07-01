@@ -4,6 +4,7 @@ using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
 using SparkServerLite.ViewModels;
+using SparkServerLite.ViewModels.Analytics;
 
 
 namespace SparkServerLite.Controllers
@@ -27,6 +28,18 @@ namespace SparkServerLite.Controllers
             ViewData["Title"] = "Analytics";
 
             return View(viewModel);
+        }
+
+        public IActionResult Pageviews()
+        {
+            ReportPageViewsViewModel viewModel = new();
+            base.Setup(viewModel);
+            ViewData["Title"] = "Report: Page Views";
+
+            // TODO: get report data from analytics repo
+
+            return View(viewModel);
+
         }
 
     }

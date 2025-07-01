@@ -3,6 +3,7 @@ using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
 using SparkServerLite.ViewModels;
 using SparkServerLite.ViewModels.Admin;
+using SparkServerLite.ViewModels.Analytics;
 using System.Runtime;
 
 namespace SparkServerLite.Mapping

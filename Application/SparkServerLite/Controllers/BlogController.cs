@@ -5,6 +5,7 @@ using SparkServerLite.Interfaces;
 using SparkServerLite.Mapping;
 using SparkServerLite.Models;
 using SparkServerLite.ViewModels;
+using SparkServerLite.ViewModels.Analytics;
 
 namespace SparkServerLite.Controllers
 {
