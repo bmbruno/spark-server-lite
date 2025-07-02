@@ -1,0 +1,95 @@
+﻿@model SparkServerLite.ViewModels.BaseViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>@ViewData["Title"] - @Model.AppContent.SiteTitle</title>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="@Model.AppContent.SiteSubtitle">
+        <meta name="author" content="Brandon Bruno">
+        @await RenderSectionAsync("PageMetadata", required: false)
+
+        <link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/fonts.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/prism.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/prism-spark.css" asp-append-version="true" />
+
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    </head>
+
+    <body>
+
+        <div class="content admin">
+
+            <header>
+
+                <h2>@Model.AppContent.SiteTitle Admin</h2>
+
+                <div>
+                    <nav>
+                        <ul>
+                            <li><a class="btn" href="/Report">Home</a></li>
+                            <li><a class="btn" href="/Report/Pageviews">Pageviews</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </header>
+
+            @if (TempData["Success"] != null) 
+            {
+                <div class="status-message success">
+                    @TempData["Success"]
+                </div>
+            }
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="status-message error">
+                    @TempData["Error"]
+                </div>
+            }
+
+            <div class="container">
+                @RenderBody()
+            </div>
+
+        </div>
+
+        <div class="modal" id="Modal">
+            <div id="ModalContent"></div>
+            <button type="button" id="CloseModal">Close</button>
+        </div>
+
+        <div class="toast" id="Toast">
+            <div id="ToastContent">
+                <h2>Title</h2>
+                <p>Content</p>
+            </div>
+        </div>
+
+        <footer>
+            <div class="container">
+                <ul>
+                    <li>
+                        <p>&copy; @DateTime.Today.Year.ToString() @Model.AppContent.SiteTitle. All rights reserved.</p>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/admin.js" asp-append-version="true"></script>
+        <script src="/js/prism.js" asp-append-version="true"></script>
+        @await RenderSectionAsync("PageScripts", required: false)
+
+    </body>
+
+</html>

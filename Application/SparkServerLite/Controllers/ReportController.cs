@@ -40,7 +40,7 @@ namespace SparkServerLite.Controllers
             ViewData["Title"] = "Report: Page Views";
 
             // TODO: get report data from analytics repo
-            _analyticsRepo.ReportPageViews();
+            viewModel.ReportData = _analyticsRepo.ReportPageViews();
 
             return View(viewModel);
 

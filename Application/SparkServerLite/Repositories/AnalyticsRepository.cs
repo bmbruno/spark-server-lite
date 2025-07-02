@@ -78,7 +78,7 @@ namespace SparkServerLite.Repositories
                         report.Add(new PageViewItem()
                         {
                             Page = reader["Page"].ToString(),
-                            PageViews = Convert.ToInt32(reader["PageViews"])
+                            ViewCount = Convert.ToInt32(reader["PageViews"])
 
                         });
                     }

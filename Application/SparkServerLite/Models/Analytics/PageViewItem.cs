@@ -4,6 +4,6 @@
     {
         public string Page { get; set; } = string.Empty;
 
-        public int PageViews { get; set; }
+        public int ViewCount { get; set; }
     }
 }
