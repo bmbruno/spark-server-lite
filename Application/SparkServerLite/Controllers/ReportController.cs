@@ -15,10 +15,10 @@ namespace SparkServerLite.Controllers
         private readonly IWebHostEnvironment _host;
         private Analytics _analytics;
         
-        public ReportController(IAnalyticsRepository<Visit> analyticsRepo, IWebHostEnvironment host, IAppSettings settings, IAppContent content) : base(settings, content)
+        public ReportController(IAnalyticsRepository<Visit> analyticsRepo, Interfaces.ILogger logger, IWebHostEnvironment host, IAppSettings settings, IAppContent content) : base(settings, content, logger)
         {
             _host = host;
-            _analytics = new Analytics(_settings, analyticsRepo);
+            _analytics = new Analytics(_settings, analyticsRepo, _logger);
         }
 
         public IActionResult Index()

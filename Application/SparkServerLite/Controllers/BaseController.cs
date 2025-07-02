@@ -11,6 +11,8 @@ namespace SparkServerLite.Controllers
 
         protected IAppSettings _settings { get; set; }
 
+        protected Interfaces.ILogger _logger { get; set; }
+
         internal int Page { get; set; }
 
         internal int ItemsPerPage { get; set; }
@@ -39,10 +41,11 @@ namespace SparkServerLite.Controllers
             viewModel.SiteURL = _settings.SiteURL;
         }
 
-        public BaseController(IAppSettings settings, IAppContent content)
+        public BaseController(IAppSettings settings, IAppContent content, Interfaces.ILogger logger)
         {
             _settings = settings;
             _content = content;
+            _logger = logger;
         }
     }
 }

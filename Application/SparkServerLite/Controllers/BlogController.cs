@@ -13,16 +13,13 @@ namespace SparkServerLite.Controllers
     {
         private readonly IBlogRepository<Blog> _blogRepo;
         private readonly IBlogTagRepository<BlogTag> _blogTagRepo;
-        private readonly IAppSettings _settings;
         private readonly Analytics _analytics;
 
-        public BlogController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAnalyticsRepository<Visit> analyticsRepo, IAppSettings settings, IAppContent content) : base(settings, content)
+        public BlogController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAnalyticsRepository<Visit> analyticsRepo, Interfaces.ILogger logger, IAppSettings settings, IAppContent content) : base(settings, content, logger)
         {
             _blogRepo = blogRepo;
             _blogTagRepo = blogTagRepo;
-            _settings = settings;
-            _analytics = new Analytics(_settings, analyticsRepo);
-
+            _analytics = new Analytics(_settings, analyticsRepo, _logger);
             this.ItemsPerPage = _settings.BlogItemsPerPage;
         }
 

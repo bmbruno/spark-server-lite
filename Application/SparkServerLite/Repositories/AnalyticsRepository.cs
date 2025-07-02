@@ -43,6 +43,8 @@ namespace SparkServerLite.Repositories
                 command.Parameters.AddWithValue("$active", newItem.Active);
                 command.Parameters.AddWithValue("$createdate", newItem.CreateDate.ToString(FormatHelper.SQLiteDateTime));
                 
+                // TODO: handle concurrency issues here
+                
                 conn.Open();
                 command.ExecuteNonQuery();
                 conn.Close();

@@ -9,11 +9,13 @@ namespace SparkServerLite.Infrastructure
     {
         private readonly IAppSettings _settings;
         private readonly IAnalyticsRepository<Visit> _analyticsRepo;
+        private readonly Interfaces.ILogger _logger;
 
-        public Analytics(IAppSettings settings, IAnalyticsRepository<Visit> repo)
+        public Analytics(IAppSettings settings, IAnalyticsRepository<Visit> repo, Interfaces.ILogger logger)
         {
             _settings = settings;
             _analyticsRepo = repo;
+            _logger = logger;
         }
 
         /// <summary>
@@ -51,7 +53,7 @@ namespace SparkServerLite.Infrastructure
             }
             catch (Exception exc)
             {
-                // TODO: handle concurrency issues/errors - move this into the Create method (concurrency issues are a responsibility of the repo, not the service class)
+                _logger.Exception("Exception when creating new analytics Visit object.", exc);
             }
         }
     }

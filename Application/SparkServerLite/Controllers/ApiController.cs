@@ -12,6 +12,7 @@ using Image = SixLabors.ImageSharp.Image;
 
 namespace SparkServerLite.Controllers
 {
+    // TODO: have this inherit from BaseController; remove _settings from this class
     public class ApiController : Controller
     {
         private readonly IBlogRepository<Blog> _blogRepo;

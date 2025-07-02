@@ -11,17 +11,13 @@ namespace SparkServerLite.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IBlogRepository<Blog> _blogRepo;
-        private readonly IAppSettings _settings;
         private readonly Analytics _analytics;
 
-        public HomeController(ILogger<HomeController> logger, IBlogRepository<Blog> blogRepo, IAnalyticsRepository<Visit> analyticsRepo, IAppSettings settings, IAppContent content) : base(settings, content)
+        public HomeController(IBlogRepository<Blog> blogRepo, IAnalyticsRepository<Visit> analyticsRepo, Interfaces.ILogger logger, IAppSettings settings, IAppContent content) : base(settings, content, logger)
         {
-            _logger = logger;
             _blogRepo = blogRepo;
-            _settings = settings;
-            _analytics = new Analytics(_settings, analyticsRepo);
+            _analytics = new Analytics(_settings, analyticsRepo, _logger);
         }
 
         public IActionResult Index()
