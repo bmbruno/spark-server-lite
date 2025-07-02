@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
-using SparkServerLite.Models;
+using SparkServerLite.Models.Analytics;
+using SparkServerLite.Repositories;
 using SparkServerLite.ViewModels;
 using SparkServerLite.ViewModels.Analytics;
 
@@ -12,12 +13,14 @@ namespace SparkServerLite.Controllers
     [Authorize]
     public class ReportController : BaseController
     {
+        private readonly IAnalyticsRepository<Visit> _analyticsRepo;
         private readonly IWebHostEnvironment _host;
         private Analytics _analytics;
-        
+                
         public ReportController(IAnalyticsRepository<Visit> analyticsRepo, Interfaces.ILogger logger, IWebHostEnvironment host, IAppSettings settings, IAppContent content) : base(settings, content, logger)
         {
             _host = host;
+            _analyticsRepo = analyticsRepo;
             _analytics = new Analytics(_settings, analyticsRepo, _logger);
         }
 
@@ -37,6 +40,7 @@ namespace SparkServerLite.Controllers
             ViewData["Title"] = "Report: Page Views";
 
             // TODO: get report data from analytics repo
+            _analyticsRepo.ReportPageViews();
 
             return View(viewModel);
 

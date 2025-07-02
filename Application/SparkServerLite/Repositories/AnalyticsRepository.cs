@@ -2,7 +2,7 @@
 using Microsoft.Data.Sqlite;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
-using SparkServerLite.Models;
+using SparkServerLite.Models.Analytics;
 
 namespace SparkServerLite.Repositories
 {
@@ -51,18 +51,43 @@ namespace SparkServerLite.Repositories
             }
         }
 
-        public void ReportPageViews()
+        public List<PageViewItem> ReportPageViews()
         {
+            List<PageViewItem> report = new List<PageViewItem>();
 
-            string sql = @"
-                SELECT
-	                [Page],
-	                COUNT(*) AS [PageViews]
-                FROM Visits
-                WHERE
-	                Active = 1
-	                GROUP BY [Page]
-	                ORDER BY [PageViews] DESC, [Date] DESC";
+            using (var conn = new SqliteConnection(_settings.AnalyticsConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+
+                command.CommandText = @"
+                    SELECT
+	                    [Page],
+	                    COUNT(*) AS [PageViews]
+                    FROM Visits
+                    WHERE
+	                    Active = 1
+	                    GROUP BY [Page]
+	                    ORDER BY [PageViews] DESC, [Date] DESC";
+
+                conn.Open();
+                
+                using (SqliteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        report.Add(new PageViewItem()
+                        {
+                            Page = reader["Page"].ToString(),
+                            PageViews = Convert.ToInt32(reader["PageViews"])
+
+                        });
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return report;
 
         }
     }

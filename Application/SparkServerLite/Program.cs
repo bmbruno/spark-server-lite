@@ -3,6 +3,7 @@ using SparkServer.Infrastructure.Repositories;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
+using SparkServerLite.Models.Analytics;
 using SparkServerLite.Repositories;
 
 namespace SparkServerLite

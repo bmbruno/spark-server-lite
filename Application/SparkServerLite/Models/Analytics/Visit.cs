@@ -1,4 +1,4 @@
-﻿namespace SparkServerLite.Models
+﻿namespace SparkServerLite.Models.Analytics
 {
     public class Visit
     {

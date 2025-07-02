@@ -1,4 +1,6 @@
-﻿namespace SparkServerLite.Interfaces
+﻿using SparkServerLite.Models.Analytics;
+
+namespace SparkServerLite.Interfaces
 {
     public interface IAnalyticsRepository<T>
     {
@@ -20,5 +22,10 @@
         /// </summary>
         /// <param name="newItem">Visit object.</param>
         void Create(T newItem);
+
+        /// <summary>
+        /// Gets data for the PageViews report.
+        /// </summary>
+        List<PageViewItem> ReportPageViews();
     }
 }

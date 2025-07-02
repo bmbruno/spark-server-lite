@@ -4,6 +4,7 @@ using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Mapping;
 using SparkServerLite.Models;
+using SparkServerLite.Models.Analytics;
 using SparkServerLite.ViewModels;
 using SparkServerLite.ViewModels.Analytics;
 

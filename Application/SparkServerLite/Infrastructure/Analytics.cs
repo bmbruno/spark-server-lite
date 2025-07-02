@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using SparkServerLite.Interfaces;
-using SparkServerLite.Models;
+using SparkServerLite.Models.Analytics;
 using SparkServerLite.Repositories;
 
 namespace SparkServerLite.Infrastructure
