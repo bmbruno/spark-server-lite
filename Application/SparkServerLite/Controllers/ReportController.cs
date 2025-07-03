@@ -45,5 +45,14 @@ namespace SparkServerLite.Controllers
 
         }
 
+        public IActionResult VisitsByTime()
+        {
+            // TODO: display total visits by day/month/year (selectable on report)
+            // Radio: breakout (day/month/year)
+            // Dropdown: last 7 days; last 30 days; last 90 days; custom
+            //   Datepicker: Start Date, End Date
+            
+        }
+
     }
 }
