@@ -19,7 +19,7 @@ namespace SparkServerLite.Infrastructure
         }
 
         /// <summary>
-        /// Records a single visit to the database.
+        /// Records a page visit to the database.
         /// </summary>
         /// <param name="page">Page URL of this visit.</param>
         /// <param name="userAgent">User Agent string, if available.</param>
@@ -42,13 +42,11 @@ namespace SparkServerLite.Infrastructure
             if (!String.IsNullOrEmpty(userAgent))
             {
                 visit.UserAgent = userAgent.Trim();
-
                 // TODO: extract useragent into variables
             }
 
             try
             {
-                // Store in database
                 _analyticsRepo.Create(visit);
             }
             catch (Exception exc)

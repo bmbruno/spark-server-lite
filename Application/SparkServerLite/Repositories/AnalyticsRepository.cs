@@ -30,7 +30,6 @@ namespace SparkServerLite.Repositories
             using (var conn = new SqliteConnection(_settings.AnalyticsConnectionString))
             {
                 SqliteCommand command = conn.CreateCommand();
-                
                 command.CommandText = @"INSERT INTO Visits (Date, UserAgent, Domain, Page, Referer, OS, Device, Active, CreateDate) VALUES ($date, $useragent, $domain, $page, $referer, $os, $device, $active, $createdate);";
                 command.Parameters.AddWithValue("$date", newItem.Date);
                 command.Parameters.AddWithValue("$useragent", !String.IsNullOrEmpty(newItem.UserAgent) ? newItem.UserAgent : DBNull.Value);
