@@ -104,7 +104,7 @@ table tr:nth-child(even) { background-color: #f6f6f6; }
 table tr:nth-child(odd) { background-color: #eaeaea; }
 
 table.report { width: 100%; text-align: left; }
-table.report th, td { padding: 0.5em 1em; }
+table.report th, table.report td { padding: 0.5em 1em; }
 table.report th { background-color: #6e8198; color: #FFF; font-weight: bold; text-shadow: 1px 1px 0 #000; }
 table.report tr { border-bottom: 1px solid #b7b7b7; }
 table.report tr:last-of-type { border-bottom: none; }
