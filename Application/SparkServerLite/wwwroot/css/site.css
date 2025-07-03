@@ -149,10 +149,10 @@ a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position
 .library-media { padding: 1em; }
 .library-media h3 { text-align: left; }
 
-.report-list { max-width: 600px; margin: 0 auto; }
-.report-list li { margin-bottom: 1em; }
-.report-list li a { display: block; text-align: left; color: #000; background-color: #FFF; padding: 2em; border-radius: 8px; }
-.report-list li a:hover { color: #187ad7; box-shadow: 4px 4px 4px #AAA; }
+.detail-list { max-width: 600px; margin: 0 auto; }
+.detail-list li { margin-bottom: 1em; }
+.detail-list li a { display: block; text-align: left; color: #000; background-color: #FFF; padding: 2em; border-radius: 8px; }
+.detail-list li a:hover { color: #187ad7; box-shadow: 4px 4px 4px #AAA; }
 
 .well { background-color: #c9c9c9; border-radius: 8px; box-shadow: inset 2px 2px 4px #999; }
 
