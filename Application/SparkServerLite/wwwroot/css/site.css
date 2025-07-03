@@ -97,11 +97,19 @@ article.blog .figure > a { box-shadow: none; }
 
 .sub-menu { padding: 1em 0; }
 
-table { width: 100%; text-align: left; }
+table { width: 100%; text-align: left;}
 table th, td { padding: 1em; }
 table th { background-color: #6e8198; color: #FFF; font-weight: bold; text-shadow: 1px 1px 0 #000; }
 table tr:nth-child(even) { background-color: #f6f6f6; }
 table tr:nth-child(odd) { background-color: #eaeaea; }
+
+table.report { width: 100%; text-align: left; }
+table.report th, td { padding: 0.5em 1em; }
+table.report th { background-color: #6e8198; color: #FFF; font-weight: bold; text-shadow: 1px 1px 0 #000; }
+table.report tr { border-bottom: 1px solid #b7b7b7; }
+table.report tr:last-of-type { border-bottom: none; }
+table.report tr:nth-child(even) { background-color: #f6f6f6; }
+table.report tr:nth-child(odd) { background-color: #f6f6f6; }
 
 .status-message { margin: 1em auto 3em auto; padding: 1em; font-size: 1em; box-shadow: 0 0 24px #636363; border-radius: 12px; color: #FFF; font-weight: bold; }
 .status-message.success { background-color: #1f650e; }
@@ -151,7 +159,7 @@ a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position
 
 .detail-list { max-width: 600px; margin: 0 auto; }
 .detail-list li { margin-bottom: 1em; }
-.detail-list li a { display: block; text-align: left; color: #000; background-color: #FFF; padding: 2em; border-radius: 8px; }
+.detail-list li a { display: block; text-align: left; color: #000; background-color: #FFF; padding: 2em; border-radius: 8px; box-shadow: 1px 1px 3px #AAA; }
 .detail-list li a:hover { color: #187ad7; box-shadow: 4px 4px 4px #AAA; }
 
 .well { background-color: #c9c9c9; border-radius: 8px; box-shadow: inset 2px 2px 4px #999; }
