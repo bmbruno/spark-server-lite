@@ -2,6 +2,7 @@
 using Microsoft.Data.Sqlite;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
+using SparkServerLite.Models.Reports;
 using SparkServerLite.Models.Analytics;
 
 namespace SparkServerLite.Repositories
@@ -88,6 +89,11 @@ namespace SparkServerLite.Repositories
 
             return report;
 
+        }
+
+        public List<VIsitByMonthItem> ReportVisitsByMonth()
+        {
+            return new List<VIsitByMonthItem>();
         }
     }
 }

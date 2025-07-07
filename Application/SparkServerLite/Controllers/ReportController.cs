@@ -5,8 +5,7 @@ using SparkServerLite.Interfaces;
 using SparkServerLite.Models.Analytics;
 using SparkServerLite.Repositories;
 using SparkServerLite.ViewModels;
-using SparkServerLite.ViewModels.Analytics;
-
+using SparkServerLite.ViewModels.Reports;
 
 namespace SparkServerLite.Controllers
 {
@@ -45,13 +44,17 @@ namespace SparkServerLite.Controllers
 
         }
 
-        public IActionResult VisitsByTime()
+        public IActionResult VisitsByMonth()
         {
-            // TODO: display total visits by day/month/year (selectable on report)
-            // Radio: breakout (day/month/year)
-            // Dropdown: last 7 days; last 30 days; last 90 days; custom
-            //   Datepicker: Start Date, End Date
+            // TODO: display total site visits by month
             
+            ReportVisitsMonthViewModel viewModel = new();
+            base.Setup(viewModel);
+            ViewData["Title"] = "Report: Visits by Month";
+
+            viewModel.ReportData = _analyticsRepo.ReportVisitsByMonth();
+
+            return View(viewModel);
         }
 
     }

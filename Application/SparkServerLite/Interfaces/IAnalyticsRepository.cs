@@ -27,5 +27,10 @@ namespace SparkServerLite.Interfaces
         /// Gets data for the PageViews report.
         /// </summary>
         List<PageViewItem> ReportPageViews();
+
+        /// <summary>
+        /// Gerts data for the VisitsByMonth report.
+        /// </summary>
+        List<string> ReportVisitsByMonth();
     }
 }

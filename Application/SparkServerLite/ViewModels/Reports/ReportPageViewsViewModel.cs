@@ -1,6 +1,6 @@
 ﻿using SparkServerLite.Models.Analytics;
 
-namespace SparkServerLite.ViewModels.Analytics
+namespace SparkServerLite.ViewModels.Reports
 {
     public class ReportPageViewsViewModel : BaseViewModel
     {
