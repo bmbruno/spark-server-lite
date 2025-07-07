@@ -1,4 +1,4 @@
-﻿namespace SparkServerLite.Models.Reports
+﻿namespace SparkServerLite.Models.Analytics
 {
     public class PageViewItem
     {

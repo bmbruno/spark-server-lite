@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Mapping;
 using SparkServerLite.Models;
 using SparkServerLite.Models.Analytics;
 using SparkServerLite.ViewModels;
-using SparkServerLite.ViewModels.Analytics;
 
 namespace SparkServerLite.Controllers
 {

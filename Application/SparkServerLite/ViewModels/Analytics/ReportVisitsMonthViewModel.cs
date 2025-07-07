@@ -1,14 +1,14 @@
 ﻿using SparkServerLite.Models.Analytics;
 
-namespace SparkServerLite.ViewModels.Reports
+namespace SparkServerLite.ViewModels.Analytics
 {
     public class ReportVisitsMonthViewModel : BaseViewModel
     {
-        public List<VIsitByMonthItem> ReportData { get; set; }
+        public List<VisitByMonthItem> ReportData { get; set; }
 
         public ReportVisitsMonthViewModel()
         {
-            this.ReportData = new List<VIsitByMonthItem>();
+            this.ReportData = new List<VisitByMonthItem>();
         }
     }
 }

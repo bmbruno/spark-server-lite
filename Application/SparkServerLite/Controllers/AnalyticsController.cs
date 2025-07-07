@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models.Analytics;
-using SparkServerLite.Repositories;
 using SparkServerLite.ViewModels;
-using SparkServerLite.ViewModels.Reports;
+using SparkServerLite.ViewModels.Analytics;
 
 namespace SparkServerLite.Controllers
 {
