@@ -1,6 +1,7 @@
 ﻿using System.Reflection.Metadata;
 using System.Text;
 using Microsoft.Data.Sqlite;
+using Microsoft.VisualBasic;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models.Analytics;
@@ -116,13 +117,15 @@ namespace SparkServerLite.Repositories
 		                    WHEN '11' THEN 'November' 
 		                    WHEN '12' THEN 'December' 
 		                    ELSE 'N/A' END AS [MonthLabel],
-		                    COUNT(*) AS [Visits]
+                        strftime('%Y', [Date]) AS [Year],
+		                COUNT(*) AS [Visits]
                     FROM Visits
                     WHERE
 	                    Active = 1
 	                    -- AND [Page] = '/'
                     GROUP BY
-	                    strftime('%m', [Date])";
+	                    strftime('%m', [Date]),
+                        strftime('%Y', [Date])";
 
                 conn.Open();
 
@@ -132,8 +135,9 @@ namespace SparkServerLite.Repositories
                     {
                         report.Add(new VisitByMonthItem()
                         {
-                            Month = Convert.ToInt32(reader["Month"]),                            
+                            Month = Convert.ToInt32(reader["Month"]),
                             MonthLabel = reader["MonthLabel"].ToString(),
+                            Year = Convert.ToInt32(reader["Year"]),
                             Visits = Convert.ToInt32(reader["Visits"])
                         });
                     }

@@ -1,4 +1,4 @@
-﻿@model SparkServerLite.ViewModels.Analytics.ReportPageViewsViewModel
+﻿@model SparkServerLite.ViewModels.Analytics.ReportVisitsMonthViewModel
 @{
     Layout = "_AnalyticsLayout";
     ViewData["Title"] = "Visits by Month";
@@ -13,7 +13,7 @@
 <table class="report">
     <thead>
         <tr>
-            <th>Page</th>
+            <th>Month</th>
             <th>Visits</th>
         </tr>
     </thead>
@@ -21,8 +21,8 @@
         @foreach (var lineItem in Model.ReportData)
         {
             <tr>
-                <td>@lineItem.Page</td>
-                <td>@lineItem.ViewCount</td>
+                <td>@lineItem.MonthLabel @lineItem.Year</td>
+                <td>@lineItem.Visits</td>
             </tr>
         }
 
