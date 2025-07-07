@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Reflection.Metadata;
+using System.Text;
 using Microsoft.Data.Sqlite;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
@@ -92,7 +93,56 @@ namespace SparkServerLite.Repositories
 
         public List<VisitByMonthItem> ReportVisitsByMonth()
         {
-            return new List<VisitByMonthItem>();
+            List<VisitByMonthItem> report = new List<VisitByMonthItem>();
+
+            using (var conn = new SqliteConnection(_settings.AnalyticsConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+
+                command.CommandText = @"
+                    SELECT
+	                    strftime('%m', [Date]) AS [Month],
+	                    CASE strftime('%m', [Date])
+		                    WHEN '01' THEN 'January' 
+		                    WHEN '02' THEN 'February' 
+		                    WHEN '03' THEN 'March' 
+		                    WHEN '04' THEN 'April' 
+		                    WHEN '05' THEN 'May' 
+		                    WHEN '06' THEN 'June' 
+		                    WHEN '07' THEN 'July' 
+		                    WHEN '08' THEN 'August' 
+		                    WHEN '09' THEN 'September' 
+		                    WHEN '10' THEN 'October' 
+		                    WHEN '11' THEN 'November' 
+		                    WHEN '12' THEN 'December' 
+		                    ELSE 'N/A' END AS [MonthLabel],
+		                    COUNT(*) AS [Visits]
+                    FROM Visits
+                    WHERE
+	                    Active = 1
+	                    -- AND [Page] = '/'
+                    GROUP BY
+	                    strftime('%m', [Date])";
+
+                conn.Open();
+
+                using (SqliteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        report.Add(new VisitByMonthItem()
+                        {
+                            Month = Convert.ToInt32(reader["Month"]),                            
+                            MonthLabel = reader["MonthLabel"].ToString(),
+                            Visits = Convert.ToInt32(reader["Visits"])
+                        });
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return report;
         }
     }
 }

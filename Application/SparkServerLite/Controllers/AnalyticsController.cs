@@ -44,9 +44,7 @@ namespace SparkServerLite.Controllers
         }
 
         public IActionResult VisitsByMonth()
-        {
-            // TODO: display total site visits by month
-            
+        {            
             ReportVisitsMonthViewModel viewModel = new();
             base.Setup(viewModel);
             ViewData["Title"] = "Report: Visits by Month";
