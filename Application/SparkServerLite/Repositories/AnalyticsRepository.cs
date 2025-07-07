@@ -92,7 +92,7 @@ namespace SparkServerLite.Repositories
 
         }
 
-        public List<VisitByMonthItem> ReportVisitsByMonth()
+        public List<VisitByMonthItem> ReportVisitsByMonth(string page)
         {
             List<VisitByMonthItem> report = new List<VisitByMonthItem>();
 
@@ -122,13 +122,15 @@ namespace SparkServerLite.Repositories
                     FROM Visits
                     WHERE
 	                    Active = 1
-	                    -- AND [Page] = '/'
+	                    AND [Page] = $page
                     GROUP BY
 	                    strftime('%m', [Date]),
                         strftime('%Y', [Date])
                     ORDER BY 
 	                    strftime('%Y', [Date]) DESC,
 	                    strftime('%m', [Date]) ASC";
+
+                command.Parameters.AddWithValue("$page", page.Trim());
 
                 conn.Open();
 

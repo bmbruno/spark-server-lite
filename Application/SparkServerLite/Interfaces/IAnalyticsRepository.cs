@@ -31,6 +31,7 @@ namespace SparkServerLite.Interfaces
         /// <summary>
         /// Gerts data for the VisitsByMonth report.
         /// </summary>
-        List<VisitByMonthItem> ReportVisitsByMonth();
+        /// <param name="page">Filter: specific page to report on.</param>
+        List<VisitByMonthItem> ReportVisitsByMonth(string page);
     }
 }
