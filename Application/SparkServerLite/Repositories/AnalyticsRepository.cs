@@ -125,7 +125,10 @@ namespace SparkServerLite.Repositories
 	                    -- AND [Page] = '/'
                     GROUP BY
 	                    strftime('%m', [Date]),
-                        strftime('%Y', [Date])";
+                        strftime('%Y', [Date])
+                    ORDER BY 
+	                    strftime('%Y', [Date]) DESC,
+	                    strftime('%m', [Date]) ASC";
 
                 conn.Open();
 
