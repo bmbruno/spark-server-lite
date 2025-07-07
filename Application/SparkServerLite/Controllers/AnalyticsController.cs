@@ -9,13 +9,13 @@ using SparkServerLite.ViewModels.Analytics;
 namespace SparkServerLite.Controllers
 {
     [Authorize]
-    public class ReportController : BaseController
+    public class AnalyticsController : BaseController
     {
         private readonly IAnalyticsRepository<Visit> _analyticsRepo;
         private readonly IWebHostEnvironment _host;
         private Analytics _analytics;
                 
-        public ReportController(IAnalyticsRepository<Visit> analyticsRepo, Interfaces.ILogger logger, IWebHostEnvironment host, IAppSettings settings, IAppContent content) : base(settings, content, logger)
+        public AnalyticsController(IAnalyticsRepository<Visit> analyticsRepo, Interfaces.ILogger logger, IWebHostEnvironment host, IAppSettings settings, IAppContent content) : base(settings, content, logger)
         {
             _host = host;
             _analyticsRepo = analyticsRepo;
