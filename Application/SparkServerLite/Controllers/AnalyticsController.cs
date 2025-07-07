@@ -43,14 +43,12 @@ namespace SparkServerLite.Controllers
 
         }
 
-        public IActionResult VisitsByMonth(string page = "/")
-        {            
-            ReportVisitsMonthViewModel viewModel = new();
-            base.Setup(viewModel);
+        public IActionResult VisitsByMonth(ReportVisitsMonthViewModel viewModel)
+        {
             ViewData["Title"] = "Report: Visits by Month";
-
-            // TODO: MAYBE: move 'page' filter into a common FilterData class for re-use on the ViewModel
-            viewModel.ReportData = _analyticsRepo.ReportVisitsByMonth(page);
+            base.Setup(viewModel);
+            viewModel.Filters.Page = String.IsNullOrEmpty(viewModel.Filters.Page) ? "/" : viewModel.Filters.Page;
+            viewModel.ReportData = _analyticsRepo.ReportVisitsByMonth(viewModel.Filters.Page);
 
             return View(viewModel);
         }

@@ -7,7 +7,7 @@
 <h2>@ViewData["Title"]</h2>
 
 <div class="sub-menu">
-    
+    @Html.DropDownListFor(x => x.Filters.Page, SparkServerLite.Infrastructure.FilterData.Pages(Model.Filters.Page))
 </div>
 
 <table class="report">
