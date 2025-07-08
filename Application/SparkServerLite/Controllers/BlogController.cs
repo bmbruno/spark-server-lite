@@ -3,6 +3,7 @@ using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Mapping;
 using SparkServerLite.Models;
+using SparkServerLite.Models.Analytics;
 using SparkServerLite.ViewModels;
 
 namespace SparkServerLite.Controllers
@@ -11,13 +12,13 @@ namespace SparkServerLite.Controllers
     {
         private readonly IBlogRepository<Blog> _blogRepo;
         private readonly IBlogTagRepository<BlogTag> _blogTagRepo;
-        private readonly IAppSettings _settings;
+        private readonly Analytics _analytics;
 
-        public BlogController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAppSettings settings, IAppContent content) : base(settings, content)
+        public BlogController(IBlogRepository<Blog> blogRepo, IBlogTagRepository<BlogTag> blogTagRepo, IAnalyticsRepository<Visit> analyticsRepo, Interfaces.ILogger logger, IAppSettings settings, IAppContent content) : base(settings, content, logger)
         {
             _blogRepo = blogRepo;
             _blogTagRepo = blogTagRepo;
-            _settings = settings;
+            _analytics = new Analytics(_settings, analyticsRepo, _logger);
             this.ItemsPerPage = _settings.BlogItemsPerPage;
         }
 
@@ -72,6 +73,8 @@ namespace SparkServerLite.Controllers
                 TempData["Error"] = $"Error loading blog posts. Exception: {exc.Message}";
             }
 
+            _analytics.RecordVisit(Request.Path, this.UserAgent, this.Referer);
+
             return View(viewModel);
         }
 
@@ -109,9 +112,14 @@ namespace SparkServerLite.Controllers
                 }
 
                 if (shouldDisplay)
+                {
+                    _analytics.RecordVisit(Request.Path, this.UserAgent, this.Referer);
                     return View(viewModel);
+                }
                 else
+                {
                     return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
 
             }
             catch (Exception exc)
@@ -119,6 +127,8 @@ namespace SparkServerLite.Controllers
                 // TODO: log this exception
                 TempData["Error"] = $"Error loading blog post. Exception: {exc.Message}";
             }
+
+            _analytics.RecordVisit(Request.Path, this.UserAgent, this.Referer);
 
             return View(viewModel);
         }
@@ -151,6 +161,8 @@ namespace SparkServerLite.Controllers
                 // TODO: log this exception
                 TempData["Error"] = $"Error loading blogs by tag. Exception: {exc.Message}";
             }
+
+            _analytics.RecordVisit(Request.Path, this.UserAgent, this.Referer);
 
             return View(viewName: "Index", model: viewModel);
         }

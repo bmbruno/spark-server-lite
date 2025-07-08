@@ -61,5 +61,37 @@ namespace SparkServerLite.Infrastructure
 
             return list;
         }
+
+        public static List<SelectListItem> Pages(string selected)
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+
+            // TODO: replace with repo as source
+            List<string> sourceList = new List<string>
+            {
+                "/",
+                "/posts/2023/7/test-blog-one",
+                "/posts/2023/7/test-blog-two",
+                "/posts/2023/6/test-blog-three"
+            };
+
+            foreach (var item in sourceList)
+            {
+                SelectListItem listItem = new SelectListItem()
+                {
+                    Value = item,
+                    Text = item
+                };
+
+                if (item == selected)
+                {
+                    listItem.Selected = true;
+                }
+
+                list.Add(listItem);
+            }
+
+            return list;
+        }
     }
 }

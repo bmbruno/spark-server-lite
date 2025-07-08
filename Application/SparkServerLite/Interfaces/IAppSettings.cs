@@ -13,6 +13,16 @@
         string DatabaseConnectionString { get; set; }
 
         /// <summary>
+        /// Connection string to the analytics SQLite database.
+        /// </summary>
+        string AnalyticsConnectionString { get; set; }
+
+        /// <summary>
+        /// Disk location for application logs to be written. Ensure the IIS user can write to this folder.
+        /// </summary>
+        string LogFolder { get; set; }
+
+        /// <summary>
         /// Base URL of the site. Used to generate some URLs. Example: https://www.myblog.com
         /// </summary>
         string SiteURL { get; set; }

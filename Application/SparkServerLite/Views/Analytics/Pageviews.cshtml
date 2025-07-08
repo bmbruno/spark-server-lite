@@ -1,0 +1,30 @@
+﻿@model SparkServerLite.ViewModels.Analytics.ReportPageViewsViewModel
+@{
+    Layout = "_AnalyticsLayout";
+    ViewData["Title"] = "Page Views for All Pages";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="sub-menu">
+    
+</div>
+
+<table class="report">
+    <thead>
+        <tr>
+            <th>Page</th>
+            <th>Visits</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var lineItem in Model.ReportData)
+        {
+            <tr>
+                <td>@lineItem.Page</td>
+                <td>@lineItem.ViewCount</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

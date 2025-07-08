@@ -1,0 +1,35 @@
+﻿@model SparkServerLite.ViewModels.Analytics.ReportVisitsMonthViewModel
+@{
+    Layout = "_AnalyticsLayout";
+    ViewData["Title"] = "Visits by Month";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+<div class="sub-menu">
+    <!--
+        TODO: finish this; add form, submit button, and build post-back logic on the server
+    <label for="Filters_Page">Page</label>
+    @Html.DropDownListFor(x => x.Filters.Page, SparkServerLite.Infrastructure.FilterData.Pages(Model.Filters.Page))
+    -->
+</div>
+
+<table class="report">
+    <thead>
+        <tr>
+            <th>Month</th>
+            <th>Visits</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var lineItem in Model.ReportData)
+        {
+            <tr>
+                <td>@lineItem.MonthLabel @lineItem.Year</td>
+                <td>@lineItem.Visits</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

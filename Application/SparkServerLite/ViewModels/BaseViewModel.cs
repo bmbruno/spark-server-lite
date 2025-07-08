@@ -15,10 +15,13 @@ namespace SparkServerLite.ViewModels
 
         public string SiteURL { get; set; } = string.Empty;
 
+        public Filters Filters { get; set; }
+
         public BaseViewModel()
         {
             Paging = new Paging();
             AppContent = new AppContent();
+            Filters = new Filters();
         }
     }
 }

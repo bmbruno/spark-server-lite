@@ -8,6 +8,10 @@ namespace SparkServerLite.Infrastructure
 
         public string DatabaseConnectionString { get; set; } = string.Empty;
 
+        public string AnalyticsConnectionString { get; set; } = string.Empty;
+
+        public string LogFolder { get; set; } = string.Empty;
+
         public string SiteURL { get; set; } = string.Empty;
 
         public int BlogItemsPerPage { get; set; }

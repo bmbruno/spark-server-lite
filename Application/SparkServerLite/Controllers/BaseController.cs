@@ -7,15 +7,21 @@ namespace SparkServerLite.Controllers
 {
     public class BaseController : Controller
     {
-        private IAppContent _content { get; set; }
+        protected IAppContent _content { get; set; }
 
-        private IAppSettings _settings { get; set; }
+        protected IAppSettings _settings { get; set; }
+
+        protected Interfaces.ILogger _logger { get; set; }
 
         internal int Page { get; set; }
 
         internal int ItemsPerPage { get; set; }
 
         internal int SkipCount { get { return (this.Page - 1) * this.ItemsPerPage; } }
+
+        internal string UserAgent { get { return Request.Headers["User-Agent"]; } }
+
+        internal string Referer { get { return Request.Headers["Referer"]; } }
 
         internal void SetupPaging(int? page)
         {
@@ -35,10 +41,11 @@ namespace SparkServerLite.Controllers
             viewModel.SiteURL = _settings.SiteURL;
         }
 
-        public BaseController(IAppSettings settings, IAppContent content)
+        public BaseController(IAppSettings settings, IAppContent content, Interfaces.ILogger logger)
         {
             _settings = settings;
             _content = content;
+            _logger = logger;
         }
     }
 }

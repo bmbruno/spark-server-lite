@@ -96,12 +96,21 @@ article.blog a:hover { box-shadow: inset 0 -8px 0 #ffe000; }
 article.blog .figure > a { box-shadow: none; }
 
 .sub-menu { padding: 1em 0; }
+.sub-menu label { display: block; padding-bottom: 0.5em; text-align: left; }
 
-table { width: 100%; text-align: left; }
+table { width: 100%; text-align: left;}
 table th, td { padding: 1em; }
 table th { background-color: #6e8198; color: #FFF; font-weight: bold; text-shadow: 1px 1px 0 #000; }
 table tr:nth-child(even) { background-color: #f6f6f6; }
 table tr:nth-child(odd) { background-color: #eaeaea; }
+
+table.report { width: 100%; text-align: left; }
+table.report th, table.report td { padding: 0.5em 1em; }
+table.report th { background-color: #6e8198; color: #FFF; font-weight: bold; text-shadow: 1px 1px 0 #000; }
+table.report tr { border-bottom: 1px solid #b7b7b7; }
+table.report tr:last-of-type { border-bottom: none; }
+table.report tr:nth-child(even) { background-color: #f6f6f6; }
+table.report tr:nth-child(odd) { background-color: #f6f6f6; }
 
 .status-message { margin: 1em auto 3em auto; padding: 1em; font-size: 1em; box-shadow: 0 0 24px #636363; border-radius: 12px; color: #FFF; font-weight: bold; }
 .status-message.success { background-color: #1f650e; }
@@ -147,7 +156,12 @@ a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position
 .media-url { margin: 1em 0; padding: 0.5em; max-width: 100%; background-color: #EFEFEF; font-family: monospace; box-shadow: inset 1px 1px 2px #AAA; overflow-x: auto; border-radius: 4px; }
 
 .library-media { padding: 1em; }
-.library-media h3 { text-align: left;}
+.library-media h3 { text-align: left; }
+
+.detail-list { max-width: 600px; margin: 0 auto; }
+.detail-list li { margin-bottom: 1em; }
+.detail-list li a { display: block; text-align: left; color: #000; background-color: #FFF; padding: 2em; border-radius: 8px; box-shadow: 1px 1px 3px #AAA; }
+.detail-list li a:hover { color: #187ad7; box-shadow: 4px 4px 4px #AAA; }
 
 .well { background-color: #c9c9c9; border-radius: 8px; box-shadow: inset 2px 2px 4px #999; }
 
@@ -217,7 +231,7 @@ footer a:hover { color: #FFF; }
 
 	.status-message { max-width: 600px; padding: 2em; line-height: 1.5em; }
 
-	.sub-menu { padding: 2em 0; }
+	.sub-menu { margin: 0 auto; padding: 2em 0; max-width: 600px; }
 
 	form .row { margin: 2em; }
 	form .row label { margin-bottom: 0.5em; }

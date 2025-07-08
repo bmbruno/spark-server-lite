@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SparkServerLite.Infrastructure;
 using SparkServerLite.Infrastructure.Enums;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Mapping;
 using SparkServerLite.Models;
+using SparkServerLite.Models.Analytics;
 using SparkServerLite.ViewModels;
 using System.Diagnostics;
 
@@ -10,15 +12,13 @@ namespace SparkServerLite.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IBlogRepository<Blog> _blogRepo;
-        private readonly IAppSettings _settings;
+        private readonly Analytics _analytics;
 
-        public HomeController(ILogger<HomeController> logger, IBlogRepository<Blog> blogRepo, IAppSettings settings, IAppContent content) : base(settings, content)
+        public HomeController(IBlogRepository<Blog> blogRepo, IAnalyticsRepository<Visit> analyticsRepo, Interfaces.ILogger logger, IAppSettings settings, IAppContent content) : base(settings, content, logger)
         {
-            _logger = logger;
             _blogRepo = blogRepo;
-            _settings = settings;
+            _analytics = new Analytics(_settings, analyticsRepo, _logger);
         }
 
         public IActionResult Index()
@@ -29,6 +29,8 @@ namespace SparkServerLite.Controllers
             var blogs = _blogRepo.GetRecent(5);
             viewModel.MapToViewModel(blogs, _settings);
             viewModel.MenuSelection = MainMenu.Home;
+
+            _analytics.RecordVisit(Request.Path, this.UserAgent, this.Referer);
 
             return View(viewModel);
         }
