@@ -128,7 +128,8 @@ namespace SparkServerLite.Controllers
                 TempData["Error"] = $"Error loading blog post. Exception: {exc.Message}";
             }
 
-            _analytics.RecordVisit(Request.Path, this.UserAgent, this.Referer);
+            if (!preview)
+                _analytics.RecordVisit(Request.Path, this.UserAgent, this.Referer);
 
             return View(viewModel);
         }
