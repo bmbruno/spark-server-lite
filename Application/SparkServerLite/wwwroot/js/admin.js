@@ -69,6 +69,12 @@
             if (getNextBannerButton) {
                 getNextBannerButton.addEventListener("click", SparkServerAdmin.handleNextBanner);
             }
+            
+            // Select media from library
+            let selectBlogBannerButton = document.getElementById("SelectBlogBanner");
+            if (selectBlogBannerButton) {
+                selectBlogBannerButton.addEventListener("click", SparkServerAdmin.handleSelectBlogBanner)
+            }
 
             // Clear tags
             let clearBlogTagsButton = document.getElementById("ClearBlogTags");
@@ -81,7 +87,7 @@
             if (closeModalButton) {
                 closeModalButton.addEventListener("click", SparkServerAdmin.closeModal);
             }
-
+            
             // Delete buttons
             SparkServerAdmin.wireDeleteConfirm();
 
@@ -599,6 +605,27 @@
 
             }
 
+        },
+
+        handleSelectBlogBanner: function () {
+          
+            // TODO: add spinner to modal
+            
+            // TODO: show modal
+            
+            // TODO: load library
+            
+            // TODO: build UI for selecting media
+            
+        },
+        
+        handleSelectBlogBannerItem: function () {
+            
+            // TODO: get selected media information (ImagePath, ImageThumbnailPath) from button data
+            
+            // TODO: populate fields on edit UI
+                        
+            // TODO: close modal
         },
 
         openModal: function (title, body, full = false) {
