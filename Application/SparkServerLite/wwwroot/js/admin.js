@@ -625,6 +625,9 @@
                 //    modal.style.top = (window.scrollY + (window.innerHeight * 0.2)) + "px";
 
                 modal.style.display = "block";
+                
+                // Wire up escape key for close functionality
+                document.body.addEventListener("keydown", SparkServerAdmin.handleModalKeydown);
 
             } else {
 
@@ -646,6 +649,15 @@
                 content.innerHTML = "";
             }
 
+        },
+        
+        handleModalKeydown: function (e) {
+            
+            if (e.key === "Escape") {
+                SparkServerAdmin.closeModal();
+                document.body.removeEventListener("keydown", SparkServerAdmin.handleModalKeydown);
+            }
+            
         },
 
         showToast: function (title, body, time = 6, type = "message") {
