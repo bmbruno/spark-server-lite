@@ -607,15 +607,45 @@
 
         },
 
-        handleSelectBlogBanner: function () {
+        handleSelectBlogBanner: async function () {
           
-            // TODO: add spinner to modal
+            // Add spinner to modal
+            let modalBody = "<img src='/images/loader.gif' style='text-align: center;'/>";
             
-            // TODO: show modal
+            // Show modal with loader
+            SparkServerAdmin.openModal("Select Blog Banner", modalBody, false);
             
-            // TODO: load library
+            // Load library & build UI for selecting media
+
+            let response = await fetch(SparkServerAdmin.endpoints.libraryMedia);
+            let result = await response.json();
+            let output = "<ul>";
+
+            if (result.status === "OK") {
+
+                result.data.map((element) => {
+
+                    output += `
+                        <li>
+                            <div class="image-container">
+                                <img src='${element.thumbnailPath}' />
+                            </div>
+                            <div class="text-container">
+                                <h3>${element.filename}</h3>
+                                <div class='media-url'>${element.webPath}</div>
+                                <button type="button" class="use-media-for-blog" data-imageurl="${element.webPath}" data-thumburl="${element.thumbnailPath}">Use Image</button>
+                            </div>
+                        </li>`;
+
+                });
+
+                output += "</ul>";
+            }
             
-            // TODO: build UI for selecting media
+            // TODO: wire-up events on new HTML
+                
+            // Update modal content
+            SparkServerAdmin.updateModal(output);
             
         },
         
@@ -662,6 +692,16 @@
 
             }
 
+        },
+        
+        updateModal: function (newContent) {
+
+            let content = document.getElementById("ModalContent");
+            
+            if (content) {
+                content.innerHTML = newContent;
+            }
+            
         },
 
         closeModal: function () {
