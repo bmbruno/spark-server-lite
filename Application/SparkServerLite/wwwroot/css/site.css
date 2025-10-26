@@ -233,7 +233,7 @@ footer a:hover { color: #FFF; }
 	article.blog h1 { font-size: 3rem; text-align: left; padding: 0; }
 	article.blog p { line-height: 1.75rem; max-width: 650px; }
 	article.blog ul, article.blog ol { }
-	article.blog ul li, article.blog ol li { max-width: 600px; }
+	article.blog ul li, article.blog ol li { max-width: 600px; line-height: 1.75em; }
 
 	.status-message { max-width: 600px; padding: 2em; line-height: 1.5em; }
 
