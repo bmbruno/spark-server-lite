@@ -1,6 +1,6 @@
 /* Additional Resets and Tweaks */
 * { box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; }
-html { overflow-y: scroll; }
+html { overflow-y: scroll; font-size: 16px; }
 img { max-width: 100%; }
 a, a:visited { text-decoration: none; color: #6f41c5; transition: all 0.1s ease-in-out; }
 a:hover { color: #187ad7; text-decoration: none; }
@@ -8,10 +8,10 @@ em { font-style: italic; }
 .center { text-align: center; }
 pre { padding: 1.5em 2em !important; }
 pre > code { overflow-x: scroll; }
-p > code { border: 1px solid #AAA; border-radius: 4px; padding: 0.25em 0.5em; font-family: monospace; font-size: 0.9em; }
+p > code { border: 1px solid #AAA; border-radius: 4px; padding: 0.25em 0.5em; font-family: monospace; font-size: 0.9rem; }
 
 /* BASE */
-body { min-width: 300px; text-align: center; font-family: 'OpenSans', arial, sans-serif; background-color: #ebebeb; font-size: 16px; }
+body { min-width: 300px; text-align: center; font-family: 'OpenSans', arial, sans-serif; background-color: #ebebeb; }
 strong { font-weight: bold; } 
 blockquote { font-style: italic; color: #555; background-color: #e3e3e3; margin: 2em 0; padding: 2em 2em 2em 2em; max-width: 650px; line-height: 1.5em; }
 blockquote p:last-of-type { margin-bottom: 0; }
@@ -25,12 +25,12 @@ nav ul li a { display: block; padding: 1em 2em; margin: 0 1em; font-family: 'Rub
 nav ul li a:hover { text-decoration: none; }
 
 h1, h2, h3, h4, h5, h6 { margin-bottom: 0.5em; line-height: 1em; font-family: "RubikBold", sans-serif; }
-h1 { font-size: 3em; }
-h2 { font-size: 2em; }
-h3 { font-size: 1.5em; }
-h4 { font-size: 1.4em; }
-h5 { font-size: 1.2em; }
-h6 { font-size: 1.15em; }
+h1 { font-size: 3rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1.15rem; }
 
 /* container sets overall size and position of site content across viewports */
 .container { width: 100%; margin: 0 auto; }
@@ -42,7 +42,7 @@ h6 { font-size: 1.15em; }
 .content.post { background-color: #FFF; }
 
 .logo-wrapper img { width: 300px; margin: 0 auto; }
-.logo-byline { margin-top: 0.5em; font-size: 0.95em; }
+.logo-byline { margin-top: 0.5em; font-size: 0.95rem; }
 
 .loader { display: none; }
 .loader-message { margin: 1em; padding: 1em; }
@@ -50,8 +50,8 @@ h6 { font-size: 1.15em; }
 .section .title { padding: 1em 0; margin: 0; font-family: "RubikMedium", sans-serif; }
 
 .hero { padding: 4em 1em; box-shadow: inset 0 0 192px #000; color: #FFF; }
-.hero h2 { font-size: 2em; font-weight: bold; margin: 0.5em 0 0.5em 0; }
-.hero h3 { font-size: 1.25em; font-family: "OpenSans", sans-serif; font-weight: bold; }
+.hero h2 { font-size: 2rem; font-weight: bold; margin: 0.5em 0 0.5em 0; }
+.hero h3 { font-size: 1.25rem; font-family: "OpenSans", sans-serif; font-weight: bold; }
 
 .hero-link { text-decoration: none; }
 .hero-link:hover { text-decoration: none; }
@@ -64,11 +64,11 @@ h6 { font-size: 1.15em; }
 .blog-card h3 { font-size: 1.75em; margin-bottom: 0.5em; line-height: 1.25em; }
 .blog-card .image-preview { background-position: center; background-size: cover; height: 200px; }
 .blog-card .image-preview > a { display: block; height: 100%; width: 100%; }
-.blog-card .subtitle { font-size: 1.15em; margin-bottom: 1em; }
-.blog-card .date { font-size: 0.85em; }
+.blog-card .subtitle { font-size: 1.15rem; margin-bottom: 1em; }
+.blog-card .date { font-size: 0.85rem; }
 
 .blog-banner { background-size: cover; background-position: center; height: 250px; position: relative; border-radius: 4px; }
-.blog-banner h1 { font-size: 2em; margin: 0; line-height: 1.25em; position: absolute; bottom: 0px; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); color: #FFF; padding: 0.5em 0.5em; text-shadow: 2px 2px 2px #000; background-color: rgba(0, 0, 0, 0.25); border-bottom-left-radius: 4px; border-top-right-radius: 4px;}
+.blog-banner h1 { font-size: 2rem; margin: 0; line-height: 1.25em; position: absolute; bottom: 0px; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); color: #FFF; padding: 0.5em 0.5em; text-shadow: 2px 2px 2px #000; background-color: rgba(0, 0, 0, 0.25); border-bottom-left-radius: 4px; border-top-right-radius: 4px;}
 
 .blog-about { margin: 1em auto; padding: 1em; text-align: left; background-color: #ebebeb; padding: 2em; font-size: 1em; }
 .blog-about .columns { display: grid; grid-template-columns: 1fr; }
@@ -83,14 +83,14 @@ h6 { font-size: 1.15em; }
 
 article.blog { text-align: left; padding: 1em; background-color: #FFF; }
 article.blog h1, article.blog h2, article.blog h3, article.blog h4, article.blog h5, article.blog h6 { max-width: 650px; line-height: 1.25em; }
-article.blog h1 { font-size: 2.25em; margin: 0 0 1em 0; text-align: center; line-height: 1em; padding-top: 1em; }
-article.blog p { font-size: 1.15em; line-height: 1.5em; margin-bottom: 1.5em; text-align: left; }
+article.blog h1 { font-size: 2.25rem; margin: 0 0 1em 0; text-align: center; line-height: 1em; padding-top: 1em; }
+article.blog p { font-size: 1em; line-height: 1.5em; margin-bottom: 1.5em; text-align: left; }
 article.blog p:last-of-type { margin-bottom: 0; }
 article.blog p a { font-weight: bold; }
 article.blog .figure { margin: 0 0 2em 0; }
-article.blog ul, article.blog ol { margin: 0 0 2em 2em; font-size: 1.15em; }
-article.blog ul li { list-style-type: disc; line-height: 1.75em; margin-bottom: 1em; }
-article.blog ol li { list-style-type: decimal; line-height: 1.75em; margin-bottom: 1em; }
+article.blog ul, article.blog ol { margin: 0 0 0 2em; font-size: 1rem; }
+article.blog ul li { list-style-type: disc; line-height: 1.5em; margin-bottom: 1em; }
+article.blog ol li { list-style-type: decimal; line-height: 1.5em; margin-bottom: 1em; }
 article.blog li > ul, article.blog li > ol { padding-top: 1em; }
 article.blog a:hover { box-shadow: inset 0 -8px 0 #ffe000; }
 article.blog .figure > a { box-shadow: none; }
@@ -140,7 +140,7 @@ form .checkbox-list { max-height: 200px; overflow-y: auto;  padding: 2em; column
 a.btn, .btn, button { display: inline-block; border-radius: 8px; cursor: pointer; padding: 0.75em 2em;  text-shadow: 1px 1px 0 #000; background-color: #6f41c5; color: #FFF; box-shadow: 0 3px 0 #313131; transition: none; border: none; }
 a.btn:hover, .btn:hover, button:hover { background-color: #63a5e4; text-decoration: none;}
 a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position: relative; top: 3px; }
-.btn.primary { padding: 1em 4em; font-weight: bold; font-size: 1.05em; }
+.btn.primary { padding: 1em 4em; font-weight: bold; font-size: 1.05rem; }
 
 .row.blog-media { padding: 1em; }
 .row.blog-media button { margin-bottom: 1em; }
@@ -178,7 +178,7 @@ a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position
 .bottom-nav a { font-family: "RubikMedium", sans-serif; font-size: 1.15em; }
 
 .paging { margin-top: 2em; }
-.paging .info { font-size: 1.25em; margin-bottom: 1em; }
+.paging .info { font-size: 1.25rem; margin-bottom: 1em; }
 .paging a { font-family: "RubikMedium", sans-serif; font-size: 1.15em; font-weight: bold; }
 
 footer { width: 100%; text-align: left; line-height: 1.5em; background-color: #555; padding: 1em 0; box-shadow: inset 0 16px 48px; }
@@ -196,22 +196,22 @@ footer a:hover { color: #FFF; }
 {
 	header { margin: 1em auto; padding: 2em 0; }
 
-	.logo-byline { font-size: 1.25em; }
+	.logo-byline { font-size: 1.25rem; }
 
 	.container { max-width: 95%; }
 	
 	nav {  }
-	nav ul li a { font-size: 1.15em; } 
+	nav ul li a { font-size: 1.15rem; } 
 
-	.section .title { font-size: 2.5em; }
+	.section .title { font-size: 2.5rem; }
 	
 	.modal { max-width: 640px; }
 	.modal.full { max-width: initial; }
 
 	.hero { box-shadow: inset 0 0 500px #000; text-shadow: 2px 2px 0 #000; padding: 8em 3em; }
-	.hero .header { font-size: 1.25em; }
-	.hero h2 { font-size: 3em; line-height: 1.25em }
-	.hero h3 { font-size: 1.5em; }
+	.hero .header { font-size: 1.25rem; }
+	.hero h2 { font-size: 3rem; line-height: 3rem }
+	.hero h3 { font-size: 1.5rem; }
 
 	.content { padding: 0; margin-top: 0em; }
 	.content.post { box-shadow: 0 16px 48px #a4a4a4; }
@@ -222,17 +222,17 @@ footer a:hover { color: #FFF; }
 	.blog-card .image-preview { margin: 0 1em 0 0; height: auto; }
 	.blog-card .overview { grid-column: 2; text-align: left; padding: 1.5em 1em; }
 	
-	.blog-about { padding: 3em 5em 1em 5em; margin: 0; font-size: 1em; border: none; max-width: initial; border-radius: unset; background-color: #FFF; }
+	.blog-about { padding: 3em 5em 1em 5em; margin: 0; font-size: 1rem; border: none; max-width: initial; border-radius: unset; background-color: #FFF; }
 	.blog-about .item { margin: 0; }
 	.blog-about .columns { grid-template-columns: 30% 30% 40%; }
 
 	.blog-banner { height: 475px; }
-	.blog-banner h1 { font-size: 3em; text-align: left; }
+	.blog-banner h1 { font-size: 3rem; text-align: left; }
 
-	article.blog { padding: 2em 5em 5em 5em; font-size: 1em; line-height: 1.15em; margin-bottom: 2em; }
-	article.blog h1 { font-size: 3em; text-align: left; padding: 0; }
-	article.blog p { font-size: 1em; line-height: 1.75em; max-width: 650px; }
-	article.blog ul, article.blog ol { font-size: 1em; }
+	article.blog { padding: 2em 5em 5em 5em; font-size: 1rem; line-height: 1.15em; margin-bottom: 2em; }
+	article.blog h1 { font-size: 3rem; text-align: left; padding: 0; }
+	article.blog p { font-size: 1rem; line-height: 1.75rem; max-width: 650px; }
+	article.blog ul, article.blog ol { font-size: 1rem; }
 	article.blog ul li, article.blog ol li { max-width: 600px; }
 
 	.status-message { max-width: 600px; padding: 2em; line-height: 1.5em; }
@@ -245,7 +245,7 @@ footer a:hover { color: #FFF; }
 	form .checkbox-list { columns: 3 }
 
 	.explore-tags { margin-bottom: 2em; }
-	.explore-tags li a { padding: 1em 2em; font-size: 1.25em; }
+	.explore-tags li a { padding: 1em 2em; font-size: 1.25rem; }
 
 	footer {  }
 }
@@ -265,9 +265,9 @@ footer a:hover { color: #FFF; }
 
 	.container { max-width: 75%; }
 
-	.blog-card h3 { font-size: 2em; margin-bottom: 0.5em; }
-	.blog-card .subtitle { font-size: 1.25em; }
-	.blog-card .date { font-size: 1em; }
+	.blog-card h3 { font-size: 2rem; margin-bottom: 0.5em; }
+	.blog-card .subtitle { font-size: 1.25rem; }
+	.blog-card .date { font-size: 1rem; }
 
 	.blog-about .columns { grid-template-columns: 25% 25% 50%; }
 
