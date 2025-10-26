@@ -117,6 +117,7 @@
         @Html.LabelFor(x => x.ImagePath)
         @Html.TextBoxFor(x => x.ImagePath, htmlAttributes: new { @class = "half" })
         <div class="controls">
+            <button type="button" id="SelectBlogBanner">Select From Media</button>
             <button type="button" id="GetNextBannerImage">Get Next Banner Image</button>
         </div>
         @Html.ValidationMessageFor(x => x.ImagePath)
@@ -161,7 +162,7 @@
             <input type="submit" value="Save Changes" class="btn primary" />
         }
     </div>
-
+    
     @section PageScripts {
 
         <script type="text/javascript">

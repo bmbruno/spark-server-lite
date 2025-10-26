@@ -69,6 +69,12 @@
             if (getNextBannerButton) {
                 getNextBannerButton.addEventListener("click", SparkServerAdmin.handleNextBanner);
             }
+            
+            // Select blog banner from library
+            let selectBlogBannerButton = document.getElementById("SelectBlogBanner");
+            if (selectBlogBannerButton) {
+                selectBlogBannerButton.addEventListener("click", SparkServerAdmin.handleSelectBlogBanner)
+            }
 
             // Clear tags
             let clearBlogTagsButton = document.getElementById("ClearBlogTags");
@@ -81,7 +87,7 @@
             if (closeModalButton) {
                 closeModalButton.addEventListener("click", SparkServerAdmin.closeModal);
             }
-
+            
             // Delete buttons
             SparkServerAdmin.wireDeleteConfirm();
 
@@ -601,6 +607,64 @@
 
         },
 
+        handleSelectBlogBanner: async function () {
+          
+            // Add spinner to modal and show
+            let modalBody = "<img src='/images/loader.gif' alt='Modal loading.' style='text-align: center;'/>";
+            SparkServerAdmin.openModal("Select Blog Banner", modalBody, false);
+            
+            // Load library & build UI for selecting media
+
+            let response = await fetch(SparkServerAdmin.endpoints.libraryMedia);
+            let result = await response.json();
+            let output = "<ul>";
+
+            if (result.status === "OK") {
+
+                result.data.map((element) => {
+
+                    output += `
+                        <li class="media-select">
+                            <div class="image-container">
+                                <img src='${element.thumbnailPath}' />
+                            </div>
+                            <div class="text-container">
+                                <h3>${element.filename}</h3>
+                                <button type="button" class="select-blog-banner" data-imageurl="${element.webPath}" data-thumburl="${element.thumbnailPath}">Use Image</button>
+                            </div>
+                        </li>`;
+
+                });
+
+                output += "</ul>";
+            }
+                
+            // Update modal content with library list
+            SparkServerAdmin.updateModal(output);
+
+            // Wire-up events on new HTML
+            let buttons = document.querySelectorAll(".select-blog-banner");
+
+            if (buttons) {
+                
+                buttons.forEach((button) => {
+                    
+                    button.addEventListener("click", (e) => {
+                        
+                        // Image/Thumbnail is stored on the button itself
+                        let imageURL = button.getAttribute("data-imageurl");
+                        let thumbURL = button.getAttribute("data-thumburl");
+    
+                        document.getElementById("ImagePath").value = imageURL;
+                        document.getElementById("ImageThumbnailPath").value = thumbURL;
+    
+                        SparkServerAdmin.closeModal();
+
+                    })
+                });
+            }
+        },
+
         openModal: function (title, body, full = false) {
 
             let modal = document.getElementById("Modal");
@@ -619,11 +683,7 @@
                 if (full)
                     modal.classList.add("full");
 
-                if (full)
-                    modal.style.top = (window.scrollY + (window.innerHeight * 0.05)) + "px";
-                //else
-                //    modal.style.top = (window.scrollY + (window.innerHeight * 0.2)) + "px";
-
+                modal.style.top = (window.scrollY + (window.innerHeight * 0.05)) + "px";
                 modal.style.display = "block";
                 
                 // Wire up escape key for close functionality
@@ -635,6 +695,16 @@
 
             }
 
+        },
+        
+        updateModal: function (newContent) {
+
+            let content = document.getElementById("ModalContent");
+            
+            if (content) {
+                content.innerHTML = newContent;
+            }
+            
         },
 
         closeModal: function () {
