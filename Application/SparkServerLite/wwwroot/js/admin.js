@@ -70,7 +70,7 @@
                 getNextBannerButton.addEventListener("click", SparkServerAdmin.handleNextBanner);
             }
             
-            // Select media from library
+            // Select blog banner from library
             let selectBlogBannerButton = document.getElementById("SelectBlogBanner");
             if (selectBlogBannerButton) {
                 selectBlogBannerButton.addEventListener("click", SparkServerAdmin.handleSelectBlogBanner)
@@ -609,11 +609,8 @@
 
         handleSelectBlogBanner: async function () {
           
-            // Add spinner to modal
-            let modalBody = "<img src='/images/loader.gif' style='text-align: center;'/>";
-            
-            // Show modal with loader
-            
+            // Add spinner to modal and show
+            let modalBody = "<img src='/images/loader.gif' alt='Modal loading.' style='text-align: center;'/>";
             SparkServerAdmin.openModal("Select Blog Banner", modalBody, false);
             
             // Load library & build UI for selecting media
@@ -633,7 +630,7 @@
                             </div>
                             <div class="text-container">
                                 <h3>${element.filename}</h3>
-                                <button type="button" class="use-media-for-blog" data-imageurl="${element.webPath}" data-thumburl="${element.thumbnailPath}">Use Image</button>
+                                <button type="button" class="select-blog-banner" data-imageurl="${element.webPath}" data-thumburl="${element.thumbnailPath}">Use Image</button>
                             </div>
                         </li>`;
 
@@ -641,21 +638,31 @@
 
                 output += "</ul>";
             }
-            
-            // TODO: wire-up events on new HTML
                 
-            // Update modal content
+            // Update modal content with library list
             SparkServerAdmin.updateModal(output);
-            
-        },
-        
-        handleSelectBlogBannerItem: function () {
-            
-            // TODO: get selected media information (ImagePath, ImageThumbnailPath) from button data
-            
-            // TODO: populate fields on edit UI
+
+            // Wire-up events on new HTML
+            let buttons = document.querySelectorAll(".select-blog-banner");
+
+            if (buttons) {
+                
+                buttons.forEach((button) => {
+                    
+                    button.addEventListener("click", (e) => {
                         
-            // TODO: close modal
+                        // Image/Thumbnail is stored on the button itself
+                        let imageURL = button.getAttribute("data-imageurl");
+                        let thumbURL = button.getAttribute("data-thumburl");
+    
+                        document.getElementById("ImagePath").value = imageURL;
+                        document.getElementById("ImageThumbnailPath").value = thumbURL;
+    
+                        SparkServerAdmin.closeModal();
+
+                    })
+                });
+            }
         },
 
         openModal: function (title, body, full = false) {
