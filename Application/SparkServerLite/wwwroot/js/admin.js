@@ -613,6 +613,7 @@
             let modalBody = "<img src='/images/loader.gif' style='text-align: center;'/>";
             
             // Show modal with loader
+            
             SparkServerAdmin.openModal("Select Blog Banner", modalBody, false);
             
             // Load library & build UI for selecting media
@@ -676,11 +677,7 @@
                 if (full)
                     modal.classList.add("full");
 
-                if (full)
-                    modal.style.top = (window.scrollY + (window.innerHeight * 0.05)) + "px";
-                //else
-                //    modal.style.top = (window.scrollY + (window.innerHeight * 0.2)) + "px";
-
+                modal.style.top = (window.scrollY + (window.innerHeight * 0.05)) + "px";
                 modal.style.display = "block";
                 
                 // Wire up escape key for close functionality
