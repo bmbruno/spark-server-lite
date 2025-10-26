@@ -81,14 +81,14 @@ h6 { font-size: 1.15rem; }
 .blog-about ul.tags li::after { content: ",\00a0"; } 
 .blog-about ul.tags li:last-child::after { content: ""; }
 
-article.blog { text-align: left; padding: 1em; background-color: #FFF; }
+article.blog { font-size: 1.15em; text-align: left; padding: 1em; background-color: #FFF; }
 article.blog h1, article.blog h2, article.blog h3, article.blog h4, article.blog h5, article.blog h6 { max-width: 650px; line-height: 1.25em; }
 article.blog h1 { font-size: 2.25rem; margin: 0 0 1em 0; text-align: center; line-height: 1em; padding-top: 1em; }
-article.blog p { font-size: 1em; line-height: 1.5em; margin-bottom: 1.5em; text-align: left; }
+article.blog p { line-height: 1.5em; margin-bottom: 1.5em; text-align: left; }
 article.blog p:last-of-type { margin-bottom: 0; }
 article.blog p a { font-weight: bold; }
 article.blog .figure { margin: 0 0 2em 0; }
-article.blog ul, article.blog ol { margin: 0 0 0 2em; font-size: 1rem; }
+article.blog ul, article.blog ol { margin: 0 0 0 2em; }
 article.blog ul li { list-style-type: disc; line-height: 1.5em; margin-bottom: 1em; }
 article.blog ol li { list-style-type: decimal; line-height: 1.5em; margin-bottom: 1em; }
 article.blog li > ul, article.blog li > ol { padding-top: 1em; }
@@ -231,8 +231,8 @@ footer a:hover { color: #FFF; }
 
 	article.blog { padding: 2em 5em 5em 5em; font-size: 1rem; line-height: 1.15em; margin-bottom: 2em; }
 	article.blog h1 { font-size: 3rem; text-align: left; padding: 0; }
-	article.blog p { font-size: 1rem; line-height: 1.75rem; max-width: 650px; }
-	article.blog ul, article.blog ol { font-size: 1rem; }
+	article.blog p { line-height: 1.75rem; max-width: 650px; }
+	article.blog ul, article.blog ol { }
 	article.blog ul li, article.blog ol li { max-width: 600px; }
 
 	.status-message { max-width: 600px; padding: 2em; line-height: 1.5em; }
