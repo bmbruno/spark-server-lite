@@ -155,6 +155,12 @@ a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position
 .media-list ul li .text-container { grid-column-start: 2; }
 .media-url { margin: 1em 0; padding: 0.5em; max-width: 100%; background-color: #EFEFEF; font-family: monospace; box-shadow: inset 1px 1px 2px #AAA; overflow-x: auto; border-radius: 4px; }
 
+.media-select { }
+.media-select .image-container {  }
+.media-select .text-container { margin-bottom: 2em; }
+.media-select .text-container button { margin-top: 0;}
+.media-select .image-container:last-of-type { margin-bottom: 0; }
+
 .library-media { padding: 1em; }
 .library-media h3 { text-align: left; }
 

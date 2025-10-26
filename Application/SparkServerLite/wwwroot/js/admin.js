@@ -627,13 +627,12 @@
                 result.data.map((element) => {
 
                     output += `
-                        <li>
+                        <li class="media-select">
                             <div class="image-container">
                                 <img src='${element.thumbnailPath}' />
                             </div>
                             <div class="text-container">
                                 <h3>${element.filename}</h3>
-                                <div class='media-url'>${element.webPath}</div>
                                 <button type="button" class="use-media-for-blog" data-imageurl="${element.webPath}" data-thumburl="${element.thumbnailPath}">Use Image</button>
                             </div>
                         </li>`;
