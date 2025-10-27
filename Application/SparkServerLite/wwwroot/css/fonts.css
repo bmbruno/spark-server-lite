@@ -27,29 +27,15 @@
 }
 
 @font-face {
-    font-family: 'RobotoBold';
-    src: url('fonts/roboto-bold.woff') format('woff');
+    font-family: 'OpenSansBold';
+    src: url('fonts/opensans-bold.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'RobotoLight';
-    src: url('fonts/roboto-light.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'RobotoBlack';
-    src: url('fonts/roboto-black.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'RobotoRegular';
-    src: url('fonts/roboto-regular.woff') format('woff');
+    font-family: 'OpenSansExtraBold';
+    src: url('fonts/opensans-extrabold.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }

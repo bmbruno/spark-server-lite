@@ -11,8 +11,8 @@ pre > code { overflow-x: scroll; }
 p > code { border: 1px solid #AAA; border-radius: 4px; padding: 0.25em 0.5em; font-family: monospace; font-size: 0.9rem; }
 
 /* BASE */
-body { min-width: 300px; text-align: center; font-family: 'RobotoLight', Arial, sans-serif; background-color: #ebebeb; }
-strong { font-family: 'RobotoBold', sans-serif; } 
+body { min-width: 300px; text-align: center; font-family: 'OpenSans', Arial, sans-serif; background-color: #ebebeb; }
+strong { font-family: 'OpenSansBold', sans-serif; font-weight: 800; } 
 blockquote { font-style: italic; color: #555; background-color: #e3e3e3; margin: 2em 0; padding: 2em 2em 2em 2em; max-width: 650px; line-height: 1.5em; }
 blockquote p:last-of-type { margin-bottom: 0; }
 .bold { font-weight: bold; }
@@ -70,27 +70,27 @@ h6 { font-size: 1.15rem; }
 .blog-banner { background-size: cover; background-position: center; height: 250px; position: relative; border-radius: 4px; }
 .blog-banner h1 { font-size: 2rem; margin: 0; line-height: 1.25em; position: absolute; bottom: 0px; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); color: #FFF; padding: 0.5em 0.5em; text-shadow: 2px 2px 2px #000; background-color: rgba(0, 0, 0, 0.25); border-bottom-left-radius: 4px; border-top-right-radius: 4px;}
 
-.blog-about { margin: 1em auto; padding: 1em; text-align: left; background-color: #ebebeb; padding: 2em; font-size: 1em; }
+.blog-about { margin: 1em auto; text-align: left; background-color: #ebebeb; padding: 2em; font-size: 1em; }
 .blog-about .columns { display: grid; grid-template-columns: 1fr; }
 .blog-about .item { margin-bottom: 1em; }
 .blog-about .item:last-of-type { margin-bottom: 0; }
-.blog-about .label { font-family: 'RobotoBold', sans-serif; margin-bottom: 0.25em; }
+.blog-about .label { font-family: 'OpenSansExtraBold', sans-serif; margin-bottom: 0.25em; }
 .blog-about p, .blog-about li { line-height: 1em !important; }
 .blog-about ul.tags { columns: 1; margin: 0; }
-.blog-about ul.tags li { margin: 0; line-height: 1em; list-style-type: none; float: left; line-height: 1.25em; }
+.blog-about ul.tags li { margin: 0; list-style-type: none; float: left; line-height: 1.25em; }
 .blog-about ul.tags li::after { content: ",\00a0"; } 
 .blog-about ul.tags li:last-child::after { content: ""; }
 
-article.blog { font-size: 1.15em; text-align: left; padding: 1em; background-color: #FFF; }
+article.blog { font-size: 1.15em; text-align: left; padding: 1em; background-color: #FFF; line-height: 1.5em; }
 article.blog h1, article.blog h2, article.blog h3, article.blog h4, article.blog h5, article.blog h6 { max-width: 650px; line-height: 1.25em; }
 article.blog h1 { font-size: 2.25rem; margin: 0 0 1em 0; text-align: center; line-height: 1em; padding-top: 1em; }
-article.blog p { line-height: 1.5em; margin-bottom: 1.5em; text-align: left; }
+article.blog p { margin-bottom: 1.5em; text-align: left; }
 article.blog p:last-of-type { margin-bottom: 0; }
 article.blog p a { font-weight: bold; }
 article.blog .figure { margin: 0 0 2em 0; }
 article.blog ul, article.blog ol { margin: 0 0 0 2em; }
-article.blog ul li { list-style-type: disc; line-height: 1.5em; margin-bottom: 1em; }
-article.blog ol li { list-style-type: decimal; line-height: 1.5em; margin-bottom: 1em; }
+article.blog ul li { list-style-type: disc; margin-bottom: 1em; }
+article.blog ol li { list-style-type: decimal; margin-bottom: 1em; }
 article.blog li > ul, article.blog li > ol { padding-top: 1em; }
 article.blog a:hover { box-shadow: inset 0 -8px 0 #ffe000; }
 article.blog .figure > a { box-shadow: none; }
@@ -229,11 +229,11 @@ footer a:hover { color: #FFF; }
 	.blog-banner { height: 475px; }
 	.blog-banner h1 { font-size: 3rem; text-align: left; }
 
-	article.blog { padding: 2em 5em 5em 5em; font-size: 1rem; line-height: 1.15em; margin-bottom: 2em; }
+	article.blog { padding: 2em 5em 5em 5em; font-size: 1rem; margin-bottom: 2em; line-height: 1.5em; }
 	article.blog h1 { font-size: 3rem; text-align: left; padding: 0; }
-	article.blog p { line-height: 1.75rem; max-width: 650px; }
+	article.blog p { max-width: 650px; }
 	article.blog ul, article.blog ol { }
-	article.blog ul li, article.blog ol li { max-width: 600px; line-height: 1.75em; }
+	article.blog ul li, article.blog ol li { max-width: 600px; }
 
 	.status-message { max-width: 600px; padding: 2em; line-height: 1.5em; }
 
