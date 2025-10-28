@@ -1,6 +1,6 @@
 # SparkServer Lite
 
-A simple blog management and hosting platform built on SQLite and ASP.NET Core MVC (.NET 6).
+A simple blog management and hosting platform built on SQLite and ASP.NET Core MVC (.NET 8).
 
 ## About
 
@@ -10,7 +10,7 @@ Blogs posts are written with Markdown.
 
 To set up SparkServer Lite:
 
-1) Ensure a .NET 6 runtime is installed.
+1) Ensure a .NET 8 runtime is installed.
 
 2) Run SQL build scripts (from a terminal) to create the SQLite database (includes test data for local development).
 
