@@ -28,7 +28,7 @@ namespace SparkServerLite.Controllers
         public ActionResult Index(int? year, int? month, int? page)
         {
             this.SetupPaging(page);
-
+            
             BlogListViewModel viewModel = new();
             List<Blog> blogList = new();
             List<BlogTag> tagList = new();
@@ -69,7 +69,7 @@ namespace SparkServerLite.Controllers
             }
             catch (Exception exc)
             {
-                // TODO: log this exception
+                _logger.Exception($"Exception loading blog posts.", exc);
                 TempData["Error"] = $"Error loading blog posts. Exception: {exc.Message}";
             }
 

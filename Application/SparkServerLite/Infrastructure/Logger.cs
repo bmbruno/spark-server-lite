@@ -16,7 +16,7 @@ namespace SparkServerLite.Infrastructure
             _settings = settings;
             _logPath = $"{_settings.LogFolder}/{DateTime.Today.ToString("yyyyMMdd")}.txt";
         }
-
+        
         public void Info(string message)
         {
             File.AppendAllText(_logPath, $"[{DateTime.Now.ToString("HH:mm:ss:FFF")}] [INFO] {message}\n");
