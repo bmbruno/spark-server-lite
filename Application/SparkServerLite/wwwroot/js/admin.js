@@ -87,6 +87,14 @@
             if (closeModalButton) {
                 closeModalButton.addEventListener("click", SparkServerAdmin.closeModal);
             }
+
+            // Tooltips
+            let tooltipIcons = document.querySelectorAll(".tooltip-icon");
+            if (tooltipIcons) {
+                tooltipIcons.forEach(icon => {
+                    icon.addEventListener("click", (e) => { SparkServerAdmin.handleTooltipClick(e); });
+                });
+            }
             
             // Delete buttons
             SparkServerAdmin.wireDeleteConfirm();
@@ -119,9 +127,9 @@
                             <div class="text-container">
                                 <p>${element.filename}</p>
                                 <div class='media-url'>${element.webPath}</div>
-                                <button type="button" class="media-copyurl-button" data-url="${element.webPath}">Copy URL</button>
-                                <button type="button" class="media-copyurl-button" data-url="${element.thumbnailPath}">Copy Thumbnail</button>
-                                <button type="button" class="media-delete-button delete-confirm" data-filename="${element.filename}">Delete</button>
+                                <button type="button" class="media-copyurl-button" data-url="${element.webPath}"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy URL</button>
+                                <button type="button" class="media-copyurl-button" data-url="${element.thumbnailPath}"><i class="fa fa-files-o" aria-hidden="true"></i> Copy Thumbnail</button>
+                                <button type="button" class="media-delete-button delete-confirm" data-filename="${element.filename}"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
                             </div>
                         </li>`;
                         
@@ -166,9 +174,9 @@
                             <div class="text-container">
                                 <h3>${element.filename}</h3>
                                 <div class='media-url'>${element.webPath}</div>
-                                <button type="button" class="media-copyurl-button" data-url="${element.webPath}">Copy URL</button>
-                                <button type="button" class="media-copyurl-button" data-url="${element.thumbnailPath}">Copy Thumbnail</button>
-                                <button type="button" class="media-delete-button delete-confirm" data-filename="${element.filename}">Delete</button>
+                                <button type="button" class="media-copyurl-button" data-url="${element.webPath}"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy URL</button>
+                                <button type="button" class="media-copyurl-button" data-url="${element.thumbnailPath}"><i class="fa fa-files-o" aria-hidden="true"></i> Copy Thumbnail</button>
+                                <button type="button" class="media-delete-button delete-confirm" data-filename="${element.filename}"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
                             </div>
                         </li>`;
 
@@ -663,6 +671,15 @@
                     })
                 });
             }
+        },
+
+        handleTooltipClick: (e) => {
+
+            let content = e.currentTarget.getAttribute("data-tooltip");
+            
+            if (content && content !== "")
+                SparkServerAdmin.openModal(null, content, false);
+
         },
 
         openModal: function (title, body, full = false) {

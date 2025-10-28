@@ -9,7 +9,7 @@
 
 @if (Model.Mode == SparkServerLite.Infrastructure.Enums.EditMode.Edit)
 {
-    <a href="/Admin/BlogDelete?ID=@Model.ID" class="btn delete-confirm">Delete</a>
+    <a href="/Admin/BlogDelete?ID=@Model.ID" class="btn delete-confirm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
 
     if (Model.ID > 0)
     {
@@ -27,12 +27,12 @@
     @Html.HiddenFor(x => x.Mode)
 
     <div class="row">
-        <label>BlogID</label>
+        <label title="System-assigned identifier.">BlogID</label>
         <p>@Model.ID</p>
     </div>
 
     <div class="row">
-        <label>Media Folder</label>
+        <label title="System-assigned media folder; created once any media is uploaded to this blog post.">Media Folder</label>
         <p>@if (!String.IsNullOrEmpty(Model.MediaFolder)) { @Model.MediaFolder } else { <text>none</text> }</p>
     </div>
 
@@ -49,11 +49,11 @@
     </div>
 
     <div class="row">
-        @Html.LabelFor(x => x.Markdown)
+        @Html.LabelFor(x => x.Markdown, htmlAttributes: new { title = "Markdown-formatted blog post content. Click 'Convert' to create HTML-ready output." }) 
         @Html.TextAreaFor(x => x.Markdown, htmlAttributes: new { style = "height: 400px" })
         <div class="controls">
-            <button type="button" id="ConvertToHTML">Convert</button>
-            <button type="button" id="PreviewHTML">Preview</button>
+            <button type="button" id="ConvertToHTML"><i class="fa fa-cog" aria-hidden="true"></i> Convert</button>
+            <button type="button" id="PreviewHTML"><i class="fa fa-file-text-o" aria-hidden="true"></i> Preview</button>
         </div>
         @Html.ValidationMessageFor(x => x.Markdown)
     </div>
@@ -61,7 +61,7 @@
     if (Model.Mode == SparkServerLite.Infrastructure.Enums.EditMode.Edit)
     {
         <div class="row blog-media well">
-            <h2>Media</h2>
+            <h2 title="Media specific to this blog post.">Media</h2>
 
             <div class="media-list" id="BlogMediaList"></div>
             <img src="/images/loader.gif" alt="Loader GIF" id="BlogMediaListLoader" class="loader" />
@@ -69,7 +69,7 @@
             <div class="media-upload">
 
                 <input type="file" id="MediaFiles" multiple value="Choose files to upload..." />
-                <button type="button" id="UploadMediaFiles">Upload Files</button>
+                <button type="button" id="UploadMediaFiles"><i class="fa fa-upload" aria-hidden="true"></i> Upload Files</button>
 
                 <div id="MediaFilesUploadMessage" class="loader">
                     <img src="/images/loader.gif" alt="Loader GIF" />
@@ -79,58 +79,57 @@
             </div>
 
         </div>
-
-
+        
     }
 
     <div class="row">
-        @Html.LabelFor(x => x.Content)
+        @Html.LabelFor(x => x.Content, htmlAttributes: new { title = "Website-ready HTML; can be tweaked here, but converting Markdown will overwrite this HTML." })
         @Html.TextAreaFor(x => x.Content, htmlAttributes: new { style = "height: 400px" })
         @Html.ValidationMessageFor(x => x.Content)
     </div>
 
     <div class="row">
-        @Html.LabelFor(x => x.PublishDate)
+        @Html.LabelFor(x => x.PublishDate, htmlAttributes: new { title = "Use a date in the future to schedule a publish." })
         @Html.TextBoxFor(x => x.PublishDate, htmlAttributes: new { @class = "half", type = "date" })
         <div class="controls">
-            <button type="button" id="TodayButton">Today</button>
+            <button type="button" id="TodayButton"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Today</button>
         </div>
         @Html.ValidationMessageFor(x => x.PublishDate)
     </div>
 
     <div class="row">
-        @Html.LabelFor(x => x.AuthorID)
+        @Html.LabelFor(x => x.AuthorID, htmlAttributes: new { title = "Select an author for this post." })
         @Html.DropDownListFor(x => x.AuthorID, Model.AuthorSource, htmlAttributes: new { @class = "half" })
         @Html.ValidationMessageFor(x => x.AuthorID)
     </div>
 
     <div class="row">
-        @Html.LabelFor(x => x.Slug)
+        @Html.LabelFor(x => x.Slug, htmlAttributes: new { title = "This will be part of the canonical URL for this post." })
         @Html.TextBoxFor(x => x.Slug, htmlAttributes: new { @class = "half" })
         <div class="controls">
-            <button type="button" id="CreateSlug">Create From Title</button>
+            <button type="button" id="CreateSlug"><i class="fa fa-pencil" aria-hidden="true"></i> Create From Title</button>
         </div>
         @Html.ValidationMessageFor(x => x.Slug)
     </div>
 
     <div class="row">
-        @Html.LabelFor(x => x.ImagePath)
+        @Html.LabelFor(x => x.ImagePath, htmlAttributes: new { title = "Path to the banner image. Can use images from this post or select from the shared media library." })
         @Html.TextBoxFor(x => x.ImagePath, htmlAttributes: new { @class = "half" })
         <div class="controls">
-            <button type="button" id="SelectBlogBanner">Select From Media</button>
-            <button type="button" id="GetNextBannerImage">Get Next Banner Image</button>
+            <button type="button" id="SelectBlogBanner" title="Use media from the shared media library."><i class="fa fa-picture-o" aria-hidden="true"></i> Select From Media</button>
+            <button type="button" id="GetNextBannerImage" title="Get the next available default banner image."><i class="fa fa-arrow-right" aria-hidden="true"></i> Get Next Banner Image</button>
         </div>
         @Html.ValidationMessageFor(x => x.ImagePath)
     </div>
 
     <div class="row">
-        @Html.LabelFor(x => x.ImageThumbnailPath)
+        @Html.LabelFor(x => x.ImageThumbnailPath, htmlAttributes: new { title = "Path to the banner image thumbnail." })
         @Html.TextBoxFor(x => x.ImageThumbnailPath, htmlAttributes: new { @class = "half" })
         @Html.ValidationMessageFor(x => x.ImagePath)
     </div>
 
     <div class="row">
-        @Html.LabelFor(x => x.BlogTags)
+        @Html.LabelFor(x => x.BlogTags, htmlAttributes: new { title = "Select one or more blog tags for this post." })
 
         <div class="checkbox-list well">
 
@@ -148,7 +147,7 @@
 
         </div>
 
-        <button type="button" id="ClearBlogTags">Clear Tags</button>
+        <button type="button" id="ClearBlogTags"><i class="fa fa-eraser" aria-hidden="true"></i> Clear Tags</button>
 
     </div>
 
