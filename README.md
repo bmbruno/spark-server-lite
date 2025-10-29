@@ -19,6 +19,8 @@ To set up SparkServer Lite:
 	
 3) Run `dotnet build` then `dotnet run` to start the local server.
 
+4) Access the backend by visiting `https:<hostname>/admin`
+
 ## Authentication
 
 SparkServer Lite is configured to use a custom-built SSO system. The `AccountController` can be updated to use your login system of choice.
