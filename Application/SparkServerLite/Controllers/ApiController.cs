@@ -5,26 +5,22 @@ using SparkServerLite.Infrastructure;
 using SparkServerLite.Infrastructure.Enums;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
-using System.Collections.Generic;
 using System.Net;
-using static System.Net.Mime.MediaTypeNames;
 using Image = SixLabors.ImageSharp.Image;
 
 namespace SparkServerLite.Controllers
 {
     // TODO: have this inherit from BaseController; remove _settings from this class
-    public class ApiController : Controller
+    public class ApiController : BaseController
     {
         private readonly IBlogRepository<Blog> _blogRepo;
-        private readonly IAppSettings _settings;
         private readonly IWebHostEnvironment _host;
 
         private readonly string[] validFileExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
 
-        public ApiController(IBlogRepository<Blog> blogRepo, IAppSettings settings, IWebHostEnvironment host)
+        public ApiController(IBlogRepository<Blog> blogRepo, IAppSettings settings, IAppContent content, Interfaces.ILogger logger, IWebHostEnvironment host) : base (settings, content, logger)
         {
             _blogRepo = blogRepo;
-            _settings = settings;
             _host = host;
         }
 
