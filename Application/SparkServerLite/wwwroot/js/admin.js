@@ -125,10 +125,11 @@
                                 <img src='${element.thumbnailPath}' />
                             </div>
                             <div class="text-container">
-                                <p>${element.filename}</p>
+                                <p title="Use this token in your Markdown to render this image: [[IMAGE:${element.filename}]]">${element.filename}</p>
                                 <div class='media-url'>${element.webPath}</div>
-                                <button type="button" class="media-copyurl-button" data-url="${element.webPath}"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy URL</button>
-                                <button type="button" class="media-copyurl-button" data-url="${element.thumbnailPath}"><i class="fa fa-files-o" aria-hidden="true"></i> Copy Thumbnail</button>
+                                <button type="button" class="media-copy-button" data-copy="${element.webPath}" title="${element.webPath}"><i class="fa fa-files-o" aria-hidden="true"></i> URL</button>
+                                <button type="button" class="media-copy-button" data-copy="${element.thumbnailPath}" title="${element.thumbnailPath}"><i class="fa fa-files-o" aria-hidden="true"></i> Thumbnail</button>
+                                <button type="button" class="media-copy-button" data-copy="[[IMAGE:${element.filename}]]" title="[[IMAGE:${element.filename}]]"><i class="fa fa-files-o" aria-hidden="true"></i> Token</button>
                                 <button type="button" class="media-delete-button delete-confirm" data-filename="${element.filename}"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
                             </div>
                         </li>`;
@@ -174,8 +175,8 @@
                             <div class="text-container">
                                 <h3>${element.filename}</h3>
                                 <div class='media-url'>${element.webPath}</div>
-                                <button type="button" class="media-copyurl-button" data-url="${element.webPath}"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy URL</button>
-                                <button type="button" class="media-copyurl-button" data-url="${element.thumbnailPath}"><i class="fa fa-files-o" aria-hidden="true"></i> Copy Thumbnail</button>
+                                <button type="button" class="media-copy-button" data-copy="${element.webPath}" title="${element.webPath}"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy URL</button>
+                                <button type="button" class="media-copy-button" data-copy="${element.thumbnailPath}" title="${element.thumbnailPath}"><i class="fa fa-files-o" aria-hidden="true"></i> Copy Thumbnail</button>
                                 <button type="button" class="media-delete-button delete-confirm" data-filename="${element.filename}"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
                             </div>
                         </li>`;
@@ -205,7 +206,6 @@
 
             // Delete buttons
             let deleteButtons = document.querySelectorAll(".media-delete-button");
-
             if (deleteButtons) {
 
                 deleteButtons.forEach((button) => {
@@ -228,8 +228,7 @@
             }
 
             // CopyURL buttons
-            let copyButtons = document.querySelectorAll(".media-copyurl-button");
-
+            let copyButtons = document.querySelectorAll(".media-copy-button");
             if (copyButtons) {
 
                 copyButtons.forEach((button) => {
@@ -237,11 +236,11 @@
                     button.addEventListener("click", function (e) {
 
                         e.preventDefault();
-                        let attrUrl = button.attributes["data-url"];
+                        let attrUrl = button.attributes["data-copy"];
 
                         if (attrUrl) {
                             navigator.clipboard.writeText(attrUrl.value);
-                            SparkServerAdmin.showToast("Copied to Clipboard", "URL fragment has been copied into the clipboard", 2, "success");
+                            SparkServerAdmin.showToast("Copied to Clipboard", "Content has been copied to the clipboard!", 2, "success");
                         }
 
                     });
