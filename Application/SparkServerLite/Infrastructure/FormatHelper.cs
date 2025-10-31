@@ -105,6 +105,8 @@ namespace SparkServerLite.Infrastructure
                     image.ParentNode.ParentNode.Name = "div";
                     image.ParentNode.ParentNode.AddClass("figure full");
                 }
+                
+                image.Attributes.Add("target", "_blank");
             }
 
             return htmlDoc;
