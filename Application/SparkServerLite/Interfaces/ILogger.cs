@@ -18,7 +18,7 @@
         /// Logs an Exception and related message to the log file on disk.
         /// </summary>
         /// <param name="message">Message to log.</param>
-        /// <param name="exc">Exception object.</param>
+        /// <param name="exc">Exception object to be logged.</param>
         void Exception(string message, Exception exc);
     }
 }

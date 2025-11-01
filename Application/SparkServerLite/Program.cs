@@ -51,6 +51,10 @@ namespace SparkServerLite
             builder.Services.AddSingleton(appContent);
 
             var app = builder.Build();
+            
+            // Ensure log directory exists
+            if (!Directory.Exists(appSettings.LogFolder))
+                Directory.CreateDirectory(appSettings.LogFolder);
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

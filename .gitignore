@@ -199,3 +199,4 @@ $RECYCLE.BIN/
 /Application/SparkServerLite/wwwroot/media
 /Application/SparkServerLite/SparkServer.db
 /Application/SparkServerLite/SparkServerAnalytics.db
+/Application/SparkServerLite/logs

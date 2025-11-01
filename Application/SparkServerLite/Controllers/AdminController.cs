@@ -47,7 +47,7 @@ namespace SparkServerLite.Controllers
             }
             catch (Exception exc)
             {
-                // TODO: log this exception
+                _logger.Exception($"ADMIN: Exception loading blogs.", exc);
                 TempData["Error"] = $"Error loading blogs. Exception: {exc.Message}";
             }
 
@@ -229,7 +229,7 @@ namespace SparkServerLite.Controllers
             }
             catch (Exception exc)
             {
-                // TODO: log this exception
+                _logger.Exception($"ADMIN: Exception loading blog tags.", exc);
                 TempData["Error"] = $"Error loading blog tags. Exception: {exc.Message}";
             }
 
