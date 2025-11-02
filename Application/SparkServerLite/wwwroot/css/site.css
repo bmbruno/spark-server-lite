@@ -8,7 +8,7 @@ em { font-style: italic; }
 .center { text-align: center; }
 pre { padding: 1.5em 2em !important; }
 pre > code { overflow-x: scroll; }
-p > code { border: 1px solid #AAA; border-radius: 4px; padding: 0.25em 0.5em; font-family: monospace; font-size: 0.9rem; }
+p > code, li > code { background-color: #e7e7e7; border-radius: 4px; padding: 0.25em 0.5em; font-family: monospace; font-size: 0.9rem; }
 
 /* BASE */
 body { min-width: 300px; text-align: center; font-family: 'OpenSans', Arial, sans-serif; background-color: #ebebeb; }
