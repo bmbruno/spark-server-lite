@@ -197,6 +197,7 @@ namespace SparkServerLite.Controllers
                 }
                 catch (Exception exc)
                 {
+                    _logger.Exception($"Could not delete blog ID: {ID.ToString()}.", exc);
                     TempData["Error"] = $"Could not delete blog. Exception: ${exc.Message}";
                 }
             }
@@ -298,6 +299,7 @@ namespace SparkServerLite.Controllers
                     }
                     catch (Exception exc)
                     {
+                        _logger.Exception($"Could not create Blog Tag '{blogTag.Name}'.", exc);
                         TempData["Error"] = $"Could not create Blog Tag '{viewModel.Name}'. Exception: {exc.Message}";
                     }
                 }
@@ -320,6 +322,7 @@ namespace SparkServerLite.Controllers
                     }
                     catch (Exception exc)
                     {
+                        _logger.Exception($"Could not update Blog Tag '{blogTag.Name}'.", exc);
                         TempData["Error"] = $"Could not update blog tag. Exception: ${exc.Message}";
                     }
 
@@ -346,6 +349,7 @@ namespace SparkServerLite.Controllers
                 }
                 catch (Exception exc)
                 {
+                    _logger.Exception($"Could not delete Blog Tag with ID '{ID}'.", exc);
                     TempData["Error"] = $"Could not delete blog tag. Exception: ${exc.Message}";
                 }
             }

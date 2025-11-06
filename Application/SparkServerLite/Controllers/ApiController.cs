@@ -37,7 +37,8 @@ namespace SparkServerLite.Controllers
             }
             catch (Exception exc)
             {
-                json.Status = JsonStatus.EXCEPTION.ToString();
+                _logger.Exception("Exception converting Markdown to HTML.", exc);
+                json.Status = nameof(JsonStatus.EXCEPTION);
                 json.Message = exc.ToString();
             }
 
@@ -85,6 +86,7 @@ namespace SparkServerLite.Controllers
             }
             catch (Exception exc)
             {
+                _logger.Exception($"Exception loading Blog Media list for blog ID '{blogID}'.", exc);
                 json.Status = JsonStatus.EXCEPTION.ToString();
                 json.Message = exc.Message;
                 json.Data = null;
@@ -171,8 +173,9 @@ namespace SparkServerLite.Controllers
                     }
                     catch (Exception exc)
                     {
+                        _logger.Exception("Exception uploading file.", exc);
                         json.Status = JsonStatus.EXCEPTION.ToString();
-                        json.Message = exc.Message.ToString();
+                        json.Message = exc.Message;
                         return Json(json);
                     }
 
@@ -254,8 +257,9 @@ namespace SparkServerLite.Controllers
                     }
                     catch (Exception exc)
                     {
+                        _logger.Exception("Exception creating thumbnail.", exc);
                         json.Status = JsonStatus.EXCEPTION.ToString();
-                        json.Message = exc.Message.ToString();
+                        json.Message = exc.Message;
                         return Json(json);
                     }
 
@@ -368,6 +372,7 @@ namespace SparkServerLite.Controllers
             }
             catch (Exception exc)
             {
+                _logger.Exception("Exception getting next banner image.", exc);
                 json.Status = JsonStatus.EXCEPTION.ToString();
                 json.Message = exc.Message.ToString();
             }
@@ -403,6 +408,7 @@ namespace SparkServerLite.Controllers
             }
             catch (Exception exc)
             {
+                _logger.Exception("Exception loading library media.", exc);
                 json.Status = JsonStatus.EXCEPTION.ToString();
                 json.Message = $"Error loading library media. Exception: {exc.Message}";
                 json.Data = null;
