@@ -90,7 +90,7 @@
 
     <div class="row">
         @Html.LabelFor(x => x.PublishDate, htmlAttributes: new { title = "Use a date in the future to schedule a publish." })
-        @Html.TextBoxFor(x => x.PublishDate, htmlAttributes: new { @class = "half", type = "date" })
+        @Html.TextBoxFor(x => x.PublishDate, htmlAttributes: new { @class = "half", type = "datetime-local" })
         <div class="controls">
             <button type="button" id="TodayButton"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Today</button>
         </div>

@@ -21,8 +21,8 @@
 
             // The Date input type requires a certain 
             let publishDate = document.getElementById("PublishDate");
-            if (publishDate && publishDate.defaultValue != "")
-                publishDate.value = SparkServerAdmin.formatDateForDatepicker(new Date(publishDate.defaultValue));
+            if (publishDate && publishDate.defaultValue !== "")
+                publishDate.value = SparkServerAdmin.formatDateForDatepicker(new Date(publishDate.defaultValue), true);
 
         },
 
@@ -437,7 +437,7 @@
 
             let publishDateField = document.getElementById("PublishDate");
             if (publishDateField) {
-                publishDateField.value = SparkServerAdmin.formatDateForDatepicker(new Date());
+                publishDateField.value = SparkServerAdmin.formatDateForDatepicker(new Date(), false);
             }
         },
 
@@ -812,12 +812,19 @@
 
         },
 
-        formatDateForDatepicker: (dateValue) => {
+        formatDateForDatepicker: (dateValue, includeTime) => {
 
             let month = (dateValue.getMonth() < 9) ? `0${dateValue.getMonth() + 1}` : `${dateValue.getMonth() + 1}`;
             let day = (dateValue.getDate() < 10) ? `0${dateValue.getDate()}` : `${dateValue.getDate()}`;
+            let hours = "00";
+            let minutes = "00";
+            
+            if (includeTime) {
+                hours = dateValue.getHours() < 10 ? '0' + dateValue.getHours() : `${dateValue.getHours()}`
+                minutes = dateValue.getMinutes() < 10 ? '0' + dateValue.getMinutes() : `${dateValue.getMinutes()}`;
+            }
 
-            return `${dateValue.getFullYear()}-${month}-${day}`;
+            return `${dateValue.getFullYear()}-${month}-${day}T${hours}:${minutes}`;
 
         }
 
