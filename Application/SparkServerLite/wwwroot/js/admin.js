@@ -449,6 +449,7 @@
 
                 let title = titleField.value;
                 title = title.split("-").join("");
+                title = title.split("&").join("");
                 title = title.split("$").join("");
                 title = title.split("%").join("");
                 title = title.split(":").join("");
@@ -465,6 +466,7 @@
                 title = title.split("?").join("");
                 title = title.split("!").join("");
                 title = title.split(" ").join("-");
+                title = title.split("--").join("-");
                 title = title.toLowerCase();
 
                 document.getElementById("Slug").value = title;
