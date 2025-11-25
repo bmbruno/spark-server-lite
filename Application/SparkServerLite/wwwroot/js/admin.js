@@ -378,23 +378,37 @@
 
             let field = document.getElementById("Markdown");
 
-            if (field && field.value != '') {
+            if (field && field.value !== '') {
 
+                // Check for post metafields; if present, populate fields and strip tokens from Markdown
+                if (field.value.startsWith("!TITLE:")) {
+                    let line = field.value.substring(0, field.value.indexOf("\n"));
+                    document.getElementById("Title").value = line.replace("!TITLE:", "").trim();
+                    field.value = field.value.replace(line, "").replace(/^\s+/, '');
+                }
+
+                if (field.value.startsWith("!SUBTITLE:")) {
+                    let line = field.value.substring(0, field.value.indexOf("\n"));
+                    document.getElementById("Subtitle").value = line.replace("!SUBTITLE:", "").trim();
+                    field.value = field.value.replace(line, "").replace(/^\s+/, '');
+                }
+                
+                // Send to server for MD -> HTML conversion
                 let formData = new FormData();
 
                 formData.append("markdown", field.value);
                 let response = await fetch(`${SparkServerAdmin.endpoints.convertToHTML}`, { method: "POST", body: formData });
                 let result = await response.json();
 
-                if (result.status == "OK") {
+                if (result.status === "OK") {
 
                     document.getElementById("Content").value = result.data;
 
-                } else if (result.status == "ERROR") {
+                } else if (result.status === "ERROR") {
 
                     SparkServerAdmin.openModal("ERROR!", result.message);
 
-                } else if (result.status == "EXCEPTION") {
+                } else if (result.status === "EXCEPTION") {
 
                     SparkServerAdmin.openModal("EXCEPTION!", result.message);
 
