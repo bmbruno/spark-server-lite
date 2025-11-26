@@ -116,6 +116,7 @@
         @Html.LabelFor(x => x.ImagePath, htmlAttributes: new { title = "Path to the banner image. Can use images from this post or select from the shared media library." })
         @Html.TextBoxFor(x => x.ImagePath, htmlAttributes: new { @class = "half" })
         <div class="controls">
+            <button type="button" id="SelectBlogBanner" title="Use media from the media library."><i class="fa fa-picture-o" aria-hidden="true"></i> Select From Media</button>
             <button type="button" id="SelectBlogBanner" title="Use media from the shared media library."><i class="fa fa-picture-o" aria-hidden="true"></i> Select From Library</button>
             <button type="button" id="GetNextBannerImage" title="Get the next available default banner image."><i class="fa fa-arrow-right" aria-hidden="true"></i> Get Next Banner Image</button>
         </div>
