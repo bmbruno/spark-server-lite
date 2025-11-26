@@ -112,7 +112,7 @@
             let response = await fetch(`${SparkServerAdmin.endpoints.blogMedia}?blogID=${blogID}`);
             let result = await response.json();
 
-            if (result.status == "OK") {
+            if (result.status === "OK") {
 
                 // Build unordered list from data
                 let output = "<ul>";
@@ -128,8 +128,9 @@
                                 <p>${element.filename}</p>
                                 <div class='media-url'>${element.webPath}</div>
                                 <button type="button" class="media-copy-button" data-copy="[![ALT](${element.thumbnailPath})](${element.webPath})" title="Copy Markdown image tag."><i class="fa fa-files-o" aria-hidden="true"></i> MD Token</button>
-                                <button type="button" class="media-copy-button" data-copy="${element.webPath}" title="${element.webPath}"><i class="fa fa-files-o" aria-hidden="true"></i> URL</button>
-                                <button type="button" class="media-copy-button" data-copy="${element.thumbnailPath}" title="${element.thumbnailPath}"><i class="fa fa-files-o" aria-hidden="true"></i> Thumbnail</button>
+                                <button type="button" class="media-cover-button" data-url="${element.webPath}" data-thumb="${element.thumbnailPath}" title="${element.webPath}"><i class="fa fa-picture-o" aria-hidden="true"></i> Cover</button>
+                                <!-- <button type="button" class="media-copy-button" data-copy="${element.webPath}" title="${element.webPath}"><i class="fa fa-files-o" aria-hidden="true"></i> URL</button>
+                                <button type="button" class="media-copy-button" data-copy="${element.thumbnailPath}" title="${element.thumbnailPath}"><i class="fa fa-files-o" aria-hidden="true"></i> Thumb</button> -->
                                 <button type="button" class="media-delete-button delete-confirm" data-filename="${element.filename}"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
                             </div>
                         </li>`;
@@ -142,11 +143,11 @@
 
                 SparkServerAdmin.wireMediaButtons();
 
-            } else if (result.status == "ERROR") {
+            } else if (result.status === "ERROR") {
 
                 SparkServerAdmin.openModal("ERROR!", result.message);
 
-            } else if (result.status == "EXCEPTION") {
+            } else if (result.status === "EXCEPTION") {
 
                 SparkServerAdmin.openModal("EXCEPTION!", result.message);
 
@@ -206,7 +207,6 @@
 
             // Delete buttons
             let deleteButtons = document.querySelectorAll(".media-delete-button");
-
             if (deleteButtons) {
 
                 deleteButtons.forEach((button) => {
@@ -230,7 +230,6 @@
 
             // CopyURL buttons
             let copyButtons = document.querySelectorAll(".media-copy-button");
-
             if (copyButtons) {
 
                 copyButtons.forEach((button) => {
@@ -247,6 +246,30 @@
 
                     });
 
+                });
+            }
+            
+            // Use as Cover button
+            let useCoverButtons = document.querySelectorAll(".media-cover-button");
+            if (useCoverButtons) {
+                useCoverButtons.forEach((button) => { 
+                    
+                    button.addEventListener("click", function (e) {
+                        
+                        e.preventDefault();
+                        let imgUrl = e.target.attributes["data-url"];
+                        let imgThumb = e.target.attributes["data-thumb"];
+                        
+                        if (imgUrl && imgThumb) {
+                            
+                            document.getElementById("ImagePath").value = imgUrl.value;
+                            document.getElementById("ImageThumbnailPath").value = imgThumb.value;
+
+                            SparkServerAdmin.showToast("Cover Image Set", "Cover image and thumbnail have been updated", 3, "success");
+                            
+                        }
+                        
+                    });
                 });
             }
         },
