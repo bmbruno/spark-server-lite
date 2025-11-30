@@ -213,7 +213,7 @@
 
                     button.addEventListener("click", function (e) {
 
-                        if (!confirm("Are you should you want to delete this?")) {
+                        if (!confirm("Are you sure you want to delete this?")) {
                             e.preventDefault();
                             return false;
                         }
@@ -255,18 +255,22 @@
                 useCoverButtons.forEach((button) => { 
                     
                     button.addEventListener("click", function (e) {
-                        
-                        e.preventDefault();
-                        let imgUrl = e.target.attributes["data-url"];
-                        let imgThumb = e.target.attributes["data-thumb"];
-                        
-                        if (imgUrl && imgThumb) {
-                            
-                            document.getElementById("ImagePath").value = imgUrl.value;
-                            document.getElementById("ImageThumbnailPath").value = imgThumb.value;
 
-                            SparkServerAdmin.showToast("Cover Image Set", "Cover image and thumbnail have been updated", 3, "success");
+                        if (confirm("Are you sure you want to set this as the cover image?")) {
                             
+                            e.preventDefault();
+
+                            let imgUrl = e.target.attributes["data-url"];
+                            let imgThumb = e.target.attributes["data-thumb"];
+
+                            if (imgUrl && imgThumb) {
+
+                                document.getElementById("ImagePath").value = imgUrl.value;
+                                document.getElementById("ImageThumbnailPath").value = imgThumb.value;
+
+                                SparkServerAdmin.showToast("Cover Image Set", "Cover image and thumbnail have been updated", 3, "success");
+
+                            }
                         }
                         
                     });
@@ -285,7 +289,7 @@
 
                     button.addEventListener("click", function (e) {
 
-                        if (!confirm("Are you should you want to delete this?")) {
+                        if (!confirm("Are you sure you want to delete this?")) {
                             e.preventDefault();
                             return false;
                         }
@@ -332,7 +336,7 @@
 
                     button.addEventListener("click", function (e) {
 
-                        if (!confirm("Are you should you want to delete this?")) {
+                        if (!confirm("Are you sure you want to delete this?")) {
                             e.preventDefault();
                             return false;
                         }
