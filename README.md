@@ -4,29 +4,31 @@ A simple blog management and hosting platform built on SQLite and ASP.NET Core M
 
 ## About
 
-SparkServer Lite provides a simple blog engine that can be hosted anywhere a .NET Core application can run. A few features highlights:
+SparkServer Lite provides a simple blog engine that can be hosted anywhere a .NET Core application can run. A few highlighted features:
 
 * Blogs posts are written with Markdown.
-* Basic media management built in.
-* Minimal setup & configuration to get started.
+* Built-in media management.
+* Minimal setup & configuration.
 * Self-contained application; SQLite-based data store.
-* Obvious URL structure (`/posts`, `/posts/2025/10`, `/blogtags`, etc.).
+* Obvious URL structure (`/posts`, `/posts/2025/10`, `/tags`, etc.).
 * Open source: extend however you see fit.
 
 ## Setup
 
-To set up SparkServer Lite:
+To set up SparkServer Lite, clone this repository and then:
 
 1) Ensure a .NET 8 runtime is installed.
 
-2) Run SQL build scripts (from a terminal) to create the SQLite database (includes test data for local development).
+2) For local development, ensure `Debug` is set to `true` in `/Application/SparkServerLite/appsettings.json`.
+
+3) Run SQL build scripts (from a terminal) to create the SQLite database (includes test data for local development).
 
    * Windows: `/SQLScripts/RunAllCreate.bat`
    * MacOS: `sh /SQLScripts/RunAllCreateMacOS`
 	
-3) Run `dotnet build` then `dotnet run` to start the local server.
+4) Run `dotnet build` then `dotnet run` to start the local server.
 
-4) Visit `https://<hostname>/admin` to get started managing posts.
+5) Visit `https://<hostname>/admin` to get started managing posts.
 
 ## Authentication
 
