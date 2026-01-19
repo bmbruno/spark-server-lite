@@ -502,6 +502,8 @@
                 title = title.split(",").join("");
                 title = title.split("<").join("");
                 title = title.split(">").join("");
+                title = title.split("[").join("");
+                title = title.split("]").join("");
                 title = title.split("\\").join("");
                 title = title.split("/").join("");
                 title = title.split("?").join("");
