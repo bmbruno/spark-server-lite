@@ -9,7 +9,7 @@
 
 @if (Model.Mode == SparkServerLite.Infrastructure.Enums.EditMode.Edit)
 {
-    <a href="/Admin/BlogDelete?ID=@Model.ID" class="btn delete-confirm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+    <a href="/Admin/BlogDelete?ID=@Model.ID" class="btn delete-confirm warning"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
 
     if (Model.ID > 0)
     {
@@ -147,7 +147,7 @@
 
         </div>
 
-        <button type="button" id="ClearBlogTags"><i class="fa fa-eraser" aria-hidden="true"></i> Clear Tags</button>
+        <button type="button" id="ClearBlogTags" class="warning"><i class="fa fa-eraser" aria-hidden="true"></i> Clear Tags</button>
 
     </div>
 

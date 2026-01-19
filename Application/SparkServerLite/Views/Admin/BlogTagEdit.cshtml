@@ -10,7 +10,7 @@
 {
     <h2>ID: @Model.ID</h2>
 
-    <a href="/Admin/BlogTagDelete?ID=@Model.ID" class="btn delete-confirm"><i class="fa fa-trash" aria-hidden="true"></i>  Delete</a>
+    <a href="/Admin/BlogTagDelete?ID=@Model.ID" class="btn delete-confirm warning"><i class="fa fa-trash" aria-hidden="true"></i>  Delete</a>
 }
 
 @using (Html.BeginForm(actionName: "BlogTagUpdate", controllerName: "Admin", method: FormMethod.Post))

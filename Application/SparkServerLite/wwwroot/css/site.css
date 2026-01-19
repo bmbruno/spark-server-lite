@@ -142,6 +142,7 @@ form .checkbox-list { max-height: 200px; overflow-y: auto;  padding: 2em; column
 a.btn, .btn, button { display: inline-block; border-radius: 8px; cursor: pointer; padding: 0.75em 2em;  text-shadow: 1px 1px 0 #000; background-color: #6f41c5; color: #FFF; box-shadow: 0 3px 0 #313131; transition: none; border: none; }
 a.btn:hover, .btn:hover, button:hover { background-color: #63a5e4; text-decoration: none;}
 a.btn:active, .btn:active, button:active { box-shadow: 0 1px 0 #313131; position: relative; top: 3px; }
+a.btn.warning, .btn.warning, button.warning { background-color: #8c0000; }
 .btn.primary { padding: 1em 4em; font-weight: bold; font-size: 1.05rem; }
 
 .row.blog-media { padding: 1em; }

@@ -131,7 +131,7 @@
                                 <button type="button" class="media-cover-button" data-url="${element.webPath}" data-thumb="${element.thumbnailPath}" title="${element.webPath}"><i class="fa fa-picture-o" aria-hidden="true"></i> Cover</button>
                                 <!-- <button type="button" class="media-copy-button" data-copy="${element.webPath}" title="${element.webPath}"><i class="fa fa-files-o" aria-hidden="true"></i> URL</button>
                                 <button type="button" class="media-copy-button" data-copy="${element.thumbnailPath}" title="${element.thumbnailPath}"><i class="fa fa-files-o" aria-hidden="true"></i> Thumb</button> -->
-                                <button type="button" class="media-delete-button delete-confirm" data-filename="${element.filename}"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+                                <button type="button" class="media-delete-button delete-confirm warning" data-filename="${element.filename}"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
                             </div>
                         </li>`;
                         
@@ -178,7 +178,7 @@
                                 <div class='media-url'>${element.webPath}</div>
                                 <button type="button" class="media-copy-button" data-url="${element.webPath}" title="${element.webPath}"><i class="fa fa-files-o" aria-hidden="true"></i> URL</button>
                                 <button type="button" class="media-copy-button" data-url="${element.thumbnailPath}" title="${element.thumbnailPath}"><i class="fa fa-files-o" aria-hidden="true"></i> Thumbnail</button>
-                                <button type="button" class="media-delete-button delete-confirm" data-filename="${element.filename}"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+                                <button type="button" class="media-delete-button delete-confirm warning" data-filename="${element.filename}"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
                             </div>
                         </li>`;
 
