@@ -97,6 +97,14 @@ These settings are only used with the QuickSSO system.
 * **Description**: description of the website.
 * **Blurb**: message, summary, overview, or other text about the website. Appears in right column of footer.
 
+## Publishing
+
+## Windows
+dotnet publish -c Release -o ./bin/win64 --runtime win-x64 --self-contained false
+
+## Linux
+dotnet publish -c Release -o ./bin/linux --runtime linux-x64 --self-contained false
+
 ## Contact The Author
 
 For questions / comments / issues, contact me:

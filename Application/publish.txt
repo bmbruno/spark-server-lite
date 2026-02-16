@@ -1,1 +1,0 @@
-dotnet publish -c Release -o ./bin/spark-server-lite-win64 --runtime win-x64 --self-contained false
