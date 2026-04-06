@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.HttpOverrides;
 using SparkServer.Infrastructure.Repositories;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
@@ -51,6 +52,12 @@ namespace SparkServerLite
             builder.Services.AddSingleton(appContent);
 
             var app = builder.Build();
+
+            // Ensure correct forward values are passed along; this is due to use of Nginx as a proxy
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedFor
+            });
             
             // Ensure log directory exists
             if (!Directory.Exists(appSettings.LogFolder))
