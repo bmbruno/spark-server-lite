@@ -14,7 +14,8 @@ namespace SparkServerLite.Infrastructure
         public Logger(IAppSettings settings)
         {
             _settings = settings;
-            _logPath = $"{_settings.LogFolder}/{DateTime.Today.ToString("yyyyMMdd")}.txt";
+            // _logPath = $"{_settings.LogFolder}/{DateTime.Today.ToString("yyyyMMdd")}.txt";
+            _logPath = Path.Combine(_settings.LogFolder, $"{DateTime.Today.ToString("yyyyMMdd")}.txt");
         }
         
         public void Info(string message)
