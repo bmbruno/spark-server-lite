@@ -128,7 +128,7 @@ namespace SparkServerLite.Repositories
                         strftime('%Y', [Date])
                     ORDER BY 
 	                    strftime('%Y', [Date]) DESC,
-	                    strftime('%m', [Date]) ASC";
+	                    strftime('%m', [Date]) DESC";
 
                 command.Parameters.AddWithValue("$page", page.Trim());
 
