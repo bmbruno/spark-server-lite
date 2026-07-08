@@ -489,29 +489,13 @@
             if (titleField) {
 
                 let title = titleField.value;
-                title = title.split("-").join("");
-                title = title.split("&").join("");
-                title = title.split("$").join("");
-                title = title.split("%").join("");
-                title = title.split(":").join("");
-                title = title.split("(").join("");
-                title = title.split(")").join("");
-                title = title.split("'").join("");
-                title = title.split("\"").join("");
-                title = title.split(".").join("");
-                title = title.split(",").join("");
-                title = title.split("<").join("");
-                title = title.split(">").join("");
-                title = title.split("[").join("");
-                title = title.split("]").join("");
-                title = title.split("\\").join("");
-                title = title.split("/").join("");
-                title = title.split("?").join("");
-                title = title.split("!").join("");
-                title = title.split(" ").join("-");
-                title = title.split("--").join("-");
-                title = title.toLowerCase();
-
+                
+                title = title
+                    .toLowerCase()                // Convert uppercase to lowercase
+                    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters (keep letters, numbers, spaces, and dashes)
+                    .trim()                       // Clean up whitespace from both ends
+                    .replace(/[\s-]+/g, '-');     // Replace multiple spaces or dashes with a single dash
+                
                 document.getElementById("Slug").value = title;
             }
 
