@@ -99,7 +99,8 @@ namespace SparkServerLite.Mapping
                     Title = blog.Title,
                     Subtitle = blog.Subtitle,
                     PublishedDate = blog.PublishDate.ToShortDateString(),
-                    AuthorName = !String.IsNullOrEmpty(blog.AuthorFullName) ? blog.AuthorFullName : "N/A"
+                    AuthorName = !String.IsNullOrEmpty(blog.AuthorFullName) ? blog.AuthorFullName : "N/A",
+                    IsFutureBlog = (blog.PublishDate >= DateTime.Now)
                 });
             }
         }

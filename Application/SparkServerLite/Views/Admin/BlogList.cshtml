@@ -24,7 +24,14 @@
             <tr>
                 <td><a href="/Admin/BlogEdit?ID=@blog.ID">@blog.Title</a></td>
                 <td>@blog.Subtitle</td>
-                <td>@blog.PublishedDate</td>
+                @if (blog.IsFutureBlog)
+                {
+                    <td class="scheduled"><p class="badge">SCHEDULED</p>@blog.PublishedDate</td>
+                }
+                else
+                {
+                    <td>@blog.PublishedDate</td>     
+                }
             </tr>
         }
 

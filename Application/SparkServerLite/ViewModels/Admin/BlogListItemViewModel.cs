@@ -12,6 +12,8 @@
 
         public string AuthorName { get; set; } = string.Empty;
 
+        public bool IsFutureBlog {  get; set; } = false;
+        
         public BlogListItemViewModel() { }
     }
 }
