@@ -36,4 +36,10 @@
     <None Include="wwwroot\site.webmanifest" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AdditionalFiles Include="Views\Seo\Index.cshtml" />
+    <AdditionalFiles Include="Views\Seo\Pageviews.cshtml" />
+    <AdditionalFiles Include="Views\Seo\VisitsByMonth.cshtml" />
+  </ItemGroup>
+
 </Project>
