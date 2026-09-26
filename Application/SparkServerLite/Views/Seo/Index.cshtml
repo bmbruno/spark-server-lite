@@ -1,9 +1,27 @@
-﻿@{Admin
+﻿@{
     Layout = "_AdminLayout";
 }
 
-<div>
-
+<div class="row">
     
+    <div class="configuration well">
+        
+        <h2>Sitemap</h2>
+        
+        <button type="button" id="GenerateSitemap" class="btn">Generate</button>
+        
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="configuration well">
+        
+        <h2>robots.txt</h2>
+        
+        <textarea id="Robots" style="width: 100%; height: 200px;"></textarea>
+        <button type="button" id="UpdateRobots" class="btn">Update</button>
+        
+    </div>
     
 </div>
