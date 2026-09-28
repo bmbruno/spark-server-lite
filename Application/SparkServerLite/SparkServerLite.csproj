@@ -38,8 +38,8 @@
 
   <ItemGroup>
     <AdditionalFiles Include="Views\Seo\Index.cshtml" />
-    <AdditionalFiles Include="Views\Seo\Pageviews.cshtml" />
-    <AdditionalFiles Include="Views\Seo\VisitsByMonth.cshtml" />
+    <AdditionalFiles Include="Views\Seo\Sitemap.cshtml" />
+    <AdditionalFiles Include="Views\Seo\Robots.cshtml" />
   </ItemGroup>
 
 </Project>
