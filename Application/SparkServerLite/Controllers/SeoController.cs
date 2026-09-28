@@ -22,9 +22,31 @@ namespace SparkServerLite.Controllers
         {
             BaseViewModel viewModel = new();
             base.Setup(viewModel);
-            ViewData["Title"] = "Analytics";
+            ViewData["Title"] = "SEO";
 
             return View(viewModel);
+        }
+
+        public ActionResult Robots()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public ActionResult SaveRobots()
+        {
+            return View(viewName: "Robots");
+        }
+        
+        public ActionResult Sitemap()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public ActionResult RebuildSitmap()
+        {
+            return View(viewName: "Sitemap");
         }
     }
 }
