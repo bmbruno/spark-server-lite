@@ -1,4 +1,4 @@
-﻿@model SparkServerLite.ViewModels.Analytics.ReportPageViewsViewModel
+﻿@model SparkServerLite.ViewModels.Seo.RobotsViewModel
 @{
     Layout = "_AdminLayout";
     ViewData["Title"] = "Robots";
@@ -6,32 +6,16 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<div class="sub-menu">
-    
-</div>
-
 <div>
     
-    <textarea style="width: 100%; min-height: 600px;"></textarea>
-    @Html.TextAreaFor
+    <form action="/admin/seo/saverobots" method="post">
+        <div class="row">
+            <label for="RobotsContent">Manage the "robots.txt" file:</label>
+            @Html.TextAreaFor(x => x.RobotsContent, htmlAttributes: new { style = "width: 100%; min-height: 400px;" })
+        </div>
+        <div class="row center">
+            <input type="submit" value="Update" class="btn primary" />
+        </div>
+    </form>
     
 </div>
-
-<table class="report">
-    <thead>
-        <tr>
-            <th>Page</th>
-            <th>Visits</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var lineItem in Model.ReportData)
-        {
-            <tr>
-                <td>@lineItem.Page</td>
-                <td>@lineItem.ViewCount</td>
-            </tr>
-        }
-
-    </tbody>
-</table>

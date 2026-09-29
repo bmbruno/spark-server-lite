@@ -5,6 +5,7 @@ using SparkServerLite.Interfaces;
 using SparkServerLite.Models.Analytics;
 using SparkServerLite.ViewModels;
 using SparkServerLite.ViewModels.Analytics;
+using SparkServerLite.ViewModels.Seo;
 
 namespace SparkServerLite.Controllers
 {
@@ -29,12 +30,20 @@ namespace SparkServerLite.Controllers
 
         public ActionResult Robots()
         {
-            return View();
+            RobotsViewModel viewModel = new();
+            
+            // TODO: load robots.txt and populate viewModel
+            
+            return View(viewModel);
         }
         
         [HttpPost]
-        public ActionResult SaveRobots()
+        public ActionResult SaveRobots(RobotsViewModel viewModel)
         {
+            // TODO: validate robots content
+            
+            // TODO: save to file
+            
             return View(viewName: "Robots");
         }
         
