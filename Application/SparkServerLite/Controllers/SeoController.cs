@@ -13,10 +13,12 @@ namespace SparkServerLite.Controllers
     public class SeoController : BaseController
     {
         private readonly IWebHostEnvironment _host;
+        private readonly SeoManager _seoManager;
                 
         public SeoController(Interfaces.ILogger logger, IWebHostEnvironment host, IAppSettings settings, IAppContent content) : base(settings, content, logger)
         {
             _host = host;
+            _seoManager = new SeoManager(settings, host);
         }
 
         public IActionResult Index()
@@ -43,6 +45,7 @@ namespace SparkServerLite.Controllers
             // TODO: validate robots content
             
             // TODO: save to file
+            _seoManager.SaveRobotsTxtToDisk(viewModel.RobotsContent);
             
             return View(viewName: "Robots");
         }
