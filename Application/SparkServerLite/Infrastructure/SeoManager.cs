@@ -8,6 +8,7 @@ public class SeoManager
     private readonly IWebHostEnvironment _host;
 
     private readonly string _robotsFilePath;
+    private readonly string _sitemapFilePath;
 
     public SeoManager(IAppSettings settings, IWebHostEnvironment host)
     {
@@ -15,6 +16,7 @@ public class SeoManager
         _host = host;
         
         _robotsFilePath = Path.Combine(_host.WebRootPath, "robots.txt");
+        _sitemapFilePath = Path.Combine(_host.WebRootPath, "sitemap.xml");
     }
 
     /// <summary>
@@ -43,5 +45,32 @@ public class SeoManager
     public void SaveRobotsTxtToDisk(string contents)
     {
         File.WriteAllText(_robotsFilePath, contents);
+    }
+
+    /// <summary>
+    /// Validates that sitemap.xml exists; creates it if it doesn't.
+    /// </summary>
+    private void ValidateSitemapFile()
+    {
+        if (!File.Exists(_sitemapFilePath))
+            File.Create(_sitemapFilePath).Dispose();
+    }
+    
+    /// <summary>
+    /// Reads the contents of sitemap.xml file on disk.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerable<string> LoadSitemapFromDisk()
+    {
+        return File.ReadAllLines(_sitemapFilePath);
+    }
+
+    /// <summary>
+    /// Writes the provided contents of the sitemap to disk (in the application root). 
+    /// </summary>
+    /// <param name="contents"></param>
+    public void SaveSitemapToDisk(IEnumerable<string> contents)
+    {
+        File.WriteAllLines(_sitemapFilePath, contents);
     }
 }
