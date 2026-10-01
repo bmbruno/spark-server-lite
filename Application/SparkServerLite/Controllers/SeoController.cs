@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
-using SparkServerLite.Models.Analytics;
 using SparkServerLite.ViewModels;
-using SparkServerLite.ViewModels.Analytics;
 using SparkServerLite.ViewModels.Seo;
 
 namespace SparkServerLite.Controllers
@@ -33,8 +31,16 @@ namespace SparkServerLite.Controllers
         public ActionResult Robots()
         {
             RobotsViewModel viewModel = new();
-            
-            // TODO: load robots.txt and populate viewModel
+
+            try
+            {
+                viewModel.RobotsContent = _seoManager.LoadRobotsTxtFromDisk();
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = $"Could not load robots.txt: {ex.Message}";
+                return RedirectToAction(actionName: "Index", controllerName: "Seo");
+            }
             
             return View(viewModel);
         }
@@ -43,11 +49,18 @@ namespace SparkServerLite.Controllers
         public ActionResult SaveRobots(RobotsViewModel viewModel)
         {
             // TODO: validate robots content
+
+            try
+            {
+                _seoManager.SaveRobotsTxtToDisk(viewModel.RobotsContent);
+                TempData["Success"] = "robots.txt updated.";
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
             
-            // TODO: save to file
-            _seoManager.SaveRobotsTxtToDisk(viewModel.RobotsContent);
-            
-            return View(viewName: "Robots");
+            return View(viewName: "Robots", model: viewModel);
         }
         
         public ActionResult Sitemap()

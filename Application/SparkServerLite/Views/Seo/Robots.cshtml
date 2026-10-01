@@ -10,7 +10,7 @@
     
     <form action="/seo/saverobots" method="post">
         <div class="row">
-            <label for="RobotsContent">robots.txt file contents (warning: updates here will be immediately reflected live):</label>
+            <label for="RobotsContent">robots.txt file contents (warning: updates made here will be live immediately):</label>
             @Html.TextAreaFor(x => x.RobotsContent, htmlAttributes: new { style = "width: 100%; min-height: 400px;" })
         </div>
         <div class="row center">
