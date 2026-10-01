@@ -73,4 +73,10 @@ public class SeoManager
     {
         File.WriteAllLines(_sitemapFilePath, contents);
     }
+
+    public void RebuildSitemap()
+    {
+        // TODO: rebuild complete sitemap XML structure
+        // https://www.sitemaps.org/protocol.html
+    }
 }

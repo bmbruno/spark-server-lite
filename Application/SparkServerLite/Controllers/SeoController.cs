@@ -65,7 +65,11 @@ namespace SparkServerLite.Controllers
         
         public ActionResult Sitemap()
         {
-            return View();
+            SitemapViewModel viewModel = new();
+            
+            viewModel.Sitemap = _seoManager.LoadSitemapFromDisk().ToList();
+            
+            return View(viewModel);
         }
         
         [HttpPost]

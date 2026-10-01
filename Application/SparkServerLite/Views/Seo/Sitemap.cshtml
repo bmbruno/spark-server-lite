@@ -1,4 +1,4 @@
-﻿@model SparkServerLite.ViewModels.Analytics.ReportVisitsMonthViewModel
+﻿@model SparkServerLite.ViewModels.Seo.SitemapViewModel
 @{
     Layout = "_AdminLayout";
     ViewData["Title"] = "Sitemap";
@@ -6,30 +6,24 @@
 
 <h2>@ViewData["Title"]</h2>
 
-
-<div class="sub-menu">
-    <!--
-        TODO: finish this; add form, submit button, and build post-back logic on the server
-    <label for="Filters_Page">Page</label>
-    @Html.DropDownListFor(x => x.Filters.Page, SparkServerLite.Infrastructure.FilterData.Pages(Model.Filters.Page))
-    -->
-</div>
-
+<form method="POST" action="/seo/rebuildsitemap">
+    <div class="row center">
+        <input type="submit" value="Rebuild Sitemap" />
+    </div>
+</form>
+    
 <table class="report">
     <thead>
         <tr>
-            <th>Month</th>
-            <th>Visits</th>
+            <th>Page</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var lineItem in Model.ReportData)
+        @foreach (string pageURL in Model.Sitemap)
         {
             <tr>
-                <td>@lineItem.MonthLabel @lineItem.Year</td>
-                <td>@lineItem.Visits</td>
+                <td>@pageURL</td>
             </tr>
         }
-
     </tbody>
 </table>
