@@ -1,4 +1,5 @@
 using SparkServerLite.Interfaces;
+using SparkServerLite.Models;
 
 namespace SparkServerLite.Infrastructure;
 
@@ -74,9 +75,11 @@ public class SeoManager
         File.WriteAllLines(_sitemapFilePath, contents);
     }
 
-    public void RebuildSitemap()
+    public void RebuildSitemap(IBlogRepository<Blog> blogRepo)
     {
         // TODO: rebuild complete sitemap XML structure
         // https://www.sitemaps.org/protocol.html
+
+        IEnumerable<Blog> blogItems = blogRepo.GetAllPublishedBlogsForSitemap();
     }
 }

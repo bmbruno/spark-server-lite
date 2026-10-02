@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SparkServer.Infrastructure.Repositories;
 using SparkServerLite.Infrastructure;
 using SparkServerLite.Interfaces;
+using SparkServerLite.Models;
 using SparkServerLite.ViewModels;
 using SparkServerLite.ViewModels.Seo;
 
@@ -12,10 +14,12 @@ namespace SparkServerLite.Controllers
     {
         private readonly IWebHostEnvironment _host;
         private readonly SeoManager _seoManager;
+        private readonly IBlogRepository<Blog> _blogRepo;
                 
-        public SeoController(Interfaces.ILogger logger, IWebHostEnvironment host, IAppSettings settings, IAppContent content) : base(settings, content, logger)
+        public SeoController(Interfaces.ILogger logger, IWebHostEnvironment host, IAppSettings settings, IAppContent content, IBlogRepository<Blog> blogRepo) : base(settings, content, logger)
         {
             _host = host;
+            _blogRepo = blogRepo;
             _seoManager = new SeoManager(settings, host);
         }
 
@@ -75,6 +79,8 @@ namespace SparkServerLite.Controllers
         [HttpPost]
         public ActionResult RebuildSitmap()
         {
+            _seoManager.RebuildSitemap(_blogRepo);
+            
             return View(viewName: "Sitemap");
         }
     }

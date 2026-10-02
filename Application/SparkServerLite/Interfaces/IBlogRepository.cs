@@ -51,6 +51,12 @@ namespace SparkServerLite.Interfaces
         IEnumerable<T> GetByTagName(string tagName);
 
         /// <summary>
+        /// Should retrieve partial blog objects from a datastore and return a list of all post URLS that are active and published.
+        /// </summary>
+        /// <returns>Enumerable of blog URLs.</returns>
+        IEnumerable<T> GetAllPublishedBlogsForSitemap();
+        
+        /// <summary>
         /// Should determine if the given URL slug exists in the database.
         /// </summary>
         /// <param name="slug">URL slug</param>
