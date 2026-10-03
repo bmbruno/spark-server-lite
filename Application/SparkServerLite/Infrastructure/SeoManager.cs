@@ -65,6 +65,7 @@ public class SeoManager
     /// <returns></returns>
     public IEnumerable<string> LoadSitemapFromDisk()
     {
+        ValidateSitemapFile();
         return File.ReadAllLines(_sitemapFilePath);
     }
 
@@ -107,8 +108,10 @@ public class SeoManager
 
                 writer.WriteStartElement("url");
 
+                // TODO: prepend site URL (blog.brandonbruno.com) from settings
+                
                 // <loc> - required
-                writer.WriteElementString("loc", item. URL);
+                writer.WriteElementString("loc", item.URL);
 
                 // <lastmod> - optional (W3C Datetime format: YYYY-MM-DD or YYYY-MM-DDThh:mm:ssTZD)
                 writer.WriteElementString("lastmod", item.PublishDate.ToString("yyyy-MM-ddTHH:mm:sszzz"));

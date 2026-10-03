@@ -77,11 +77,13 @@ namespace SparkServerLite.Controllers
         }
         
         [HttpPost]
-        public ActionResult RebuildSitmap()
+        public ActionResult RebuildSitemap()
         {
             _seoManager.RebuildSitemap(_blogRepo);
             
-            return View(viewName: "Sitemap");
+            TempData["Success"] = "Sitemap rebuilt.";
+            
+            return RedirectToAction(actionName: "Sitemap", controllerName: "Seo");
         }
     }
 }
