@@ -1,3 +1,5 @@
+using System.Text;
+using System.Xml;
 using SparkServerLite.Interfaces;
 using SparkServerLite.Models;
 
@@ -81,5 +83,41 @@ public class SeoManager
         // https://www.sitemaps.org/protocol.html
 
         IEnumerable<Blog> blogItems = blogRepo.GetAllPublishedBlogsForSitemap();
+        
+        if (blogItems == null) throw new ArgumentNullException(nameof(blogItems));
+
+        var settings = new XmlWriterSettings
+        {
+            Encoding = Encoding.UTF8,
+            Indent = true,
+            IndentChars = "  ",
+            OmitXmlDeclaration = false
+        };
+
+        using (var writer = XmlWriter.Create(_sitemapFilePath, settings))
+        {
+            writer.WriteStartDocument();
+
+            // <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+            writer.WriteStartElement("urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
+
+            foreach (var item in blogItems)
+            {
+                if (string.IsNullOrWhiteSpace(item.URL)) continue;
+
+                writer.WriteStartElement("url");
+
+                // <loc> - required
+                writer.WriteElementString("loc", item. URL);
+
+                // <lastmod> - optional (W3C Datetime format: YYYY-MM-DD or YYYY-MM-DDThh:mm:ssTZD)
+                writer.WriteElementString("lastmod", item.PublishDate.ToString("yyyy-MM-ddTHH:mm:sszzz"));
+
+                writer.WriteEndElement(); // </url>
+            }
+
+            writer.WriteEndElement(); // </urlset>
+            writer.WriteEndDocument();
+        }
     }
 }
