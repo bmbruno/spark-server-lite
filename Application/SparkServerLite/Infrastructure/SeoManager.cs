@@ -80,14 +80,12 @@ public class SeoManager
 
     public void RebuildSitemap(IBlogRepository<Blog> blogRepo)
     {
-        // TODO: rebuild complete sitemap XML structure
         // https://www.sitemaps.org/protocol.html
 
         IEnumerable<Blog> blogItems = blogRepo.GetAllPublishedBlogsForSitemap();
-        
         if (blogItems == null) throw new ArgumentNullException(nameof(blogItems));
 
-        var settings = new XmlWriterSettings
+        var xmlSettings = new XmlWriterSettings
         {
             Encoding = Encoding.UTF8,
             Indent = true,
@@ -95,23 +93,25 @@ public class SeoManager
             OmitXmlDeclaration = false
         };
 
-        using (var writer = XmlWriter.Create(_sitemapFilePath, settings))
+        using (var writer = XmlWriter.Create(_sitemapFilePath, xmlSettings))
         {
             writer.WriteStartDocument();
-
-            // <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+            
             writer.WriteStartElement("urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
-
+            
+            writer.WriteStartElement("url");
+            writer.WriteElementString("loc", _settings.SiteURL);
+            writer.WriteElementString("lastmod", DateTime.Today.ToString("yyyy-MM-ddTHH:mm:sszzz"));
+            writer.WriteEndElement();
+            
             foreach (var item in blogItems)
             {
                 if (string.IsNullOrWhiteSpace(item.URL)) continue;
 
                 writer.WriteStartElement("url");
 
-                // TODO: prepend site URL (blog.brandonbruno.com) from settings
-                
                 // <loc> - required
-                writer.WriteElementString("loc", item.URL);
+                writer.WriteElementString("loc", $"{_settings.SiteURL}{item.URL}");
 
                 // <lastmod> - optional (W3C Datetime format: YYYY-MM-DD or YYYY-MM-DDThh:mm:ssTZD)
                 writer.WriteElementString("lastmod", item.PublishDate.ToString("yyyy-MM-ddTHH:mm:sszzz"));

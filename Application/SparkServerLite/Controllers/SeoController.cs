@@ -35,7 +35,8 @@ namespace SparkServerLite.Controllers
         public ActionResult Robots()
         {
             RobotsViewModel viewModel = new();
-
+            base.Setup(viewModel);
+            
             try
             {
                 viewModel.RobotsContent = _seoManager.LoadRobotsTxtFromDisk();
@@ -64,12 +65,14 @@ namespace SparkServerLite.Controllers
                 TempData["Error"] = ex.Message;
             }
             
+            // TODO: redirect to Robots instead of the view only
             return View(viewName: "Robots", model: viewModel);
         }
         
         public ActionResult Sitemap()
         {
             SitemapViewModel viewModel = new();
+            base.Setup(viewModel);
             
             viewModel.Sitemap = _seoManager.LoadSitemapFromDisk().ToList();
             

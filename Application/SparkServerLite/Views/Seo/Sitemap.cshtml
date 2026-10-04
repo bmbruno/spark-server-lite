@@ -8,7 +8,7 @@
 
 <form method="POST" action="/seo/rebuildsitemap">
     <div class="row center">
-        <input type="submit" value="Rebuild Sitemap" />
+        <input type="submit" value="Rebuild Sitemap" class="btn primary" />
     </div>
 </form>
     
@@ -19,10 +19,10 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (string pageURL in Model.Sitemap)
+        @foreach (string line in Model.Sitemap)
         {
             <tr>
-                <td>@pageURL</td>
+                <td>@line</td>
             </tr>
         }
     </tbody>
