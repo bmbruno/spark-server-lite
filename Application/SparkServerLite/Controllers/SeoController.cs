@@ -75,7 +75,7 @@ namespace SparkServerLite.Controllers
             base.Setup(viewModel);
             
             viewModel.Sitemap = _seoManager.LoadSitemapFromDisk().ToList();
-            
+
             return View(viewModel);
         }
         

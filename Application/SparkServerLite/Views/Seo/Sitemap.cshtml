@@ -11,19 +11,10 @@
         <input type="submit" value="Rebuild Sitemap" class="btn primary" />
     </div>
 </form>
-    
-<table class="report">
-    <thead>
-        <tr>
-            <th>Page</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (string line in Model.Sitemap)
-        {
-            <tr>
-                <td>@line</td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+<div style="background-color: #FFF; border-radius: 8px; padding: 1em; font-family: monospace; text-align: left;">
+    @foreach (string line in Model.Sitemap)
+    {
+        @line <br/>
+    }
+</div>
