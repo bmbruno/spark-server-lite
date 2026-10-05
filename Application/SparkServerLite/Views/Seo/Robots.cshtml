@@ -1,0 +1,21 @@
+﻿@model SparkServerLite.ViewModels.Seo.RobotsViewModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Robots";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    
+    <form action="/seo/saverobots" method="post">
+        <div class="row">
+            <label for="RobotsContent">robots.txt file contents (warning: updates made here will be live immediately):</label>
+            @Html.TextAreaFor(x => x.RobotsContent, htmlAttributes: new { style = "width: 100%; min-height: 400px;" })
+        </div>
+        <div class="row center">
+            <input type="submit" value="Update" class="btn primary" />
+        </div>
+    </form>
+    
+</div>

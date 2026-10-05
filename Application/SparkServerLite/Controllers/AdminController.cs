@@ -171,6 +171,7 @@ namespace SparkServerLite.Controllers
                     _blogTagRepo.UpdateTagsForBlog(blog.ID, viewModel.BlogTags);
 
                     TempData["Success"] = "Blog updated.";
+                    TempData["ShowSitemapButton"] = true;
                     return RedirectToAction(actionName: "BlogEdit", controllerName: "Admin", routeValues: new { blog.ID });
                 }
 

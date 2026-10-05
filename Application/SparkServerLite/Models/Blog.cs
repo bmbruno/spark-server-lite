@@ -28,6 +28,14 @@
 
         public DateTime CreateDate { get; set; }
 
+        public string URL
+        {
+            get
+            {
+                return $"/posts/{this.PublishDate.Year}/{this.PublishDate.Month}/{this.Slug}";
+            }
+        }
+        
         public Blog() { }
 
     }

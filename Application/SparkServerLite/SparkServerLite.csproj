@@ -36,4 +36,10 @@
     <None Include="wwwroot\site.webmanifest" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AdditionalFiles Include="Views\Seo\Index.cshtml" />
+    <AdditionalFiles Include="Views\Seo\Sitemap.cshtml" />
+    <AdditionalFiles Include="Views\Seo\Robots.cshtml" />
+  </ItemGroup>
+
 </Project>

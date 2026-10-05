@@ -15,6 +15,11 @@
     {
         <a href="@Model.BlogURL?preview=true" target="_blank" class="btn">Preview Blog</a>
     }
+
+    if (Model.ID > 0 && TempData["ShowSitemapButton"] != null)
+    {
+        <a href="/seo/sitemap" target="_blank" class="btn">Update Sitemap</a>
+    }
 }
 
 @using (Html.BeginForm(actionName: "BlogUpdate", controllerName: "Admin", method: FormMethod.Post))

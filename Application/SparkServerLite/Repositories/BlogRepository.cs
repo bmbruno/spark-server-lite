@@ -121,7 +121,7 @@ namespace SparkServer.Infrastructure.Repositories
                             AuthorID = Database.GetID(reader["AuthorID"]),
                             AuthorFullName = Database.GetString(reader["AuthorFullName"]),
                             CreateDate = Database.GetDateTime(reader["CreateDate"]).Value
-                    });
+                        });
                     }
                 }
 
@@ -142,18 +142,21 @@ namespace SparkServer.Infrastructure.Repositories
                 SqliteCommand command = conn.CreateCommand();
 
                 // Initial insert of minimum required data
-                command.CommandText = @"INSERT INTO Blogs (Title, PublishDate, Slug, AuthorID, CreateDate) VALUES ($title, $publishDate, $slug, $authorID, $createDate);";
+                command.CommandText =
+                    @"INSERT INTO Blogs (Title, PublishDate, Slug, AuthorID, CreateDate) VALUES ($title, $publishDate, $slug, $authorID, $createDate);";
                 command.Parameters.AddWithValue("$title", newItem.Title);
-                command.Parameters.AddWithValue("$publishDate", newItem.PublishDate.ToString(FormatHelper.SQLiteDateTime));
+                command.Parameters.AddWithValue("$publishDate",
+                    newItem.PublishDate.ToString(FormatHelper.SQLiteDateTime));
                 command.Parameters.AddWithValue("$slug", newItem.Slug);
                 command.Parameters.AddWithValue("$authorID", newItem.AuthorID);
-                command.Parameters.AddWithValue("$createDate", newItem.CreateDate.ToString(FormatHelper.SQLiteDateTime));
+                command.Parameters.AddWithValue("$createDate",
+                    newItem.CreateDate.ToString(FormatHelper.SQLiteDateTime));
                 command.ExecuteNonQuery();
                 command.Parameters.Clear();
 
                 command.CommandText = "SELECT last_insert_rowid()";
                 newID = (long)command.ExecuteScalar();
-                
+
                 // Updates of various fields
                 StringBuilder updateSQL = new();
                 bool needsUpdate = false;
@@ -435,7 +438,9 @@ namespace SparkServer.Infrastructure.Repositories
                 if (month.HasValue)
                 {
                     startDate = new DateTime(year, month.Value, 1).ToString(FormatHelper.SQLiteDate);
-                    endDate = new DateTime(year, month.Value, DateTime.DaysInMonth(year, month.Value)).ToString(FormatHelper.SQLiteDate);
+                    endDate =
+                        new DateTime(year, month.Value, DateTime.DaysInMonth(year, month.Value)).ToString(FormatHelper
+                            .SQLiteDate);
                 }
                 else
                 {
@@ -465,7 +470,7 @@ namespace SparkServer.Infrastructure.Repositories
                             AuthorID = Database.GetID(reader["AuthorID"]),
                             AuthorFullName = Database.GetString(reader["AuthorFullName"]),
                             CreateDate = Database.GetDateTime(reader["CreateDate"]).Value
-                    });
+                        });
                     }
                 }
 
@@ -504,8 +509,9 @@ namespace SparkServer.Infrastructure.Repositories
                 {
                     while (reader.Read())
                     {
-                        blogList.Add(new Blog() { 
-                        
+                        blogList.Add(new Blog()
+                        {
+
                             ID = Database.GetID(reader["ID"]),
                             Title = Database.GetString(reader["Title"]),
                             Subtitle = Database.GetString(reader["Subtitle"]),
@@ -624,6 +630,45 @@ namespace SparkServer.Infrastructure.Repositories
                             AuthorID = Database.GetID(reader["AuthorID"]),
                             AuthorFullName = Database.GetString(reader["AuthorFullName"]),
                             CreateDate = Database.GetDateTime(reader["CreateDate"]).Value
+                        });
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return blogList;
+        }
+
+        public IEnumerable<Blog> GetAllPublishedBlogsForSitemap()
+        {
+            List<Blog> blogList = new();
+
+            using (var conn = new SqliteConnection(_settings.DatabaseConnectionString))
+            {
+                SqliteCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    SELECT
+	                    Blogs.PublishDate,
+	                    Blogs.Slug
+                    FROM
+	                    Blogs
+                    WHERE
+	                    Blogs.Active = 1
+	                    AND PublishDate <= datetime('now', 'localtime')
+                    ORDER BY
+	                    PublishDate DESC ";
+
+                conn.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        blogList.Add(new Blog()
+                        {
+                            Slug = Database.GetString(reader["Slug"]),
+                            PublishDate = Database.GetDateTime(reader["PublishDate"]).Value
                         });
                     }
                 }

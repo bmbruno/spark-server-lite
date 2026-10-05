@@ -62,8 +62,15 @@ namespace SparkServerLite.Infrastructure
             return list;
         }
 
+        /// <summary>
+        /// NOT IMPLEMENTED
+        /// </summary>
+        /// <param name="selected"></param>
+        /// <returns></returns>
         public static List<SelectListItem> Pages(string selected)
         {
+            throw new NotImplementedException();
+            
             List<SelectListItem> list = new List<SelectListItem>();
 
             // TODO: replace with repo as source
