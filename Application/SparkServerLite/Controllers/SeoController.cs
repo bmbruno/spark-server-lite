@@ -53,8 +53,6 @@ namespace SparkServerLite.Controllers
         [HttpPost]
         public ActionResult SaveRobots(RobotsViewModel viewModel)
         {
-            // TODO: validate robots content
-
             try
             {
                 _seoManager.SaveRobotsTxtToDisk(viewModel.RobotsContent);
@@ -65,8 +63,7 @@ namespace SparkServerLite.Controllers
                 TempData["Error"] = ex.Message;
             }
             
-            // TODO: redirect to Robots instead of the view only
-            return View(viewName: "Robots", model: viewModel);
+            return RedirectToAction(actionName: "Robots", controllerName: "Seo");
         }
         
         public ActionResult Sitemap()
