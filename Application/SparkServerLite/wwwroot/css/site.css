@@ -88,7 +88,7 @@ article.blog p { margin-bottom: 1.5em; text-align: left; }
 article.blog p:last-of-type { margin-bottom: 0; }
 article.blog p a { font-weight: bold; }
 article.blog .figure { margin: 0 0 2em 0; }
-article.blog ul, article.blog ol { margin: 0 0 0 2em; }
+article.blog ul, article.blog ol { margin: 0 0 1.5em 2em; }
 article.blog ul li { list-style-type: disc; margin-bottom: 1em; }
 article.blog ol li { list-style-type: decimal; margin-bottom: 1em; }
 article.blog li > ul, article.blog li > ol { padding-top: 1em; }
